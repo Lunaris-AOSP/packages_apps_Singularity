@@ -108,12 +108,8 @@ public class LockScreen extends SettingsPreferenceFragment
         }
 
         mWeather = (Preference) findPreference(KEY_WEATHER);
-        OmniJawsClient weatherClient = new OmniJawsClient(getContext());
-        boolean weatherEnabled = weatherClient.isOmniJawsEnabled();
-        if (!weatherEnabled) {
-            mWeather.setEnabled(false);
-            mWeather.setSummary(R.string.lockscreen_weather_enabled_info);
-        }
+        mWeatherClient = new OmniJawsClient(getContext());
+        updateWeatherSettings();
 
         mUserSwitcher = (Preference) findPreference(KEY_KG_USER_SWITCHER);
         mUserSwitcher.setOnPreferenceChangeListener(this);
@@ -129,6 +125,14 @@ public class LockScreen extends SettingsPreferenceFragment
             return true;
         }
         return false;
+    }
+
+    private void updateWeatherSettings() {
+        if (mWeatherClient == null || mWeather == null) return;
+        boolean weatherEnabled = mWeatherClient.isOmniJawsEnabled();
+        mWeather.setEnabled(weatherEnabled);
+        mWeather.setSummary(weatherEnabled ? R.string.lockscreen_weather_summary :
+            R.string.lockscreen_weather_enabled_info);
     }
 
     public static void reset(Context mContext) {
@@ -156,6 +160,7 @@ public class LockScreen extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        updateWeatherSettings();
     }
 
     @Override
