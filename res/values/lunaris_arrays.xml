@@ -1483,18 +1483,6 @@
         <item>3</item>
     </string-array>
 
-   <string-array name="clock_color_mode_entries">
-        <item>Default</item>
-        <item>Accent</item>
-        <item>Custom</item>
-    </string-array>
-
-    <string-array name="clock_color_mode_values">
-        <item>default</item>
-        <item>accent</item>
-        <item>custom</item>
-    </string-array> 
-
     <string-array name="custom_gradient_color_mode_values" translatable="false">
         <item>0</item>
         <item>1</item>
@@ -1577,5 +1565,18 @@
         <item>Asus ROG Phone 9 Pro</item>
         <item>Samsung Galaxy S25 Ultra</item>
         <item>None</item>
+    </string-array>
+
+    <!-- Custom clock style -->
+    <string-array name="lockscreen_custom_clock_color_mode_entries" translatable="false">
+        <item>@string/default_value</item>
+        <item>@string/accent_color</item>
+        <item>@string/custom_color</item>
+    </string-array>
+
+    <string-array name="lockscreen_custom_clock_color_mode_values" translatable="false">
+        <item>default</item>
+        <item>accent</item>
+        <item>custom</item>
     </string-array>
 </resources>
