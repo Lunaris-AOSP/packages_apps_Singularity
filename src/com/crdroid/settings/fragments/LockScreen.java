@@ -36,6 +36,8 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.android.OmniJawsClient;
 import com.android.internal.util.crdroid.Utils;
+import com.android.internal.util.crdroid.systemUtils;
+import com.android.internal.util.crdroid.ThemeUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -71,11 +73,17 @@ public class LockScreen extends SettingsPreferenceFragment
     private Preference mWeather;
     private Preference mUserSwitcher;
 
+    private OmniJawsClient mWeatherClient;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.crdroid_settings_lockscreen);
+
+        final Context mContext = getActivity().getApplicationContext();
+
+        mThemeUtils = ThemeUtils.getInstance(getActivity());
 
         PreferenceCategory gestCategory = (PreferenceCategory) findPreference(LOCKSCREEN_GESTURES_CATEGORY);
 
