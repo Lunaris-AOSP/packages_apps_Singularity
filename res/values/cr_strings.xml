@@ -1585,4 +1585,8 @@
     <string name="qs_widgets_enabled_title">Quick Settings Widgets</string>
     <string name="qs_widgets_enabled_summary">Show widgets in quick settings. Disable to use qs tile customization</string>
 
+    <!-- Progressbar styles -->
+    <string name="theme_customization_progressbar_title">Seekbar</string>
+    <string name="theme_customization_progressbar_summary">Customize seekbar styles</string>
+
 </resources>
