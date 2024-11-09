@@ -73,7 +73,8 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
             R.layout.keyguard_clock_center,
             R.layout.keyguard_clock_simple,
             R.layout.keyguard_clock_miui,
-            R.layout.keyguard_clock_ide
+            R.layout.keyguard_clock_ide,
+            R.layout.keyguard_clock_label
     };
 
     @Override
