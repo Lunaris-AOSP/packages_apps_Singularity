@@ -43,6 +43,10 @@
                         android:id="@+id/wallpaper_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:blurred="true"
+                        app:blurRadius="30"
+                        android:background="#6B000000"
+                        android:foreground="#6B000000"
                         android:scaleType="centerCrop" />
 
                     <androidx.viewpager.widget.ViewPager

@@ -63,5 +63,6 @@
 
     <declare-styleable name="WallpaperView">
         <attr name="blurred" format="boolean" />
+        <attr name="blurRadius" format="float" />
     </declare-styleable>
 </resources>
