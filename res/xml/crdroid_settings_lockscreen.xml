@@ -39,6 +39,12 @@
             android:summary="@string/lockscreen_widgets_enabled_summary"
             android:fragment="com.crdroid.settings.fragments.ui.LockScreenWidgets" />
 
+        <com.tenx.support.preferences.TenXPreference
+            android:key="depth_wallpaper"
+            android:title="@string/dw_wallpaper_enabled_title"
+            android:summary="@string/dw_wallpaper_enabled_summary"
+            android:fragment="com.crdroid.settings.fragments.ui.WallpaperDepth"/>
+
         <!--<com.crdroid.settings.preferences.SecureSettingSeekBarPreference
             android:key="kg_custom_clock_top_margin"
             android:icon="@drawable/ic_lock_clock"
