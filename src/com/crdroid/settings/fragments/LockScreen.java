@@ -36,8 +36,8 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.android.OmniJawsClient;
 import com.android.internal.util.crdroid.Utils;
-import com.android.internal.util.crdroid.systemUtils;
 import com.android.internal.util.crdroid.ThemeUtils;
+import com.android.internal.util.android.SystemRestartUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -130,7 +130,7 @@ public class LockScreen extends SettingsPreferenceFragment
         Context mContext = getActivity().getApplicationContext();
 	    ContentResolver resolver = mContext.getContentResolver();
         if (preference == mUserSwitcher) {
-            systemUtils.showSystemUIRestartDialog(getContext());
+            SystemRestartUtils.showSystemUIRestartDialog(getContext());
             return true;
         }
         return false;
