@@ -81,7 +81,8 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
             R.layout.keyguard_clock_accent,
             R.layout.keyguard_clock_nos1,
             R.layout.keyguard_clock_nos2,
-            R.layout.keyguard_clock_life
+            R.layout.keyguard_clock_life,
+            R.layout.keyguard_clock_word
     };
 
     @Override
