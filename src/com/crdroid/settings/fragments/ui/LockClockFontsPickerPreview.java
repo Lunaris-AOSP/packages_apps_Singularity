@@ -65,7 +65,7 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
     private ThemeUtils mThemeUtils;
     private Handler mHandler = new Handler();
     
-    private final static int[] mCenterClocks = {2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 15};
+    private final static int[] mCenterClocks = {2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17,};
 
     private static final int[] CLOCK_LAYOUTS = {
             R.layout.keyguard_clock_default,
@@ -83,7 +83,9 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
             R.layout.keyguard_clock_nos2,
             R.layout.keyguard_clock_life,
             R.layout.keyguard_clock_word,
-            R.layout.keyguard_clock_encode
+            R.layout.keyguard_clock_encode,
+            R.layout.keyguard_clock_nos3,
+            R.layout.keyguard_clock_analog
     };
 
     @Override
