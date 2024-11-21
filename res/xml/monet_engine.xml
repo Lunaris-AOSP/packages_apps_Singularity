@@ -17,43 +17,55 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:tenx="http://schemas.android.com/apk/res-auto"
     android:key="monet_settings"
     android:title="@string/monet_title">
 
-    <ListPreference
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="monet_preview"
+        android:layout="@layout/monet_preview"
+        android:selectable="false"/>
+
+    <com.tenx.support.preferences.SystemSettingListPreference
         android:key="theme_style"
+        tenx:position="top"
         android:title="@string/monet_engine_style_title"
         android:entries="@array/monet_engine_style_entries"
         android:entryValues="@array/monet_engine_style_values"
         android:defaultValue="0" />
 
-    <ListPreference
+    <com.tenx.support.preferences.SystemSettingListPreference
         android:key="color_source"
+        tenx:position="middle"
         android:title="@string/monet_engine_color_source_title"
         android:entries="@array/monet_engine_color_source_entries"
         android:entryValues="@array/monet_engine_color_source_values"
         android:defaultValue="0" />
 
-    <com.crdroid.settings.preferences.colorpicker.ColorPickerPreference
+    <com.tenx.support.colorpicker.ColorPickerPreference
         android:key="accent_color"
+        tenx:position="middle"
         android:title="@string/monet_engine_custom_color_title"
         android:summary="@string/monet_engine_custom_color_summary"
         android:defaultValue="0xFF1b6ef3" />
 
-    <SwitchPreferenceCompat
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
         android:key="accent_background"
+        tenx:position="middle"
         android:title="@string/monet_engine_custom_bgcolor_title"
         android:summary="@string/monet_engine_custom_bgcolor_summary"
         android:defaultValue="false" />
 
-    <com.crdroid.settings.preferences.colorpicker.ColorPickerPreference
+    <com.tenx.support.colorpicker.ColorPickerPreference
         android:key="bg_color"
+        tenx:position="middle"
         android:title="@string/monet_engine_color_override_title"
         android:dependency="accent_background"
         android:defaultValue="0xFF1b6ef3" />
 
-    <com.crdroid.settings.preferences.CustomSeekBarPreference
+    <com.tenx.support.preferences.ProperSeekBarPreference
         android:key="luminance_factor"
+        tenx:position="middle"
         android:title="@string/monet_engine_luminance_factor_title"
         android:summary="@string/monet_engine_luminance_factor_summary"
         android:defaultValue="0"
@@ -63,8 +75,9 @@
         settings:units="%"
         settings:showSign="true" />
 
-    <com.crdroid.settings.preferences.CustomSeekBarPreference
+    <com.tenx.support.preferences.ProperSeekBarPreference
         android:key="chroma_factor"
+        tenx:position="middle"
         android:title="@string/monet_engine_chroma_factor_title"
         android:summary="@string/monet_engine_chroma_factor_summary"
         android:defaultValue="0"
@@ -74,14 +87,16 @@
         settings:units="%"
         settings:showSign="true" />
 
-    <SwitchPreferenceCompat
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
         android:key="whole_palette"
+        tenx:position="middle"
         android:title="@string/monet_engine_whole_palette_title"
         android:summary="@string/monet_engine_whole_palette_summary"
         android:defaultValue="false" />
 
-    <SwitchPreferenceCompat
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
         android:key="tint_background"
+        tenx:position="bottom"
         android:title="@string/monet_engine_tint_background_title"
         android:summary="@string/monet_engine_tint_background_summary"
         android:defaultValue="false" />

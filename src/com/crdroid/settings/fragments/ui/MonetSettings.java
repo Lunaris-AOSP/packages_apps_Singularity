@@ -35,8 +35,10 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import com.crdroid.settings.preferences.colorpicker.ColorPickerPreference;
-import com.crdroid.settings.preferences.CustomSeekBarPreference;
+import com.tenx.support.colorpicker.ColorPickerPreference;
+import com.tenx.support.preferences.SystemSettingSwitchPreference;
+import com.tenx.support.preferences.SystemSettingListPreference;
+import com.tenx.support.preferences.ProperSeekBarPreference;
 
 import java.lang.CharSequence;
 
@@ -87,15 +89,15 @@ public class MonetSettings extends DashboardFragment implements
 
     private static final int DEFAULT_COLOR = 0xFF1b6ef3;
 
-    private ListPreference mThemeStylePref;
-    private ListPreference mColorSourcePref;
+    private SystemSettingListPreference mThemeStylePref;
+    private SystemSettingListPreference mColorSourcePref;
     private ColorPickerPreference mAccentColorPref;
-    private SwitchPreferenceCompat mAccentBackgroundPref;
+    private SystemSettingSwitchPreference mAccentBackgroundPref;
     private ColorPickerPreference mBgColorPref;
-    private CustomSeekBarPreference mLuminancePref;
-    private CustomSeekBarPreference mChromaPref;
-    private SwitchPreferenceCompat mWholePalettePref;
-    private SwitchPreferenceCompat mTintBackgroundPref;
+    private ProperSeekBarPreference mLuminancePref;
+    private ProperSeekBarPreference mChromaPref;
+    private SystemSettingSwitchPreference mWholePalettePref;
+    private SystemSettingSwitchPreference mTintBackgroundPref;
 
     private int mAccentColorValue;
     private int mBgColorValue;
@@ -274,11 +276,11 @@ public class MonetSettings extends DashboardFragment implements
         return false;
     }
 
-    private void updateListByValue(ListPreference pref, String value) {
+    private void updateListByValue(SystemSettingListPreference pref, String value) {
         updateListByValue(pref, value, true);
     }
 
-    private void updateListByValue(ListPreference pref, String value, boolean set) {
+    private void updateListByValue(SystemSettingListPreference pref, String value, boolean set) {
         if (set) pref.setValue(value);
         final int index = pref.findIndexOfValue(value);
         pref.setSummary(pref.getEntries()[index]);
