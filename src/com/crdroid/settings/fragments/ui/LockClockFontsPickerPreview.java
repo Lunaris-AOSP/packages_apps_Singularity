@@ -165,7 +165,7 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
                 Settings.Secure.putIntForUser(getContext().getContentResolver(), 
                     "clock_style", mClockPosition, UserHandle.USER_CURRENT);
                 Settings.Secure.putIntForUser(getContext().getContentResolver(), 
-                    "lock_screen_custom_clock_face ", 0, UserHandle.USER_CURRENT);
+                    "lock_screen_custom_clock_face", 0, UserHandle.USER_CURRENT);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
