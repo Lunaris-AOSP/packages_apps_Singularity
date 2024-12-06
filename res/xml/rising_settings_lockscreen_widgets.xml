@@ -28,6 +28,14 @@
         android:defaultValue="false"
         tenx:position="full" />
 
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
+        android:key="lockscreen_info_widgets_enabled"
+        android:dependency="lockscreen_widgets_enabled"
+        android:title="@string/lockscreen_display_widgets_title"
+        android:summary="@string/lockscreen_display_widgets_summary"
+        android:defaultValue="false"
+        tenx:position="full" />
+
     <com.tenx.support.preferences.SystemSettingListPreference
         android:key="lockscreen_widgets_style"
         android:dependency="lockscreen_widgets_enabled"
