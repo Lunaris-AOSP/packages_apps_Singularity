@@ -1591,6 +1591,7 @@
     <string name="data">Data</string>
     <string name="ringer">Ringer</string>
     <string name="bt">Bluetooth</string>
+    <string name="hotspot">Hotspot</string>
 
     <!-- QS Widgets -->
     <string name="qs_widgets_enabled_title">Quick Settings Widgets</string>
