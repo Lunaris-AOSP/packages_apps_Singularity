@@ -186,6 +186,13 @@
             android:summary="@string/brightness_percent_summary"
             android:defaultValue="false" />
 
+        <!-- Brightness slider styles -->
+        <com.tenx.support.preferences.TenXPreference
+            android:key="android.theme.customization.brightness_slider"
+            android:title="@string/theme_customization_brightness_slider_title"
+            android:summary="@string/theme_customization_brightness_slider_summary"
+            android:fragment="com.crdroid.settings.fragments.ui.BrightnessSlider"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
