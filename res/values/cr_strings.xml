@@ -17,15 +17,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- App Title -->
-    <string name="crdroid_settings_title">crDroid Settings</string>
-    <string name="crdroid_settings_summary">Open goodness</string>
+    <string name="crdroid_settings_title">Singularity</string>
+    <string name="crdroid_settings_summary">Explore infinity</string>
     <string name="reset_settings_title">Reset settings</string>
     <string name="reset_settings_message">This will reset most crdroid settings to their default values for the current user. Would you like to continue?</string>
 
     <!-- Personalization Categories -->
     <string name="button_title">Buttons</string>
     <string name="lockscreen_title">Lock Screen</string>
-    <string name="misc_title">Miscellaneous</string>
+    <string name="misc_title">System</string>
     <string name="navigation_title">Navigation</string>
     <string name="notifications_title">Notifications</string>
     <string name="quicksettings_title">Quick Settings</string>
