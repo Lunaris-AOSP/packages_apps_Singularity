@@ -968,4 +968,88 @@
         <item>259200000</item>
     </string-array>
 
+    <!-- Settings dashboard customisations --> 
+    <string-array name="settings_dashboard_background_style_entries" translatable="false">
+        <item>@string/settings_dashboard_background_style_solid_circle</item>
+        <item>@string/settings_dashboard_background_style_stroke</item>
+        <item>@string/settings_dashboard_background_style_stroke_alpha</item>
+        <item>@string/settings_dashboard_background_style_solid_square</item>
+        <item>@string/settings_dashboard_background_style_stroke_square</item>
+        <item>@string/settings_dashboard_background_style_stroke_square_alpha</item>
+        <item>@string/settings_dashboard_background_style_solid_gradient</item>
+        <item>@string/settings_dashboard_background_style_stroke_gradient</item>
+        <item>@string/settings_dashboard_background_style_square_gradient</item>
+    </string-array>
+    
+    <string-array name="settings_dashboard_background_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="settings_dashboard_background_arrow_entries" translatable="false">
+        <item>@string/settings_dashboard_arrow_hidden</item>
+        <item>@string/settings_dashboard_arrow_shown</item>
+        <item>@string/settings_dashboard_arrow_with_background</item>
+    </string-array>
+    
+    <string-array name="settings_dashboard_background_arrow_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="settings_dashboard_arrow_color_entries" translatable="false">
+        <item>@string/settings_dashboard_arrow_color_white</item>
+        <item>@string/settings_dashboard_arrow_color_black</item>
+        <item>@string/settings_dashboard_arrow_color_accent</item>
+    </string-array>
+    <string-array name="settings_dashboard_arrow_color_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="settings_icon_color_entries" translatable="false">
+        <item>@string/settings_icon_color_default</item>
+        <item>@string/settings_icon_color_accent</item>
+        <item>@string/settings_icon_color_grey</item>
+        <item>@string/settings_icon_color_random</item>
+    </string-array>
+    <string-array name="settings_icon_color_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="settings_styles_color_entries" translatable="false">
+        <item>@string/settings_icon_styles_default</item>
+        <item>@string/settings_icon_styles_accent</item>
+        <item>@string/settings_icon_styles_gradient</item>
+    </string-array>
+    <string-array name="settings_styles_color_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="settings_dashboard_background_size_entries" translatable="false">
+        <item>@string/settings_background_size_default</item>
+        <item>@string/settings_background_size_x</item>
+        <item>@string/settings_background_size_y</item>
+        <item>@string/settings_background_size_z</item>
+        <item>@string/settings_background_size_zx</item>
+        <item>@string/settings_background_size_zy</item>
+    </string-array>
+    <string-array name="settings_dashboard_background_size_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
 </resources>

@@ -1394,4 +1394,55 @@
     <string name="increasing_ring_volume_option_title">Increasing ring volume</string>
     <string name="increasing_ring_min_volume_title">Start volume</string>
     <string name="increasing_ring_ramp_up_time_title">Ramp-up time</string>
+
+    <!-- Settings dashboard customisations -->
+    <string name="tenx_settings_dashboard_title">Settings Dashboard</string>
+    <string name="tenx_settings_dashboard_summary">Settings Homepage customisations</string>
+     <!-- Settings dashboard customisations -->
+    <string name="settings_dashboard_background_shown_title">Background</string>
+    <string name="settings_dashboard_background_shown_summary">Enables background for settings icon</string>
+    <string name="settings_dashboard_cards_show_title">Cards</string>
+    <string name="settings_dashboard_cards_show_summary">Set settings card style</string>
+    <string name="settings_dashboard_background_style_title">Style</string>
+    <string name="settings_dashboard_background_style_solid_circle">Solid Circle (Accent)</string>
+    <string name="settings_dashboard_background_style_stroke">Stroke Circle (Accent)</string>
+    <string name="settings_dashboard_background_style_stroke_alpha">Stroke Circle (Accent alpha)</string>
+    <string name="settings_dashboard_background_style_solid_square">Solid Square (Accent)</string>
+    <string name="settings_dashboard_background_style_stroke_square">Stroke Square (Accent)</string>
+    <string name="settings_dashboard_background_style_stroke_square_alpha">Stroke Square (Accent alpha)</string>
+    <string name="settings_dashboard_background_style_solid_gradient">Gradient circle (Solid)</string>
+    <string name="settings_dashboard_background_style_stroke_gradient">Gradient circle (Stroke)</string>
+    <string name="settings_dashboard_background_style_square_gradient">Gradient (Stroke)</string>
+    <string name="settings_dashboard_background_random_color_title">Random color</string>
+    <string name="settings_dashboard_background_random_color_summary">Switches between Accent &amp; Random colors</string>
+    <string name="settings_dashboard_background_stroke_width_title">Stroke width</string>
+    <string name="settings_dashboard_background_gradient_start_color">Gradient start</string>
+    <string name="settings_dashboard_background_gradient_end_color">Gradient end</string>
+    <string name="settings_icon_styles_title">Icons</string>
+    <string name="settings_icon_color_title">Icons color</string>
+    <string name="settings_icon_color_default">Default</string>
+    <string name="settings_icon_color_accent">Accent</string>
+    <string name="settings_icon_color_grey">Grey</string>
+    <string name="settings_icon_color_random">Random</string>
+    <string name="settings_icon_styles_default">Default</string>
+    <string name="settings_icon_styles_accent">Accent</string>
+    <string name="settings_icon_styles_gradient">Gradient</string>
+    <string name="settings_background_size_title">Background size</string>
+    <string name="settings_background_size_default">Default</string>
+    <string name="settings_background_size_x">55dp</string>
+    <string name="settings_background_size_y">60dp</string>
+    <string name="settings_background_size_z">65dp</string>
+    <string name="settings_background_size_zx">70dp</string>
+    <string name="settings_background_size_zy">75dp</string>
+    <string name="settings_dashboard_arrow_title">Arrow</string>
+    <string name="settings_dashboard_arrow_hidden">Hidden</string>
+    <string name="settings_dashboard_arrow_shown">Arrow only</string>
+    <string name="settings_dashboard_arrow_with_background">Background with arrow</string>
+    <string name="settings_dashboard_arrow_color_title">Arrow color</string>
+    <string name="settings_dashboard_arrow_color_white">White</string>
+    <string name="settings_dashboard_arrow_color_black">Black</string>
+    <string name="settings_dashboard_arrow_color_accent">Accent</string>
+    <string name="settings_category_title">Settings Card style</string>
+    <string name="default_string">Default</string>
+    
 </resources>
