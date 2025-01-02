@@ -1505,4 +1505,8 @@
     <string name="search">Search</string>
     <string name="search_apps">Search apps</string>
 
+    <!-- Brightness percentage -->
+    <string name="brightness_percent_title">Brightness Percentage</string>
+    <string name="brightness_percent_summary">Show hide brightness percentage text</string>
+
 </resources>
