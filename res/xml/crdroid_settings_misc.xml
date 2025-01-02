@@ -19,6 +19,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/misc_title">
 
+    <com.tenx.support.preferences.TenXPreference
+        android:key="spoofing"
+        android:title="@string/spoofing_title"
+        android:summary="@string/spoofing_summary"
+        android:fragment="com.crdroid.settings.fragments.misc.Spoof" />
+
     <!-- Gaming mode -->
     <Preference
         android:key="gaming_mode"
