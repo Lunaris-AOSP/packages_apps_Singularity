@@ -1470,5 +1470,17 @@
     <string name="error_loading_properties">Error loading PIF properties</string>
     <string name="entryhooks_title">Enable Keybox spoofing</string>
     <string name="entryhooks_summary">Spoof device keybox to pass Play Integrity</string>
+
+    <!-- Haptics Settings -->
+    <string name="haptics_settings_title">System haptics</string>
+    <string name="haptics_settings_summary">Modify system haptics intensities</string>
+    <string name="back_gesture_haptic_intensity_title">Back gesture haptics intensity</string>
+    <string name="brightness_slider_haptics_intensity_title">Brightness slider haptics intensity</string>
+    <string name="edge_scrolling_haptics_intensity_title">Edge scrolling haptics intensity</string>
+    <string name="volume_slider_haptics_intensity_title">Volume slider haptics intensity</string>
+    <string name="qs_panel_tile_haptic_intensity_title">QS tile haptics intensity</string>
+    <string name="qs_haptics_intensity_title">QS fling haptics intensity</string>
+    <string name="volume_panel_haptic_feedback_title">bottom haptic</string>
+    <string name="volume_panel_haptic_feedback_summary">Vibrate on pressing volume bottom</string>
     
 </resources>
