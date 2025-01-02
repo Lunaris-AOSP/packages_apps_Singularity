@@ -75,6 +75,13 @@
             android:summary="@string/lockscreen_show_carrier_summary"
             android:defaultValue="true" />
 
+        <!-- Keyguard user switcher -->
+        <com.tenx.support.preferences.SystemSettingSwitchPreference
+            android:key="kg_user_switcher_enabled"
+            android:title="@string/kg_user_switcher_enabled_title"
+            android:summary="@string/kg_user_switcher_enabled_summary"
+            android:defaultValue="false" />
+
         <!--<lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="lockscreen_media_metadata"
             android:icon="@drawable/ic_movie"

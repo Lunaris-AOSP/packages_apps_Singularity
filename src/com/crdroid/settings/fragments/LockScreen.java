@@ -62,12 +62,14 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String KEY_UDFPS_ICONS = "udfps_icon_picker";
     private static final String SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
     private static final String KEY_WEATHER = "lockscreen_weather_enabled";
+    private static final String KEY_KG_USER_SWITCHER= "kg_user_switcher_enabled";
 
     private Preference mUdfpsAnimations;
     private Preference mUdfpsIcons;
     private Preference mRippleEffect;
     private Preference mScreenOffUdfps;
     private Preference mWeather;
+    private Preference mUserSwitcher;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,10 +115,19 @@ public class LockScreen extends SettingsPreferenceFragment
             mWeather.setSummary(R.string.lockscreen_weather_enabled_info);
         }
 
+        mUserSwitcher = (Preference) findPreference(KEY_KG_USER_SWITCHER);
+        mUserSwitcher.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Context mContext = getActivity().getApplicationContext();
+	    ContentResolver resolver = mContext.getContentResolver();
+        if (preference == mUserSwitcher) {
+            systemUtils.showSystemUIRestartDialog(getContext());
+            return true;
+        }
         return false;
     }
 
