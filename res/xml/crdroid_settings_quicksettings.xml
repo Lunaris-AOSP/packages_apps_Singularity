@@ -23,6 +23,12 @@
     <PreferenceCategory
          android:title="@string/qs_misc_category">
 
+        <com.tenx.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_split_shade"
+            android:title="@string/qs_split_shade_title"
+            android:summary="@string/qs_split_shade_summary"
+            android:defaultValue="false" />
+
         <!-- QS Header -->
         <Preference
             android:key="qs_header_image"

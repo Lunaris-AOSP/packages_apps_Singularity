@@ -1522,4 +1522,8 @@
     <string name="nothing_launcher_customizations_summary">Customize nothing launcher homescreen app</string>
     <string name="quickswitch_not_supported">QuickSwitch is not supported; the system only has one launcher.</string>
 
+    <!-- QS split shade -->
+    <string name="qs_split_shade_title">QS Split Shade</string>
+    <string name="qs_split_shade_summary">Split QS layout in landscape mode</string>
+
 </resources>
