@@ -1482,5 +1482,9 @@
     <string name="qs_haptics_intensity_title">QS fling haptics intensity</string>
     <string name="volume_panel_haptic_feedback_title">bottom haptic</string>
     <string name="volume_panel_haptic_feedback_summary">Vibrate on pressing volume bottom</string>
+
+    <!-- Idle Manager -->
+    <string name="idle_manager_title">Idle Manager</string>
+    <string name="idle_manager_summary">Stop all non-essential background processes when the device is idle</string>
     
 </resources>

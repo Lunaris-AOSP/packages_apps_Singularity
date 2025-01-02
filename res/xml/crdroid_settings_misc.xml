@@ -84,4 +84,11 @@
         android:summary="@string/pocket_judge_summary"
         android:defaultValue="false" />
 
+    <!-- Background process killer -->
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
+        android:key="custom_idle_manager"
+        android:title="@string/idle_manager_title"
+        android:summary="@string/idle_manager_summary"
+        android:defaultValue="false" />
+
 </PreferenceScreen>
