@@ -1581,4 +1581,8 @@
     <string name="ringer">Ringer</string>
     <string name="bt">Bluetooth</string>
 
+    <!-- QS Widgets -->
+    <string name="qs_widgets_enabled_title">Quick Settings Widgets</string>
+    <string name="qs_widgets_enabled_summary">Show widgets in quick settings. Disable to use qs tile customization</string>
+
 </resources>
