@@ -31,7 +31,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.util.crdroid.SystemRestartUtils;
+import com.android.internal.util.android.SystemRestartUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
