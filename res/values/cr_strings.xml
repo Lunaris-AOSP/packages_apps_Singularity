@@ -1487,4 +1487,8 @@
     <string name="idle_manager_title">Idle Manager</string>
     <string name="idle_manager_summary">Stop all non-essential background processes when the device is idle</string>
     
+    <!-- Ignore window secure -->
+    <string name="ignore_window_secure_title">Ignore window secure flags</string>
+    <string name="ignore_window_secure_summary">Fixes black screenshots and recordings, May lead to privacy leaks, Restart apps to apply changes</string>
+
 </resources>
