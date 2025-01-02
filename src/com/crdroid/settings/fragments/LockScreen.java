@@ -36,7 +36,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.android.OmniJawsClient;
 import com.android.internal.util.crdroid.Utils;
-import com.android.internal.util.crdroid.systemUtils;
 import com.android.internal.util.crdroid.ThemeUtils;
 import com.android.internal.util.android.SystemRestartUtils;
 
