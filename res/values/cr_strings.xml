@@ -1509,4 +1509,8 @@
     <string name="brightness_percent_title">Brightness Percentage</string>
     <string name="brightness_percent_summary">Show hide brightness percentage text</string>
 
+    <!-- Media player settings -->
+    <string name="media_controls_always_show_time_title">Always show time</string>
+    <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
+
 </resources>

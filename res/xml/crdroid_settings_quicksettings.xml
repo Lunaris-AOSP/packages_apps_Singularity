@@ -305,4 +305,16 @@
             android:summary="@string/notification_material_dismiss_summary" />-->
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="QS media player">
+
+        <com.tenx.support.preferences.SecureSettingSwitchPreference
+        	android:key="media_controls_always_show_time"
+        	android:title="@string/media_controls_always_show_time_title"
+        	android:summary="@string/media_controls_always_show_time_summary"
+        	android:defaultValue="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
