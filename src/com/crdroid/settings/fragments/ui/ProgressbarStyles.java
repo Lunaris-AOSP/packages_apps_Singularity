@@ -100,7 +100,7 @@ public class ProgressbarStyles extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.AOSPA;
+        return MetricsEvent.CRDROID_SETTINGS;
     }
 
     @Override
