@@ -37,7 +37,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.android.internal.util.crdroid.systemUtils;
+import com.android.internal.util.android.SystemRestartUtils;
 
 @SearchIndexable
 public class QuickSwitch extends SettingsPreferenceFragment 
