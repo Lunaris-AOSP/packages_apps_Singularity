@@ -1534,4 +1534,11 @@
     <string name="volume_show_media_button_title">Volume media button</string>
     <string name="volume_show_media_button_summary">Show media output switcher button into volume dialog</string>
 
+    <!-- Volume TextView -->
+    <string name="volume_persen_switch_title">Volume Percentage</string>
+    <string name="volume_persen_switch_summary">show volume panel percentage</string>
+    <string name="volume_persen_style_title">Percentage Location</string>
+    <string name="volume_persen_style_top">Top</string>
+    <string name="volume_persen_style_bottom">Bottom</string>
+
 </resources>
