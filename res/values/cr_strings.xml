@@ -1495,4 +1495,8 @@
     <string name="no_storage_restrict_title">No storage restrict</string>
     <string name="no_storage_restrict_summary">Remove the restriction when selecting folders through Storage Access Framework.</string>
 
+    <!-- Hide screen capture status -->
+    <string name="hide_screen_capture_status_title">Hide screen capture status</string>
+    <string name="hide_screen_capture_status_summary">Hide screen capture and screen record status from all applications.</string>
+
 </resources>

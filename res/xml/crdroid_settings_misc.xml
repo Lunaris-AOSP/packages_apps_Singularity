@@ -72,6 +72,13 @@
             android:title="@string/no_storage_restrict_title"
             android:summary="@string/no_storage_restrict_summary"
             android:defaultValue="false"/>
+
+        <!-- Hide screen capture status -->
+        <com.tenx.support.preferences.SystemSettingSwitchPreference
+            android:key="hide_screen_capture_status"
+            android:title="@string/hide_screen_capture_status_title"
+            android:summary="@string/hide_screen_capture_status_summary"
+            android:defaultValue="false"/>
                
      </PreferenceCategory>
 
