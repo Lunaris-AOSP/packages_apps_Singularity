@@ -25,6 +25,13 @@
         android:summary="@string/spoofing_summary"
         android:fragment="com.crdroid.settings.fragments.misc.Spoof" />
 
+    <!-- System Haptics intensities preference -->
+    <com.tenx.support.preferences.TenXPreference
+        android:key="haptics_settings"
+        android:title="@string/haptics_settings_title"
+        android:summary="@string/haptics_settings_summary"
+        android:fragment="com.crdroid.settings.fragments.misc.HapticsPreferenceFragment"/>
+
     <!-- Gaming mode -->
     <Preference
         android:key="gaming_mode"
