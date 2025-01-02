@@ -38,6 +38,8 @@ import com.android.settingslib.search.SearchIndexable;
 import com.crdroid.settings.fragments.quicksettings.LayoutSettings;
 import com.crdroid.settings.fragments.quicksettings.QsHeaderImageSettings;
 import com.crdroid.settings.preferences.CustomSeekBarPreference;
+import com.tenx.support.preferences.SystemSettingListPreference;
+import com.tenx.support.preferences.SystemSettingSwitchPreference;
 
 import lineageos.providers.LineageSettings;
 
@@ -59,6 +61,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_PREF_TILE_ANIM_INTERPOLATOR = "qs_tile_animation_interpolator";
     private static final String KEY_QS_UI_STYLE  = "qs_tile_ui_style";
     private static final String KEY_QS_PANEL_STYLE  = "qs_panel_style";
+    private static final String KEY_QS_SPLIT_SHADE = "qs_split_shade";
+    private static final String QS_SPLIT_SHADE_LAYOUT_CTG = "android.theme.customization.qs_landscape_layout";
+    private static final String QS_SPLIT_SHADE_LAYOUT_PKG = "com.android.systemui.qs.landscape.split_shade_layout";
+    private static final String QS_SPLIT_SHADE_LAYOUT_TARGET = "com.android.systemui";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -69,6 +75,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mTileAnimationInterpolator;
     private ListPreference mQsUI;
     private ListPreference mQsPanelStyle;
+    private SystemSettingSwitchPreference mSplitShade;
 
     private static ThemeUtils mThemeUtils;
 
@@ -108,6 +115,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mTileAnimationInterpolator = (ListPreference) findPreference(KEY_PREF_TILE_ANIM_INTERPOLATOR);
 
         mTileAnimationStyle.setOnPreferenceChangeListener(this);
+
+        mSplitShade = findPreference(KEY_QS_SPLIT_SHADE);
+        boolean ssEnabled = isSplitShadeEnabled();
+        mSplitShade.setChecked(ssEnabled);
+        mSplitShade.setOnPreferenceChangeListener(this);
 
         int tileAnimationStyle = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_TILE_ANIMATION_STYLE, 0, UserHandle.USER_CURRENT);
@@ -151,8 +163,21 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             updateQsPanelStyle(getContext());
             checkQSOverlays(getContext());
             return true;
+        } else if (preference == mSplitShade) {
+            updateSplitShadeState(((Boolean) newValue).booleanValue());
+            return true;
         }
         return false;
+    }
+
+    private boolean isSplitShadeEnabled() {
+        return mThemeUtils.isOverlayEnabled(QS_SPLIT_SHADE_LAYOUT_PKG);
+    }
+    private void updateSplitShadeState(boolean enable) {
+        mThemeUtils.setOverlayEnabled(
+                QS_SPLIT_SHADE_LAYOUT_CTG,
+                enable ? QS_SPLIT_SHADE_LAYOUT_PKG : QS_SPLIT_SHADE_LAYOUT_TARGET,
+                QS_SPLIT_SHADE_LAYOUT_TARGET);
     }
 
     public static void reset(Context mContext) {
