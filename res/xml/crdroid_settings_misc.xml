@@ -58,6 +58,13 @@
             android:targetClass="com.libremobileos.sidebar.ui.sidebar.SidebarSettingsActivity" />
     </Preference>
 
+    <!-- QuickSwitch -->
+    <com.tenx.support.preferences.TenXPreference
+        android:key="quickswitch"
+        android:title="@string/quickswitch_launcher_title" 
+        android:summary="@string/quickswitch_launcher_summary" 
+        android:fragment="com.crdroid.settings.fragments.misc.QuickSwitch" />
+
     <PreferenceCategory
         android:title="System changes">
 

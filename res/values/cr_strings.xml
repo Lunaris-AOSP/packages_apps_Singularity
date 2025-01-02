@@ -1512,5 +1512,12 @@
     <!-- Media player settings -->
     <string name="media_controls_always_show_time_title">Always show time</string>
     <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
+    
+    <!-- QuickSwitch -->
+    <string name="quickswitch_launcher_title">QuickSwitch</string>
+    <string name="quickswitch_launcher_summary">Customize default homescreen app</string>
+    <string name="nothing_launcher_customizations_title">Nothing launcher customizations</string>
+    <string name="nothing_launcher_customizations_summary">Customize nothing launcher homescreen app</string>
+    <string name="quickswitch_not_supported">QuickSwitch is not supported; the system only has one launcher.</string>
 
 </resources>
