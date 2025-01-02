@@ -323,6 +323,12 @@
             android:summary="@string/button_wake_summary"
             android:defaultValue="false" />
 
+        <com.tenx.support.preferences.SecureSettingSwitchPreference
+            android:key="volume_show_media_button"
+            android:title="@string/volume_show_media_button_title"
+            android:summary="@string/volume_show_media_button_summary"
+            android:defaultValue="true"/>
+
         <lineageos.preference.LineageSystemSettingSwitchPreference
             android:key="volume_answer_call"
             android:icon="@drawable/ic_answer_call"

@@ -1530,4 +1530,8 @@
     <string name="kg_user_switcher_enabled_title">User Switcher</string>
     <string name="kg_user_switcher_enabled_summary">Show user switcher when showing pin/password prompt</string>
 
+    <!-- Volume Media Button -->
+    <string name="volume_show_media_button_title">Volume media button</string>
+    <string name="volume_show_media_button_summary">Show media output switcher button into volume dialog</string>
+
 </resources>
