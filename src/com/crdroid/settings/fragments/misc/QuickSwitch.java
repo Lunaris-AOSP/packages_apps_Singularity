@@ -84,7 +84,7 @@ public class QuickSwitch extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == quickSwitchPref) {
-            systemUtils.showSystemRestartDialog(getContext());
+            SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }
         return false;
