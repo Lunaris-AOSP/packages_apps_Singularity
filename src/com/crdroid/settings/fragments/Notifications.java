@@ -38,7 +38,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.android.internal.util.crdroid.Utils;
-import com.android.internal.util.crdroid.systemUtils;
+import com.android.internal.util.android.SystemRestartUtils;
 
 import com.crdroid.settings.preferences.CustomSeekBarPreference;
 
@@ -143,7 +143,7 @@ public class Notifications extends SettingsPreferenceFragment implements
             mFlashOnCallRate.setEnabled(value > 0);
             return true;
         } else if (preference == mCompactHUNPref) {
-            systemUtils.showSystemUIRestartDialog(getContext());
+            SystemRestartUtils.showSystemUIRestartDialog(getContext());
             return true;
         }
         return false;
