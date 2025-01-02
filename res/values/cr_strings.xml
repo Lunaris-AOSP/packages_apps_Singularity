@@ -1589,4 +1589,8 @@
     <string name="theme_customization_progressbar_title">Seekbar</string>
     <string name="theme_customization_progressbar_summary">Customize seekbar styles</string>
 
+    <!-- Compact Headsup -->
+    <string name="notification_heads_up_compact_title">Compact Heads Up notifications</string>
+    <string name="notification_heads_up_compact_summary">Show brief pop up notifications</string>
+
 </resources>

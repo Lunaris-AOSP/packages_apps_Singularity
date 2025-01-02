@@ -38,6 +38,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.android.internal.util.crdroid.Utils;
+import com.android.internal.util.android.SystemRestartUtils;
 
 import com.crdroid.settings.preferences.CustomSeekBarPreference;
 
@@ -58,6 +59,7 @@ public class Notifications extends SettingsPreferenceFragment implements
     private static final String FLASHLIGHT_DND_PREF = "flashlight_on_call_ignore_dnd";
     private static final String FLASHLIGHT_RATE_PREF = "flashlight_on_call_rate";
     private static final String HEADS_UP_TIMEOUT_PREF = "heads_up_timeout";
+    private static final String COMPACT_HUN_KEY = "persist.sys.compact_hun.enabled";
 
     private Preference mAlertSlider;
     private Preference mBatLights;
@@ -67,6 +69,7 @@ public class Notifications extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mFlashOnCallIgnoreDND;
     private CustomSeekBarPreference mFlashOnCallRate;
     private CustomSeekBarPreference mHeadsUpTimeOut;
+    private Preference mCompactHUNPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +130,9 @@ public class Notifications extends SettingsPreferenceFragment implements
             mFlashOnCallIgnoreDND.setEnabled(value > 1);
             mFlashOnCallRate.setEnabled(value > 0);
         }
+
+        mCompactHUNPref = findPreference(COMPACT_HUN_KEY);
+        mCompactHUNPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -135,6 +141,9 @@ public class Notifications extends SettingsPreferenceFragment implements
             int value = Integer.parseInt((String) newValue);
             mFlashOnCallIgnoreDND.setEnabled(value > 1);
             mFlashOnCallRate.setEnabled(value > 0);
+            return true;
+        } else if (preference == mCompactHUNPref) {
+            SystemRestartUtils.showSystemUIRestartDialog(getContext());
             return true;
         }
         return false;
