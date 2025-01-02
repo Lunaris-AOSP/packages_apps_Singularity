@@ -34,7 +34,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.util.crdroid.OmniJawsClient;
+import com.android.internal.util.android.OmniJawsClient;
 import com.android.internal.util.crdroid.Utils;
 
 import com.android.settings.R;
@@ -58,21 +58,16 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String LOCKSCREEN_INTERFACE_CATEGORY = "lockscreen_interface_category";
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
-    private static final String KEY_SMARTSPACE = "lockscreen_smartspace_enabled";
-    private static final String KEY_WEATHER = "lockscreen_weather_enabled";
     private static final String KEY_UDFPS_ANIMATIONS = "udfps_recognizing_animation_preview";
     private static final String KEY_UDFPS_ICONS = "udfps_icon_picker";
     private static final String SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
+    private static final String KEY_WEATHER = "lockscreen_weather_enabled";
 
     private Preference mUdfpsAnimations;
     private Preference mUdfpsIcons;
     private Preference mRippleEffect;
-    private Preference mWeather;
     private Preference mScreenOffUdfps;
-
-    private SwitchPreferenceCompat mSmartspace;
-
-    private OmniJawsClient mWeatherClient;
+    private Preference mWeather;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,22 +105,18 @@ public class LockScreen extends SettingsPreferenceFragment
                 gestCategory.removePreference(mScreenOffUdfps);
         }
 
-        mSmartspace = (SwitchPreferenceCompat) findPreference(KEY_SMARTSPACE);
-        mSmartspace.setOnPreferenceChangeListener(this);
-
         mWeather = (Preference) findPreference(KEY_WEATHER);
-        mWeatherClient = new OmniJawsClient(getContext());
-        updateWeatherSettings();
+        OmniJawsClient weatherClient = new OmniJawsClient(getContext());
+        boolean weatherEnabled = weatherClient.isOmniJawsEnabled();
+        if (!weatherEnabled) {
+            mWeather.setEnabled(false);
+            mWeather.setSummary(R.string.lockscreen_weather_enabled_info);
+        }
+
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mSmartspace) {
-            mSmartspace.setChecked((Boolean)newValue);
-            updateWeatherSettings();
-            return true;
-        }
-
         return false;
     }
 
@@ -133,8 +124,6 @@ public class LockScreen extends SettingsPreferenceFragment
         ContentResolver resolver = mContext.getContentResolver();
         Settings.Secure.putIntForUser(resolver,
                 Settings.Secure.SCREEN_OFF_UDFPS_ENABLED, 0, UserHandle.USER_CURRENT);
-        Settings.Secure.putIntForUser(resolver,
-                Settings.Secure.LOCKSCREEN_SMARTSPACE_ENABLED, 1, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
                 Settings.System.LOCKSCREEN_BATTERY_INFO, 1, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
@@ -148,30 +137,14 @@ public class LockScreen extends SettingsPreferenceFragment
         Settings.System.putIntForUser(resolver,
                 Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, 1, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
-                Settings.System.LOCKSCREEN_WEATHER_ENABLED, 0, UserHandle.USER_CURRENT);
-        Settings.System.putIntForUser(resolver,
-                Settings.System.LOCKSCREEN_WEATHER_LOCATION, 0, UserHandle.USER_CURRENT);
-        Settings.System.putIntForUser(resolver,
-                Settings.System.LOCKSCREEN_WEATHER_TEXT, 1, UserHandle.USER_CURRENT);
-        Settings.System.putIntForUser(resolver,
                 Settings.System.LOCKSCREEN_SHOW_CARRIER, 1, UserHandle.USER_CURRENT);
         UdfpsAnimation.reset(mContext);
         UdfpsIconPicker.reset(mContext);
     }
 
-    private void updateWeatherSettings() {
-        if (mWeatherClient == null || mWeather == null || mSmartspace == null) return;
-
-        boolean weatherEnabled = mWeatherClient.isOmniJawsEnabled();
-        mWeather.setEnabled(!mSmartspace.isChecked() && weatherEnabled);
-        mWeather.setSummary(!mSmartspace.isChecked() && weatherEnabled ? R.string.lockscreen_weather_summary :
-            R.string.lockscreen_weather_enabled_info);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        updateWeatherSettings();
     }
 
     @Override
