@@ -29,6 +29,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.crdroid.ThemeUtils;
+import com.android.internal.util.crdroid.systemUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -65,6 +66,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String QS_SPLIT_SHADE_LAYOUT_CTG = "android.theme.customization.qs_landscape_layout";
     private static final String QS_SPLIT_SHADE_LAYOUT_PKG = "com.android.systemui.qs.landscape.split_shade_layout";
     private static final String QS_SPLIT_SHADE_LAYOUT_TARGET = "com.android.systemui";
+    private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -76,6 +78,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mQsUI;
     private ListPreference mQsPanelStyle;
     private SystemSettingSwitchPreference mSplitShade;
+    private Preference mQsCompactPlayer;
 
     private static ThemeUtils mThemeUtils;
 
@@ -132,6 +135,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsPanelStyle.setOnPreferenceChangeListener(this);
 
         checkQSOverlays(mContext);
+
+        mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
+        mQsCompactPlayer.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -165,6 +171,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mSplitShade) {
             updateSplitShadeState(((Boolean) newValue).booleanValue());
+            return true;
+        } else if (preference == mQsCompactPlayer) {
+            systemUtils.showSystemUIRestartDialog(getActivity());
             return true;
         }
         return false;
