@@ -5,4 +5,11 @@
     <string name="pie_animation_style_title">Android P animation style</string>
     <string name="pie_animation_style_summary">Enable Android P \"Default\" animations</string>
 
+    <!-- Notification Styles -->
+    <string name="notif_style_title">Notification Style</string>
+    <string name="notif_style1">Cyberpunk</string>
+    <string name="notif_style2">Duoline</string>
+    <string name="notif_style3">IOS</string>
+    <string name="notif_style4">Layers</string>
+
 </resources>
