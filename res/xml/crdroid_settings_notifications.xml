@@ -20,6 +20,15 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/notifications_title">
 
+    <!-- Notification Styles -->      
+    <com.tenx.support.preferences.SystemSettingListPreference
+        android:key="notification_style"
+        android:title="@string/notif_style_title"
+        android:entries="@array/notif_style_entries"
+        android:entryValues="@array/notif_style_values"
+        android:summary="%s"
+        android:defaultValue="0" />
+
     <com.crdroid.settings.preferences.SystemSettingSwitchPreference
         android:key="alert_slider_notifications"
         android:icon="@drawable/ic_light_switch"

@@ -60,6 +60,7 @@ public class Notifications extends SettingsPreferenceFragment implements
     private static final String FLASHLIGHT_RATE_PREF = "flashlight_on_call_rate";
     private static final String HEADS_UP_TIMEOUT_PREF = "heads_up_timeout";
     private static final String COMPACT_HUN_KEY = "persist.sys.compact_hun.enabled";
+    private static final String KEY_NOTIF_STYLE = "notification_style";
 
     private Preference mAlertSlider;
     private Preference mBatLights;
@@ -70,6 +71,7 @@ public class Notifications extends SettingsPreferenceFragment implements
     private CustomSeekBarPreference mFlashOnCallRate;
     private CustomSeekBarPreference mHeadsUpTimeOut;
     private Preference mCompactHUNPref;
+    private Preference mNotificationStylePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +135,42 @@ public class Notifications extends SettingsPreferenceFragment implements
 
         mCompactHUNPref = findPreference(COMPACT_HUN_KEY);
         mCompactHUNPref.setOnPreferenceChangeListener(this);
+
+        mNotificationStylePref = (Preference) findPreference(KEY_NOTIF_STYLE);
+        mNotificationStylePref.setOnPreferenceChangeListener(this);
+    }
+    private void updateNotifStyle() {
+        final int notifStyle = Settings.System.getIntForUser(
+                getContext().getContentResolver(),
+                KEY_NOTIF_STYLE, 
+                0, 
+                UserHandle.USER_CURRENT
+        );
+        String notifStyleCategory = "android.theme.customization.notification";
+        String overlayThemeTarget = "com.android.systemui";
+        String overlayPackage = null;
+        if (mThemeUtils == null) {
+            mThemeUtils = ThemeUtils.getInstance(getContext());
+        }
+        mThemeUtils.setOverlayEnabled(notifStyleCategory, overlayThemeTarget, overlayThemeTarget);
+        if (notifStyle == 0) return;
+        switch (notifStyle) {
+            case 1:
+                overlayPackage = "com.android.theme.notification.cyberpunk";
+                break;
+            case 2:
+                overlayPackage = "com.android.theme.notification.duoline";
+                break;
+            case 3:
+                overlayPackage = "com.android.theme.notification.ios";
+                break;
+            case 4:
+                overlayPackage = "com.android.theme.notification.layers";
+                break;
+        }
+        if (overlayPackage != null) {
+            mThemeUtils.setOverlayEnabled(notifStyleCategory, overlayPackage, overlayThemeTarget);
+        }
     }
 
     @Override
@@ -144,6 +182,12 @@ public class Notifications extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mCompactHUNPref) {
             SystemRestartUtils.showSystemUIRestartDialog(getContext());
+            return true;
+        } else if (preference == mNotificationStylePref) {
+            int value = Integer.parseInt((String) newValue);
+            Settings.System.putIntForUser(getActivity().getContentResolver(),
+                    KEY_NOTIF_STYLE, value, UserHandle.USER_CURRENT);
+            updateNotifStyle();
             return true;
         }
         return false;
