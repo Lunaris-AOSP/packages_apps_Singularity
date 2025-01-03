@@ -19,4 +19,17 @@
     <string name="powermenu_style3">IOS</string>
     <string name="powermenu_style4">Layers</string>
 
+    <!-- Peek Display -->
+    <string name="peek_display_notifications_title">Peek display</string>
+    <string name="peek_display_notifications_summary">Enable minimal lockscreen notification style</string>
+    <string name="peek_display_location_title">Peek display location</string>
+    <string name="peek_display_bottom_margin_title">Peek display (bottom) top margin</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
+    
+    <!-- Peek display Styles -->
+    <string name="peek_display_style_title">Peek display styles</string>
+    <string name="peek_display_style1">Material Rounded</string>
+    <string name="peek_display_style2">Minimal</string>
+
 </resources>
