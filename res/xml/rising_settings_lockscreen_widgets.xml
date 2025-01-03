@@ -29,7 +29,17 @@
         tenx:position="full" />
 
     <com.tenx.support.preferences.SystemSettingListPreference
+        android:key="lockscreen_widgets_style"
+        android:dependency="lockscreen_widgets_enabled"
+        android:title="@string/lockscreen_widgets_style_title"
+        android:entries="@array/lockscreen_widgets_style_entries"
+        android:entryValues="@array/lockscreen_widgets_style_values" 
+        android:summary="%s"
+        tenx:position="full" />
+
+    <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/main_custom_widgets1"
         android:key="main_custom_widgets1"
         android:entryValues="@array/widget_values" 
@@ -38,6 +48,7 @@
 
     <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/main_custom_widgets2"
         android:key="main_custom_widgets2"
         android:entryValues="@array/widget_values"
@@ -46,6 +57,7 @@
 
     <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/custom_widgets1"
         android:key="custom_widgets1"
         android:entryValues="@array/widget_values" 
@@ -54,6 +66,7 @@
 
     <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/custom_widgets2"
         android:key="custom_widgets2"
         android:entryValues="@array/widget_values"
@@ -62,6 +75,7 @@
 
     <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/custom_widgets3"
         android:key="custom_widgets3"
         android:entryValues="@array/widget_values" 
@@ -70,6 +84,7 @@
 
     <com.tenx.support.preferences.SystemSettingListPreference
         android:entries="@array/widget_entries"
+        android:dependency="lockscreen_widgets_enabled"
         android:title="@string/custom_widgets4"
         android:key="custom_widgets4"
         android:entryValues="@array/widget_values" 
