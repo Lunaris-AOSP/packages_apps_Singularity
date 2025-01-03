@@ -1609,4 +1609,20 @@
         The depth wallpaper feature, inspired by iOS\'s Wallpaper Subject Segmentation, enables overlaying of a subject above the lockscreen clock to show a wallpaper depth effect.\n\nTo setup Depth Wallpaper Feature:\n1. Set a wallpaper with the subject or a background you want the subject to be above of.\n2. Select a subject image to track, this image will be overlaid above the lockscreen clock.\n3. Modify the offsets and opacity according to your needs.
     </string>
 
+
+    <!-- Wallpaper Styles -->
+    <string name="wallpaper_settings_title">Wallpaper Styles</string>
+    <string name="wallpaper_settings_summary">Configure wallpaper styles and settings</string>
+    <string name="wallpaper_blur_title">Wallpaper Blur</string>
+    <string name="wallpaper_blur_summary">Enable or disable wallpaper blur effect</string>
+    <string name="wallpaper_blur_filter">Wallpaper Blur Style</string>
+    <string name="wallpaper_dim_title">Wallpaper Dim</string>
+    <string name="wallpaper_dim_level_title">Wallpaper Dim level</string>
+    <string name="wallpaper_dim_level_summary">Configure wallpaper dim level</string>
+    <string name="glass_blur">Glass blur</string>
+    <string name="frosted_blur">Frosted blur</string>
+    <string name="wallpaper_styles_footer">
+        For wallpaper styles to work effectively, users must set the wallpapers for the lockscreen and homescreen at different times.\nThe same wallpaper can be used, but it should not be applied to both the lockscreen and homescreen at the same time.\nThis is optional when using the BOTH OPTION for wallpaper blur and dim styles. It is recommended to use a separate lockscreen wallpaper and reapply after enabling this option.
+    </string>
+
 </resources>
