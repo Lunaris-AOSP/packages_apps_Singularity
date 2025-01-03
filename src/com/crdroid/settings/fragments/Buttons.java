@@ -44,6 +44,10 @@ import com.crdroid.settings.preferences.LineageSystemSettingSeekBarPreference;
 import com.crdroid.settings.utils.DeviceUtils;
 import com.crdroid.settings.utils.TelephonyUtils;
 
+import com.android.internal.util.crdroid.ThemeUtils;
+import com.android.internal.util.android.SystemRestartUtils;
+import com.tenx.support.preferences.SystemSettingListPreference;
+
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 import java.util.List;
@@ -104,6 +108,9 @@ public class Buttons extends SettingsPreferenceFragment implements
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_EXTRAS = "extras_category";
+    private static final String KEY_POWERMENU_STYLE = "powermenu_style";
+
+    private ThemeUtils mThemeUtils;
 
     private SwitchPreferenceCompat mHardwareKeysDisable;
     private SwitchPreferenceCompat mSwapCapacitiveKeys;
@@ -127,6 +134,7 @@ public class Buttons extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mHomeAnswerCall;
     private SwitchPreferenceCompat mTorchLongPressPowerGesture;
     private LineageSystemSettingSeekBarPreference mTorchLongPressPowerTimeout;
+    private Preference mPowerMenuStylePref;
 
     private LineageHardwareManager mHardware;
 
@@ -395,6 +403,47 @@ public class Buttons extends SettingsPreferenceFragment implements
         if (extrasCategory.getPreferenceCount() == 0) {
             prefScreen.removePreference(extrasCategory);
         }
+
+        mThemeUtils = ThemeUtils.getInstance(getActivity());
+        mPowerMenuStylePref = (Preference) findPreference(KEY_POWERMENU_STYLE);
+        mPowerMenuStylePref.setOnPreferenceChangeListener(this);
+    }
+    
+    private void updatePowerMenuStyle() {
+        final int powerMenu = Settings.System.getIntForUser(
+                getContext().getContentResolver(),
+                KEY_POWERMENU_STYLE, 
+                0, 
+                UserHandle.USER_CURRENT
+        );
+        String powerMenuStyleCategory = "android.theme.customization.powermenu";
+        String overlayThemeTarget = "com.android.systemui";
+        String overlayPackage = null;
+        if (mThemeUtils == null) {
+            mThemeUtils = ThemeUtils.getInstance(getContext());
+        }
+        mThemeUtils.setOverlayEnabled(powerMenuStyleCategory, overlayThemeTarget, overlayThemeTarget);
+        if (powerMenu == 0) {
+            SystemRestartUtils.restartSystemUI(getContext());
+            return;
+        }
+        switch (powerMenu) {
+            case 1:
+                overlayPackage = "com.android.theme.powermenu.cyberpunk";
+                break;
+            case 2:
+                overlayPackage = "com.android.theme.powermenu.duoline";
+                break;
+            case 3:
+                overlayPackage = "com.android.theme.powermenu.ios";
+                break;
+            case 4:
+                overlayPackage = "com.android.theme.powermenu.layers";
+                break;
+        }
+        if (overlayPackage != null) {
+            mThemeUtils.setOverlayEnabled(powerMenuStyleCategory, overlayPackage, overlayThemeTarget);
+        }
     }
 
     @Override
@@ -503,6 +552,12 @@ public class Buttons extends SettingsPreferenceFragment implements
         } else if (preference == mVolumeKeyCursorControl) {
             handleSystemListChange((ListPreference) preference, newValue,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
+            return true;
+        } else if (preference == mPowerMenuStylePref) {
+            int value = Integer.parseInt((String) newValue);
+            Settings.System.putIntForUser(getActivity().getContentResolver(),
+                    KEY_POWERMENU_STYLE, value, UserHandle.USER_CURRENT);
+            updatePowerMenuStyle();
             return true;
         }
         return false;
