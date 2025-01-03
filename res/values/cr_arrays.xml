@@ -1165,4 +1165,21 @@
         <item>3</item>
     </string-array>
 
+    <!-- Quick Settings Header Clock Styles -->
+    <string-array name="qs_header_clock_style_entries">
+        <item>@string/qs_header_clock_none</item>
+        <item>@string/qs_header_clock_chip</item>
+        <item>@string/qs_header_clock_oos</item>
+        <item>@string/qs_header_clock_analog</item>
+        <item>@string/qs_header_clock_simple</item>
+    </string-array>
+    
+    <string-array name="qs_header_clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
 </resources>

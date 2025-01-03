@@ -68,6 +68,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String QS_SPLIT_SHADE_LAYOUT_PKG = "com.android.systemui.qs.landscape.split_shade_layout";
     private static final String QS_SPLIT_SHADE_LAYOUT_TARGET = "com.android.systemui";
     private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
+    private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -80,6 +81,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mQsPanelStyle;
     private SystemSettingSwitchPreference mSplitShade;
     private Preference mQsCompactPlayer;
+    private SystemSettingListPreference mQsHeaderClockStyle;
 
     private static ThemeUtils mThemeUtils;
 
@@ -139,6 +141,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
         mQsCompactPlayer.setOnPreferenceChangeListener(this);
+
+        mQsHeaderClockStyle = (SystemSettingListPreference) findPreference(KEY_QS_HEADER_CLOCK_STYLE);
+        if (mQsHeaderClockStyle != null) {
+            mQsHeaderClockStyle.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -175,6 +182,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mQsCompactPlayer) {
             SystemRestartUtils.showSystemUIRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsHeaderClockStyle) {
+            int value = Integer.parseInt((String) newValue);
+            Settings.System.putIntForUser(resolver,
+                    KEY_QS_HEADER_CLOCK_STYLE, value, UserHandle.USER_CURRENT);
+            SystemRestartUtils.showSystemUIRestartDialog(getContext());
             return true;
         }
         return false;
