@@ -1644,4 +1644,12 @@
     <string name="lockscreen_widgets_style3">Square Translucent</string>
     <string name="lockscreen_widgets_style4">Rounded Semi-Transparent</string>
 
+    <!-- QS clock style -->
+    <string name="qs_header_clock_style_title">QS header clock styles</string>
+    <string name="qs_header_clock_none">Default Aosp</string>
+    <string name="qs_header_clock_chip">Chip Style Clock</string>
+    <string name="qs_header_clock_oos">OxygenOS Style Clock</string>
+    <string name="qs_header_clock_analog">Analog Clock</string>
+    <string name="qs_header_clock_simple">Simple Clock</string>
+
 </resources>
