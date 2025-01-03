@@ -38,6 +38,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.android.internal.util.crdroid.Utils;
+import com.android.internal.util.crdroid.ThemeUtils;
 import com.android.internal.util.android.SystemRestartUtils;
 
 import com.crdroid.settings.preferences.CustomSeekBarPreference;
@@ -66,6 +67,7 @@ public class Notifications extends SettingsPreferenceFragment implements
     private Preference mBatLights;
     private Preference mNotLights;
 
+    private ThemeUtils mThemeUtils;
     private ListPreference mFlashOnCall;
     private SwitchPreferenceCompat mFlashOnCallIgnoreDND;
     private CustomSeekBarPreference mFlashOnCallRate;
@@ -153,8 +155,11 @@ public class Notifications extends SettingsPreferenceFragment implements
             mThemeUtils = ThemeUtils.getInstance(getContext());
         }
         mThemeUtils.setOverlayEnabled(notifStyleCategory, overlayThemeTarget, overlayThemeTarget);
-        if (notifStyle == 0) return;
-        switch (notifStyle) {
+        if (notifStyle == 0) {
+            SystemRestartUtils.restartSystemUI(getContext());
+            return;
+        }
+	switch (notifStyle) {
             case 1:
                 overlayPackage = "com.android.theme.notification.cyberpunk";
                 break;
