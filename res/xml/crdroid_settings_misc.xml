@@ -35,7 +35,6 @@
     <!-- Gaming mode -->
     <Preference
         android:key="gaming_mode"
-        android:icon="@drawable/ic_gaming"
         android:title="@string/gaming_mode_title"
         android:summary="@string/gaming_mode_summary">
 
@@ -48,7 +47,6 @@
     <!-- Sidebar -->
     <Preference
         android:key="sidebar"
-        android:icon="@drawable/ic_floating"
         android:title="@string/sidebar_title"
         android:summary="@string/sidebar_summary">
 
@@ -98,7 +96,6 @@
     <!-- Three fingers swipe action -->
     <ListPreference
         android:key="three_fingers_swipe"
-        android:icon="@drawable/ic_three_finger_gesture"
         android:dialogTitle="@string/three_fingers_swipe_title"
         android:title="@string/three_fingers_swipe_title"
         android:entries="@array/hardware_keys_action_entries"
@@ -108,7 +105,6 @@
     <!-- Sensor block per package -->
     <Preference
         android:key="sensor_block_settings"
-        android:icon="@drawable/ic_remote"
         android:title="@string/sensor_block_title"
         android:summary="@string/sensor_block_summary"
         android:fragment="com.crdroid.settings.fragments.misc.SensorBlock"/>
@@ -116,7 +112,6 @@
     <!-- Pocket Judge -->
     <com.crdroid.settings.preferences.SystemSettingSwitchPreference
         android:key="pocket_judge"
-        android:icon="@drawable/ic_pocket"
         android:title="@string/pocket_judge_title"
         android:summary="@string/pocket_judge_summary"
         android:defaultValue="false" />

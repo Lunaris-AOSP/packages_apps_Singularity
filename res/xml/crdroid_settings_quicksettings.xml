@@ -38,7 +38,6 @@
         <!-- QS Header -->
         <Preference
             android:key="qs_header_image"
-            android:icon="@drawable/ic_header"
             android:title="@string/qs_header_image_title"
             android:summary="@string/qs_header_image_summary"
             android:fragment="com.crdroid.settings.fragments.quicksettings.QsHeaderImageSettings" />
@@ -81,7 +80,6 @@
         <!-- Battery styles -->
         <com.crdroid.settings.preferences.SystemSettingListPreference
             android:key="qs_battery_style"
-            android:icon="@drawable/ic_battery"
             android:title="@string/status_bar_battery_style_title"
             android:entries="@array/qs_battery_style_entries"
             android:entryValues="@array/qs_battery_style_values"
@@ -99,7 +97,6 @@
         <!-- Battery percent -->
         <com.crdroid.settings.preferences.SystemSettingListPreference
             android:key="qs_show_battery_percent"
-            android:icon="@drawable/ic_battery_alert"
             android:title="@string/status_bar_battery_percent_title"
             android:entries="@array/status_bar_battery_percent_entries"
             android:entryValues="@array/status_bar_battery_percent_values"
@@ -114,20 +111,17 @@
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="secure_lockscreen_qs_disabled"
-            android:icon="@drawable/ic_lock_alert"
             android:title="@string/disable_qs_title"
             android:summary="@string/disable_qs_summary"/>
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_dual_tone"
-            android:icon="@drawable/ic_color_bucket"
             android:title="@string/qs_dual_tone_title"
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="true" />
 
         <com.crdroid.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_transparency"
-            android:icon="@drawable/ic_color_bucket"
             android:title="@string/qs_opacity_title"
             android:summary="@string/qs_opacity_summary"
             android:defaultValue="100"
@@ -139,7 +133,6 @@
         <!-- QS Bluetooth Dialog -->
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_bt_show_dialog"
-            android:icon="@drawable/ic_bt"
             android:title="@string/qs_bt_show_dialog_title"
             android:summary="@string/qs_bt_show_dialog_summary"
             android:defaultValue="true" />
@@ -152,7 +145,6 @@
         <!-- Brightness slider -->
         <lineageos.preference.LineageSecureSettingListPreference
             android:key="qs_show_brightness_slider"
-            android:icon="@drawable/ic_brightness"
             android:title="@string/qs_show_brightness_slider_title"
             android:entries="@array/qs_show_brightness_slider_entries"
             android:entryValues="@array/qs_show_brightness_slider_values"
@@ -160,7 +152,6 @@
 
         <lineageos.preference.LineageSecureSettingListPreference
             android:key="qs_brightness_slider_position"
-            android:icon="@drawable/ic_brightness"
             android:title="@string/qs_brightness_slider_position_title"
             android:entries="@array/qs_brightness_slider_position_entries"
             android:entryValues="@array/qs_brightness_slider_position_values"
@@ -168,13 +159,11 @@
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_brightness_slider_haptic"
-            android:icon="@drawable/ic_brightness"
             android:title="@string/qs_brightness_slider_haptic_title"
             android:summary="@string/qs_brightness_slider_haptic_summary"/>
 
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="qs_show_auto_brightness"
-            android:icon="@drawable/ic_brightness_auto"
             android:title="@string/qs_show_auto_brightness_title"
             android:summary="@string/qs_show_auto_brightness_summary"
             android:defaultValue="true" />
@@ -201,7 +190,6 @@
 
         <ListPreference
             android:key="qs_tile_ui_style"
-            android:icon="@drawable/ic_shapes"
             android:title="@string/qs_tile_ui_style_title"
             android:entries="@array/qs_tile_ui_style_entries"
             android:entryValues="@array/qs_tile_ui_style_values"
@@ -209,7 +197,6 @@
 
         <ListPreference
             android:key="qs_panel_style"
-            android:icon="@drawable/ic_color_bucket"
             android:title="@string/qs_panel_style_title"
             android:entries="@array/qs_panel_style_entries"
             android:entryValues="@array/qs_panel_style_values"
@@ -217,14 +204,12 @@
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_label_hide"
-            android:icon="@drawable/ic_text"
             android:title="@string/qs_tile_label_hide_title"
             android:summary="@string/qs_tile_label_hide_summary"
             android:defaultValue="false" />
 
         <com.crdroid.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_tile_label_size"
-            android:icon="@drawable/ic_text"
             android:title="@string/qs_tile_label_size_title"
             android:max="15"
             settings:min="10"
@@ -234,14 +219,12 @@
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_vertical_layout"
-            android:icon="@drawable/ic_qs_tile"
             android:title="@string/qs_tile_layout_title"
             android:summary="@string/qs_tile_layout_summary"
             android:defaultValue="false" />
 
         <Preference
             android:key="qs_layout_columns_rows"
-            android:icon="@drawable/ic_qs_tile"
             android:title="@string/qs_layout_columns_rows_title"
             android:summary="@string/qs_layout_columns_rows_summary"
             android:fragment="com.crdroid.settings.fragments.quicksettings.LayoutSettings" />
@@ -253,7 +236,6 @@
 
         <com.crdroid.settings.preferences.SystemSettingListPreference
             android:key="qs_tile_animation_style"
-            android:icon="@drawable/ic_qs_tile_animation_style"
             android:title="@string/qs_tile_animation_style_title"
             android:entries="@array/qs_tile_animation_style_entries"
             android:entryValues="@array/qs_tile_animation_style_values"
@@ -261,7 +243,6 @@
 
         <com.crdroid.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_tile_animation_duration"
-            android:icon="@drawable/ic_clock"
             android:title="@string/qs_tile_animation_duration_title"
             android:defaultValue="1"
             settings:interval="1"
@@ -271,7 +252,6 @@
 
         <com.crdroid.settings.preferences.SystemSettingListPreference
             android:key="qs_tile_animation_interpolator"
-            android:icon="@drawable/ic_qs_tile_animation_interpolator"
             android:title="@string/qs_tile_animation_interpolator_title"
             android:entries="@array/qs_tile_animation_interpolator_entries"
             android:entryValues="@array/qs_tile_animation_interpolator_values"
@@ -284,7 +264,6 @@
 
         <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_show_data_usage"
-            android:icon="@drawable/ic_swap_vertical"
             android:title="@string/qs_footer_datausage_title"
             android:summary="@string/qs_footer_datausage_summary" />
 
