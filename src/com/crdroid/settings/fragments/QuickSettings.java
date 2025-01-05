@@ -29,7 +29,6 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.crdroid.ThemeUtils;
-import com.android.internal.util.crdroid.systemUtils;
 import com.android.internal.util.android.SystemRestartUtils;
 
 import com.android.settings.R;

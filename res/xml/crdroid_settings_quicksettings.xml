@@ -23,13 +23,13 @@
     <PreferenceCategory
          android:title="@string/qs_misc_category">
 
-        <com.tenx.support.preferences.SystemSettingSwitchPreference
+        <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_widgets_enabled"
             android:title="@string/qs_widgets_enabled_title"
             android:summary="@string/qs_widgets_enabled_summary"
             android:defaultValue="false" />
 
-        <com.tenx.support.preferences.SystemSettingSwitchPreference
+        <com.crdroid.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_split_shade"
             android:title="@string/qs_split_shade_title"
             android:summary="@string/qs_split_shade_summary"
