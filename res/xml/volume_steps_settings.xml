@@ -18,7 +18,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/volume_steps_title">
 
-    <com.crdroid.settings.preferences.CustomSeekBarPreference
+    <com.lunaris.settings.preferences.CustomSeekBarPreference
         android:key="max_music_volume"
         android:title="@string/max_music_volume_title"
         android:max="100"
@@ -26,7 +26,7 @@
         settings:interval="5"
         settings:units="@string/steps_unit" />
 
-    <com.crdroid.settings.preferences.CustomSeekBarPreference
+    <com.lunaris.settings.preferences.CustomSeekBarPreference
         android:key="max_call_volume"
         android:title="@string/max_call_volume_title"
         android:max="30"
@@ -34,7 +34,7 @@
         settings:interval="1"
         settings:units="@string/steps_unit" />
 
-    <com.crdroid.settings.preferences.CustomSeekBarPreference
+    <com.lunaris.settings.preferences.CustomSeekBarPreference
         android:key="max_alarm_volume"
         android:title="@string/max_alarm_volume_title"
         android:max="30"

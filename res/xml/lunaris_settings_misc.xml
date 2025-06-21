@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2016-2024 crDroid Android Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/misc_title">
+
+    <com.tenx.support.preferences.TenXPreference
+        android:key="spoofing"
+        android:title="@string/spoofing_title"
+        android:summary="@string/spoofing_summary"
+        android:fragment="com.lunaris.settings.fragments.misc.Spoof" />
+
+    <!-- System Haptics intensities preference -->
+    <com.tenx.support.preferences.TenXPreference
+        android:key="haptics_settings"
+        android:title="@string/haptics_settings_title"
+        android:summary="@string/haptics_settings_summary"
+        android:fragment="com.lunaris.settings.fragments.misc.HapticsPreferenceFragment"/>
+
+    <!-- Gaming mode -->
+    <Preference
+        android:key="gaming_mode"
+        android:title="@string/gaming_mode_title"
+        android:summary="@string/gaming_mode_summary">
+
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="io.chaldeaprjkt.gamespace"
+            android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
+    </Preference>
+
+    <!-- Sidebar -->
+    <Preference
+        android:key="sidebar"
+        android:title="@string/sidebar_title"
+        android:summary="@string/sidebar_summary">
+
+        <intent
+            android:action="android.intent.action.IA_SETTINGS"
+            android:targetPackage="com.libremobileos.sidebar"
+            android:targetClass="com.libremobileos.sidebar.ui.sidebar.SidebarSettingsActivity" />
+    </Preference>
+
+    <!-- QuickSwitch -->
+    <com.tenx.support.preferences.TenXPreference
+        android:key="quickswitch"
+        android:title="@string/quickswitch_launcher_title" 
+        android:summary="@string/quickswitch_launcher_summary" 
+        android:fragment="com.lunaris.settings.fragments.misc.QuickSwitch" />
+
+    <PreferenceCategory
+        android:title="System changes">
+
+          <com.tenx.support.preferences.GlobalSettingSwitchPreference
+               android:key="window_ignore_secure"
+               android:title="@string/ignore_window_secure_title"
+               android:summary="@string/ignore_window_secure_summary"
+               android:defaultValue="false"/>
+
+        <com.tenx.support.preferences.SystemSettingSwitchPreference
+            android:key="no_storage_restrict"
+            android:title="@string/no_storage_restrict_title"
+            android:summary="@string/no_storage_restrict_summary"
+            android:defaultValue="false"/>
+
+        <!-- Hide screen capture status -->
+        <com.tenx.support.preferences.SystemSettingSwitchPreference
+            android:key="hide_screen_capture_status"
+            android:title="@string/hide_screen_capture_status_title"
+            android:summary="@string/hide_screen_capture_status_summary"
+            android:defaultValue="false"/>
+
+        <com.tenx.support.preferences.TenXPreference
+            android:key="hide_developer_status_settings"
+            android:title="@string/hide_developer_status_title"
+            android:summary="@string/hide_developer_status_summary"
+            android:fragment="com.lunaris.settings.fragments.misc.HideDeveloperStatusSettings" />
+               
+     </PreferenceCategory>
+
+    <!-- Three fingers swipe action -->
+    <ListPreference
+        android:key="three_fingers_swipe"
+        android:dialogTitle="@string/three_fingers_swipe_title"
+        android:title="@string/three_fingers_swipe_title"
+        android:entries="@array/hardware_keys_action_entries"
+        android:entryValues="@array/hardware_keys_action_values"
+        android:persistent="false" />
+
+    <!-- Sensor block per package -->
+    <Preference
+        android:key="sensor_block_settings"
+        android:title="@string/sensor_block_title"
+        android:summary="@string/sensor_block_summary"
+        android:fragment="com.lunaris.settings.fragments.misc.SensorBlock"/>
+
+    <!-- Pocket Judge -->
+    <com.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="pocket_judge"
+        android:title="@string/pocket_judge_title"
+        android:summary="@string/pocket_judge_summary"
+        android:defaultValue="false" />
+
+    <!-- Background process killer -->
+    <com.tenx.support.preferences.SystemSettingSwitchPreference
+        android:key="custom_idle_manager"
+        android:title="@string/idle_manager_title"
+        android:summary="@string/idle_manager_summary"
+        android:defaultValue="false" />
+
+</PreferenceScreen>
