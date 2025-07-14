@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/power_menu_title">
+
+    <PreferenceCategory
+        android:key="power_menu_interface_category"
+        android:title="@string/power_menu_interface_category">
+
+        <!-- Power menu actions -->
+        <Preference
+            android:key="power_menu_actions"
+            android:title="@string/power_menu_actions_title"
+            android:summary="@string/power_menu_actions_summary"
+            android:fragment="org.lunaris.settings.fragments.powermenu.PowerMenuActions" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="power_menu_lock_screen_category"
+        android:title="@string/power_menu_lock_screen_category">
+
+        <!-- Secure lock screen power menu -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_enable_power_menu"
+            android:title="@string/power_menu_lock_screen_secure_title"
+            android:summary="@string/power_menu_lock_screen_secure_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
