@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/notifications_title">
+
+    <PreferenceCategory
+        android:key="heads_up"
+        android:title="@string/notifications_heads_up_title">
+
+        <!-- Heads up -->
+        <lineageos.preference.GlobalSettingSwitchPreference
+            android:key="heads_up_notifications_enabled"
+            android:title="@string/heads_up_notifications_enabled_title"
+            android:summary="@string/heads_up_notifications_enabled_summary" />
+
+        <!-- Less boring heads up -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="less_boring_heads_up"
+            android:title="@string/notifications_less_boring_heads_up_title"
+            android:summary="@string/notifications_less_boring_heads_up_summary"
+            android:defaultValue="false"
+            android:dependency="heads_up_notifications_enabled" />
+
+        <!-- Notification guts kill app button -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_guts_kill_app_button"
+            android:defaultValue="false"
+            android:title="@string/notification_guts_kill_app_button_title"
+            android:summary="@string/notification_guts_kill_app_button_summary" />
+
+        <!-- Compact Heads up -->
+        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.compact_heads_up_notification.always_show"
+            android:title="@string/compact_heads_up_notifications_enabled_title"
+            android:summary="@string/compact_heads_up_notifications_enabled_summary"
+            android:defaultValue="false"
+            android:dependency="heads_up_notifications_enabled" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="notifications_sounds_vibration_category"
+        android:title="@string/notifications_sounds_vibration_category">
+
+        <!-- Alert while display on -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_sound_vib_screen_on"
+            android:title="@string/notifications_alert_display_on_title"
+            android:summary="@string/notifications_alert_display_on_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="notifications_interface_category"
+        android:title="@string/notifications_interface_category">
+
+        <!-- Alert Slider Notifications -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="alert_slider_notifications"
+            android:title="@string/alert_slider_notifications_title"
+            android:summary="@string/alert_slider_notifications_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

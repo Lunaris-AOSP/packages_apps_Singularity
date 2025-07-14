@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2024 lunaris X
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/status_bar_title">
+
+    <PreferenceCategory
+        android:key="status_bar_icons_category"
+        android:title="@string/status_bar_icons_category">
+
+        <!-- Status bar tuner -->
+        <Preference
+            android:key="status_bar_icons"
+            android:title="@string/status_bar_tuner_title"
+            android:summary="@string/status_bar_tuner_summary">
+                <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
+        </Preference>
+
+        <!-- Battery styles -->
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="status_bar_battery_style"
+            android:title="@string/status_bar_battery_style_title"
+            android:entries="@array/status_bar_battery_style_entries"
+            android:entryValues="@array/status_bar_battery_style_values"
+            android:defaultValue="0" />
+
+        <!-- Battery percent -->
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="status_bar_show_battery_percent"
+            android:title="@string/status_bar_battery_percent_title"
+            android:entries="@array/status_bar_battery_percent_entries"
+            android:entryValues="@array/status_bar_battery_percent_values"
+            android:defaultValue="0" />
+
+        <!-- Battery percentage when charging -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="status_bar_battery_text_charging"
+            android:title="@string/status_bar_battery_text_charging_title"
+            android:summary="@string/status_bar_battery_text_charging_summary"
+            android:defaultValue="true" />
+
+        <!-- Clock & date -->
+        <Preference
+            android:key="clock"
+            android:title="@string/status_bar_clock_and_date_title"
+            android:summary="@string/status_bar_clock_and_date_summary"
+            android:fragment="org.lunaris.settings.fragments.statusbar.Clock" />
+
+        <!-- Network traffic -->
+        <Preference
+            android:key="network_traffic_settings"
+            android:title="@string/status_bar_network_traffic_settings_title"
+            android:summary="@string/status_bar_network_traffic_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.statusbar.NetworkTrafficSettings" />
+
+        <!-- Data disabled icon -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="data_disabled_icon"
+            android:title="@string/status_bar_data_disabled_icon_title"
+            android:summary="@string/status_bar_data_disabled_icon_summary"
+            android:defaultValue="true" />
+        
+        <!-- 4G icon -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="show_fourg_icon"
+            android:title="@string/status_bar_4g_icon_title"
+            android:summary="@string/status_bar_4g_icon_summary"
+            android:defaultValue="false" />
+
+        <!-- Wi-Fi standard icon -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="wifi_standard_icon"
+            android:title="@string/status_bar_wifi_standard_icon_title"
+            android:summary="@string/status_bar_wifi_standard_icon_summary"
+            android:defaultValue="false" />
+
+        <!-- Bluetooth battery status -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="bluetooth_show_battery"
+            android:title="@string/status_bar_bluetooth_battery_title"
+            android:summary="@string/status_bar_bluetooth_battery_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="ongoing_progress_settings"
+            android:title="@string/ongoing_progress_settings_title"
+            android:summary="@string/ongoing_progress_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.statusbar.OngoingProgressBar" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="status_bar_logo_category"
+        android:title="Logo">
+
+            <!-- Logo -->
+            <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+                android:key="status_bar_logo"
+                android:title="@string/status_bar_logo_title"
+                android:summary="@string/status_bar_logo_summary"
+                android:defaultValue="false" />
+
+            <!-- Logo position -->
+            <org.lunaris.settings.preferences.SystemSettingListPreference
+                android:key="status_bar_logo_position"
+                android:title="@string/status_bar_logo_position_title"
+                android:entries="@array/status_bar_logo_position_entries"
+                android:entryValues="@array/status_bar_logo_position_values"
+                android:defaultValue="0"
+                android:dependency="status_bar_logo" />
+
+            <!-- Logo style -->
+            <org.lunaris.settings.preferences.SystemSettingListPreference
+                android:key="status_bar_logo_style"
+                android:title="@string/status_bar_logo_style_title"
+                android:entries="@array/status_bar_logo_style_entries"
+                android:entryValues="@array/status_bar_logo_style_values"
+                android:defaultValue="0"
+                android:dependency="status_bar_logo" />
+
+            <!-- Logo color type -->
+            <org.lunaris.settings.preferences.SystemSettingListPreference
+                android:key="status_bar_logo_color"
+                android:title="@string/status_bar_logo_color_title"
+                android:entries="@array/status_bar_logo_color_entries"
+                android:entryValues="@array/status_bar_logo_color_values"
+                android:dependency="status_bar_logo"
+                android:defaultValue="0" />
+               
+            <!-- Logo custom color -->
+            <org.lunaris.settings.preferences.colorpicker.ColorPickerPreference
+                android:key="status_bar_logo_color_picker"
+                android:title="@string/status_bar_logo_color_custom"
+                settings:defaultValue="0xFFFFFFFF" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="status_bar_gestures_category"
+        android:title="@string/status_bar_gestures_category">
+
+        <!-- Status bar brightness control -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="status_bar_brightness_control"
+            android:title="@string/status_bar_brightness_control_title"
+            android:summary="@string/status_bar_brightness_control_summary"
+            android:defaultValue="false" />
+
+        <!-- Quick pull down -->
+        <lineageos.preference.LineageSystemSettingListPreference
+            android:key="qs_quick_pulldown"
+            android:title="@string/status_bar_quick_pull_down_title"
+            android:entries="@array/status_bar_quick_pull_down_entries"
+            android:entryValues="@array/status_bar_quick_pull_down_values"
+            android:defaultValue="0" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="status_bar_privacy_indicators_category"
+        android:title="@string/status_bar_privacy_indicators_category">
+
+        <!-- Mic/Camera privacy indicator -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="enable_camera_privacy_indicator"
+            android:title="@string/status_bar_mic_camera_privacy_indicator_title"
+            android:summary="@string/status_bar_mic_camera_privacy_indicator_summary"
+            android:defaultValue="true" />
+
+        <!-- Location privacy indicator -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="enable_location_privacy_indicator"
+            android:title="@string/status_bar_location_privacy_indicator_title"
+            android:summary="@string/status_bar_location_privacy_indicator_summary"
+            android:defaultValue="true" />
+
+        <!-- Projection privacy indicator -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="enable_projection_privacy_indicator"
+            android:title="@string/status_bar_projection_privacy_indicator_title"
+            android:summary="@string/status_bar_projection_privacy_indicator_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
