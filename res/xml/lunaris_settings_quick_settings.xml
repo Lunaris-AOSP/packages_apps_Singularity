@@ -106,6 +106,12 @@
             android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.noalpha"
+            android:title="@string/fluid_notification_title"
+            android:summary="@string/fluid_notification_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
             android:title="@string/qs_split_shade_enabled_title"
             android:summary="@string/qs_split_shade_enabled_summary"
