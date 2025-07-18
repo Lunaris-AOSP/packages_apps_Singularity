@@ -48,6 +48,13 @@
         android:key="miscellaneous_developer_options_category"
         android:title="@string/miscellaneous_developer_options_category">
 
+        <!-- QuickSwitch -->
+        <Preference
+            android:key="quickswitch"
+            android:title="@string/quickswitch_launcher_title" 
+            android:summary="@string/quickswitch_launcher_summary" 
+            android:fragment="org.lunaris.settings.fragments.miscellaneous.QuickSwitch" /> 
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="arcane_idle_manager"
             android:title="@string/idle_manager_title"
