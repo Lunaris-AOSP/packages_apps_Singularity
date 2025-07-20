@@ -122,7 +122,7 @@
             android:key="show_media_squiggle_animation"
             android:title="@string/show_squiggle_animation_title"
             android:summary="@string/show_squiggle_animation_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
         <!--<org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_header_clock_style"
