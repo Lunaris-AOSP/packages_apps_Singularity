@@ -972,7 +972,7 @@
 
     <!-- Animation Settings -->
     <string name="screen_animation_title">Doze Animation</string>
-    <string name="screen_animation_summary">Switch to legacy aosp doze animations</string>
+    <string name="screen_animation_summary">Switch to NOS like doze animations</string>
 
     <!-- Settings -->
     <string name="settings_category_title">Settings themes</string>
