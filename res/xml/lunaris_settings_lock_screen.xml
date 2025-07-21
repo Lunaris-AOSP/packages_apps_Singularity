@@ -49,10 +49,10 @@
         android:title="@string/lock_screen_interface_category">
 
         <Preference
-            android:key="pulse_settings"
+            android:key="pulse"
             android:title="@string/pulse_settings"
-            android:summary="@string/pulse_settings_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.PulseSettings" />
+            android:summary="@string/show_lockscreen_pulse_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.Pulse" />
 
         <Preference
             android:key="edge_light_settings"

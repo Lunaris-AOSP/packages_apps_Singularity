@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+     Copyright (C) 2025 AxionOS Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/visualizer_pulse" >
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="visualizer_pulse_enabled"
+        android:title="@string/visualizer_pulse"
+        android:summary="@string/visualizer_pulse_summary"
+        android:defaultValue="false" />
+        
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="visualizer_pulse_rounded_bars_enabled"
+        android:title="@string/visualizer_pulse_rounded_bars_title"
+        android:summary="@string/visualizer_pulse_rounded_bars_summary"
+        android:defaultValue="true"
+        android:dependency="visualizer_pulse_enabled" />
+
+    <org.lunaris.settings.preferences.SecureSettingListPreference
+        android:key="visualizer_pulse_color"
+        android:title="@string/visualizer_pulse_color"
+        android:summary="%s"
+        android:dialogTitle="@string/visualizer_pulse_color"
+        android:entries="@array/visualizer_pulse_color_entries"
+        android:entryValues="@array/visualizer_pulse_color_values"
+        android:defaultValue="lavalamp"
+        android:dependency="visualizer_pulse_enabled" />
+
+    <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+        android:key="visualizer_pulse_bar_count"
+        android:title="@string/visualizer_pulse_bar_count_title"
+        android:summary="@string/visualizer_pulse_bar_count_summary"
+        settings:units="bars"
+        android:defaultValue="32"
+        settings:min="8"
+        settings:interval="4"
+        android:max="64"
+        android:dependency="visualizer_pulse_enabled" />
+
+</PreferenceScreen> 
