@@ -33,5 +33,12 @@
             android:title="@string/power_menu_lock_screen_secure_title"
             android:summary="@string/power_menu_lock_screen_secure_summary"
             android:defaultValue="true" />
+
+        <Preference
+            android:key="power_off_verify"
+            android:title="@string/power_off_verify_title"
+            android:summary="@string/power_off_verify_summary"
+            android:dependency="lockscreen_enable_power_menu"
+            android:fragment="org.lunaris.settings.fragments.powermenu.PowerOffVerify" />
     </PreferenceCategory>
 </PreferenceScreen>
