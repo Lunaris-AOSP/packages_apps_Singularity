@@ -105,5 +105,19 @@
             android:title="@string/spoofing_storage_encryption_title"
             android:summary="@string/spoofing_storage_encryption_summary"
             android:defaultValue="false" />
+
+        <!-- Snapchat -->
+        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.pixelprops.snap"
+            android:title="@string/spoofing_snap_title"
+            android:summary="@string/spoofing_snap_summary"
+            android:defaultValue="false" />
+        
+        <!-- Netflix -->
+        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.pixelprops.netflix"
+            android:title="@string/spoofing_netflix_title"
+            android:summary="@string/spoofing_netflix_summary"
+            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>
