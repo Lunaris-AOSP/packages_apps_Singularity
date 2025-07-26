@@ -67,6 +67,29 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/qs_shade_category_title">
+
+        <SwitchPreferenceCompat
+            android:key="notification_row_transparency"
+            android:title="@string/notification_row_transparency_title"
+            android:summary="@string/notification_row_transparency_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.noalpha"
+            android:title="@string/fluid_notification_title"
+            android:summary="@string/fluid_notification_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.dualtone"
+            android:title="@string/qs_dual_tone_title"
+            android:summary="@string/qs_dual_tone_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="quick_settings_interface_category"
         android:title="@string/quick_settings_interface_category">
 
@@ -98,18 +121,6 @@
             android:title="@string/qs_compact_media_player_mode_title"
             android:summary="@string/qs_compact_media_player_mode_summary"
             android:defaultValue="false" />-->
-
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.system.qs.dualtone"
-            android:title="@string/qs_dual_tone_title"
-            android:summary="@string/qs_dual_tone_summary"
-            android:defaultValue="false" />
-
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.system.qs.noalpha"
-            android:title="@string/fluid_notification_title"
-            android:summary="@string/fluid_notification_summary"
-            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"

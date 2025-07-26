@@ -29,7 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
@@ -51,9 +51,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_INTERFACE_CATEGORY = "quick_settings_interface_category";
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
+    private static final String PREF_NOTIFICATION_ROW_TRANSPARENCY = "notification_row_transparency";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
+    private SwitchPreferenceCompat mNotificationRowTransparencyPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,17 +67,27 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = mContext.getResources();
 
-        mMiscellaneousCategory = (PreferenceCategory) findPreference(KEY_MISCELLANEOUS_CATEGORY);
+        mInterfaceCategory = findPreference(KEY_INTERFACE_CATEGORY);
+        mMiscellaneousCategory = findPreference(KEY_MISCELLANEOUS_CATEGORY);
+        mNotificationRowTransparencyPref = findPreference(PREF_NOTIFICATION_ROW_TRANSPARENCY);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
+
+        if (mNotificationRowTransparencyPref != null)
+            mNotificationRowTransparencyPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
+        final ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mNotificationRowTransparencyPref) {
+    	    boolean value = (Boolean) newValue;
+    	    Settings.System.putIntForUser(resolver, PREF_NOTIFICATION_ROW_TRANSPARENCY,
+                    value ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        }
         return false;
     }
 

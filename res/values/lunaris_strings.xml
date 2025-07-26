@@ -1022,4 +1022,9 @@
     <!-- Notification count -->
     <string name="statusbar_notif_count_title">Show notification count</string>
     <string name="statusbar_notif_count_summary">Display the number of pending notifications</string>
+
+    <!-- Notification panel -->
+    <string name="qs_shade_category_title">Shade Appearance</string>
+    <string name="notification_row_transparency_title">Full Transparent notifications</string>
+    <string name="notification_row_transparency_summary">Apply a full-transparent background to notifications</string>
 </resources>
