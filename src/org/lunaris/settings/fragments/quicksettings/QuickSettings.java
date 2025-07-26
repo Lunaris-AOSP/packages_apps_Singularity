@@ -40,6 +40,8 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.utils.DeviceUtils;
 
+import org.lunaris.settings.preferences.CustomSeekBarPreference;
+
 import java.util.List;
 
 @SearchIndexable
@@ -51,9 +53,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_INTERFACE_CATEGORY = "quick_settings_interface_category";
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
+    private static final String PREF_SHADE_ALPHA = "shade_background_alpha";
+    private static final String PREF_SHADE_BLUR_RADIUS = "shade_blur_radius";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
+    private CustomSeekBarPreference mShadeAlphaPref;
+    private CustomSeekBarPreference mShadeBlurRadiusPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,23 +71,59 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = mContext.getResources();
 
-        mMiscellaneousCategory = (PreferenceCategory) findPreference(KEY_MISCELLANEOUS_CATEGORY);
+        mInterfaceCategory = findPreference(KEY_INTERFACE_CATEGORY);
+        mMiscellaneousCategory = findPreference(KEY_MISCELLANEOUS_CATEGORY);
+        mShadeAlphaPref = findPreference(PREF_SHADE_ALPHA);
+        mShadeBlurRadiusPref = findPreference(PREF_SHADE_BLUR_RADIUS);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
+
+        updatePreferences();
+
+        if (mShadeAlphaPref != null)
+            mShadeAlphaPref.setOnPreferenceChangeListener(this);
+
+        if (mShadeBlurRadiusPref != null)
+            mShadeBlurRadiusPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
+        final ContentResolver resolver = getActivity().getContentResolver();
+
+        if (preference == mShadeAlphaPref) {
+            int value = (Integer) newValue;
+            Settings.System.putIntForUser(resolver, PREF_SHADE_ALPHA,
+                    value, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mShadeBlurRadiusPref) {
+            int value = (Integer) newValue;
+            Settings.System.putIntForUser(resolver, PREF_SHADE_BLUR_RADIUS,
+                    value, UserHandle.USER_CURRENT);
+            return true;
+        }
         return false;
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
+    }
+
+    private void updatePreferences() {
+        final ContentResolver resolver = getActivity().getContentResolver();
+
+        int currentAlpha = Settings.System.getIntForUser(
+                resolver, PREF_SHADE_ALPHA, 85, UserHandle.USER_CURRENT);
+        if (mShadeAlphaPref != null)
+            mShadeAlphaPref.setValue(currentAlpha);
+
+        int currentBlur = Settings.System.getIntForUser(
+                resolver, PREF_SHADE_BLUR_RADIUS, 18, UserHandle.USER_CURRENT);
+        if (mShadeBlurRadiusPref != null)
+            mShadeBlurRadiusPref.setValue(currentBlur);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

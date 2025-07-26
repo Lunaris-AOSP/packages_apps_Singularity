@@ -67,6 +67,31 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/qs_blur_category_title">
+
+        <org.lunaris.settings.preferences.CustomSeekBarPreference
+            android:key="shade_background_alpha"
+            android:title="@string/shade_background_alpha_title"
+            android:summary="@string/shade_background_alpha_summary"
+            android:defaultValue="65"
+            settings:min="0"
+            android:max="100"
+            settings:interval="5"
+            settings:units="%" />
+
+        <org.lunaris.settings.preferences.CustomSeekBarPreference
+            android:key="shade_blur_radius"
+            android:title="@string/shade_blur_radius_title"
+            android:summary="@string/shade_blur_radius_summary"
+            android:defaultValue="18"
+            settings:min="0"
+            android:max="50"
+            settings:interval="1"
+            settings:units="dp" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="quick_settings_interface_category"
         android:title="@string/quick_settings_interface_category">
 
