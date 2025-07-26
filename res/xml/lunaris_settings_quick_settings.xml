@@ -69,6 +69,12 @@
     <PreferenceCategory
         android:title="@string/qs_blur_category_title">
 
+        <SwitchPreferenceCompat
+            android:key="notification_row_transparency"
+            android:title="@string/notification_row_transparency_title"
+            android:summary="@string/notification_row_transparency_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.CustomSeekBarPreference
             android:key="shade_background_alpha"
             android:title="@string/shade_background_alpha_title"

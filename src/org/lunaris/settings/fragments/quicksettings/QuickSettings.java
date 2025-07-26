@@ -29,7 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
@@ -55,11 +55,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
     private static final String PREF_SHADE_ALPHA = "shade_background_alpha";
     private static final String PREF_SHADE_BLUR_RADIUS = "shade_blur_radius";
+    private static final String PREF_NOTIFICATION_ROW_TRANSPARENCY = "notification_row_transparency";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private CustomSeekBarPreference mShadeAlphaPref;
     private CustomSeekBarPreference mShadeBlurRadiusPref;
+    private SwitchPreferenceCompat mNotificationRowTransparencyPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mMiscellaneousCategory = findPreference(KEY_MISCELLANEOUS_CATEGORY);
         mShadeAlphaPref = findPreference(PREF_SHADE_ALPHA);
         mShadeBlurRadiusPref = findPreference(PREF_SHADE_BLUR_RADIUS);
+        mNotificationRowTransparencyPref = findPreference(PREF_NOTIFICATION_ROW_TRANSPARENCY);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
@@ -87,6 +90,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         if (mShadeBlurRadiusPref != null)
             mShadeBlurRadiusPref.setOnPreferenceChangeListener(this);
+
+        if (mNotificationRowTransparencyPref != null)
+            mNotificationRowTransparencyPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -102,6 +108,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             int value = (Integer) newValue;
             Settings.System.putIntForUser(resolver, PREF_SHADE_BLUR_RADIUS,
                     value, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mNotificationRowTransparencyPref) {
+    	    boolean value = (Boolean) newValue;
+    	    Settings.System.putIntForUser(resolver, PREF_NOTIFICATION_ROW_TRANSPARENCY,
+                    value ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
         }
         return false;
