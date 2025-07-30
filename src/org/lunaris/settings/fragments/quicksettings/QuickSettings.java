@@ -38,7 +38,10 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+
 import org.lunaris.settings.utils.DeviceUtils;
+import org.lunaris.settings.utils.SystemRestartUtils;
 
 import java.util.List;
 
@@ -52,10 +55,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
     private static final String PREF_NOTIFICATION_ROW_TRANSPARENCY = "notification_row_transparency";
+    private static final String KEY_QS_REFACTOR_ENABLED = "qs_refactor_enabled";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private SwitchPreferenceCompat mNotificationRowTransparencyPref;
+    private SecureSettingSwitchPreference mQsRefactorEnabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mInterfaceCategory = findPreference(KEY_INTERFACE_CATEGORY);
         mMiscellaneousCategory = findPreference(KEY_MISCELLANEOUS_CATEGORY);
         mNotificationRowTransparencyPref = findPreference(PREF_NOTIFICATION_ROW_TRANSPARENCY);
+
+        mQsRefactorEnabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_ENABLED);
+        mQsRefactorEnabled.setOnPreferenceChangeListener(this);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
@@ -86,6 +94,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     	    boolean value = (Boolean) newValue;
     	    Settings.System.putIntForUser(resolver, PREF_NOTIFICATION_ROW_TRANSPARENCY,
                     value ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsRefactorEnabled) {
+            SystemRestartUtils.restartSystemUI(getContext());
             return true;
         }
         return false;

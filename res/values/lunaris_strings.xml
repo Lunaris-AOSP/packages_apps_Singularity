@@ -1027,4 +1027,8 @@
     <string name="qs_shade_category_title">Shade Appearance</string>
     <string name="notification_row_transparency_title">Full Transparent notifications</string>
     <string name="notification_row_transparency_summary">Apply a full-transparent background to notifications</string>
+
+    <!-- QuickSettings Refactor -->
+    <string name="qs_refactor_title">Nothing Style Quick Settings</string>
+    <string name="qs_refactor_summary">Switch to nothing os style Quick Settngs, Some features will not work on the new QS</string>
 </resources>

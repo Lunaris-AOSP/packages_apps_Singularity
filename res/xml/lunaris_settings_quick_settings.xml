@@ -69,6 +69,12 @@
     <PreferenceCategory
         android:title="@string/qs_shade_category_title">
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_refactor_enabled"
+            android:title="@string/qs_refactor_title"
+            android:summary="@string/qs_refactor_summary"
+            android:defaultValue="true" />
+
         <SwitchPreferenceCompat
             android:key="notification_row_transparency"
             android:title="@string/notification_row_transparency_title"
