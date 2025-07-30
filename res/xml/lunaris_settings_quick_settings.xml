@@ -99,6 +99,12 @@
             android:summary="@string/qs_compact_media_player_mode_summary"
             android:defaultValue="false" />-->
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_refactor_enabled"
+            android:title="@string/qs_refactor_title"
+            android:summary="@string/qs_refactor_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.dualtone"
             android:title="@string/qs_dual_tone_title"
