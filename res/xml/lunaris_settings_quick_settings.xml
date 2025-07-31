@@ -94,10 +94,10 @@
             android:defaultValue="false" />-->
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="qs_refactor_enabled"
+            android:key="qs_refactor_disabled"
             android:title="@string/qs_refactor_title"
             android:summary="@string/qs_refactor_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.dualtone"

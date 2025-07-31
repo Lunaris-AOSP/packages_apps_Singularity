@@ -54,11 +54,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_INTERFACE_CATEGORY = "quick_settings_interface_category";
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
-    private static final String KEY_QS_REFACTOR_ENABLED = "qs_refactor_enabled";
+    private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
-    private SecureSettingSwitchPreference mQsRefactorEnabled;
+    private SecureSettingSwitchPreference mQsRefactorDisabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mMiscellaneousCategory = (PreferenceCategory) findPreference(KEY_MISCELLANEOUS_CATEGORY);
 
-        mQsRefactorEnabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_ENABLED);
-        mQsRefactorEnabled.setOnPreferenceChangeListener(this);
+        mQsRefactorDisabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_DISABLED);
+        mQsRefactorDisabled.setOnPreferenceChangeListener(this);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
@@ -83,7 +83,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mQsRefactorEnabled) {
+        if (preference == mQsRefactorDisabled) {
             SystemRestartUtils.restartSystemUI(getContext());
             return true;
         }
