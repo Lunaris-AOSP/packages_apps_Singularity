@@ -38,6 +38,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.lunaris.settings.preferences.CustomSeekBarPreference;
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
@@ -57,12 +58,14 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String PREF_NOTIFICATION_ROW_TRANSPARENCY = "notification_row_transparency";
     private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
     private static final String PREF_DUAL_TONE_SHADE = "dual_tone_shade_enabled";
+    private static final String PREF_SHADE_BLUR_RADIUS = "shade_blur_radius";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private SwitchPreferenceCompat mNotificationRowTransparencyPref;
     private SecureSettingSwitchPreference mQsRefactorDisabled;
     private SwitchPreferenceCompat mDualToneShadePref;
+    private CustomSeekBarPreference mShadeBlurRadiusPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsRefactorDisabled.setOnPreferenceChangeListener(this);
 
         mDualToneShadePref = findPreference(PREF_DUAL_TONE_SHADE);
+
+        mShadeBlurRadiusPref = findPreference(PREF_SHADE_BLUR_RADIUS);
         
         updatePreferences();
 
@@ -93,8 +98,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(mMiscellaneousCategory);
         }
 
-        if (mNotificationRowTransparencyPref != null)
+        if (mNotificationRowTransparencyPref != null) {
             mNotificationRowTransparencyPref.setOnPreferenceChangeListener(this);
+        }
+
+        if (mShadeBlurRadiusPref != null) {
+            mShadeBlurRadiusPref.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -109,6 +119,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 resolver,
                 Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
                 UserHandle.USER_CURRENT);
+
+        int currentBlur = Settings.System.getIntForUser(resolver,
+                PREF_SHADE_BLUR_RADIUS, 17, UserHandle.USER_CURRENT);
+        mShadeBlurRadiusPref.setValue(currentBlur);
+
         boolean dualToneEnabled = Settings.System.getIntForUser(resolver,
                 PREF_DUAL_TONE_SHADE, 0, UserHandle.USER_CURRENT) == 1;
         mDualToneShadePref.setChecked(dualToneEnabled);
@@ -130,6 +145,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(resolver, PREF_DUAL_TONE_SHADE,
                     value ? 1 : 0, UserHandle.USER_CURRENT);
            return true;
+        } else if (preference == mShadeBlurRadiusPref) {
+            int value = (Integer) newValue;
+            Settings.System.putIntForUser(resolver, PREF_SHADE_BLUR_RADIUS,
+                    value, UserHandle.USER_CURRENT);
+            return true;
         }
         return false;
     }

@@ -99,6 +99,16 @@
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.CustomSeekBarPreference
+            android:key="shade_blur_radius"
+            android:title="@string/shade_blur_radius_title"
+            android:summary="@string/shade_blur_radius_summary"
+            android:defaultValue="17"
+            settings:min="0"
+            android:max="40"
+            settings:interval="1"
+            settings:units="dp" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
