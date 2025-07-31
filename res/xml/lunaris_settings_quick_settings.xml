@@ -76,6 +76,12 @@
             android:defaultValue="false" />
 
         <SwitchPreferenceCompat
+            android:key="dual_tone_shade_enabled"
+            android:title="@string/dual_tone_shade_title"
+            android:summary="@string/dual_tone_shade_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreferenceCompat
             android:key="notification_row_transparency"
             android:title="@string/notification_row_transparency_title"
             android:summary="@string/notification_row_transparency_summary"

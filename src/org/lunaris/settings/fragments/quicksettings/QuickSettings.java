@@ -56,11 +56,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
     private static final String PREF_NOTIFICATION_ROW_TRANSPARENCY = "notification_row_transparency";
     private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
+    private static final String PREF_DUAL_TONE_SHADE = "dual_tone_shade_enabled";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private SwitchPreferenceCompat mNotificationRowTransparencyPref;
     private SecureSettingSwitchPreference mQsRefactorDisabled;
+    private SwitchPreferenceCompat mDualToneShadePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,12 +81,37 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsRefactorDisabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_DISABLED);
         mQsRefactorDisabled.setOnPreferenceChangeListener(this);
 
+        mDualToneShadePref = findPreference(PREF_DUAL_TONE_SHADE);
+        
+        updatePreferences();
+
+        if (mDualToneShadePref != null) {
+            mDualToneShadePref.setOnPreferenceChangeListener(this);
+        }
+
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
 
         if (mNotificationRowTransparencyPref != null)
             mNotificationRowTransparencyPref.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updatePreferences();
+    }
+
+    private void updatePreferences() {
+        final ContentResolver resolver = getActivity().getContentResolver();
+        final String overlayPackageJson = Settings.Secure.getStringForUser(
+                resolver,
+                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
+                UserHandle.USER_CURRENT);
+        boolean dualToneEnabled = Settings.System.getIntForUser(resolver,
+                PREF_DUAL_TONE_SHADE, 0, UserHandle.USER_CURRENT) == 1;
+        mDualToneShadePref.setChecked(dualToneEnabled);
     }
 
     @Override
@@ -98,6 +125,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else if (preference == mQsRefactorDisabled) {
             SystemRestartUtils.restartSystemUI(getContext());
             return true;
+        } else if (preference == mDualToneShadePref) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putIntForUser(resolver, PREF_DUAL_TONE_SHADE,
+                    value ? 1 : 0, UserHandle.USER_CURRENT);
+           return true;
         }
         return false;
     }
