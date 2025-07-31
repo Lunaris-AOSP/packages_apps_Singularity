@@ -70,10 +70,10 @@
         android:title="@string/qs_shade_category_title">
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="qs_refactor_enabled"
+            android:key="qs_refactor_disabled"
             android:title="@string/qs_refactor_title"
             android:summary="@string/qs_refactor_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
         <SwitchPreferenceCompat
             android:key="notification_row_transparency"
@@ -104,6 +104,7 @@
             android:title="@string/qs_show_brightness_slider_title"
             android:entries="@array/qs_show_brightness_slider_entries"
             android:entryValues="@array/qs_show_brightness_slider_values"
+            android:dependency="qs_refactor_disabled"
             android:defaultValue="1" />
 
         <lineageos.preference.LineageSecureSettingListPreference
@@ -111,17 +112,20 @@
             android:title="@string/qs_brightness_slider_position_title"
             android:entries="@array/qs_brightness_slider_position_entries"
             android:entryValues="@array/qs_brightness_slider_position_values"
+            android:dependency="qs_refactor_disabled"
             android:defaultValue="0" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_brightness_slider_haptic"
             android:title="@string/qs_brightness_slider_haptic_title"
+            android:dependency="qs_refactor_disabled"
             android:summary="@string/qs_brightness_slider_haptic_summary"/>
 
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="qs_show_auto_brightness"
             android:title="@string/qs_show_auto_brightness_title"
             android:summary="@string/qs_show_auto_brightness_summary"
+            android:dependency="qs_refactor_disabled"
             android:defaultValue="true" />
 
     </PreferenceCategory>
