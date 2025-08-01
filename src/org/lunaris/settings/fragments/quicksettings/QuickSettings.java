@@ -42,6 +42,7 @@ import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemRestartUtils;
+import org.lunaris.settings.utils.SystemUtils;
 
 import java.util.List;
 
@@ -55,10 +56,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
     private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
+    private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private SecureSettingSwitchPreference mQsRefactorDisabled;
+    private Preference mQsCompactPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsRefactorDisabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_DISABLED);
         mQsRefactorDisabled.setOnPreferenceChangeListener(this);
 
+        mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
+        mQsCompactPlayer.setOnPreferenceChangeListener(this);
+
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
@@ -85,6 +91,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mQsRefactorDisabled) {
             SystemRestartUtils.restartSystemUI(getContext());
+            return true;
+        } else if (preference == mQsCompactPlayer) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }
         return false;
