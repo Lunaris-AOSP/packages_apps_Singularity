@@ -1068,4 +1068,7 @@
 
     <string name="shade_blur_radius_title">Shade Blur Radius</string>
     <string name="shade_blur_radius_summary">Controls the intensity of the background blur</string>
+
+    <string name="aod_wallpaper_title">AOD wallpaper</string>
+    <string name="aod_wallpaper_summary">Show wallpaper when aod on</string>
 </resources>
