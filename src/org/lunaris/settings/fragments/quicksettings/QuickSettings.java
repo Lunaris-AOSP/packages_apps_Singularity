@@ -43,6 +43,7 @@ import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemRestartUtils;
+import org.lunaris.settings.utils.SystemUtils;
 
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
     private static final String PREF_DUAL_TONE_SHADE = "dual_tone_shade_enabled";
     private static final String PREF_SHADE_BLUR_RADIUS = "shade_blur_radius";
+    private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -66,6 +68,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SecureSettingSwitchPreference mQsRefactorDisabled;
     private SwitchPreferenceCompat mDualToneShadePref;
     private CustomSeekBarPreference mShadeBlurRadiusPref;
+    private Preference mQsCompactPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mQsRefactorDisabled = (SecureSettingSwitchPreference) findPreference(KEY_QS_REFACTOR_DISABLED);
         mQsRefactorDisabled.setOnPreferenceChangeListener(this);
+
+        mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
+        mQsCompactPlayer.setOnPreferenceChangeListener(this);
 
         mDualToneShadePref = findPreference(PREF_DUAL_TONE_SHADE);
 
@@ -149,6 +155,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             int value = (Integer) newValue;
             Settings.System.putIntForUser(resolver, PREF_SHADE_BLUR_RADIUS,
                     value, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsCompactPlayer) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }
         return false;

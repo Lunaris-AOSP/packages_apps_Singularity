@@ -171,13 +171,13 @@
             android:key="qs_header_image"
             android:title="@string/quick_settings_header_image_title"
             android:summary="@string/quick_settings_header_image_summary"
-            android:fragment="org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings" />
+            android:fragment="org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings" />-->
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_compact_media_player_mode"
             android:title="@string/qs_compact_media_player_mode_title"
             android:summary="@string/qs_compact_media_player_mode_summary"
-            android:defaultValue="false" />-->
+            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
