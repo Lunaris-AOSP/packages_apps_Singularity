@@ -1117,4 +1117,8 @@
     <string name="selected_widgets">Selected Widgets</string>
     <string name="confirm">Confirm</string>
     <string name="reset">Reset</string>
+
+    <!-- Single tap for keyguard affordance -->
+    <string name="keyguard_affordance_single_tap_title">Keyguard affordance single tap</string>
+    <string name="keyguard_affordance_single_tap_summary">Toggle keyguard affordances with a single tap</string>
 </resources>
