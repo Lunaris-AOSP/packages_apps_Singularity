@@ -1,0 +1,5 @@
+<resources>
+    <color name="app_background_color">#202124</color>
+    <color name="background_floating">#3C4043</color>
+    <color name="theme_accent">@android:color/system_accent1_100</color>
+</resources>
