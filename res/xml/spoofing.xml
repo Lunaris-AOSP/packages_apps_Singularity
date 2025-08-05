@@ -92,13 +92,6 @@
             android:summary="@string/spoofing_photos_summary"
             android:defaultValue="true" />
 
-        <!-- Snapchat -->
-        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
-            android:key="persist.sys.pixelprops.snap"
-            android:title="@string/spoofing_snap_title"
-            android:summary="@string/spoofing_snap_summary"
-            android:defaultValue="false" />
-
         <!-- Encryption -->
         <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
             android:key="spoofing_storage_encryption"
