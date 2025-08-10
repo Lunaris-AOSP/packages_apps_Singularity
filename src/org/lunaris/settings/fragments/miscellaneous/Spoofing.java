@@ -71,33 +71,35 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String TAG = "Spoofing";
 
     private static final String KEY_PIF_JSON_FILE_PREFERENCE = "pif_json_file_preference";
+    private static final String KEY_GAME_PROPS_JSON_FILE_PREFERENCE = "game_props_json_file_preference";
     private static final String KEY_SYSTEM_WIDE_CATEGORY = "spoofing_system_wide_category";
     private static final String KEY_UPDATE_JSON_BUTTON = "update_pif_json";
     private static final String SYS_GMS_SPOOF = "persist.sys.pixelprops.gms";
     private static final String SYS_GOOGLE_SPOOF = "persist.sys.pixelprops";
-    private static final String SYS_GAMEPROP_SPOOF = "persist.sys.pixelprops.games";
     private static final String SYS_GPHOTOS_SPOOF = "persist.sys.pixelprops.gphotos";
     private static final String SYS_QSB_SPOOF = "persist.sys.pixelprops.qsb";
     private static final String SYS_SNAP_SPOOF = "persist.sys.pixelprops.snap";
     private static final String SYS_NETF_SPOOF = "persist.sys.pixelprops.netflix";
     private static final String SYS_VENDING_SPOOF = "persist.sys.pixelprops.vending";
     private static final String SYS_ENABLE_TENSOR_FEATURES = "persist.sys.features.tensor";
+    private static final String SYS_GAMEPROP_ENABLED = "persist.sys.gameprops.enabled";
     private static final String KEYBOX_DATA_KEY = "keybox_data_setting";
 
     private ActivityResultLauncher<Intent> mKeyboxFilePickerLauncher;
     private KeyboxDataPreference mKeyboxDataPreference;
     private Preference mPifJsonFilePreference;
+    private Preference mGamePropsJsonFilePreference;
     private Preference mUpdateJsonButton;
     private PreferenceCategory mSystemWideCategory;
     private SystemPropertySwitchPreference mGmsSpoof;
     private SystemPropertySwitchPreference mGoogleSpoof;
-    private SystemPropertySwitchPreference mGamePropsSpoof;
     private SystemPropertySwitchPreference mGphotosSpoof;
     private SystemPropertySwitchPreference mQsbSpoof;
     private SystemPropertySwitchPreference mSnapSpoof;
     private SystemPropertySwitchPreference mNetfSpoof;
     private SystemPropertySwitchPreference mVendingSpoof;
     private SystemPropertySwitchPreference mTensorFeaturesToggle;
+    private SystemPropertySwitchPreference mGamePropsEnabled;
 
     private Handler mHandler;
 
@@ -113,21 +115,22 @@ public class Spoofing extends SettingsPreferenceFragment implements
         final Resources resources = context.getResources();
 
         mSystemWideCategory = (PreferenceCategory) findPreference(KEY_SYSTEM_WIDE_CATEGORY);
-        mGamePropsSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GAMEPROP_SPOOF);
         mGphotosSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GPHOTOS_SPOOF);
         mGmsSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GMS_SPOOF);
         mGoogleSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GOOGLE_SPOOF);
         mPifJsonFilePreference = findPreference(KEY_PIF_JSON_FILE_PREFERENCE);
+        mGamePropsJsonFilePreference = findPreference(KEY_GAME_PROPS_JSON_FILE_PREFERENCE);
         mQsbSpoof = (SystemPropertySwitchPreference) findPreference(SYS_QSB_SPOOF);
         mSnapSpoof = (SystemPropertySwitchPreference) findPreference(SYS_SNAP_SPOOF);
         mNetfSpoof = (SystemPropertySwitchPreference) findPreference(SYS_NETF_SPOOF);
         mVendingSpoof = (SystemPropertySwitchPreference) findPreference(SYS_VENDING_SPOOF);
         mUpdateJsonButton = findPreference(KEY_UPDATE_JSON_BUTTON);
         mTensorFeaturesToggle = (SystemPropertySwitchPreference) findPreference(SYS_ENABLE_TENSOR_FEATURES);
+        mGamePropsEnabled = (SystemPropertySwitchPreference) findPreference(SYS_GAMEPROP_ENABLED);
 
         String model = SystemProperties.get("ro.product.model");
         boolean isTensorDevice = model.matches("Pixel [6-9][a-zA-Z ]*");
-        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true); // Default to Pixel GMS
+        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true);
 
         if (DeviceUtils.isCurrentlySupportedPixel()) {
             mGoogleSpoof.setDefaultValue(false);
@@ -143,12 +146,14 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mGmsSpoof.setOnPreferenceChangeListener(this);
         mGoogleSpoof.setOnPreferenceChangeListener(this);
         mGphotosSpoof.setOnPreferenceChangeListener(this);
-        mGamePropsSpoof.setOnPreferenceChangeListener(this);
         mQsbSpoof.setOnPreferenceChangeListener(this);
         mSnapSpoof.setOnPreferenceChangeListener(this);
         mNetfSpoof.setOnPreferenceChangeListener(this);
         mVendingSpoof.setOnPreferenceChangeListener(this);
         mTensorFeaturesToggle.setOnPreferenceChangeListener(this);
+        if (mGamePropsEnabled != null) {
+            mGamePropsEnabled.setOnPreferenceChangeListener(this);
+        }
 
         mKeyboxFilePickerLauncher = registerForActivityResult(
         new ActivityResultContracts.StartActivityForResult(),
@@ -167,6 +172,13 @@ public class Spoofing extends SettingsPreferenceFragment implements
             openFileSelector(10001);
             return true;
         });
+
+        if (mGamePropsJsonFilePreference != null) {
+            mGamePropsJsonFilePreference.setOnPreferenceClickListener(preference -> {
+                openFileSelector(10002);
+                return true;
+            });
+        }
 
         mUpdateJsonButton.setOnPreferenceClickListener(preference -> {
             updatePropertiesFromUrl("https://raw.githubusercontent.com/Lunaris-CLO/vendor_certification/refs/heads/15/gms_certified_props.json");
@@ -209,6 +221,8 @@ public class Spoofing extends SettingsPreferenceFragment implements
             if (uri != null) {
                 if (requestCode == 10001) {
                     loadPifJson(uri);
+                } else if (requestCode == 10002) {
+                    loadGameSpoofingJson(uri);
                 }
             }
         }
@@ -228,8 +242,11 @@ public class Spoofing extends SettingsPreferenceFragment implements
                 "persist.sys.pihooks_PRODUCT",
                 "persist.sys.pihooks_SECURITY_PATCH",
                 "persist.sys.pihooks_DEVICE_INITIAL_SDK_INT",
+                "persist.sys.pihooks_TYPE",
+                "persist.sys.pihooks_TAG",
                 "persist.sys.pihooks_RELEASE",
-                "persist.sys.pihooks_SDK_INT"
+                "persist.sys.pihooks_SDK_INT",
+                "persist.sys.pihooks_DEBUG"
             };
             for (String key : keys) {
                 String value = SystemProperties.get(key, null);
@@ -308,6 +325,51 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }, 1250);
     }
 
+    private void loadGameSpoofingJson(Uri uri) {
+        Log.d(TAG, "Loading Game Props JSON from URI: " + uri.toString());
+        try (InputStream inputStream = getActivity().getContentResolver().openInputStream(uri)) {
+            if (inputStream != null) {
+                String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                Log.d(TAG, "Game Props JSON data: " + json);
+                JSONObject jsonObject = new JSONObject(json);
+                for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+                    String key = it.next();
+                    if (key.startsWith("PACKAGES_") && !key.endsWith("_DEVICE")) {
+                        String deviceKey = key + "_DEVICE";
+                        if (jsonObject.has(deviceKey)) {
+                            JSONObject deviceProps = jsonObject.getJSONObject(deviceKey);
+                            JSONArray packages = jsonObject.getJSONArray(key);
+                            for (int i = 0; i < packages.length(); i++) {
+                                String packageName = packages.getString(i);
+                                Log.d(TAG, "Spoofing package: " + packageName);
+                                setGameProps(packageName, deviceProps);
+                            }
+                        }            
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error reading Game Props JSON or setting properties", e);
+        }
+        mHandler.postDelayed(() -> {
+            SystemRestartUtils.showSystemRestartDialog(getContext());
+        }, 1250);
+    }
+
+    private void setGameProps(String packageName, JSONObject deviceProps) {
+        try {
+            for (Iterator<String> it = deviceProps.keys(); it.hasNext(); ) {
+                String key = it.next();
+                String value = deviceProps.getString(key);
+                String systemPropertyKey = "persist.sys.gameprops." + packageName + "." + key;
+                SystemProperties.set(systemPropertyKey, value);
+                Log.d(TAG, "Set system property: " + systemPropertyKey + " = " + value);
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "Error parsing device properties", e);
+        }
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
@@ -315,7 +377,6 @@ public class Spoofing extends SettingsPreferenceFragment implements
         if (preference == mGmsSpoof
             || preference == mGoogleSpoof
             || preference == mGphotosSpoof
-            || preference == mGamePropsSpoof
             || preference == mQsbSpoof
             || preference == mSnapSpoof
             || preference == mNetfSpoof
@@ -326,6 +387,10 @@ public class Spoofing extends SettingsPreferenceFragment implements
         if (preference == mTensorFeaturesToggle) {
             boolean enabled = (Boolean) newValue;
             SystemProperties.set(SYS_ENABLE_TENSOR_FEATURES, enabled ? "true" : "false");
+            SystemRestartUtils.showSystemRestartDialog(getContext());
+            return true;
+        }
+        if (preference == mGamePropsEnabled) {
             SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }
