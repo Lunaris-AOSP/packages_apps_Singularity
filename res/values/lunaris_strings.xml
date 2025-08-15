@@ -1094,4 +1094,8 @@
     <!-- Heads up timeout -->
     <string name="notification_heads_up_timeout_title">Time out</string>
     <string name="notification_heads_up_timeout_summary">Time to display heads up notifications</string>
+
+    <!-- MusicCard -->
+    <string name="volume_panel_musiccard_title">Music Card</string>
+    <string name="volume_panel_musiccard_summary">Enable music card in volume panel</string>
 </resources>
