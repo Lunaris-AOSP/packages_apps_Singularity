@@ -81,11 +81,11 @@
             android:summary="@string/quick_settings_data_usage_summary"
             android:defaultValue="false" />
 
-        <!--<Preference
+        <Preference
             android:key="qs_header_image"
-            android:title="@string/quick_settings_header_image_title"
-            android:summary="@string/quick_settings_header_image_summary"
-            android:fragment="org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings" />-->
+            android:title="@string/qs_header_image_title"
+            android:summary="@string/qs_header_image_summary"
+            android:fragment="org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_compact_media_player_mode"
