@@ -525,6 +525,8 @@
     <string name="power_menu_lock_screen_category">Lock screen</string>
     <string name="power_menu_lock_screen_secure_title">Show on secure lock screen</string>
     <string name="power_menu_lock_screen_secure_summary">Show the power menu while the device is locked</string>
+    <string name="advanced_reboot_secured_title">Secured lockscreen</string>
+    <string name="advanced_reboot_secured_summary">Display advanced restart options on secured lockscreen</string>
 
     <!-- Power menu/Power menu actions -->
     <string name="power_menu_actions_advanced_reboot_title">Advanced reboot</string>
