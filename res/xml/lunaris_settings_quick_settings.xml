@@ -73,7 +73,7 @@
             settings:interval="1"
             settings:units="%"
             android:max="100"
-            android:min="1" />
+            android:min="1" />-->
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_show_data_usage"
@@ -81,7 +81,7 @@
             android:summary="@string/quick_settings_data_usage_summary"
             android:defaultValue="false" />
 
-        <Preference
+        <!--<Preference
             android:key="qs_header_image"
             android:title="@string/quick_settings_header_image_title"
             android:summary="@string/quick_settings_header_image_summary"
