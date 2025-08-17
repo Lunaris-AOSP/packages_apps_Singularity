@@ -668,9 +668,9 @@
 
     <!-- QS Header -->
     <string-array name="qs_header_provider_entries" translatable="false">
-        <item>@string/quick_settings_header_daylight_provider_title</item>
-        <item>@string/quick_settings_header_static_provider_title</item>
-        <item>@string/quick_settings_header_file_provider_title</item>
+        <item>@string/qs_header_daylight_provider_title</item>
+        <item>@string/qs_header_static_provider_title</item>
+        <item>@string/qs_header_file_provider_title</item>
     </string-array>
 
     <string-array name="qs_header_provider_values" translatable="false">
