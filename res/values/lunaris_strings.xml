@@ -1098,4 +1098,10 @@
     <!-- MusicCard -->
     <string name="volume_panel_musiccard_title">Music Card</string>
     <string name="volume_panel_musiccard_summary">Enable music card in volume panel</string>
+
+    <!-- System Animation styles -->
+    <string name="color_default">Default</string>
+    <string name="system_animation_style_title">System animation style</string>
+    <string name="pie_system_animation_style">Android P</string>
+    <string name="scale_system_animation_style">Scale</string>
 </resources>
