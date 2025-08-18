@@ -86,6 +86,15 @@
         android:key="themes_general_category"
         android:title="@string/themes_general_category">
 
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="system_animation_style"
+            android:title="@string/system_animation_style_title"
+            android:dialogTitle="@string/system_animation_style_title"
+            android:entries="@array/system_animation_styles_entries"
+            android:entryValues="@array/system_animation_styles_values"
+            android:defaultValue="0"
+            android:summary="%s" />
+
         <!-- Notification styles    
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="notification_style"
