@@ -118,13 +118,13 @@
             android:summary="@string/show_squiggle_animation_summary"
             android:defaultValue="false" />
 
-        <!--<org.lunaris.settings.preferences.SystemSettingListPreference
+        <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_header_clock_style"
             android:title="@string/qs_header_clock_style_title"
             android:entries="@array/qs_header_clock_style_entries"
             android:entryValues="@array/qs_header_clock_style_values"
             android:summary="%s"
-            android:defaultValue="0" />-->
+            android:defaultValue="0" />
 
         <!-- Battery styles -->
         <org.lunaris.settings.preferences.SystemSettingListPreference
