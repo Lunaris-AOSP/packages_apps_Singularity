@@ -105,11 +105,11 @@
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="false" />
 
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.system.qs.noalpha"
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="notification_row_transparency"
             android:title="@string/fluid_notification_title"
             android:summary="@string/fluid_notification_summary"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
