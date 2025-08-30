@@ -129,8 +129,8 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mGamePropsEnabled = (SystemPropertySwitchPreference) findPreference(SYS_GAMEPROP_ENABLED);
 
         String model = SystemProperties.get("ro.product.model");
-        boolean isTensorDevice = model.matches("Pixel [6-9][a-zA-Z ]*");
-        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true);
+        boolean isTensorDevice = model.matches("Pixel (6|7|8|9|10)[a-zA-Z ]*");
+        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true); // Default to Pixel GMS
 
         if (DeviceUtils.isCurrentlySupportedPixel()) {
             mGoogleSpoof.setDefaultValue(false);
@@ -195,7 +195,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     }
 
     private boolean isMainlineTensorModel(String model) {
-        return model.matches("Pixel [8-9][a-zA-Z ]*");
+        return model.matches("Pixel (8|9|10)[a-zA-Z ]*");
     }
 
     private void openFileSelector(int requestCode) {
