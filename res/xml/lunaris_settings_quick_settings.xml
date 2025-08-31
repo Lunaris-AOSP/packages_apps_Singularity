@@ -80,6 +80,14 @@
             android:title="@string/quick_settings_data_usage_title"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="qs_data_usage_cycle_type"
+            android:title="@string/qs_data_usage_cycle_type_title"
+            android:summary="@string/qs_data_usage_cycle_type_summary"
+            android:entries="@array/qs_data_usage_cycle_type_entries"
+            android:entryValues="@array/qs_data_usage_cycle_type_values"
+            android:defaultValue="0" />
+
         <Preference
             android:key="qs_header_image"
             android:title="@string/qs_header_image_title"
