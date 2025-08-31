@@ -99,12 +99,6 @@
             android:summary="@string/screen_animation_summary"
             android:defaultValue="true" />
 
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.aod.wallpaper"
-            android:title="@string/aod_wallpaper_title"
-            android:summary="@string/aod_wallpaper_summary"
-            android:defaultValue="false" />
-
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="screen_off_aod_enabled"
             android:title="@string/screen_off_aod_enabled_title"
