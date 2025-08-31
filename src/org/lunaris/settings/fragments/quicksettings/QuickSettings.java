@@ -56,12 +56,16 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
     private static final String KEY_QS_REFACTOR_DISABLED = "qs_refactor_disabled";
-    private static final String KEY_QS_COMPACT_PLAYER  = "qs_compact_media_player_mode";
+    private static final String KEY_QS_COMPACT_PLAYER = "qs_compact_media_player_mode";
+    private static final String KEY_QS_DATA_USAGE = "qs_show_data_usage";
+    private static final String KEY_QS_DATA_USAGE_CYCLE_TYPE = "qs_data_usage_cycle_type";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
     private SecureSettingSwitchPreference mQsRefactorDisabled;
     private Preference mQsCompactPlayer;
+    private Preference mDataUsagePreference;
+    private ListPreference mDataUsageCycleTypePreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,15 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
         mQsCompactPlayer.setOnPreferenceChangeListener(this);
 
+        mDataUsagePreference = findPreference(KEY_QS_DATA_USAGE);
+        mDataUsageCycleTypePreference = (ListPreference) findPreference(KEY_QS_DATA_USAGE_CYCLE_TYPE);
+        
+        if (mDataUsageCycleTypePreference != null) {
+            mDataUsageCycleTypePreference.setOnPreferenceChangeListener(this);
+        }
+        
+        updateDataUsageSummary();
+
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
@@ -95,8 +108,47 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else if (preference == mQsCompactPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
+        } else if (preference == mDataUsageCycleTypePreference) {
+            updateDataUsageSummary(newValue.toString());
+            return true;
         }
         return false;
+    }
+
+    private void updateDataUsageSummary() {
+        updateDataUsageSummary(null);
+    }
+
+    private void updateDataUsageSummary(String cycleTypeValue) {
+        if (mDataUsagePreference == null) return;
+        
+        final ContentResolver resolver = getActivity().getContentResolver();
+        int cycleType;
+        
+        if (cycleTypeValue != null) {
+            try {
+                cycleType = Integer.parseInt(cycleTypeValue);
+            } catch (NumberFormatException e) {
+                cycleType = 0;
+            }
+        } else {
+            cycleType = Settings.Secure.getInt(resolver, KEY_QS_DATA_USAGE_CYCLE_TYPE, 0);
+        }
+        
+        int summaryResId;
+        switch (cycleType) {
+            case 0:
+                summaryResId = R.string.qs_footer_datausage_summary_daily;
+                break;
+            case 1:
+                summaryResId = R.string.qs_footer_datausage_summary_weekly;
+                break;
+            default:
+                summaryResId = R.string.qs_footer_datausage_summary_daily;
+                break;
+        }
+        
+        mDataUsagePreference.setSummary(getString(summaryResId));
     }
 
     @Override
