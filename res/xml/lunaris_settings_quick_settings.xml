@@ -64,6 +64,12 @@
         android:key="quick_settings_interface_category"
         android:title="@string/quick_settings_interface_category">
 
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.qsblur"
+            android:title="@string/qs_blur_forsted_title"
+            android:summary="@string/qs_blur_forsted_summary"
+            android:defaultValue="false" />
+
         <!-- QS Transparency -->
         <!--<org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_transparency"

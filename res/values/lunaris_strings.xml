@@ -1122,4 +1122,8 @@
     <!-- Small landscape notifications -->
     <string name="small_landscape_notification_title">Small landscape notifications</string>
     <string name="small_landscape_notification_summary">Shows notifications smaller in width in notification panel in landscape mode just as AOSP intended</string>
+
+    <!-- Frosted blur -->
+    <string name="qs_blur_forsted_title">QS frosted blur effect</string>
+    <string name="qs_blur_forsted_summary">Applies frosted glass blur to Quick Settings (restart systemUI)</string>
 </resources>
