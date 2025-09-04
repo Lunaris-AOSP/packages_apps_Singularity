@@ -39,6 +39,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+import org.lunaris.settings.preferences.SystemSettingListPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemRestartUtils;
@@ -59,6 +60,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_COMPACT_PLAYER = "qs_compact_media_player_mode";
     private static final String KEY_QS_DATA_USAGE = "qs_show_data_usage";
     private static final String KEY_QS_DATA_USAGE_CYCLE_TYPE = "qs_data_usage_cycle_type";
+    private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -66,6 +68,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mQsCompactPlayer;
     private Preference mDataUsagePreference;
     private ListPreference mDataUsageCycleTypePreference;
+    private SystemSettingListPreference mQsHeaderClockStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
         mQsCompactPlayer.setOnPreferenceChangeListener(this);
+
+        mQsHeaderClockStyle = (SystemSettingListPreference) findPreference(KEY_QS_HEADER_CLOCK_STYLE);
+        if (mQsHeaderClockStyle != null) {
+            mQsHeaderClockStyle.setOnPreferenceChangeListener(this);
+        }
 
         mDataUsagePreference = findPreference(KEY_QS_DATA_USAGE);
         mDataUsageCycleTypePreference = (ListPreference) findPreference(KEY_QS_DATA_USAGE_CYCLE_TYPE);
@@ -107,6 +115,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mQsCompactPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsHeaderClockStyle) {
+            String value = newValue.toString();
+            if ("0".equals(value)) {
+                SystemRestartUtils.restartSystemUI(getContext());
+            }
             return true;
         } else if (preference == mDataUsageCycleTypePreference) {
             updateDataUsageSummary(newValue.toString());
