@@ -99,6 +99,12 @@
             android:title="@string/qs_compact_media_player_mode_title"
             android:summary="@string/qs_compact_media_player_mode_summary"
             android:defaultValue="false" />
+        
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.qsmedia"
+            android:title="@string/qs_media_stock_title"
+            android:summary="@string/qs_media_stock_summary"
+            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="qs_refactor_disabled"
