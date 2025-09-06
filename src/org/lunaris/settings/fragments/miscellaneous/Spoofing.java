@@ -289,6 +289,36 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }
     }
 
+    /**
+     * Kill specific game packages to apply new game properties
+     */
+    private int killGamePackages(Set<String> gamePackages) {
+        int killedCount = 0;
+        try {
+            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+            PackageManager pm = getContext().getPackageManager();
+
+            for (String packageName : gamePackages) {
+                try {
+                    pm.getPackageInfo(packageName, 0); // check if installed
+                    am.getClass()
+                    .getMethod("forceStopPackage", String.class)
+                    .invoke(am, packageName);
+                    Log.i(TAG, "Game package killed: " + packageName);
+                    killedCount++;
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.d(TAG, "Game package not installed: " + packageName);
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to kill game package: " + packageName, e);
+                }
+            }
+            Log.i(TAG, "Successfully killed " + killedCount + " game packages out of " + gamePackages.size());
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to kill game packages", e);
+        }
+        return killedCount;
+    }
+
     private void updatePropertiesFromUrl(String urlString) {
         new Thread(() -> {
             try {
@@ -352,6 +382,9 @@ public class Spoofing extends SettingsPreferenceFragment implements
                 String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
                 Log.d(TAG, "Game Props JSON data: " + json);
                 JSONObject jsonObject = new JSONObject(json);
+
+                Set<String> packagesToKill = new HashSet<>();
+
                 for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                     String key = it.next();
                     if (key.startsWith("PACKAGES_") && !key.endsWith("_DEVICE")) {
@@ -363,11 +396,20 @@ public class Spoofing extends SettingsPreferenceFragment implements
                                 String packageName = packages.getString(i);
                                 Log.d(TAG, "Spoofing package: " + packageName);
                                 setGameProps(packageName, deviceProps);
+                                packagesToKill.add(packageName);
                             }
-                        }            
+                        }
                     }
                 }
-                Toast.makeText(getContext(), "Game Props JSON loaded", Toast.LENGTH_SHORT).show();
+
+                int killed = 0;
+                if (!packagesToKill.isEmpty()) {
+                    killed = killGamePackages(packagesToKill);
+                }
+
+                Toast.makeText(getContext(),
+                    "Game Json loaded, Killed " + killed + " out of " + packagesToKill.size() + " game apps",
+                    Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Log.e(TAG, "Error reading Game Props JSON or setting properties", e);
