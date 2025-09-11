@@ -435,13 +435,15 @@ public class Spoofing extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
-        if (preference == mGmsSpoof
-            || preference == mGoogleSpoof
+        if (preference == mGmsSpoof || preference == mVendingSpoof) {
+            killGMSPackages();
+            return true;
+        }
+        if (preference == mGoogleSpoof
             || preference == mGphotosSpoof
             || preference == mQsbSpoof
             || preference == mSnapSpoof
-            || preference == mNetfSpoof
-            || preference == mVendingSpoof) {
+            || preference == mNetfSpoof) {
             SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }
