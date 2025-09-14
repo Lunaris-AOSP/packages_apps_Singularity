@@ -69,6 +69,8 @@ import android.widget.Button;
 import android.view.Gravity;
 import android.graphics.drawable.Drawable;
 
+import com.android.internal.util.android.VibrationUtils;
+
 @SearchIndexable
 public class MonetSettings extends DashboardFragment implements
         OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
@@ -384,6 +386,14 @@ public class MonetSettings extends DashboardFragment implements
             mTintBackgroundPref.setChecked(false);
             updateAccentEnablement("both");
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

@@ -44,6 +44,8 @@ import com.android.settings.R;
 
 import org.lunaris.settings.utils.TelephonyUtils;
 
+import com.android.internal.util.android.VibrationUtils;
+
 import lineageos.app.LineageGlobalActions;
 import lineageos.providers.LineageSettings;
 
@@ -146,6 +148,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+
         boolean value;
 
         if (preference == mScreenshotPref) {
