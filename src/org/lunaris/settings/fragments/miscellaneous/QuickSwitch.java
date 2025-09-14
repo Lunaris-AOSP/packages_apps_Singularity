@@ -39,6 +39,8 @@ import java.util.List;
 
 import com.android.internal.util.android.SystemRestartUtils;
 
+import com.android.internal.util.android.VibrationUtils;
+
 @SearchIndexable
 public class QuickSwitch extends SettingsPreferenceFragment 
     implements Preference.OnPreferenceChangeListener, Indexable {
@@ -84,6 +86,14 @@ public class QuickSwitch extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

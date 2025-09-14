@@ -41,6 +41,8 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.utils.ImageUtils;
 
+import com.android.internal.util.android.VibrationUtils;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -148,6 +150,9 @@ public class QsHeaderImageSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
         if (preference == mFileHeader) {
             try {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

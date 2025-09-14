@@ -33,6 +33,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.android.internal.util.android.VibrationUtils;
+
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 
 public class BatteryBar extends SettingsPreferenceFragment
@@ -95,5 +97,13 @@ public class BatteryBar extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.LUNARIS;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 }

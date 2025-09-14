@@ -45,6 +45,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.android.internal.util.android.VibrationUtils;
+
 public class EdgeLightSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
@@ -62,5 +64,13 @@ public class EdgeLightSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.LUNARIS;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 }

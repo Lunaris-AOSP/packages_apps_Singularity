@@ -6,6 +6,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import androidx.preference.Preference;
+
+import com.android.internal.util.android.VibrationUtils;
+
 @SearchIndexable
 public class LunarisSettings extends DashboardFragment {
 
@@ -19,6 +23,14 @@ public class LunarisSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

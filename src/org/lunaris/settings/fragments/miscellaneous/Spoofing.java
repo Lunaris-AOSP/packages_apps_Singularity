@@ -61,6 +61,8 @@ import org.lunaris.settings.preferences.KeyboxDataPreference;
 import org.lunaris.settings.preferences.SystemPropertySwitchPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 
+import com.android.internal.util.android.VibrationUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -463,6 +465,14 @@ public class Spoofing extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -27,6 +27,10 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import androidx.preference.Preference;
+
+import com.android.internal.util.android.VibrationUtils;
+
 import java.util.List;
 
 import lineageos.providers.LineageSettings;
@@ -46,6 +50,14 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

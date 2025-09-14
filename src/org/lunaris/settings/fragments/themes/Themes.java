@@ -11,6 +11,8 @@ import android.content.res.Resources;
 import android.provider.Settings;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.view.HapticFeedbackConstants;
+import android.view.View;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -32,6 +34,8 @@ import org.lunaris.settings.preferences.SystemSettingListPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemRestartUtils;
 import org.lunaris.settings.utils.SystemUtils;
+
+import com.android.internal.util.android.VibrationUtils;
 
 @SearchIndexable
 public class Themes extends SettingsPreferenceFragment implements
@@ -76,6 +80,14 @@ public class Themes extends SettingsPreferenceFragment implements
 
         mPowerMenuStylePref = findPreference(KEY_POWERMENU_STYLE);
         mPowerMenuStylePref.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void updateStyle(String key, String category, String target,
