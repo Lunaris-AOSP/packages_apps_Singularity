@@ -1126,4 +1126,8 @@
     <!-- Frosted blur -->
     <string name="qs_blur_forsted_title">QS frosted blur effect</string>
     <string name="qs_blur_forsted_summary">Applies frosted glass blur to Quick Settings (restart systemUI)</string>
+
+    <!-- Lockscreen remaining charging time -->
+    <string name="lockscreen_charging_time_title">Lockscreen charging time</string>
+    <string name="lockscreen_charging_time_summary">Display the remaining time for charging to finish</string>
 </resources>
