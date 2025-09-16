@@ -71,6 +71,12 @@
         android:key="miscellaneous_developer_options_category"
         android:title="@string/miscellaneous_developer_options_category">
 
+        <Preference
+            android:key="performance"
+            android:title="@string/performance_title"
+            android:summary="@string/performance_summary"
+            android:fragment="org.lunaris.settings.fragments.miscellaneous.Performance" />
+
         <!-- QuickSwitch -->
         <Preference
             android:key="quickswitch"

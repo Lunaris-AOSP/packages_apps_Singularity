@@ -1130,4 +1130,47 @@
     <!-- Lockscreen remaining charging time -->
     <string name="lockscreen_charging_time_title">Lockscreen charging time</string>
     <string name="lockscreen_charging_time_summary">Display the remaining time for charging to finish</string>
+
+    <!-- Performance -->
+    <string name="performance_title">Performance mode</string>
+    <string name="performance_summary">Adjust CPU and system behavior to save battery or improve performance based on your needs.</string>
+    <string name="display_boost_title">Display Boost</string>
+    <string name="display_boost_summary">Prioritize SurfaceFlinger and display threads during animations and flings for smoother visuals. May increase battery usage.</string>
+    <string name="input_touch_boost_title">Touch Boost</string>
+    <string name="input_touch_boost_summary">Briefly raise CPU speed when the screen is touched for faster responsiveness. May increase battery usage.</string>
+    <string name="cluster_little_title">Little Cluster</string>
+    <string name="cluster_big_title">Big Cluster</string>
+    <string name="cluster_prime_title">Prime Cluster</string>
+    <string name="cpu_boost_title">CPU Boost</string>
+    <string name="cpu_boost_summary">Temporarily boost little cores during animations and flings for smoother performance. May increase battery usage.</string>
+    <string name="big_core_boost_title">Big Core Boost</string>
+    <string name="big_core_boost_summary">Temporarily use big cores during animations and flings for higher performance. May increase battery usage.</string>
+    <string name="prime_core_boost_title">Prime Core Boost</string>
+    <string name="prime_core_boost_summary">Temporarily use the prime cores (highest performance) during animations and flings. May increase battery usage.</string>
+    <string name="axion_min_freq_boost_title">Boost Min Frequency – Little</string>
+    <string name="axion_min_freq_boost_summary">Minimum little-core frequency while CPU Boost is active. Higher values improve responsiveness but may increase battery usage.</string>
+    <string name="axion_min_freq_big_boost_title">Boost Min Frequency – Big</string>
+    <string name="axion_min_freq_big_boost_summary">Minimum big-core frequency while Big Core Boost is active. Higher values improve responsiveness but may increase battery usage.</string>
+    <string name="axion_min_freq_prime_boost_title">Boost Min Frequency – Prime</string>
+    <string name="axion_min_freq_prime_boost_summary">Minimum prime-core frequency while Prime Core Boost is active. Higher values improve responsiveness but may increase battery usage.</string>
+    <string name="axion_min_freq_title">Minimum Frequency – Little</string>
+    <string name="axion_min_freq_summary">Sets the minimum frequency for little cores. Lower values save battery, higher values improve performance.</string>
+    <string name="axion_min_freq_big_title">Minimum Frequency – Big</string>
+    <string name="axion_min_freq_big_summary">Sets the minimum frequency for big cores. Lower values save battery, higher values improve performance.</string>
+    <string name="axion_min_freq_prime_title">Minimum Frequency – Prime</string>
+    <string name="axion_min_freq_prime_summary">Sets the minimum frequency for prime cores. Lower values save battery, higher values improve performance.</string>
+    <string name="axion_max_freq_title">Maximum Frequency – Little</string>
+    <string name="axion_max_freq_summary">Sets the maximum frequency for little cores. Lower values save battery, higher values improve performance.</string>
+    <string name="axion_max_freq_big_title">Maximum Frequency – Big</string>
+    <string name="axion_max_freq_big_summary">Sets the maximum frequency for big cores. Lower values save battery, higher values improve performance.</string>
+    <string name="axion_max_freq_prime_title">Maximum Frequency – Prime</string>
+    <string name="axion_max_freq_prime_summary">Sets the maximum frequency for prime cores. Lower values save battery, higher values improve performance.</string>
+    <string name="gpu_title">GPU</string>
+    <string name="axion_game_gpu_boost_title">Game GPU Boost Level</string>
+    <string name="axion_game_gpu_boost_summary">Set the GPU boost level for gaming scenarios</string>
+    <string name="axion_sys_gpu_boost_title">System GPU Boost Level</string>
+    <string name="axion_sys_gpu_boost_summary">Set the GPU boost level for system/UI scenarios</string>
+    <string name="performence_footer_text">
+    If you don\’t know what frequency value to set, press the reset switch in the seekbar to restore the default.
+    </string>
 </resources>
