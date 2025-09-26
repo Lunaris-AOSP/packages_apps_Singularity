@@ -86,6 +86,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String SYS_VENDING_SPOOF = "persist.sys.pixelprops.vending";
     private static final String SYS_ENABLE_TENSOR_FEATURES = "persist.sys.features.tensor";
     private static final String SYS_GAMEPROP_ENABLED = "persist.sys.gameprops.enabled";
+    private static final String SYS_KEYBOX_CHECK_ENABLED = "persist.sys.keybox.check.enabled";
     private static final String KEYBOX_DATA_KEY = "keybox_data_setting";
 
     private ActivityResultLauncher<Intent> mKeyboxFilePickerLauncher;
@@ -103,6 +104,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private SystemPropertySwitchPreference mVendingSpoof;
     private SystemPropertySwitchPreference mTensorFeaturesToggle;
     private SystemPropertySwitchPreference mGamePropsEnabled;
+    private SystemPropertySwitchPreference mKeyboxCheckEnabled;
 
     private Handler mHandler;
 
@@ -130,6 +132,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mUpdateJsonButton = findPreference(KEY_UPDATE_JSON_BUTTON);
         mTensorFeaturesToggle = (SystemPropertySwitchPreference) findPreference(SYS_ENABLE_TENSOR_FEATURES);
         mGamePropsEnabled = (SystemPropertySwitchPreference) findPreference(SYS_GAMEPROP_ENABLED);
+        mKeyboxCheckEnabled = (SystemPropertySwitchPreference) findPreference(SYS_KEYBOX_CHECK_ENABLED);
 
         String model = SystemProperties.get("ro.product.model");
         boolean isTensorDevice = model.matches("Pixel (6|7|8|9|10)[a-zA-Z ]*");
@@ -156,6 +159,9 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mTensorFeaturesToggle.setOnPreferenceChangeListener(this);
         if (mGamePropsEnabled != null) {
             mGamePropsEnabled.setOnPreferenceChangeListener(this);
+        }
+        if (mKeyboxCheckEnabled != null) {
+            mKeyboxCheckEnabled.setOnPreferenceChangeListener(this);
         }
 
         mKeyboxFilePickerLauncher = registerForActivityResult(
@@ -457,6 +463,10 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }
         if (preference == mGamePropsEnabled) {
             SystemRestartUtils.showSystemRestartDialog(getContext());
+            return true;
+        }
+        if (preference == mKeyboxCheckEnabled) {
+            killGMSPackages();
             return true;
         }
         return false;
