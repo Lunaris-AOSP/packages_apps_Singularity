@@ -51,6 +51,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String[] POWER_MENU_OVERLAYS = {
             "com.android.theme.powermenu.cyberpunk",
             "com.android.theme.powermenu.duoline",
+            "com.android.theme.powermenu.fluid",
             "com.android.theme.powermenu.ios",
             "com.android.theme.powermenu.layers"
     };
