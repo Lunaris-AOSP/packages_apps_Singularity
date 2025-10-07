@@ -99,6 +99,9 @@
     <string name="theme_customization_lock_clock_summary">Set lockscreen clock font style</string>
     <string name="theme_customization_brightness_slider_title">Brightness slider style</string>
     <string name="theme_customization_brightness_slider_summary">Set custom brightness slider style</string>
+    <string name="quick_settings_media_category">QS media category</string>
+    <string name="quick_settings_notification_category">QS notification category</string>
+    <string name="status_bar_battery_category">Statusbar battery category</string>
 
     <!-- Themes/Boot animation preview -->
     <string name="boot_animation_preview_desc">Preview of the selected boot animation</string>

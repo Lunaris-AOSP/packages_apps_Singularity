@@ -106,18 +106,6 @@
             android:summary="@string/qs_header_image_summary"
             android:fragment="org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings" />
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_compact_media_player_mode"
-            android:title="@string/qs_compact_media_player_mode_title"
-            android:summary="@string/qs_compact_media_player_mode_summary"
-            android:defaultValue="false" />
-        
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.system.qs.qsmedia"
-            android:title="@string/qs_media_stock_title"
-            android:summary="@string/qs_media_stock_summary"
-            android:defaultValue="false" />
-
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="qs_refactor_disabled"
             android:title="@string/qs_refactor_title"
@@ -129,24 +117,6 @@
             android:title="@string/qs_dual_tone_title"
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="false" />
-
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="notification_row_transparency"
-            android:title="@string/fluid_notification_title"
-            android:summary="@string/fluid_notification_summary"
-            android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="notification_row_transparency"
-            android:title="@string/notification_row_transparency_title"
-            android:summary="@string/notification_row_transparency_summary"
-            android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
-            android:key="com.android.system.qs.ui.better_qs"
-            android:title="@string/qs_split_shade_enabled_title"
-            android:summary="@string/qs_split_shade_enabled_summary"
-            android:defaultValue="true" />
 
         <!-- Squiggle animation -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
@@ -221,6 +191,49 @@
             android:summary="@string/quick_settings_tile_layout_summary"
             android:defaultValue="false" />-->
             
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="quick_settings_notification_category"
+        android:title="@string/quick_settings_notification_category">
+
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="notification_row_transparency"
+            android:title="@string/notification_row_transparency_title"
+            android:summary="@string/notification_row_transparency_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.ui.better_qs"
+            android:title="@string/qs_split_shade_enabled_title"
+            android:summary="@string/qs_split_shade_enabled_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="quick_settings_media_category"
+        android:title="@string/quick_settings_media_category">
+
+        <!-- Squiggle animation -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="show_media_squiggle_animation"
+            android:title="@string/show_squiggle_animation_title"
+            android:summary="@string/show_squiggle_animation_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_compact_media_player_mode"
+            android:title="@string/qs_compact_media_player_mode_title"
+            android:summary="@string/qs_compact_media_player_mode_summary"
+            android:defaultValue="false" />
+        
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.system.qs.qsmedia"
+            android:title="@string/qs_media_stock_title"
+            android:summary="@string/qs_media_stock_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <!--<PreferenceCategory
