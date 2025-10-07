@@ -130,11 +130,14 @@
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="false" />
 
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="notification_row_transparency"
-            android:title="@string/fluid_notification_title"
-            android:summary="@string/fluid_notification_summary"
-            android:defaultValue="true" />
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="notification_row_transparency_level"
+            android:title="@string/notification_row_transparency_level_title"
+            android:summary="@string/notification_row_transparency_level_summary"
+            android:defaultValue="85"
+            android:max="100"
+            settings:min="0"
+            settings:units="%" />
 
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
