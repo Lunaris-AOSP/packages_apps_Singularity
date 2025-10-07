@@ -1176,4 +1176,8 @@
     <string name="performence_footer_text">
     If you don\’t know what frequency value to set, press the reset switch in the seekbar to restore the default.
     </string>
+
+    <!-- Blur intensity -->
+    <string name="blur_intensity_title">Blur intensity</string>
+    <string name="blur_intensity_summary" formatted="false">Control the intensity of blur effects throughout the system.\n0% = no blur, 100% = system default, 200% = double intensity.</string>
 </resources>
