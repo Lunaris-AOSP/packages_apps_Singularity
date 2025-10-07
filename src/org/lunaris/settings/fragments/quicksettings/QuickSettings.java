@@ -118,7 +118,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
         
         // Initialize context-aware toggle availability based on current slider value
-        int currentLevel = Settings.Secure.getInt(resolver, KEY_NOTIF_TRANSPARENCY_LEVEL, 15);
+        int currentLevel = Settings.Secure.getInt(resolver, KEY_NOTIF_TRANSPARENCY_LEVEL, 40);
         updateTransparencyContextAvailability(currentLevel);
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
