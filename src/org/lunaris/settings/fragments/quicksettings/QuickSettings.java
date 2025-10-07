@@ -39,6 +39,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+import org.lunaris.settings.preferences.SecureSettingSeekBarPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
@@ -63,6 +64,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_DATA_USAGE = "qs_show_data_usage";
     private static final String KEY_QS_DATA_USAGE_CYCLE_TYPE = "qs_data_usage_cycle_type";
     private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
+    private static final String KEY_NOTIF_TRANSPARENCY_LEVEL = "notification_row_transparency_level";
+    private static final String KEY_NOTIF_TRANSPARENCY_CONTEXT = "notification_row_transparency_context_aware";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -71,6 +74,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mDataUsagePreference;
     private ListPreference mDataUsageCycleTypePreference;
     private SystemSettingListPreference mQsHeaderClockStyle;
+    private SecureSettingSeekBarPreference mNotifTransparencyLevelPref;
+    private SecureSettingSwitchPreference mNotifTransparencyContextPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,18 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         
         updateDataUsageSummary();
 
+        // Initialize notification transparency preferences
+        mNotifTransparencyLevelPref = (SecureSettingSeekBarPreference) findPreference(KEY_NOTIF_TRANSPARENCY_LEVEL);
+        mNotifTransparencyContextPref = (SecureSettingSwitchPreference) findPreference(KEY_NOTIF_TRANSPARENCY_CONTEXT);
+        
+        if (mNotifTransparencyLevelPref != null) {
+            mNotifTransparencyLevelPref.setOnPreferenceChangeListener(this);
+        }
+        
+        // Initialize context-aware toggle availability based on current slider value
+        int currentLevel = Settings.Secure.getInt(resolver, KEY_NOTIF_TRANSPARENCY_LEVEL, 85);
+        updateTransparencyContextAvailability(currentLevel);
+
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
         }
@@ -126,6 +143,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mDataUsageCycleTypePreference) {
             updateDataUsageSummary(newValue.toString());
+            return true;
+        } else if (preference == mNotifTransparencyLevelPref) {
+            int level = (Integer) newValue;
+            updateTransparencyContextAvailability(level);
             return true;
         }
         return false;
@@ -165,6 +186,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
         
         mDataUsagePreference.setSummary(getString(summaryResId));
+    }
+
+    private void updateTransparencyContextAvailability(int level) {
+        if (mNotifTransparencyContextPref != null) {
+            // Disable context-aware toggle when transparency is 0 (AOSP default opaque)
+            mNotifTransparencyContextPref.setEnabled(level > 0);
+        }
     }
 
     @Override
