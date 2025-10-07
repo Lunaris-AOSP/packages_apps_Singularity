@@ -77,6 +77,15 @@
             android:summary="@string/performance_summary"
             android:fragment="org.lunaris.settings.fragments.miscellaneous.Performance" />
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="blur_intensity"
+            android:title="@string/blur_intensity_title"
+            android:summary="@string/blur_intensity_summary"
+            android:max="200"
+            settings:min="0"
+            android:defaultValue="100"
+            settings:units="%" />
+
         <!-- QuickSwitch -->
         <Preference
             android:key="quickswitch"

@@ -1356,4 +1356,8 @@
     <!-- Footer -->
     <string name="lock_glymps_footer_title">Important Information</string>
     <string name="lock_glymps_footer_text">📁 Local folder: /sdcard/LunarisGlymps\n\n⚠️ Low-end devices may experience slight lag\n\n🎨 Tip: Use Custom Accent in Monet Settings for stable colors</string>
+   
+    <!-- Blur intensity -->
+    <string name="blur_intensity_title">Blur intensity</string>
+    <string name="blur_intensity_summary" formatted="false">Control the intensity of blur effects throughout the system.\n0% = no blur, 100% = system default, 200% = double intensity.</string>
 </resources>
