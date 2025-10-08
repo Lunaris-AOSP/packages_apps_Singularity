@@ -1196,4 +1196,8 @@
     <string name="ambient_battery_cpu_battery_temperature_title">Battery level, temperature (Battery &amp; CPU)</string>
     <string name="display_icon_title">Icons</string>
     <string name="display_icon_summary">Display icons along with level &amp; temperature</string>
+
+    <!-- Clock size -->
+    <string name="statusbar_clock_size_title">Clock Size (Statusbar)</string>
+    <string name="qs_clock_size_title">Clock Size (QS)</string>
 </resources>
