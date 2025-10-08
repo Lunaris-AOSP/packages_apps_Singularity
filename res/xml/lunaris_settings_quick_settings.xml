@@ -117,12 +117,14 @@
             android:summary="@string/qs_dual_tone_summary"
             android:defaultValue="false" />
 
-        <!-- Squiggle animation -->
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="show_media_squiggle_animation"
-            android:title="@string/show_squiggle_animation_title"
-            android:summary="@string/show_squiggle_animation_summary"
-            android:defaultValue="false" />
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="qs_header_clock_size"
+            android:title="@string/qs_clock_size_title"
+            android:max="20"
+            settings:min="4"
+            settings:interval="1"
+            android:defaultValue="14"
+            settings:units="px" />
 
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_header_clock_style"
