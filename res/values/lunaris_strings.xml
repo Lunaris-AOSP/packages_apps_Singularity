@@ -1205,4 +1205,8 @@
     <!-- Ambient AOD -->
     <string name="ambient_aod_title">Ambient AOD</string>
     <string name="ambient_aod_summary">Enable ambient wallpaper and AOD enhancements</string>
+
+    <!-- Dynamic charging animation -->
+    <string name="wireless_charging_dynamic_color_title">Dynamic charging color</string>
+    <string name="wireless_charging_dynamic_color_summary">Use battery level to determine charging ripple animation color</string>
 </resources>
