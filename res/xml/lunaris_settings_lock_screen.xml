@@ -119,6 +119,12 @@
             android:summary="@string/display_icon_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="ambient_aod"
+            android:title="@string/ambient_aod_title"
+            android:summary="@string/ambient_aod_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
