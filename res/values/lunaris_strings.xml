@@ -1201,4 +1201,8 @@
     <!-- Clock size -->
     <string name="statusbar_clock_size_title">Clock Size (Statusbar)</string>
     <string name="qs_clock_size_title">Clock Size (QS)</string>
+
+    <!-- Ambient AOD -->
+    <string name="ambient_aod_title">Ambient AOD</string>
+    <string name="ambient_aod_summary">Enable ambient wallpaper and AOD enhancements</string>
 </resources>
