@@ -9,6 +9,12 @@
         android:key="heads_up"
         android:title="@string/notifications_heads_up_title">
 
+        <Preference
+            android:key="island_notification"
+            android:title="@string/notifications_island_notification_title"
+            android:summary="@string/notifications_island_notification_summary"
+            android:fragment="org.lunaris.settings.fragments.notifications.IslandSettings" />
+
         <!-- Heads up -->
         <lineageos.preference.GlobalSettingSwitchPreference
             android:key="heads_up_notifications_enabled"
