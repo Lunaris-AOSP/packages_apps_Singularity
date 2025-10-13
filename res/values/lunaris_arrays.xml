@@ -1223,4 +1223,16 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="chip_alignment_entries">
+        <item>Left</item>
+        <item>Center</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="chip_alignment_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
