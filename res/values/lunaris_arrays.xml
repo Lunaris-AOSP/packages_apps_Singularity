@@ -1076,6 +1076,16 @@
         <item>custom</item>
     </string-array>
 
+    <string-array name="edge_light_style_entries">
+        <item>Default (Left/Right)</item>
+        <item>Rounded (4-Sides)</item>
+    </string-array>
+
+    <string-array name="edge_light_style_values">
+        <item>default</item>
+        <item>rounded</item>
+    </string-array>
+
     <string-array name="quickswitch_launcher_entries">
         <item>Lunaris Launcher</item>
         <item>Pixel Launcher</item>

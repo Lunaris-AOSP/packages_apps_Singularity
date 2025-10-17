@@ -45,6 +45,14 @@
         android:dependency="edge_light_enabled" />
 
     <org.lunaris.settings.preferences.SystemSettingListPreference
+        android:key="edge_light_style"
+        android:title="@string/edge_light_style_title"
+        android:entries="@array/edge_light_style_entries"
+        android:entryValues="@array/edge_light_style_values"
+        android:defaultValue="default"
+        android:dependency="edge_light_enabled" />
+
+    <org.lunaris.settings.preferences.SystemSettingListPreference
         android:key="edge_light_color_mode"
         android:title="@string/edge_light_color_mode_title"
         android:entries="@array/edge_light_color_mode_entries"
