@@ -176,6 +176,9 @@
     <string name="pulse_renderer">Visualizer style</string>
     <string name="pulse_renderer_solid">Solid lines</string>
     <string name="pulse_renderer_fading">Fading blocks</string>
+    <string name="pulse_renderer_neon_glow">Neon Glow</string>
+    <string name="pulse_renderer_retro_vu_meter">Retro VU Meter</string>
+    <string name="pulse_renderer_minimal_wave">Minimal Wave</string>
 	
 	<!-- Pulse Gravity n Mirror Options -->
     <string name="pulse_custom_gravity_title">Gravity</string>
