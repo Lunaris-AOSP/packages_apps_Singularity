@@ -483,6 +483,9 @@
     <string name="qs_header_static_provider_title">Static image</string>
     <string name="qs_header_daylight_provider_title">Image collection</string>
     <string name="qs_header_file_provider_title">Custom image</string>
+    <string name="qs_header_image_processing">Processing image...</string>
+    <string name="qs_header_image_success">Header image saved successfully</string>
+    <string name="qs_header_image_error">Failed to save header image</string>
     <string name="qs_header_provider_title">Header provider</string>
     <string name="qs_header_browse_title">Browse installed headers</string>
     <string name="qs_header_browse_summary">Browse all available header collections</string>
