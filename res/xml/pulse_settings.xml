@@ -24,6 +24,13 @@
         android:key="lockscreen_pulse_enabled"
         android:title="@string/enable" />
 
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="pulse_show_on_ambient"
+        android:title="@string/pulse_show_on_ambient_title"
+        android:summary="@string/pulse_show_on_ambient_summary"
+        android:defaultValue="true" 
+        android:dependency="lockscreen_pulse_enabled" />
+
     <org.lunaris.settings.preferences.SecureSettingListPreference
         android:key="pulse_renderer"
         android:title="@string/pulse_renderer"
