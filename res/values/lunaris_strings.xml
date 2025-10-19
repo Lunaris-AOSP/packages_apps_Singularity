@@ -1035,6 +1035,7 @@
     <string name="edge_light_stroke_width_title">Stroke width</string>
     <string name="edge_light_stroke_width_summary">Set thickness for edge light bars</string>
     <string name="edge_light_style_title">Edge Light Style</string>
+    <string name="edge_light_animation_effect_title">Animation Effect</string>
 
     <!-- Statusbar Padding -->
     <string name="statusbar_extra_padding_category">Extra padding</string>

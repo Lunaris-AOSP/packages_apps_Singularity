@@ -1094,6 +1094,24 @@
         <item>rounded</item>
     </string-array>
 
+    <string-array name="edge_light_animation_entries">
+        <item>Standard</item> 
+        <item>Breathing</item>
+        <item>Wave</item>
+        <item>Sparkle</item>
+        <item>Chase</item>
+        <item>Comet</item>
+    </string-array>
+
+    <string-array name="edge_light_animation_values">
+        <item>none</item>
+        <item>breathing</item>
+        <item>wave</item>
+        <item>sparkle</item>
+        <item>chase</item>
+        <item>comet</item>
+    </string-array>
+
     <string-array name="quickswitch_launcher_entries">
         <item>Lunaris Launcher</item>
         <item>Pixel Launcher</item>
