@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -55,9 +56,12 @@ public class LockScreen extends SettingsPreferenceFragment implements
 
     private static final String KEY_KG_USER_SWITCHER= "kg_user_switcher_enabled";
     private static final String KEY_DOZE_ANIMATION = "screen_animation_enabled";
+    private static final String CATEGORY_UDFPS_CUSTOM = "lockscreen_custom_category";
+    private static final String PROP_CUSTOM_UDFPS = "lunaris_udfps_custom";
 
     private Preference mUserSwitcher;
     private Preference mDozeAnimation;
+    private PreferenceCategory mUdfpsCategory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,14 @@ public class LockScreen extends SettingsPreferenceFragment implements
 
         mDozeAnimation = (Preference) findPreference(KEY_DOZE_ANIMATION);
         mDozeAnimation.setOnPreferenceChangeListener(this);
+
+        mUdfpsCategory = findPreference(CATEGORY_UDFPS_CUSTOM);
+        if (mUdfpsCategory != null) {
+            boolean showUdfps = SystemProperties.getBoolean(PROP_CUSTOM_UDFPS, false);
+            if (!showUdfps) {
+                prefScreen.removePreference(mUdfpsCategory);
+            }
+        }
     }
 
     @Override
