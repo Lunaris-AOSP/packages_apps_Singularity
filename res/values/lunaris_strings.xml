@@ -1224,4 +1224,11 @@
     <string name="island_transparent_background_summary">Use transparent background for island notifications</string>
     <string name="island_margin_top_title">Island notifications top margin</string>
     <string name="island_margin_top_summary">Adjust the top margin of island notification</string>
+
+    <!-- UDFPS settings -->
+    <string name="udfps_custom_title">UDFPS customization</string>
+    <string name="udfps_icon_picker_title">UDFPS icon picker</string>
+    <string name="udfps_icon_picker_summary">Choose your favorite fingerprint icon</string>
+    <string name="udfps_recog_animation_effect_title">UDFPS custom animation</string>
+    <string name="udfps_recog_animation_effect_summary">Choose animation effect</string>
 </resources>
