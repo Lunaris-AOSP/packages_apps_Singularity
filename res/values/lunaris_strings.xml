@@ -65,6 +65,7 @@
     <string name="themes_navigation_bar_icons_summary">Set navigation bar icon style</string>
     <string name="themes_udfps_icon_title">UDFPS icon</string>
     <string name="themes_udfps_icon_summary">Set UDFPS icon style</string>
+    
     <string name="themes_brightness_category">Brightness slider</string>
     <string name="themes_brightness_slider_title">Brightness slider style</string>
     <string name="themes_brightness_slider_summary">Set brightness slider style</string>
@@ -1230,9 +1231,26 @@
     <string name="island_margin_top_summary">Adjust the top margin of island notification</string>
 
     <!-- UDFPS settings -->
+    <string name="udfps_cust_title">UDFPS icon and animation</string>
+    <string name="udfps_cust_summary">Customize fingerprint icon and animation</string>
     <string name="udfps_custom_title">UDFPS customization</string>
-    <string name="udfps_icon_picker_title">UDFPS icon picker</string>
+    <string name="udfps_icon_picker_title">UDFPS prebuilt icon</string>
     <string name="udfps_icon_picker_summary">Choose your favorite fingerprint icon</string>
     <string name="udfps_recog_animation_effect_title">UDFPS custom animation</string>
     <string name="udfps_recog_animation_effect_summary">Choose animation effect</string>
+    <string name="udfps_custom_footer_text">Set any custom icon in prebuilt icon before switching or applying custom icon\'s After restart device restart systemui once it will fix invisible/blank custom icon issue </string>
+
+    <!-- UDFPS Icon Type -->
+    <string name="udfps_icon_type_title">Icon type</string>
+    
+    <!-- Custom Icon Select -->
+    <string name="udfps_custom_icon_select_title">Select custom icon</string>
+    <string name="udfps_custom_icon_select_summary">Choose an image from gallery</string>
+    <string name="udfps_custom_icon_selected">Custom icon applied</string>
+    
+    <!-- Toast Messages -->
+    <string name="udfps_custom_icon_processing">Processing custom icon...</string>
+    <string name="udfps_custom_icon_success">Custom icon applied successfully</string>
+    <string name="udfps_custom_icon_error">Failed to apply custom icon</string>
+    <string name="udfps_custom_icon_picker_error">No gallery app found</string>
 </resources>

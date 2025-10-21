@@ -171,42 +171,12 @@
     <PreferenceCategory
         android:key="lockscreen_custom_category"
         android:title="@string/udfps_custom_title">
-      
-      <Preference
-            android:key="udfps_icon_picker"
-            android:title="@string/udfps_icon_picker_title"
-            android:summary="@string/udfps_icon_picker_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.UdfpsIconPicker" />
 
         <Preference
-            android:key="udfps_recognizing_animation_preview"
-            android:title="@string/udfps_recog_animation_effect_title"
-            android:summary="@string/udfps_recog_animation_effect_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.UdfpsAnimation" />
-
-        <!-- UDFPS Animation Size -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="udfps_anim_size"
-            android:title="@string/udfps_animation_size_title"
-            android:summary="@string/udfps_animation_size_summary"
-            android:max="100"
-            android:min="10"
-            android:defaultValue="50"
-            settings:interval="1"
-            settings:units="%"
-            android:dependency="udfps_recognizing_animation_preview" />
-
-        <!-- UDFPS Animation Offset -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="udfps_anim_offset"
-            android:title="@string/udfps_animation_offset_title"
-            android:summary="@string/udfps_animation_offset_summary"
-            android:max="50"
-            settings:min="-50"
-            android:defaultValue="0"
-            settings:interval="1"
-            settings:units="dp"
-            android:dependency="udfps_recognizing_animation_preview" />
+            android:key="udfps_cust"
+            android:title="@string/udfps_cust_title"
+            android:summary="@string/udfps_cust_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.UdfpsCust" />
 
     </PreferenceCategory>
 
