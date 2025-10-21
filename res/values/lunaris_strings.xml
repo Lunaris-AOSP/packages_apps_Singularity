@@ -78,6 +78,10 @@
     <string name="themes_screen_off_animation_scale">Scale</string>
     <string name="themes_udfps_animation_title">UDFPS animation</string>
     <string name="themes_udfps_animation_summary">Set UDFPS animation style</string>
+    <string name="udfps_animation_offset_title">UDFPS animation offset</string>
+    <string name="udfps_animation_offset_summary">Adjust the vertical position of fingerprint animation</string>
+    <string name="udfps_animation_size_title">UDFPS animation size</string>
+    <string name="udfps_animation_size_summary">Adjust the size of fingerprint animation</string>
     <string name="themes_launcher_category">Pixel Launcher</string>
     <string name="themes_launcher_background_blur_title">Background blur</string>
     <string name="themes_launcher_background_blur_summary">Enable blur effect for recent items page background</string>
