@@ -83,14 +83,26 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="themes_general_category"
-        android:title="@string/themes_general_category">
+        android:key="video_wallpaper_category"
+        android:title="@string/video_wallpaper_category">
+
+        <Preference
+            android:key="video_wallpaper"
+            android:title="@string/video_wallpaper_category_title"
+            android:summary="@string/video_wallpaper_category_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.VideoWallpaperFragment" />
 
         <Preference
             android:key="wallpaper_settings"
             android:title="@string/wallpaper_settings_title"
             android:summary="@string/wallpaper_settings_summary"
             android:fragment="org.lunaris.settings.fragments.themes.Wallpaper" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="themes_general_category"
+        android:title="@string/themes_general_category">
 
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="system_animation_style"
