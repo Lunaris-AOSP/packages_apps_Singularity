@@ -862,6 +862,7 @@
     <!-- Visual Effects -->
     <string-array name="wallpaper_effect_entries">
         <item>None</item>
+        <item>Blur Grain</item>
         <item>Chromatic aberration</item>
         <item>Vignette</item>
         <item>Pixelation</item>
@@ -886,6 +887,7 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+        <item>11</item>
     </string-array>
 
     <!-- Lockscreen album art filter -->
