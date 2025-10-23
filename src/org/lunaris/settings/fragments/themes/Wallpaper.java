@@ -128,10 +128,10 @@ public class Wallpaper extends SettingsPreferenceFragment
     private void updateEffectDependencies() {
         int effectType = android.os.SystemProperties.getInt("persist.sys.wallpaper.effect_type", 0);
         mEffectTargetPref.setVisible(effectType > 0);
-        mVignettePref.setVisible(effectType == 2);
-        mPixelationPref.setVisible(effectType == 3);
-        mSaturationPref.setVisible(effectType == 4);
-        mPosterizePref.setVisible(effectType == 10);
+        mVignettePref.setVisible(effectType == 3);
+        mPixelationPref.setVisible(effectType == 4);
+        mSaturationPref.setVisible(effectType == 5);
+        mPosterizePref.setVisible(effectType == 11);
     }
     
     private void updateBlurDependencies() {
