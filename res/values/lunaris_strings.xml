@@ -186,6 +186,10 @@
     <string name="pulse_renderer_neon_glow">Neon Glow</string>
     <string name="pulse_renderer_retro_vu_meter">Retro VU Meter</string>
     <string name="pulse_renderer_minimal_wave">Minimal Wave</string>
+
+    <!-- Pulse height multiplier -->
+    <string name="pulse_height_multiplier_title">Pulse height</string>
+    <string name="pulse_height_multiplier_summary">Adjust the visualization height</string>
 	
 	<!-- Pulse Gravity n Mirror Options -->
     <string name="pulse_custom_gravity_title">Gravity</string>

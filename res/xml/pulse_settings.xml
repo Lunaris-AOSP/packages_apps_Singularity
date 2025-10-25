@@ -68,4 +68,15 @@
         settings:interval="4"
         android:max="64"
         android:dependency="lockscreen_pulse_enabled" />
+
+    <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+        android:key="pulse_height_multiplier"
+        android:title="@string/pulse_height_multiplier_title"
+        android:summary="@string/pulse_height_multiplier_summary"
+        settings:units="%"
+        android:defaultValue="100"
+        settings:min="25"
+        settings:interval="5"
+        android:max="200"
+        android:dependency="lockscreen_pulse_enabled" />
 </PreferenceScreen>
