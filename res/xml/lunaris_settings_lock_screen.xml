@@ -60,6 +60,12 @@
             android:summary="@string/edge_light_summary"
             android:fragment="org.lunaris.settings.fragments.lockscreen.EdgeLightSettings" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="notification_row_transparency_lockscreen"
+            android:title="@string/notification_row_transparency_lockscreen_title"
+            android:summary="@string/notification_row_transparency_lockscreen_summary"
+            android:defaultValue="true" />
+
         <!-- Keyguard user switcher -->
 	    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
 	        android:key="kg_user_switcher_enabled"
