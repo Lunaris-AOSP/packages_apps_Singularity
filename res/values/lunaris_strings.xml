@@ -1176,4 +1176,8 @@
     <string name="performence_footer_text">
     If you don\’t know what frequency value to set, press the reset switch in the seekbar to restore the default.
     </string>
+
+    <!-- Notification Row -->
+    <string name="notification_row_transparency_title">Translucent notifications</string>
+    <string name="notification_row_transparency_summary">Set translucent background for notifications</string>
 </resources>
