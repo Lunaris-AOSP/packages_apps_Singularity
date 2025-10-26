@@ -136,6 +136,12 @@
             android:summary="@string/fluid_notification_summary"
             android:defaultValue="true" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="notification_row_transparency"
+            android:title="@string/notification_row_transparency_title"
+            android:summary="@string/notification_row_transparency_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
             android:title="@string/qs_split_shade_enabled_title"
