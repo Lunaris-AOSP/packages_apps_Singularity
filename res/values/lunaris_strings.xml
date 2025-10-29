@@ -1406,4 +1406,7 @@
     <string name="reset">Reset</string>
     <string name="reset_default_title">Reset to default?</string>
     <string name="reset_default_message">This will restore the default font settings</string>
+
+    <!-- Ripple Shape -->
+    <string name="ripple_shape_title">Charging ripple Shape</string>
 </resources>
