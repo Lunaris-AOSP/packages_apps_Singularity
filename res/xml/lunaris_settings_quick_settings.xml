@@ -216,6 +216,12 @@
         android:key="quick_settings_media_category"
         android:title="@string/quick_settings_media_category">
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_show_media_player"
+            android:title="@string/qs_show_media_player_title"
+            android:summary="@string/qs_show_media_player_summary"
+            android:defaultValue="true" />
+
         <!-- Squiggle animation -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="media_squiggle_animation"

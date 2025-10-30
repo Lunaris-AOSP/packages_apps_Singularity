@@ -63,6 +63,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_DATA_USAGE = "qs_show_data_usage";
     private static final String KEY_QS_DATA_USAGE_CYCLE_TYPE = "qs_data_usage_cycle_type";
     private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
+    private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -71,6 +72,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mDataUsagePreference;
     private ListPreference mDataUsageCycleTypePreference;
     private SystemSettingListPreference mQsHeaderClockStyle;
+    private SecureSettingSwitchPreference mQsShowMediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mDataUsageCycleTypePreference != null) {
             mDataUsageCycleTypePreference.setOnPreferenceChangeListener(this);
         }
+
+        mQsShowMediaPlayer = (SecureSettingSwitchPreference) findPreference(KEY_QS_SHOW_MEDIA_PLAYER);
+        if (mQsShowMediaPlayer != null) {
+            mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
+        }
         
         updateDataUsageSummary();
 
@@ -116,6 +123,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemRestartUtils.restartSystemUI(getContext());
             return true;
         } else if (preference == mQsCompactPlayer) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsShowMediaPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsHeaderClockStyle) {
