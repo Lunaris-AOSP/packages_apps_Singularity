@@ -1411,7 +1411,7 @@
     <string name="ripple_shape_title">Charging ripple Shape</string>
 
     <!-- QS media player -->
-    <string name="qs_show_media_player_title">Show media player</string>
+    <string name="qs_show_media_player_title">QS Media player</string>
     <string name="qs_show_media_player_summary">Display media controls in Quick Settings</string>
 
     <!-- Status bar - Icon tinting -->

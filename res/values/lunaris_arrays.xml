@@ -1378,4 +1378,16 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <string-array name="qs_media_player_entries">
+        <item>Disabled</item>
+        <item>Stock player</item>
+        <item>Mini player</item>
+    </string-array>
+
+    <string-array name="qs_media_player_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

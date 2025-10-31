@@ -39,6 +39,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+import org.lunaris.settings.preferences.SecureSettingListPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
@@ -72,7 +73,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mDataUsagePreference;
     private ListPreference mDataUsageCycleTypePreference;
     private SystemSettingListPreference mQsHeaderClockStyle;
-    private SecureSettingSwitchPreference mQsShowMediaPlayer;
+    private SecureSettingListPreference mQsShowMediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             mDataUsageCycleTypePreference.setOnPreferenceChangeListener(this);
         }
 
-        mQsShowMediaPlayer = (SecureSettingSwitchPreference) findPreference(KEY_QS_SHOW_MEDIA_PLAYER);
+        mQsShowMediaPlayer = (SecureSettingListPreference) findPreference(KEY_QS_SHOW_MEDIA_PLAYER);
         if (mQsShowMediaPlayer != null) {
             mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
         }
