@@ -167,6 +167,7 @@
             <org.lunaris.settings.preferences.colorpicker.ColorPickerPreference
                 android:key="status_bar_logo_color_picker"
                 android:title="@string/status_bar_logo_color_custom"
+                android:dependency="status_bar_logo"
                 settings:defaultValue="0xFFFFFFFF" />
 
     </PreferenceCategory>
