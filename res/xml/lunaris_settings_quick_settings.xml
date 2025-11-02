@@ -223,6 +223,12 @@
             android:entryValues="@array/qs_media_player_values"
             android:defaultValue="1" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        	android:key="media_controls_always_show_time"
+        	android:title="@string/media_controls_always_show_time_title"
+        	android:summary="@string/media_controls_always_show_time_summary"
+        	android:defaultValue="false" />
+
         <!-- Squiggle animation -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="media_squiggle_animation"
