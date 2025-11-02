@@ -146,6 +146,13 @@
         android:key="misc_category"
         android:layout="@layout/settingslib_preference_category_no_title">
 
+        <!-- Rotation button -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="enable_rotation_button"
+            android:title="@string/floating_rotation_button_title"
+            android:summary="@string/floating_rotation_button_summary"
+            android:defaultValue="true" />
+
         <!-- Block wallpaper dimming -->
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="block_wallpaper_dimming"
