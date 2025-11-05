@@ -1425,4 +1425,8 @@
     <!-- Media player settings -->
     <string name="media_controls_always_show_time_title">Always show time</string>
     <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
+
+    <!-- Doze screen state fix -->
+<string name="doze_screen_state_fix_title">Doze screen state</string>
+<string name="doze_screen_state_fix_summary">Apply screen state fix after unlock animation ends in AOD</string>
 </resources>
