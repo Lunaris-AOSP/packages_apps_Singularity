@@ -141,7 +141,8 @@
             android:key="doze_screen_state_fix_enabled"
             android:title="@string/doze_screen_state_fix_title"
             android:summary="@string/doze_screen_state_fix_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false" 
+            android:dependency="screen_animation_enabled" />
 
         <!-- Screen Off animation -->
         <org.lunaris.settings.preferences.SystemSettingListPreference

@@ -204,11 +204,11 @@
             android:summary="@string/notification_row_transparency_summary"
             android:defaultValue="true" />
 
-        <org.lunaris.settings.preferences.OverlaySwitchPreference
+        <!--<org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.ui.better_qs"
             android:title="@string/qs_split_shade_enabled_title"
             android:summary="@string/qs_split_shade_enabled_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true" />-->
 
     </PreferenceCategory>
 
