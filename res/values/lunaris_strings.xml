@@ -1354,6 +1354,9 @@
     <string name="lock_glymps_change_on_title">Change wallpaper on</string>
     <string name="lock_glymps_change_on_summary">When to change the lock screen wallpaper</string>
     
+    <string name="lock_glymps_timer_interval_title">Timer interval</string>
+    <string name="lock_glymps_timer_interval_summary">How often to change wallpaper automatically</string>
+    
     <!-- Footer -->
     <string name="lock_glymps_footer_title">Important Information</string>
     <string name="lock_glymps_footer_text">📁 Local folder: /sdcard/LunarisGlymps\n\n⚠️ Low-end devices may experience slight lag\n\n🎨 Tip: Use Custom Accent in Monet Settings for stable colors</string>
@@ -1427,6 +1430,6 @@
     <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
 
     <!-- Doze screen state fix -->
-<string name="doze_screen_state_fix_title">Doze screen state</string>
-<string name="doze_screen_state_fix_summary">Apply screen state fix after unlock animation ends in AOD</string>
+    <string name="doze_screen_state_fix_title">Doze screen state</string>
+    <string name="doze_screen_state_fix_summary">Apply screen state fix after unlock animation ends in AOD</string>
 </resources>
