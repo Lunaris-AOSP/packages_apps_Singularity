@@ -65,6 +65,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_DATA_USAGE_CYCLE_TYPE = "qs_data_usage_cycle_type";
     private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
     private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
+    private static final String KEY_QS_MEDIA_ALWAYS_SHOW = "qs_media_always_show";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -74,6 +75,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mDataUsageCycleTypePreference;
     private SystemSettingListPreference mQsHeaderClockStyle;
     private SecureSettingListPreference mQsShowMediaPlayer;
+    private SecureSettingSwitchPreference mQsMediaAlwaysShow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,8 +111,14 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mQsShowMediaPlayer != null) {
             mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
         }
+
+        mQsMediaAlwaysShow = (SecureSettingSwitchPreference) findPreference(KEY_QS_MEDIA_ALWAYS_SHOW);
+        if (mQsMediaAlwaysShow != null) {
+            mQsMediaAlwaysShow.setOnPreferenceChangeListener(this);
+        }
         
         updateDataUsageSummary();
+        updateMediaAlwaysShowVisibility();
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
@@ -127,7 +135,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsShowMediaPlayer) {
+            updateMediaAlwaysShowVisibility(newValue.toString());
             SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsMediaAlwaysShow) {
+            SystemRestartUtils.restartSystemUI(getContext());
             return true;
         } else if (preference == mQsHeaderClockStyle) {
             String value = newValue.toString();
@@ -178,6 +190,31 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mDataUsagePreference.setSummary(getString(summaryResId));
     }
 
+    private void updateMediaAlwaysShowVisibility() {
+        updateMediaAlwaysShowVisibility(null);
+    }
+
+    private void updateMediaAlwaysShowVisibility(String newValue) {
+        if (mQsMediaAlwaysShow == null) return;
+        
+        final ContentResolver resolver = getActivity().getContentResolver();
+        int mediaPlayerMode;
+        
+        if (newValue != null) {
+            try {
+                mediaPlayerMode = Integer.parseInt(newValue);
+            } catch (NumberFormatException e) {
+                mediaPlayerMode = Settings.Secure.getInt(resolver, KEY_QS_SHOW_MEDIA_PLAYER, 0);
+            }
+        } else {
+            mediaPlayerMode = Settings.Secure.getInt(resolver, KEY_QS_SHOW_MEDIA_PLAYER, 0);
+        }
+        
+        boolean shouldBeVisible = (mediaPlayerMode == 2);
+        mQsMediaAlwaysShow.setVisible(shouldBeVisible);
+        mQsMediaAlwaysShow.setEnabled(shouldBeVisible);
+    }
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
@@ -202,6 +239,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 if (!DeviceUtils.deviceSupportsBluetooth(context)) {
                     keys.add(KEY_QS_BLUETOOTH_SHOW_DIALOG);
                 }
+                
+                final ContentResolver resolver = context.getContentResolver();
+                int mediaPlayerMode = Settings.Secure.getInt(resolver, KEY_QS_SHOW_MEDIA_PLAYER, 0);
+                if (mediaPlayerMode != 2) {
+                    keys.add(KEY_QS_MEDIA_ALWAYS_SHOW);
+                }
+                
                 return keys;
             }
         };

@@ -224,6 +224,12 @@
             android:defaultValue="1" />
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_media_always_show"
+            android:title="@string/qs_media_always_show_title"
+            android:summary="@string/qs_media_always_show_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         	android:key="media_controls_always_show_time"
         	android:title="@string/media_controls_always_show_time_title"
         	android:summary="@string/media_controls_always_show_time_summary"

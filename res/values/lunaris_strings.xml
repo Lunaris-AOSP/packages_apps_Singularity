@@ -1429,6 +1429,10 @@
     <string name="media_controls_always_show_time_title">Always show time</string>
     <string name="media_controls_always_show_time_summary">Always show passed and total time on media player</string>
 
+    <!-- QS Media Player Compact-->
+    <string name="qs_media_always_show_title">Always show media player</string>
+    <string name="qs_media_always_show_summary">Display media player in Quick Settings even when no media is playing</string>
+
     <!-- Doze screen state fix -->
     <string name="doze_screen_state_fix_title">Doze screen state</string>
     <string name="doze_screen_state_fix_summary">Apply screen state fix after unlock animation ends in AOD</string>
