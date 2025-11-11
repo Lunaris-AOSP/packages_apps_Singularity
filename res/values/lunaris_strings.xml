@@ -1437,4 +1437,8 @@
     <!-- Doze screen state fix -->
     <string name="doze_screen_state_fix_title">Doze screen state</string>
     <string name="doze_screen_state_fix_summary">Apply screen state fix after unlock animation ends in AOD</string>
+
+    <!-- chinese lunar calendar -->
+    <string name="qs_show_lunar_calendar_title">Chinese Lunar Calendar</string>
+    <string name="qs_show_lunar_calendar_summary">Show lunar calendar in Quick Settings</string>
 </resources>
