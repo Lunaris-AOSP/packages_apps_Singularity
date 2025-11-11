@@ -1442,6 +1442,7 @@
     <string name="qs_calendar_type_title">Calendar type</string>
     <string name="qs_calendar_type_summary">Choose calendar display in Quick Settings</string>
     <string name="qs_calendar_type_default">Default (Gregorian)</string>
+    <string name="qs_calendar_type_bangabda">Bangabda (Indian)</string>
     <string name="qs_calendar_type_lunar">Lunar (Chinese)</string>
     <string name="qs_calendar_type_saka">Saka (Indian)</string>
 </resources>

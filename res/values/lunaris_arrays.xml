@@ -1425,11 +1425,13 @@
         <item>@string/qs_calendar_type_default</item>
         <item>@string/qs_calendar_type_lunar</item>
         <item>@string/qs_calendar_type_saka</item>
+        <item>@string/qs_calendar_type_bangabda</item>
     </string-array>
 
     <string-array name="qs_calendar_type_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>
