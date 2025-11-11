@@ -80,11 +80,13 @@
             android:max="100"
             android:min="1" />-->
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_show_lunar_calendar"
-            android:title="@string/qs_show_lunar_calendar_title"
-            android:summary="@string/qs_show_lunar_calendar_summary"
-            android:defaultValue="false" />
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="qs_calendar_type"
+            android:title="@string/qs_calendar_type_title"
+            android:summary="%s"
+            android:entries="@array/qs_calendar_type_entries"
+            android:entryValues="@array/qs_calendar_type_values"
+            android:defaultValue="0" />
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="qs_show_data_usage"
