@@ -78,6 +78,12 @@
             android:summary="@string/notification_row_transparency_lockscreen_summary"
             android:defaultValue="true" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="quickspace_psa_enabled"
+            android:title="@string/quickspace_psa_title"
+            android:summary="@string/quickspace_psa_summary"
+            android:defaultValue="false" />
+
         <!-- Keyguard user switcher -->
 	    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
 	        android:key="kg_user_switcher_enabled"
