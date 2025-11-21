@@ -37,9 +37,9 @@
             android:key="ls_media_art_blur_level"
             android:title="@string/lockscreen_media_art_blur_level_title"
             android:summary="@string/lockscreen_media_art_blur_level_summary"
-            android:max="600"
+            android:max="200"
             android:min="0"
-            android:defaultValue="200"
+            android:defaultValue="90"
             android:dependency="ls_media_art_enabled" />
             
     </PreferenceCategory>
