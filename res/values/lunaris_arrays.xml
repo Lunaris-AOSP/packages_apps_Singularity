@@ -1059,6 +1059,7 @@
         <item>Custom tint</item>
         <item>Invert</item>
         <item>Grayscale + Blur</item>
+        <item>Pixelation/Mosaic effect</item>
     </string-array>
     
     <string-array name="lockscreen_media_art_filter_values">
@@ -1069,6 +1070,7 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="quick_settings_secure_lock_screen_entries" translatable="false">

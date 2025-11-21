@@ -961,7 +961,9 @@
     <!-- Media Art Filter -->
     <string name="lockscreen_media_art_filter_title">Media art filter</string>
     <string name="lockscreen_media_art_filter_summary">Choose visual filter for media art</string>
-    
+    <string name="lockscreen_media_art_pixel_size_title">Media art pixel size</string>
+    <string name="lockscreen_media_art_pixel_size_summary">Adjust the pixel size for media artwork displayed on the lock screen</string>
+
     <!-- Media Art Fade Level -->
     <string name="lockscreen_media_art_fade_level_title">Media art fade level</string>
     <string name="lockscreen_media_art_fade_level_summary">Darkness overlay for better text readability</string>

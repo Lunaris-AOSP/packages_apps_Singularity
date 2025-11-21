@@ -23,6 +23,15 @@
             android:entryValues="@array/lockscreen_media_art_filter_values"
             android:defaultValue="0"
             android:dependency="ls_media_art_enabled" />
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="ls_media_art_pixel_size"
+            android:title="@string/lockscreen_media_art_pixel_size_title"
+            android:summary="@string/lockscreen_media_art_pixel_size_summary"
+            android:max="45"
+            android:min="5"
+            android:defaultValue="20"
+            android:dependency="ls_media_art_enabled" />
         
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="ls_media_art_fade_level"

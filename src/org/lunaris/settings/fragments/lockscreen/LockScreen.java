@@ -21,9 +21,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.MediaStore;
@@ -31,6 +34,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
@@ -58,10 +62,22 @@ public class LockScreen extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE_ANIMATION = "screen_animation_enabled";
     private static final String CATEGORY_UDFPS_CUSTOM = "lockscreen_custom_category";
     private static final String PROP_CUSTOM_UDFPS = "lunaris_udfps_custom";
+    private static final String KEY_MEDIA_ART_FILTER = "ls_media_art_filter";
+    private static final String KEY_PIXEL_SIZE = "ls_media_art_pixel_size";
+    private static final int FILTER_PIXELATION = 7;
 
     private Preference mUserSwitcher;
     private Preference mDozeAnimation;
     private PreferenceCategory mUdfpsCategory;
+    private ListPreference mMediaArtFilter;
+    private Preference mPixelSize;
+
+    private ContentObserver mMediaFilterObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updatePixelSizeVisibility();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,10 +89,14 @@ public class LockScreen extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
         mUserSwitcher = (Preference) findPreference(KEY_KG_USER_SWITCHER);
-        mUserSwitcher.setOnPreferenceChangeListener(this);
+        if (mUserSwitcher != null) {
+            mUserSwitcher.setOnPreferenceChangeListener(this);
+        }
 
         mDozeAnimation = (Preference) findPreference(KEY_DOZE_ANIMATION);
-        mDozeAnimation.setOnPreferenceChangeListener(this);
+        if (mDozeAnimation != null) {
+            mDozeAnimation.setOnPreferenceChangeListener(this);
+        }
 
         mUdfpsCategory = findPreference(CATEGORY_UDFPS_CUSTOM);
         if (mUdfpsCategory != null) {
@@ -85,6 +105,56 @@ public class LockScreen extends SettingsPreferenceFragment implements
                 prefScreen.removePreference(mUdfpsCategory);
             }
         }
+
+        mMediaArtFilter = (ListPreference) findPreference(KEY_MEDIA_ART_FILTER);
+        mPixelSize = findPreference(KEY_PIXEL_SIZE);
+        
+        if (mMediaArtFilter != null) {
+            mMediaArtFilter.setOnPreferenceChangeListener(this);
+        }
+        
+        updatePixelSizeVisibility();
+        
+        if (resolver != null) {
+            resolver.registerContentObserver(
+                Settings.System.getUriFor(Settings.System.LS_MEDIA_ART_FILTER),
+                false,
+                mMediaFilterObserver,
+                UserHandle.USER_CURRENT
+            );
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updatePixelSizeVisibility();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Context context = getContext();
+        if (context != null && context.getContentResolver() != null) {
+            context.getContentResolver().unregisterContentObserver(mMediaFilterObserver);
+        }
+    }
+
+    private void updatePixelSizeVisibility() {
+        if (mPixelSize == null) return;
+        
+        Context context = getContext();
+        if (context == null) return;
+        
+        final ContentResolver resolver = context.getContentResolver();
+        int currentFilter = Settings.System.getIntForUser(
+            resolver,
+            Settings.System.LS_MEDIA_ART_FILTER,
+            0,
+            UserHandle.USER_CURRENT
+        );
+        
+        mPixelSize.setVisible(currentFilter == FILTER_PIXELATION);
     }
 
     @Override
@@ -93,6 +163,12 @@ public class LockScreen extends SettingsPreferenceFragment implements
             Context context = getContext();
             if (context != null) {
                 SystemUtils.showSystemUiRestartDialog(context);
+            }
+            return true;
+        } else if (preference == mMediaArtFilter) {
+            int filterValue = Integer.parseInt((String) newValue);
+            if (mPixelSize != null) {
+                mPixelSize.setVisible(filterValue == FILTER_PIXELATION);
             }
             return true;
         }
@@ -119,6 +195,19 @@ public class LockScreen extends SettingsPreferenceFragment implements
             public List<String> getNonIndexableKeys(Context context) {
                 List<String> keys = super.getNonIndexableKeys(context);
                 final Resources resources = context.getResources();
+                
+                ContentResolver resolver = context.getContentResolver();
+                int currentFilter = Settings.System.getIntForUser(
+                    resolver,
+                    Settings.System.LS_MEDIA_ART_FILTER,
+                    0,
+                    UserHandle.USER_CURRENT
+                );
+                
+                if (currentFilter != 7) {
+                    keys.add(KEY_PIXEL_SIZE);
+                }
+                
                 return keys;
             }
         };
