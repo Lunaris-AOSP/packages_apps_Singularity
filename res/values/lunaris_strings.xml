@@ -1496,4 +1496,8 @@
     <string name="add_sensor_block_package_summary">Significant motion, accelerometer, linear acceleration sensors will be blocked for these apps</string>
     <string name="choose_app">Choose app</string>
     <string name="delete_message">Remove selected item?</string>
+
+    <!-- UDFPS -->
+    <string name="udfps_icon_aod_title">UDFPS icon AOD</string>
+    <string name="udfps_icon_aod_summary">Use custom UDFPS icon on Always-On Display</string>
 </resources>

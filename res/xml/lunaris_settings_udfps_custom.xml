@@ -12,6 +12,12 @@
         android:entryValues="@array/udfps_icon_type_values"
         android:defaultValue="0" />
 
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="udfps_icon_aod"
+        android:title="@string/udfps_icon_aod_title"
+        android:summary="@string/udfps_icon_aod_summary"
+        android:defaultValue="false" />
+
     <Preference
         android:key="udfps_icon_picker"
         android:title="@string/udfps_icon_picker_title"
