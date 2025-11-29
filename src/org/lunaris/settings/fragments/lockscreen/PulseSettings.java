@@ -33,13 +33,51 @@ import com.android.settings.SettingsPreferenceFragment;
 
 import com.android.internal.util.android.VibrationUtils;
 
-public class PulseSettings extends SettingsPreferenceFragment {
+import org.lunaris.settings.preferences.SecureSettingListPreference;
+
+public class PulseSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
+
+    private static final String KEY_PULSE_RENDERER = "pulse_renderer";
+    private static final String KEY_PULSE_COLOR = "pulse_color";
+
+    private SecureSettingListPreference mPulseRenderer;
+    private SecureSettingListPreference mPulseColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pulse_settings);
+
+        mPulseRenderer = (SecureSettingListPreference) findPreference(KEY_PULSE_RENDERER);
+        mPulseColor = (SecureSettingListPreference) findPreference(KEY_PULSE_COLOR);
+
+        if (mPulseRenderer != null) {
+            mPulseRenderer.setOnPreferenceChangeListener(this);
+            String currentRenderer = Settings.Secure.getStringForUser(
+                    getContentResolver(),
+                    Settings.Secure.PULSE_RENDERER,
+                    UserHandle.USER_CURRENT);
+            updateColorPreferenceVisibility(currentRenderer);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mPulseRenderer) {
+            String value = (String) newValue;
+            updateColorPreferenceVisibility(value);
+            return true;
+        }
+        return false;
+    }
+
+    private void updateColorPreferenceVisibility(String rendererValue) {
+        if (mPulseColor != null) {
+            boolean isMatrix = "matrix".equals(rendererValue);
+            mPulseColor.setVisible(!isMatrix);
+        }
     }
 
     @Override
