@@ -1518,4 +1518,8 @@
     <string name="charging_display_category_title">Display options</string>
     <string name="charging_show_on_lockscreen_summary">Display animation when lockscreen is visible</string>
     <string name="charging_show_on_aod_summary">Display animation in ambient mode</string>
+
+    <!-- Single Tone QS -->
+    <string name="qs_single_tone_title">Single Tone QS</string>
+    <string name="qs_single_tone_summary">Hide notification scrim for unified Quick Settings appearance</string>
 </resources>

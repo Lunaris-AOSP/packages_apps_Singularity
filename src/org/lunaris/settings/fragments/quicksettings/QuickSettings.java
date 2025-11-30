@@ -41,6 +41,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 import org.lunaris.settings.preferences.SecureSettingListPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemRestartUtils;
@@ -66,6 +67,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
     private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
     private static final String KEY_QS_MEDIA_ALWAYS_SHOW = "qs_media_always_show";
+    private static final String KEY_SINGLE_QS_TONE_ENABLED = "single_qs_tone_enabled";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -76,6 +78,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mQsHeaderClockStyle;
     private SecureSettingListPreference mQsShowMediaPlayer;
     private SecureSettingSwitchPreference mQsMediaAlwaysShow;
+    private SystemSettingSwitchPreference mSingleQsToneEnabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mQsMediaAlwaysShow != null) {
             mQsMediaAlwaysShow.setOnPreferenceChangeListener(this);
         }
+
+        mSingleQsToneEnabled = (SystemSettingSwitchPreference) findPreference(KEY_SINGLE_QS_TONE_ENABLED);
+        if (mSingleQsToneEnabled != null) {
+            mSingleQsToneEnabled.setOnPreferenceChangeListener(this);
+        }
         
         updateDataUsageSummary();
         updateMediaAlwaysShowVisibility();
@@ -149,6 +157,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mDataUsageCycleTypePreference) {
             updateDataUsageSummary(newValue.toString());
+            return true;
+        } else if (preference == mSingleQsToneEnabled) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }
         return false;
