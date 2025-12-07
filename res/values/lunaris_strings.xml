@@ -797,20 +797,28 @@
     <string name="volume_sound_haptics_summary">Enable sound feedback when adjusting volume row progress</string>
 
     <!-- Weather -->
+    <string name="lockscreen_smartspace_category">Smartspace</string>
+    <string name="lockscreen_smartspace_title">Lockscreen smartspace</string>
+    <string name="lockscreen_smartspace_summary">Show Google Smartspace when available</string>
     <string name="weather_settings_title">Weather settings</string>
     <string name="weather_settings_summary">Setup icon pack and weather service</string>
     <string name="lockscreen_weather_category">Weather</string>
     <string name="lockscreen_weather_title">Weather update</string>
     <string name="lockscreen_weather_summary">Display current weather update</string>
-    <string name="lockscreen_weather_enabled_info">Requires weather service to be enabled</string>
+    <string name="lockscreen_weather_enabled_info">Requires custom weather service configured and smartspace disabled</string>
     <string name="lockscreen_weather_location_title">Current location</string>
     <string name="lockscreen_weather_location_summary">Display current weather location</string>
     <string name="lockscreen_weather_text_title">Current condition</string>
     <string name="lockscreen_weather_text_summary">Display current weather condition summary</string>
-    <string name="lockscreen_weather_style_title">Pixel style</string>
-    <string name="lockscreen_weather_style_summary">Display weather as separate row</string>
+    <string name="lockscreen_weather_wind_info_title">Wind info</string>
+    <string name="lockscreen_weather_wind_info_summary">Display current wind speed and direction</string>
+    <string name="lockscreen_weather_humidity_info_title">Humidity info</string>
+    <string name="lockscreen_weather_humidity_info_summary">Display current humidity in percentage</string>
     <string name="weather_menu_title">Weather Menu</string>
     <string name="weather_menu_summary">Check weather and refresh</string>
+    <string name="lockscreen_weather_footer_title">Information</string>
+    <string name="lockscreen_weather_footer_summary">Weather displays current conditions, temperature, and location on the lockscreen. It requires a custom weather service (OmniJaws) to be configured. Note that omnijaws weather and Google Smartspace cannot be enabled simultaneously - enabling Smartspace will automatically disable the weather widget.</string>
+    <string name="lockscreen_weather_smartspace_enabled_info">Cannot be enabled while Smartspace is active</string>
 
     <!-- AOD Settings -->
     <string name="aod_display_category_title">Always-On-Display</string>
