@@ -101,6 +101,53 @@ public class ExternalFontInstaller {
         return postScriptName;
     }
 
+    public Typeface loadTypefaceFromFile(Context context, File file) {
+        try {
+            String postScriptName = extractPostScriptName(file);
+            if (postScriptName == null) {
+                return null;
+            }
+            return Typeface.createFromFile(file);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to load typeface from file", e);
+            return null;
+        }
+    }
+
+    public String installFontFromFile(Context context, File sourceFile) {
+        try {
+            File fontFile = new File(context.getCacheDir(), CUSTOM_FONT_FILE);
+            FileInputStream input = new FileInputStream(sourceFile);
+            FileOutputStream output = new FileOutputStream(fontFile);
+            FileUtils.copy(input, output);
+            input.close();
+            output.close();
+
+            String postScriptName = extractPostScriptName(fontFile);
+            if (postScriptName == null) {
+                fontFile.delete();
+                return null;
+            }
+
+            if (!applyFontToSystem(fontFile, postScriptName)) {
+                fontFile.delete();
+                return null;
+            }
+
+            updateThemeOverlays(context);
+            cleanupPreviewFont(context);
+            
+            if (sourceFile.getAbsolutePath().startsWith(context.getCacheDir().getAbsolutePath())) {
+                sourceFile.delete();
+            }
+            
+            return postScriptName;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to install font from file", e);
+            return null;
+        }
+    }
+
     private File copyUriToCache(Context context, Uri uri, String fileName) {
         try {
             File cacheFile = new File(context.getCacheDir(), fileName);
