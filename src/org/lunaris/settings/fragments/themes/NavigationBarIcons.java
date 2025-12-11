@@ -41,9 +41,9 @@ import com.android.internal.util.lunaris.ThemeUtils;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class NavbarStyles extends SettingsPreferenceFragment {
+public class NavigationBarIcons extends SettingsPreferenceFragment {
 
-    private static final String TAG = "NavbarStyles";
+    private static final String TAG = "NavigationBarIcons";
 
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;

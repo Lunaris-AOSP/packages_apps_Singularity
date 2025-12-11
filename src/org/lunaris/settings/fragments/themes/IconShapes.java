@@ -70,18 +70,7 @@ public class IconShapes extends SettingsPreferenceFragment {
         View view = inflater.inflate(R.layout.item_view, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
-
-        // Fix: safely assign adapter after layout inflation
-        view.post(() -> {
-            if (mRecyclerView != null) {
-                mRecyclerView.setAdapter(
-                    new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, mRecyclerView)
-                );
-            } else {
-                Log.w(TAG, "RecyclerView is null — adapter not set");
-            }
-        });
-
+        mRecyclerView.setAdapter(new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, mRecyclerView));
         return view;
     }
 
@@ -155,7 +144,9 @@ public class IconShapes extends SettingsPreferenceFragment {
             holder.itemView.setActivated(pkg.equals(mSelectedPkg));
             holder.itemView.setOnClickListener(view -> {
                 if (!pkg.equals(mSelectedPkg)) {
+                    String oldPkg = mSelectedPkg;
                     mSelectedPkg = pkg;
+                    mThemeUtils.setOverlayEnabled(mCategory, oldPkg, oldPkg);
                     mThemeUtils.setOverlayEnabled(mCategory, pkg, "android");
                 }
                 updateActivatedStatus();

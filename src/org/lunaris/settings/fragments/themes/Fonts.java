@@ -44,7 +44,7 @@ import java.util.List;
 
 public class Fonts extends SettingsPreferenceFragment {
 
-    private static final String TAG = "FontsPicker";
+    private static final String TAG = "Fonts";
 
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;
@@ -66,18 +66,7 @@ public class Fonts extends SettingsPreferenceFragment {
         View view = inflater.inflate(R.layout.item_view, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
-
-        // Fix: safely assign adapter after layout inflation
-        view.post(() -> {
-            if (mRecyclerView != null) {
-                mRecyclerView.setAdapter(
-                    new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, mRecyclerView)
-                );
-            } else {
-                Log.w(TAG, "RecyclerView is null — adapter not set");
-            }
-        });
-
+        mRecyclerView.setAdapter(new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, mRecyclerView));
         return view;
     }
 
@@ -148,10 +137,10 @@ public class Fonts extends SettingsPreferenceFragment {
                 if (!pkg.equals(mSelectedPkg)) {
                     String oldPkg = mSelectedPkg;
                     mSelectedPkg = pkg;
+                    mThemeUtils.setOverlayEnabled(mCategory, oldPkg, oldPkg);
                     mThemeUtils.setOverlayEnabled(mCategory, pkg, "android");
-                    updateActivatedStatus(oldPkg);
-                    updateActivatedStatus(mSelectedPkg);
                 }
+                updateActivatedStatus();
             });
         }
 
@@ -160,11 +149,8 @@ public class Fonts extends SettingsPreferenceFragment {
             return mPkgs.size();
         }
 
-        private void updateActivatedStatus(String pkg) {
-            int index = mPkgs.indexOf(pkg);
-            if (index >= 0) {
-                notifyItemChanged(index);
-            }
+        private void updateActivatedStatus() {
+            notifyDataSetChanged();
         }
 
         public static class CustomViewHolder extends RecyclerView.ViewHolder {

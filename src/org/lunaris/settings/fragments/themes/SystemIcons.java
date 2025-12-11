@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class SystemIcons extends SettingsPreferenceFragment {
 
-    private static final String TAG = "StatusbarIcons";
+    private static final String TAG = "SystemIcons";
 
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;
@@ -75,18 +75,7 @@ public class SystemIcons extends SettingsPreferenceFragment {
         View view = inflater.inflate(R.layout.item_view, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
-
-        // Fix: safely assign adapter after layout inflation
-        view.post(() -> {
-            if (mRecyclerView != null) {
-                mRecyclerView.setAdapter(
-                    new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, overlayMap, mRecyclerView)
-                );
-            } else {
-                Log.w(TAG, "RecyclerView is null — adapter not set");
-            }
-        });
-
+        mRecyclerView.setAdapter(new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, overlayMap, mRecyclerView));
         return view;
     }
 
@@ -157,10 +146,10 @@ public class SystemIcons extends SettingsPreferenceFragment {
                 if (!pkg.equals(mSelectedPkg)) {
                     String oldPkg = mSelectedPkg;
                     mSelectedPkg = pkg;
+                    mThemeUtils.setOverlayEnabled(mCategory, oldPkg, oldPkg);
                     applyOverlays(pkg);
-                    updateActivatedStatus(oldPkg);
-                    updateActivatedStatus(mSelectedPkg);
                 }
+                updateActivatedStatus();
             });
         }
 
@@ -187,11 +176,8 @@ public class SystemIcons extends SettingsPreferenceFragment {
             return mPkgs.size();
         }
 
-        private void updateActivatedStatus(String pkg) {
-            int index = mPkgs.indexOf(pkg);
-            if (index >= 0) {
-                notifyItemChanged(index);
-            }
+        private void updateActivatedStatus() {
+            notifyDataSetChanged();
         }
 
         public static class CustomViewHolder extends RecyclerView.ViewHolder {
