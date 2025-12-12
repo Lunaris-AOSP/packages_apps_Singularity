@@ -133,6 +133,24 @@
             android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="shade_panel_alpha"
+            android:title="@string/shade_panel_alpha_title"
+            settings:units="%"
+            settings:min="0"
+            android:max="100"
+            settings:interval="1"
+            android:defaultValue="32" />
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="notification_scrim_alpha"
+            android:title="@string/notification_scrim_alpha_title"
+            settings:units="%"
+            settings:min="0"
+            android:max="100"
+            settings:interval="1"
+            android:defaultValue="14" />
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_header_clock_size"
             android:title="@string/qs_clock_size_title"
             android:max="20"
