@@ -1447,6 +1447,7 @@
         <item>@string/qs_calendar_type_lunar</item>
         <item>@string/qs_calendar_type_saka</item>
         <item>@string/qs_calendar_type_bangabda</item>
+        <item>@string/qs_calendar_type_vikram</item>
     </string-array>
 
     <string-array name="qs_calendar_type_values" translatable="false">
@@ -1454,6 +1455,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="nowplaying_icon_style_entries">

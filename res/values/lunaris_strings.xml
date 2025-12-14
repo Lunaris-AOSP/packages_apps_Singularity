@@ -1456,6 +1456,7 @@
     <string name="qs_calendar_type_bangabda">Bangabda (Indian)</string>
     <string name="qs_calendar_type_lunar">Lunar (Chinese)</string>
     <string name="qs_calendar_type_saka">Saka (Indian)</string>
+    <string name="qs_calendar_type_vikram">Vikram Samvat (Indian)</string>
 
     <!-- Now Playing -->
     <string name="nowplaying_title">Now Playing</string>
