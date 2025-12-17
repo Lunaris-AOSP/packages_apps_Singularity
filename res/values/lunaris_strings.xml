@@ -784,6 +784,11 @@
     <string name="lockscreen_albumart_filter_blur">Blur</string>
     <string name="lockscreen_albumart_filter_grayblur">Grayscale and blurred</string>
 
+    <!-- AOD Media Settings -->
+    <string name="show_on_aod_title">Show on AOD</string>
+    <string name="show_on_aod_summary">Display media artwork on Always-On Display</string>
+    <string name="aod_brightness_title">AOD brightness</string>
+
     <!-- Haptics Settings -->
     <string name="haptics_settings_title">System haptics</string>
     <string name="haptics_settings_summary">Modify system haptics intensities</string>
