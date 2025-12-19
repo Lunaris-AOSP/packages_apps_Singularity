@@ -1520,4 +1520,15 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <!-- QS Tile Shape Style -->
+    <string-array name="qs_tile_shape_style_entries">
+        <item>Rounded (Circular)</item>
+        <item>Rounded Rectangle</item>
+    </string-array>
+
+    <string-array name="qs_tile_shape_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

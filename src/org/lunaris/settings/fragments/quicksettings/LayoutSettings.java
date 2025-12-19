@@ -31,17 +31,39 @@ import com.android.settingslib.search.SearchIndexable;
 
 import com.android.internal.util.android.VibrationUtils;
 
+import org.lunaris.settings.utils.SystemRestartUtils;
+import org.lunaris.settings.utils.SystemUtils;
+
 import java.util.List;
 
 @SearchIndexable
-public class LayoutSettings extends SettingsPreferenceFragment {
+public class LayoutSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
 
     public static final String TAG = "LayoutSettings";
+
+    private static final String KEY_QS_TILE_SHAPE_STYLE = "qs_tile_shape_style";
+
+    private Preference mQsTileShapeStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.qs_layout_settings);
+
+        mQsTileShapeStyle = findPreference(KEY_QS_TILE_SHAPE_STYLE);
+        if (mQsTileShapeStyle != null) {
+            mQsTileShapeStyle.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mQsTileShapeStyle) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        }
+        return false;
     }
 
     @Override

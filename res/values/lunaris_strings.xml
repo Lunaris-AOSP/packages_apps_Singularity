@@ -1541,4 +1541,8 @@
     <string name="flashlight_on_call_ignore_dnd_title">Ignore DND</string>
     <string name="flashlight_on_call_ignore_dnd_summary">Whether to flash when Do Not Disturb mode is active</string>
     <string name="flashlight_on_call_rate_title">Blink rate</string>
+
+    <!-- QS Tile Shape Style -->
+    <string name="qs_tile_shape_style_title">Tile shape</string>
+    <string name="qs_tile_shape_style_summary">Choose between rounded or rounded rectangle tiles</string>
 </resources>

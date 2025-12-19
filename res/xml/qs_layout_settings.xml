@@ -19,6 +19,14 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/quick_settings_layout_columns_rows_title">
 
+    <org.lunaris.settings.preferences.SystemSettingListPreference
+        android:key="qs_tile_shape_style"
+        android:title="@string/qs_tile_shape_style_title"
+        android:summary="%s"
+        android:entries="@array/qs_tile_shape_style_entries"
+        android:entryValues="@array/qs_tile_shape_style_values"
+        android:defaultValue="0" />
+
     <!-- Columns (portrait) -->
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_tiles_columns"
