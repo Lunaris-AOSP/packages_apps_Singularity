@@ -38,7 +38,7 @@
             android:summary="@string/lockscreen_media_art_filter_summary"
             android:entries="@array/lockscreen_media_art_filter_entries"
             android:entryValues="@array/lockscreen_media_art_filter_values"
-            android:defaultValue="0"
+            android:defaultValue="1"
             android:dependency="ls_media_art_enabled" />
 
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
