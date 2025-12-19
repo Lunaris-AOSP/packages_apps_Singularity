@@ -1545,4 +1545,8 @@
     <!-- QS Tile Shape Style -->
     <string name="qs_tile_shape_style_title">Tile shape</string>
     <string name="qs_tile_shape_style_summary">Choose between rounded or rounded rectangle tiles</string>
+
+    <!-- QPR1 Tile Background Shade -->
+    <string name="qs_altshade_title">Alternate tile shade</string>
+    <string name="qs_altshade_summary">Enable alternative background shading for Quick Settings tiles inspired by QPR1 design</string>
 </resources>
