@@ -27,6 +27,23 @@
         android:entryValues="@array/qs_tile_shape_style_values"
         android:defaultValue="0" />
 
+    <!-- QS Tile Spacing -->
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tile_horizontal_spacing"
+        android:title="@string/qs_tile_horizontal_spacing_title"
+        android:max="40"
+        settings:min="4"
+        android:defaultValue="25"
+        settings:units="dp" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tile_vertical_spacing"
+        android:title="@string/qs_tile_vertical_spacing_title"
+        android:max="40"
+        settings:min="4"
+        android:defaultValue="21"
+        settings:units="dp" />
+
     <!-- Columns (portrait) -->
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
         android:key="qs_tiles_columns"

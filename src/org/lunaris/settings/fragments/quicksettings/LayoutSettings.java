@@ -43,8 +43,12 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
     public static final String TAG = "LayoutSettings";
 
     private static final String KEY_QS_TILE_SHAPE_STYLE = "qs_tile_shape_style";
+    private static final String KEY_QS_TILE_HORIZONTAL_SPACING = "qs_tile_horizontal_spacing";
+    private static final String KEY_QS_TILE_VERTICAL_SPACING = "qs_tile_vertical_spacing";
 
     private Preference mQsTileShapeStyle;
+    private Preference mQsTileHorizontalSpacing;
+    private Preference mQsTileVerticalSpacing;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,11 +59,27 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
         if (mQsTileShapeStyle != null) {
             mQsTileShapeStyle.setOnPreferenceChangeListener(this);
         }
+
+        mQsTileHorizontalSpacing = findPreference(KEY_QS_TILE_HORIZONTAL_SPACING);
+        if (mQsTileHorizontalSpacing != null) {
+            mQsTileHorizontalSpacing.setOnPreferenceChangeListener(this);
+        }
+
+        mQsTileVerticalSpacing = findPreference(KEY_QS_TILE_VERTICAL_SPACING);
+        if (mQsTileVerticalSpacing != null) {
+            mQsTileVerticalSpacing.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mQsTileShapeStyle) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsTileHorizontalSpacing) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsTileVerticalSpacing) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }

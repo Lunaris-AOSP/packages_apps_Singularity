@@ -1549,4 +1549,10 @@
     <!-- QPR1 Tile Background Shade -->
     <string name="qs_altshade_title">Alternate tile shade</string>
     <string name="qs_altshade_summary">Enable alternative background shading for Quick Settings tiles inspired by QPR1 design</string>
+
+    <!-- QS Tile Spacing -->
+    <string name="qs_tile_horizontal_spacing_title">Horizontal tile spacing</string>
+    <string name="qs_tile_horizontal_spacing_summary">Adjust spacing between tiles horizontally</string>
+    <string name="qs_tile_vertical_spacing_title">Vertical tile spacing</string>
+    <string name="qs_tile_vertical_spacing_summary">Adjust spacing between tiles vertically</string>
 </resources>
