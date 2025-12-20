@@ -45,10 +45,14 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_TILE_SHAPE_STYLE = "qs_tile_shape_style";
     private static final String KEY_QS_TILE_HORIZONTAL_SPACING = "qs_tile_horizontal_spacing";
     private static final String KEY_QS_TILE_VERTICAL_SPACING = "qs_tile_vertical_spacing";
+    private static final String KEY_APPLY_CHANGES = "apply_qs_layout_changes";
 
     private Preference mQsTileShapeStyle;
     private Preference mQsTileHorizontalSpacing;
     private Preference mQsTileVerticalSpacing;
+    private Preference mApplyChanges;
+
+    private boolean mHasPendingChanges = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,18 +73,20 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
         if (mQsTileVerticalSpacing != null) {
             mQsTileVerticalSpacing.setOnPreferenceChangeListener(this);
         }
+
+        mApplyChanges = findPreference(KEY_APPLY_CHANGES);
+        if (mApplyChanges != null) {
+            updateApplyButtonState();
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mQsTileShapeStyle) {
-            SystemUtils.showSystemUiRestartDialog(getActivity());
-            return true;
-        } else if (preference == mQsTileHorizontalSpacing) {
-            SystemUtils.showSystemUiRestartDialog(getActivity());
-            return true;
-        } else if (preference == mQsTileVerticalSpacing) {
-            SystemUtils.showSystemUiRestartDialog(getActivity());
+        if (preference == mQsTileShapeStyle ||
+            preference == mQsTileHorizontalSpacing ||
+            preference == mQsTileVerticalSpacing) {
+            mHasPendingChanges = true;
+            updateApplyButtonState();
             return true;
         }
         return false;
@@ -95,8 +101,29 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference != null && preference.getKey() != null) {
             VibrationUtils.triggerVibration(getContext(), 3);
+            
+            if (preference.getKey().equals(KEY_APPLY_CHANGES)) {
+                if (mHasPendingChanges) {
+                    SystemUtils.showSystemUiRestartDialog(getActivity());
+                    mHasPendingChanges = false;
+                    updateApplyButtonState();
+                }
+                return true;
+            }
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    private void updateApplyButtonState() {
+        if (mApplyChanges != null) {
+            if (mHasPendingChanges) {
+                mApplyChanges.setSummary(R.string.apply_changes_summary_pending);
+                mApplyChanges.setEnabled(true);
+            } else {
+                mApplyChanges.setSummary(R.string.apply_changes_summary);
+                mApplyChanges.setEnabled(false);
+            }
+        }
     }
 
     /**
