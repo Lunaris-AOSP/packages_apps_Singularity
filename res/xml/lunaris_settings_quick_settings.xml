@@ -88,6 +88,12 @@
             android:entryValues="@array/qs_calendar_type_values"
             android:defaultValue="0" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_media_art_scrim_enabled"
+            android:title="@string/qs_media_art_scrim_title"
+            android:summary="@string/qs_media_art_scrim_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="qs_show_data_usage"
             android:title="@string/quick_settings_data_usage_title"
