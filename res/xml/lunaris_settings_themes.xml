@@ -15,10 +15,10 @@
 
         <!-- Monet engine -->
         <Preference
-            android:key="monet_engine"
-            android:title="@string/themes_monet_title"
-            android:summary="@string/themes_monet_summary"
-            android:fragment="org.lunaris.settings.fragments.themes.MonetSettings" />
+            android:key="monet_settings"
+            android:title="@string/monet_settings_title"
+            android:summary="@string/monet_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.ColorsSettingsFragment" />
 
     </PreferenceCategory>
 
