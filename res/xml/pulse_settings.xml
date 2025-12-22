@@ -58,6 +58,12 @@
         android:defaultValue="lavalamp"
         android:dependency="lockscreen_pulse_enabled" />
 
+    <org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference
+        android:key="pulse_custom_color"
+        android:title="@string/custom_color"
+        android:defaultValue="#FFFFFF"
+        android:dependency="lockscreen_pulse_enabled" />
+
     <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
         android:key="pulse_bar_count"
         android:title="@string/pulse_bar_count_title"

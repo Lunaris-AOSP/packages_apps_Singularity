@@ -34,15 +34,18 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.util.android.VibrationUtils;
 
 import org.lunaris.settings.preferences.SecureSettingListPreference;
+import org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference;
 
 public class PulseSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String KEY_PULSE_RENDERER = "pulse_renderer";
     private static final String KEY_PULSE_COLOR = "pulse_color";
+    private static final String KEY_PULSE_CUSTOM_COLOR = "pulse_custom_color";
 
     private SecureSettingListPreference mPulseRenderer;
     private SecureSettingListPreference mPulseColor;
+    private SecureSettingColorPickerPreference mPulseCustomColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class PulseSettings extends SettingsPreferenceFragment implements
 
         mPulseRenderer = (SecureSettingListPreference) findPreference(KEY_PULSE_RENDERER);
         mPulseColor = (SecureSettingListPreference) findPreference(KEY_PULSE_COLOR);
+        mPulseCustomColor = (SecureSettingColorPickerPreference) findPreference(KEY_PULSE_CUSTOM_COLOR);
 
         if (mPulseRenderer != null) {
             mPulseRenderer.setOnPreferenceChangeListener(this);
@@ -59,7 +63,12 @@ public class PulseSettings extends SettingsPreferenceFragment implements
                     getContentResolver(),
                     Settings.Secure.PULSE_RENDERER,
                     UserHandle.USER_CURRENT);
-            updateColorPreferenceVisibility(currentRenderer);
+            updatePreferenceVisibility(currentRenderer, getCurrentColorMode());
+        }
+
+        if (mPulseColor != null) {
+            mPulseColor.setOnPreferenceChangeListener(this);
+            updatePreferenceVisibility(getCurrentRenderer(), getCurrentColorMode());
         }
     }
 
@@ -67,17 +76,36 @@ public class PulseSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mPulseRenderer) {
             String value = (String) newValue;
-            updateColorPreferenceVisibility(value);
+            updatePreferenceVisibility(value, getCurrentColorMode());
+            return true;
+        } else if (preference == mPulseColor) {
+            String value = (String) newValue;
+            updatePreferenceVisibility(getCurrentRenderer(), value);
             return true;
         }
         return false;
     }
 
-    private void updateColorPreferenceVisibility(String rendererValue) {
-        if (mPulseColor != null) {
-            boolean isMatrix = "matrix".equals(rendererValue);
-            mPulseColor.setVisible(!isMatrix);
+    private void updatePreferenceVisibility(String rendererValue, String colorValue) {
+        if (mPulseColor != null && mPulseCustomColor != null) {
+            boolean isCustomColor = "custom".equals(colorValue);
+            mPulseColor.setVisible(true);
+            mPulseCustomColor.setVisible(isCustomColor);
         }
+    }
+
+    private String getCurrentRenderer() {
+        return Settings.Secure.getStringForUser(
+                getContentResolver(),
+                Settings.Secure.PULSE_RENDERER,
+                UserHandle.USER_CURRENT);
+    }
+
+    private String getCurrentColorMode() {
+        return Settings.Secure.getStringForUser(
+                getContentResolver(),
+                Settings.Secure.PULSE_COLOR,
+                UserHandle.USER_CURRENT);
     }
 
     @Override
