@@ -70,6 +70,15 @@
             android:summary="@string/qs_media_art_scrim_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="qs_media_art_dim_amount"
+            android:title="@string/qs_media_art_dim_amount_title"
+            settings:units="%"
+            settings:min="0"
+            android:max="100"
+            settings:interval="1"
+            android:defaultValue="10" />
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.altshade"
             android:title="@string/qs_altshade_title"
