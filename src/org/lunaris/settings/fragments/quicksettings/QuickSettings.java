@@ -68,6 +68,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
     private static final String KEY_QS_MEDIA_ALWAYS_SHOW = "qs_media_always_show";
     private static final String KEY_SINGLE_QS_TONE_ENABLED = "single_qs_tone_enabled";
+    private static final String KEY_MEDIA_WAVEFORM_SEEKBAR = "media_waveform_seekbar";
+    private static final String KEY_MEDIA_SQUIGGLE_ANIMATION = "media_squiggle_animation";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -79,6 +81,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SecureSettingListPreference mQsShowMediaPlayer;
     private SecureSettingSwitchPreference mQsMediaAlwaysShow;
     private SystemSettingSwitchPreference mSingleQsToneEnabled;
+    private SystemSettingSwitchPreference mMediaWaveformSeekBar;
+    private SecureSettingSwitchPreference mMediaSquiggleAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,9 +128,20 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mSingleQsToneEnabled != null) {
             mSingleQsToneEnabled.setOnPreferenceChangeListener(this);
         }
+
+        mMediaWaveformSeekBar = (SystemSettingSwitchPreference) findPreference(KEY_MEDIA_WAVEFORM_SEEKBAR);
+        if (mMediaWaveformSeekBar != null) {
+            mMediaWaveformSeekBar.setOnPreferenceChangeListener(this);
+        }
+
+        mMediaSquiggleAnimation = (SecureSettingSwitchPreference) findPreference(KEY_MEDIA_SQUIGGLE_ANIMATION);
+        if (mMediaSquiggleAnimation != null) {
+            mMediaSquiggleAnimation.setOnPreferenceChangeListener(this);
+        }
         
         updateDataUsageSummary();
         updateMediaAlwaysShowVisibility();
+        updateSquiggleAnimationVisibility();
 
         if (!DeviceUtils.deviceSupportsBluetooth(mContext)) {
             prefScreen.removePreference(mMiscellaneousCategory);
@@ -159,6 +174,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             updateDataUsageSummary(newValue.toString());
             return true;
         } else if (preference == mSingleQsToneEnabled) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mMediaWaveformSeekBar) {
+            updateSquiggleAnimationVisibility((Boolean) newValue);
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mMediaSquiggleAnimation) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }
@@ -226,6 +248,27 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsMediaAlwaysShow.setEnabled(shouldBeVisible);
     }
 
+    private void updateSquiggleAnimationVisibility() {
+        updateSquiggleAnimationVisibility(null);
+    }
+
+    private void updateSquiggleAnimationVisibility(Boolean newValue) {
+        if (mMediaSquiggleAnimation == null) return;
+        
+        final ContentResolver resolver = getActivity().getContentResolver();
+        boolean waveformEnabled;
+        
+        if (newValue != null) {
+            waveformEnabled = newValue;
+        } else {
+            waveformEnabled = Settings.System.getInt(resolver, 
+                Settings.System.MEDIA_WAVEFORM_SEEKBAR, 0) == 1;
+        }
+        
+        mMediaSquiggleAnimation.setVisible(!waveformEnabled);
+        mMediaSquiggleAnimation.setEnabled(!waveformEnabled);
+    }
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LUNARIS;
@@ -255,6 +298,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 int mediaPlayerMode = Settings.Secure.getInt(resolver, KEY_QS_SHOW_MEDIA_PLAYER, 0);
                 if (mediaPlayerMode != 2) {
                     keys.add(KEY_QS_MEDIA_ALWAYS_SHOW);
+                }
+                
+                boolean waveformEnabled = Settings.System.getInt(resolver, 
+                    Settings.System.MEDIA_WAVEFORM_SEEKBAR, 0) == 1;
+                if (waveformEnabled) {
+                    keys.add(KEY_MEDIA_SQUIGGLE_ANIMATION);
                 }
                 
                 return keys;

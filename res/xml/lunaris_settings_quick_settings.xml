@@ -289,6 +289,13 @@
         	android:summary="@string/media_controls_always_show_time_summary"
         	android:defaultValue="false" />
 
+        <!-- Waveform seekbar -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="media_waveform_seekbar"
+            android:title="@string/media_waveform_seekbar_title"
+            android:summary="@string/media_waveform_seekbar_summary"
+            android:defaultValue="false" />
+
         <!-- Squiggle animation -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="media_squiggle_animation"

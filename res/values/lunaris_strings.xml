@@ -1583,4 +1583,8 @@
     <string name="about_color_customization_desc">Color changes apply system-wide to all apps that support Material You theming.\nAdjusting these colors may affect the appearance of apps across your device.</string>
     <string name="wallpaper_seed_color_title">Pick from Wallpaper</string>
     <string name="wallpaper_seed_color_desc">Extract color from your current wallpaper</string>
+
+    <!-- Media art QS background -->
+    <string name="media_waveform_seekbar_title">Waveform Media Seekbar</string>
+    <string name="media_waveform_seekbar_summary">Enable animated waveform effect for media playback progress</string>
 </resources>
