@@ -1587,4 +1587,8 @@
     <!-- Media art QS background -->
     <string name="media_waveform_seekbar_title">Waveform Media Seekbar</string>
     <string name="media_waveform_seekbar_summary">Enable animated waveform effect for media playback progress</string>
+
+    <!-- Smile Switch -->
+    <string name="smile_switch_title">Smile Switch</string>
+    <string name="smile_switch_summary">Enable Smile Switch</string>
 </resources>

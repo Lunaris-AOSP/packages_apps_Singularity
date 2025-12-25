@@ -209,6 +209,12 @@
             android:defaultValue="1"
             android:summary="%s" />
 
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.settingslib.smileswitch"
+            android:title="@string/smile_switch_title"
+            android:summary="@string/smile_switch_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
         
 </PreferenceScreen>
