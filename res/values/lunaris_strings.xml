@@ -1591,4 +1591,8 @@
     <!-- Smile Switch -->
     <string name="smile_switch_title">Smile Switch</string>
     <string name="smile_switch_summary">Enable Smile Switch</string>
+
+    <!-- Emergency button toggle -->
+    <string name="lockscreen_emergency_button_title">Show emergency button</string>
+    <string name="lockscreen_emergency_button_summary">Display emergency call button on lockscreen</string>
 </resources>

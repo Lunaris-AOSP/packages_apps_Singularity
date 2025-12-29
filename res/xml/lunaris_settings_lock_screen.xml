@@ -130,6 +130,12 @@
             android:summary="@string/keyguard_affordance_single_tap_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lockscreen_show_emergency_button"
+            android:title="@string/lockscreen_emergency_button_title"
+            android:summary="@string/lockscreen_emergency_button_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
