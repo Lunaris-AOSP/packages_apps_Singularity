@@ -92,6 +92,12 @@
             android:summary="@string/qs_single_tone_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="dual_target_tile_style"
+            android:title="@string/dual_target_tile_style_title"
+            android:summary="@string/dual_target_tile_style_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="shade_panel_alpha"
             android:title="@string/shade_panel_alpha_title"
