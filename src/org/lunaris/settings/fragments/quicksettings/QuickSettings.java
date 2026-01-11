@@ -70,6 +70,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SINGLE_QS_TONE_ENABLED = "single_qs_tone_enabled";
     private static final String KEY_MEDIA_WAVEFORM_SEEKBAR = "media_waveform_seekbar";
     private static final String KEY_MEDIA_SQUIGGLE_ANIMATION = "media_squiggle_animation";
+    private static final String KEY_QS_SHOW_DATA_USAGE_TILE = "qs_show_data_usage_tile";
 
     private PreferenceCategory mInterfaceCategory;
     private PreferenceCategory mMiscellaneousCategory;
@@ -83,6 +84,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mSingleQsToneEnabled;
     private SystemSettingSwitchPreference mMediaWaveformSeekBar;
     private SecureSettingSwitchPreference mMediaSquiggleAnimation;
+    private SecureSettingSwitchPreference mQsShowDataUsageTile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mMediaSquiggleAnimation != null) {
             mMediaSquiggleAnimation.setOnPreferenceChangeListener(this);
         }
+
+        mQsShowDataUsageTile = (SecureSettingSwitchPreference) findPreference(KEY_QS_SHOW_DATA_USAGE_TILE);
+        if (mQsShowDataUsageTile != null) {
+            mQsShowDataUsageTile.setOnPreferenceChangeListener(this);
+        }
         
         updateDataUsageSummary();
         updateMediaAlwaysShowVisibility();
@@ -181,6 +188,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mMediaSquiggleAnimation) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsShowDataUsageTile) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }

@@ -480,6 +480,8 @@
     <string name="qs_data_usage_cycle_weekly">Weekly</string>
     <string name="qs_show_data_usage_cycle_info_title">Show cycle info</string>
     <string name="qs_show_data_usage_cycle_info_summary">Display additional information about the data usage cycle</string>
+    <string name="qs_show_data_usage_title">Show data usage in tiles</string>
+    <string name="qs_show_data_usage_summary">Display data usage information in WiFi and Cellular Quick Settings tiles</string>
     <string name="quick_settings_lock_screen_category">Lock screen</string>
     <string name="quick_settings_secure_lock_screen_title">Show on secure lock screen</string>
     <string name="quick_settings_secure_lock_screen_summary">Show all quick settings in the notification shade while the device is locked</string>

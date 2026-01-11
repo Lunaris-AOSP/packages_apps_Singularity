@@ -159,6 +159,12 @@
             android:entryValues="@array/qs_data_usage_cycle_type_values"
             android:defaultValue="0" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_show_data_usage_tile"
+            android:title="@string/qs_show_data_usage_title"
+            android:summary="@string/qs_show_data_usage_summary"
+            android:defaultValue="true" />
+
         <Preference
             android:key="qs_layout_columns_rows"
             android:title="@string/quick_settings_layout_columns_rows_title"
