@@ -181,6 +181,15 @@
             android:defaultValue="false" 
             android:dependency="screen_animation_enabled" />
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="screen_off_aod_duration"
+            android:title="@string/screen_off_aod_duration_title"
+            android:defaultValue="2"
+            android:dependency="screen_off_aod_enabled"
+            settings:min="1"
+            android:max="30"
+            settings:units=" sec" />
+
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="doze_screen_state_fix"
             android:title="@string/doze_screen_state_fix_title"

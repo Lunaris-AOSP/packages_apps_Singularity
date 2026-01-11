@@ -952,6 +952,7 @@
     <!-- Screen off AOD -->
     <string name="screen_off_aod_enabled_title">Screen Off AOD</string>
     <string name="screen_off_aod_enabled_summary">Briefly show the Always-On Display when the screen turns off</string>
+    <string name="screen_off_aod_duration_title">Screen Off AOD Duration</string>
 
     <!-- navigation bar -->
     <string name="navigation_bar_mode_title">Hide keyboard ime</string>
