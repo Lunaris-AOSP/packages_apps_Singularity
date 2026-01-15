@@ -55,7 +55,7 @@ public class GithubFontPreviewDialog extends Dialog {
     private Button mCancelButton;
 
     public GithubFontPreviewDialog(@NonNull Context context, Uri fontUri, String fontName) {
-        super(context, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        super(context);
         mFontUri = fontUri;
         mFontName = fontName;
         mFontInstaller = new ExternalFontInstaller(context);

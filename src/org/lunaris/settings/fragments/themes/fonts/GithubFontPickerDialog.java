@@ -73,7 +73,7 @@ public class GithubFontPickerDialog extends Dialog {
     private OnFontSelectedListener mListener;
 
     public GithubFontPickerDialog(@NonNull Context context) {
-        super(context, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        super(context);
         mFontInstaller = new ExternalFontInstaller(context);
         
         File externalFilesDir = context.getExternalFilesDir(null);
