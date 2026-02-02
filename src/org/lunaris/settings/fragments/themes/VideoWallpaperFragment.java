@@ -44,7 +44,7 @@ import org.lunaris.settings.utils.MediaUtils;
 import java.io.File;
 import java.util.List;
 
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 @SearchIndexable
 public class VideoWallpaperFragment extends SettingsPreferenceFragment

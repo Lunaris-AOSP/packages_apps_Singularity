@@ -25,7 +25,7 @@ import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
-import com.android.internal.util.android.VibrationUtils
+import com.android.internal.util.lunaris.VibrationUtils
 
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference
 

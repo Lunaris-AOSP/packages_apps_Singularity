@@ -27,6 +27,12 @@
         android:entryValues="@array/quickswitch_launcher_values"
         android:summary="%s" />
 
+     <org.lunaris.settings.preferences.OverlaySwitchPreference
+        android:key="com.android.system.qs.wallpaperoverlay"
+        android:title="@string/wallpaper_overlay_title"
+        android:summary="@string/wallpaper_overlay_summary"
+        android:defaultValue="true" />
+
      <com.android.settingslib.widget.FooterPreference
         android:key="quickswitch_footer"
         android:title="@string/quickswitch_footer_text"

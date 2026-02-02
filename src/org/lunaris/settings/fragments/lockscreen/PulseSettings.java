@@ -31,7 +31,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import org.lunaris.settings.preferences.SecureSettingListPreference;
 import org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference;

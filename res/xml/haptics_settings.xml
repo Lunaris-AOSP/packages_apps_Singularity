@@ -29,19 +29,4 @@
         android:defaultValue="1"
         settings:interval="1"/>
 
-    <!-- Volume slider intensity -->
-    <org.lunaris.settings.preferences.CustomSeekBarPreference
-        android:key="volume_slider_haptics_intensity"
-        android:title="@string/volume_slider_haptics_intensity_title"
-        android:max="3"
-        settings:min="0"
-        android:defaultValue="1"
-        settings:interval="1"/>
-
-    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-        android:key="volume_sound_haptics"
-        android:title="@string/volume_sound_haptics_title"
-        android:summary="@string/volume_sound_haptics_summary"
-        android:defaultValue="false"/>
-
 </PreferenceScreen>

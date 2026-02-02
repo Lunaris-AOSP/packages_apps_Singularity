@@ -3,82 +3,39 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto"
     android:title="@string/lock_screen_title">
 
     <PreferenceCategory
-        android:key="lockscreen_media_category"
-        android:title="@string/lockscreen_media_art_title">
-        
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="ls_media_art_enabled"
-            android:title="@string/lockscreen_media_art_title"
-            android:summary="@string/lockscreen_media_art_summary"
-            android:defaultValue="false" />
+        android:key="lockscreen_clock_category"
+        android:title="@string/qs_clock_title">
 
-        <!-- AOD Toggle -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="ls_media_art_aod_enabled"
-            android:title="@string/show_on_aod_title"
-            android:summary="@string/show_on_aod_summary"
-            android:defaultValue="false"
-            android:dependency="ls_media_art_enabled" />
+        <!-- Lockscreen Clock Font style -->
+        <Preference
+            android:key="android.theme.customization.lockscreen_clock_font"
+            android:title="@string/theme_customization_lock_clock_title"
+            android:summary="@string/theme_customization_lock_clock_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.LockClockFontsPicker"/>
 
-        <!-- AOD Dim Level -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="ls_media_art_aod_dim_level"
-            android:title="@string/aod_brightness_title"
-            android:max="100"
-            android:min="0"
-            android:defaultValue="35"
-            android:dependency="ls_media_art_aod_enabled" />
-        
-        <org.lunaris.settings.preferences.SystemSettingListPreference
-            android:key="ls_media_art_filter"
-            android:title="@string/lockscreen_media_art_filter_title"
-            android:summary="@string/lockscreen_media_art_filter_summary"
-            android:entries="@array/lockscreen_media_art_filter_entries"
-            android:entryValues="@array/lockscreen_media_art_filter_values"
-            android:defaultValue="1"
-            android:dependency="ls_media_art_enabled" />
-
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="ls_media_art_pixel_size"
-            android:title="@string/lockscreen_media_art_pixel_size_title"
-            android:summary="@string/lockscreen_media_art_pixel_size_summary"
-            android:max="45"
-            android:min="5"
-            android:defaultValue="20"
-            android:dependency="ls_media_art_enabled" />
-        
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="ls_media_art_fade_level"
-            android:title="@string/lockscreen_media_art_fade_level_title"
-            android:summary="@string/lockscreen_media_art_fade_level_summary"
-            android:max="100"
-            android:min="0"
-            android:defaultValue="40"
-            android:dependency="ls_media_art_enabled" />
-        
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="ls_media_art_blur_level"
-            android:title="@string/lockscreen_media_art_blur_level_title"
-            android:summary="@string/lockscreen_media_art_blur_level_summary"
-            android:max="200"
-            android:min="0"
-            android:defaultValue="90"
-            android:dependency="ls_media_art_enabled" />
-            
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="lock_screen_interface_category"
-        android:title="@string/lock_screen_interface_category">
+        android:key="lockscreen_interface_category"
+        android:title="@string/lockscreen_interface_category">
 
+        <!-- Lockscreen Media Art -->
         <Preference
-            android:key="lockscreen_weather"
-            android:title="@string/lockscreen_weather_title"
-            android:summary="@string/lockscreen_weather_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.LockscreenWeather" />
+            android:key="media_art_settings"
+            android:title="@string/ls_media_art_title"
+            android:summary="@string/ls_media_art_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.MediaArtSettings" />
+
+        <!-- Pulse music visualizer -->
+        <Preference
+            android:key="pulse_settings"
+            android:title="@string/pulse_settings_title"
+            android:summary="@string/pulse_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.PulseSettings" />
 
         <Preference
             android:key="nowplaying_settings"
@@ -86,42 +43,29 @@
             android:summary="@string/nowplaying_summary"
             android:fragment="org.lunaris.settings.fragments.lockscreen.NowplayingSettings" />
 
-        <Preference
-            android:key="lock_glymps_settings"
-            android:title="@string/lock_glymps_title"
-            android:summary="@string/lock_glymps_enable_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.LockGlympsSettings" />
-
-        <Preference
-            android:key="pulse_settings"
-            android:title="@string/pulse_settings"
-            android:summary="@string/pulse_settings_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.PulseSettings" />
-
-        <Preference
-            android:key="edge_light_settings"
-            android:title="@string/edge_light_title"
-            android:summary="@string/edge_light_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.EdgeLightSettings" />
-
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="notification_row_transparency_lockscreen"
-            android:title="@string/notification_row_transparency_lockscreen_title"
-            android:summary="@string/notification_row_transparency_lockscreen_summary"
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_battery_info"
+            android:title="@string/lockscreen_battery_info_title"
+            android:summary="@string/lockscreen_battery_info_summary"
             android:defaultValue="true" />
 
-        <!-- Keyguard user switcher -->
-	    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-	        android:key="kg_user_switcher_enabled"
-            android:title="@string/kg_user_switcher_enabled_title"
-            android:summary="@string/kg_user_switcher_enabled_summary"
-            android:defaultValue="false" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_charging_time"
+            android:title="@string/lockscreen_charging_time_title"
+            android:summary="@string/lockscreen_charging_time_summary"
+            android:defaultValue="true" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="lockscreen_show_carrier"
-            android:title="@string/status_bar_carrier_lock_screen_title"
-            android:summary="@string/status_bar_carrier_lock_screen_summary"
+            android:title="@string/lockscreen_show_carrier_title"
+            android:summary="@string/lockscreen_show_carrier_summary"
             android:defaultValue="true" />
+        
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lockscreen_show_emergency_button"
+            android:title="@string/lockscreen_emergency_button_title"
+            android:summary="@string/lockscreen_emergency_button_summary"
+            android:defaultValue="false" />
 
         <!-- Shortcuts -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
@@ -130,80 +74,95 @@
             android:summary="@string/keyguard_affordance_single_tap_summary"
             android:defaultValue="false" />
 
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="lockscreen_show_emergency_button"
-            android:title="@string/lockscreen_emergency_button_title"
-            android:summary="@string/lockscreen_emergency_button_summary"
+        <!-- Keyguard user switcher -->
+	    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+	        android:key="kg_user_switcher_enabled"
+            android:title="@string/kg_user_switcher_enabled_title"
+            android:summary="@string/kg_user_switcher_enabled_summary"
             android:defaultValue="false" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="ambient_display_category"
-        android:title="@string/ambient_display_category_title">
-
-        <org.lunaris.settings.preferences.SystemSettingListPreference
-            android:key="ambient_show_settings"
-            android:title="@string/ambient_bottom_title"
-            android:entries="@array/ambient_bottom_entries"
-            android:entryValues="@array/ambient_bottom_values"
-            android:summary="%s"
-            android:defaultValue="1" />
-
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="ambient_show_settings_icons"
-            android:title="@string/display_icon_title"
-            android:summary="@string/display_icon_summary"
-            android:defaultValue="false" />
+        android:key="lockscreen_weather_category"
+        android:title="@string/lockscreen_weather_category">
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="ambient_aod"
-            android:title="@string/ambient_aod_title"
-            android:summary="@string/ambient_aod_summary"
-            android:defaultValue="false" />
+            android:key="lockscreen_smartspace_enabled"
+            android:title="@string/lockscreen_smartspace_title"
+            android:summary="@string/lockscreen_smartspace_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:title="@string/weather_settings_title"
+            android:summary="@string/weather_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="org.omnirom.omnijaws"
+                android:targetClass="org.omnirom.omnijaws.SettingsActivity" />
+        </Preference>
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_weather_enabled"
+            android:title="@string/lockscreen_weather_title"
+            android:summary="@string/lockscreen_weather_summary" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_weather_location"
+            android:title="@string/lockscreen_weather_location_title"
+            android:summary="@string/lockscreen_weather_location_summary"
+            android:dependency="lockscreen_weather_enabled" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_weather_text"
+            android:title="@string/lockscreen_weather_text_title"
+            android:summary="@string/lockscreen_weather_text_summary"
+            android:defaultValue="true"
+            android:dependency="lockscreen_weather_enabled" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_weather_wind_info"
+            android:title="@string/lockscreen_weather_wind_info_title"
+            android:summary="@string/lockscreen_weather_wind_info_summary"
+            android:defaultValue="false"
+            android:dependency="lockscreen_weather_enabled" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_weather_humidity_info"
+            android:title="@string/lockscreen_weather_humidity_info_title"
+            android:summary="@string/lockscreen_weather_humidity_info_summary"
+            android:defaultValue="false"
+            android:dependency="lockscreen_weather_enabled" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="themes_animations_category"
-        android:title="@string/themes_animations_category">
+        android:key="lockscreen_gestures_category"
+        android:title="@string/gestures_title">
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="screen_animation_enabled"
-            android:title="@string/screen_animation_title"
-            android:summary="@string/screen_animation_summary"
+            android:key="double_tap_sleep_lockscreen"
+            android:title="@string/lockscreen_doubletap_sleep_title"
+            android:summary="@string/lockscreen_doubletap_sleep_summary"
             android:defaultValue="true" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="screen_off_aod_enabled"
-            android:title="@string/screen_off_aod_enabled_title"
-            android:summary="@string/screen_off_aod_enabled_summary"
-            android:defaultValue="false" 
-            android:dependency="screen_animation_enabled" />
+            android:key="fp_success_vibrate"
+            android:title="@string/fp_success_vibrate_title"
+            android:summary="@string/fp_success_vibrate_summary"
+            android:defaultValue="true" />
 
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="screen_off_aod_duration"
-            android:title="@string/screen_off_aod_duration_title"
-            android:defaultValue="2"
-            android:dependency="screen_off_aod_enabled"
-            settings:min="1"
-            android:max="30"
-            settings:units=" sec" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="fp_error_vibrate"
+            android:title="@string/fp_error_vibrate_title"
+            android:summary="@string/fp_error_vibrate_summary"
+            android:defaultValue="true" />
 
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="doze_screen_state_fix"
-            android:title="@string/doze_screen_state_fix_title"
-            android:summary="@string/doze_screen_state_fix_summary"
-            android:defaultValue="false" 
-            android:dependency="screen_animation_enabled" />
-
-        <!-- Screen Off animation -->
-        <org.lunaris.settings.preferences.SystemSettingListPreference
-            android:key="screen_off_animation"
-            android:title="@string/themes_screen_off_animation_title"
-            android:entries="@array/themes_screen_off_animation_entries"
-            android:entryValues="@array/themes_screen_off_animation_values"
-            android:defaultValue="0" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="enable_ripple_effect"
+            android:title="@string/enable_fingerprint_ripple_effect_title"
+            android:summary="@string/enable_fingerprint_ripple_effect_summary"
+            android:defaultValue="true" />
 
     </PreferenceCategory>
 
@@ -220,73 +179,15 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="lock_screen_charging_category"
-        android:title="@string/lock_screen_charging_category">
-
-        <Preference
-            android:key="charging_animation_settings"
-            android:title="@string/charging_animation_title"
-            android:summary="@string/charging_animation_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.ChargingAnimationSettings" />
-
-        <!-- Charging animation -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="charging_animation"
-            android:title="@string/themes_charging_animation_title"
-            android:summary="@string/themes_charging_animation_summary"
-            android:defaultValue="true" />
-
-        <!-- Dynamic charging animation -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="wireless_charging_dynamic_color"
-            android:title="@string/wireless_charging_dynamic_color_title"
-            android:summary="@string/wireless_charging_dynamic_color_summary"
-            android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.SystemSettingListPreference
-            android:key="wireless_charging_ripple_shape"
-            android:title="@string/ripple_shape_title"
-            android:summary="%s"
-            android:entries="@array/ripple_shape_entries"
-            android:entryValues="@array/ripple_shape_values"
-            android:defaultValue="0" />
-
-        <!-- Charging stats -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="lockscreen_battery_info"
-            android:title="@string/lock_screen_charging_stats_title"
-            android:summary="@string/lock_screen_charging_stats_summary"
-            android:defaultValue="true" />
+        android:key="lockscreen_misc_category"
+        android:title="@string/misc_title">
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="lockscreen_charging_time"
-            android:title="@string/lockscreen_charging_time_title"
-            android:summary="@string/lockscreen_charging_time_summary"
-            android:defaultValue="true" />
+               android:key="lockscreen_enable_power_menu"
+               android:title="@string/lockscreen_enable_power_menu_title"
+               android:summary="@string/lockscreen_enable_power_menu_summary"
+               android:defaultValue="true" />
 
     </PreferenceCategory>
 
-
-    <PreferenceCategory
-        android:key="lock_screen_fingerprint_category"
-        android:title="@string/lock_screen_fingerprint_category">
-
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="enable_ripple_effect"
-            android:title="@string/lock_screen_fingerprint_ripple_title"
-            android:summary="@string/lock_screen_fingerprint_ripple_summary"
-            android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="fp_success_vibrate"
-            android:title="@string/lock_screen_fingerprint_success_vibration_title"
-            android:summary="@string/lock_screen_fingerprint_success_vibration_summary"
-            android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="fp_error_vibrate"
-            android:title="@string/lock_screen_fingerprint_error_vibration_title"
-            android:summary="@string/lock_screen_fingerprint_error_vibration_summary"
-	    android:defaultValue="true" />
-    </PreferenceCategory>
 </PreferenceScreen>

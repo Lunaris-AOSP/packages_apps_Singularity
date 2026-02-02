@@ -42,7 +42,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.utils.ImageUtils;
 
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import java.util.List;
 import java.util.ArrayList;
