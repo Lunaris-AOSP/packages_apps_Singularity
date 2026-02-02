@@ -61,7 +61,7 @@ import org.lunaris.settings.preferences.KeyboxDataPreference;
 import org.lunaris.settings.preferences.SystemPropertySwitchPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,14 +77,12 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String KEY_GAME_PROPS_JSON_FILE_PREFERENCE = "game_props_json_file_preference";
     private static final String KEY_SYSTEM_WIDE_CATEGORY = "spoofing_system_wide_category";
     private static final String KEY_UPDATE_JSON_BUTTON = "update_pif_json";
-    private static final String SYS_GMS_SPOOF = "persist.sys.pixelprops.gms";
-    private static final String SYS_GOOGLE_SPOOF = "persist.sys.pixelprops";
-    private static final String SYS_GPHOTOS_SPOOF = "persist.sys.pixelprops.gphotos";
-    private static final String SYS_QSB_SPOOF = "persist.sys.pixelprops.qsb";
-    private static final String SYS_SNAP_SPOOF = "persist.sys.pixelprops.snap";
-    private static final String SYS_NETF_SPOOF = "persist.sys.pixelprops.netflix";
-    private static final String SYS_VENDING_SPOOF = "persist.sys.pixelprops.vending";
-    private static final String SYS_ENABLE_TENSOR_FEATURES = "persist.sys.features.tensor";
+    private static final String SYS_GMS_SPOOF = "persist.sys.pp.gms";
+    private static final String SYS_GOOGLE_SPOOF = "persist.sys.pp";
+    private static final String SYS_GPHOTOS_SPOOF = "persist.sys.pp.gphotos";
+    private static final String SYS_SNAP_SPOOF = "persist.sys.pp.snap";
+    private static final String SYS_VENDING_SPOOF = "persist.sys.pp.vending";
+    private static final String SYS_ENABLE_TENSOR_FEATURES = "persist.sys.pp.tensor";
     private static final String SYS_GAMEPROP_ENABLED = "persist.sys.gameprops.enabled";
     private static final String SYS_KEYBOX_CHECK_ENABLED = "persist.sys.keybox.check.enabled";
     private static final String KEYBOX_DATA_KEY = "keybox_data_setting";
@@ -98,9 +96,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private SystemPropertySwitchPreference mGmsSpoof;
     private SystemPropertySwitchPreference mGoogleSpoof;
     private SystemPropertySwitchPreference mGphotosSpoof;
-    private SystemPropertySwitchPreference mQsbSpoof;
     private SystemPropertySwitchPreference mSnapSpoof;
-    private SystemPropertySwitchPreference mNetfSpoof;
     private SystemPropertySwitchPreference mVendingSpoof;
     private SystemPropertySwitchPreference mTensorFeaturesToggle;
     private SystemPropertySwitchPreference mGamePropsEnabled;
@@ -125,9 +121,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mGoogleSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GOOGLE_SPOOF);
         mPifJsonFilePreference = findPreference(KEY_PIF_JSON_FILE_PREFERENCE);
         mGamePropsJsonFilePreference = findPreference(KEY_GAME_PROPS_JSON_FILE_PREFERENCE);
-        mQsbSpoof = (SystemPropertySwitchPreference) findPreference(SYS_QSB_SPOOF);
         mSnapSpoof = (SystemPropertySwitchPreference) findPreference(SYS_SNAP_SPOOF);
-        mNetfSpoof = (SystemPropertySwitchPreference) findPreference(SYS_NETF_SPOOF);
         mVendingSpoof = (SystemPropertySwitchPreference) findPreference(SYS_VENDING_SPOOF);
         mUpdateJsonButton = findPreference(KEY_UPDATE_JSON_BUTTON);
         mTensorFeaturesToggle = (SystemPropertySwitchPreference) findPreference(SYS_ENABLE_TENSOR_FEATURES);
@@ -136,7 +130,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
 
         String model = SystemProperties.get("ro.product.model");
         boolean isTensorDevice = model.matches("Pixel (6|7|8|9|10)[a-zA-Z ]*");
-        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true); // Default to Pixel GMS
+        boolean isPixelGmsEnabled = SystemProperties.getBoolean(SYS_GMS_SPOOF, true);
 
         if (DeviceUtils.isCurrentlySupportedPixel()) {
             mGoogleSpoof.setDefaultValue(false);
@@ -152,9 +146,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mGmsSpoof.setOnPreferenceChangeListener(this);
         mGoogleSpoof.setOnPreferenceChangeListener(this);
         mGphotosSpoof.setOnPreferenceChangeListener(this);
-        mQsbSpoof.setOnPreferenceChangeListener(this);
         mSnapSpoof.setOnPreferenceChangeListener(this);
-        mNetfSpoof.setOnPreferenceChangeListener(this);
         mVendingSpoof.setOnPreferenceChangeListener(this);
         mTensorFeaturesToggle.setOnPreferenceChangeListener(this);
         if (mGamePropsEnabled != null) {
@@ -276,9 +268,6 @@ public class Spoofing extends SettingsPreferenceFragment implements
             .show();
     }
 
-    /**
-     * Kill packages that need to be restarted to pick up new PIF properties
-     */
     private void killGMSPackages() {
         try {
             ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
@@ -297,9 +286,6 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }
     }
 
-    /**
-     * Kill specific game packages to apply new game properties
-     */
     private int killGamePackages(Set<String> gamePackages) {
         int killedCount = 0;
         try {
@@ -308,7 +294,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
 
             for (String packageName : gamePackages) {
                 try {
-                    pm.getPackageInfo(packageName, 0); // check if installed
+                    pm.getPackageInfo(packageName, 0);
                     am.getClass()
                     .getMethod("forceStopPackage", String.class)
                     .invoke(am, packageName);
@@ -449,9 +435,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }
         if (preference == mGoogleSpoof
             || preference == mGphotosSpoof
-            || preference == mQsbSpoof
-            || preference == mSnapSpoof
-            || preference == mNetfSpoof) {
+            || preference == mSnapSpoof) {
             SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }

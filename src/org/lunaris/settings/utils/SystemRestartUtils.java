@@ -29,10 +29,10 @@ public class SystemRestartUtils {
 
     public static void showSystemUIRestartDialog(Context context) {
         new AlertDialog.Builder(context)
-            .setTitle(com.android.internal.R.string.systemui_restart_title)
-            .setMessage(com.android.internal.R.string.systemui_restart_message)
-            .setPositiveButton(com.android.internal.R.string.ok, (dialog, which) -> restartSystemUI(context))
-            .setNegativeButton(com.android.internal.R.string.cancel, null)
+            .setTitle(R.string.systemui_restart_title)
+            .setMessage(R.string.systemui_restart_message)
+            .setPositiveButton(R.string.ok, (dialog, which) -> restartSystemUI(context))
+            .setNegativeButton(R.string.cancel, null)
             .show();
     }
 

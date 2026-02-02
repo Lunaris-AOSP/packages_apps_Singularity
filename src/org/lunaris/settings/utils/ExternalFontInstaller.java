@@ -45,8 +45,8 @@ public class ExternalFontInstaller {
     private static final String CUSTOM_FONT_FILE = "cust_font.ttf";
     private static final String TEMP_PREVIEW_FONT = "preview_font.ttf";
     private static final String OVERLAY_CATEGORY_FONT = "android.theme.customization.font";
-    private static final String DEFAULT_FONT_FAMILY = "SpaceGrotesk";
-    private static final String DEFAULT_FONT_OVERLAY = "com.android.theme.font.SpaceGrotesk";
+    private static final String DEFAULT_FONT_FAMILY = "google-sans-flex";
+    private static final String DEFAULT_FONT_OVERLAY = "com.android.theme.font.googlesansflex";
 
     private final Context mContext;
     private final FontManager mFontManager;

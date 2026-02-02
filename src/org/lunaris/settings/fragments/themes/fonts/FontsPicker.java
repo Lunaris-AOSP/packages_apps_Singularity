@@ -16,7 +16,7 @@
 
 package org.lunaris.settings.fragments.themes.fonts;
 
-import static com.android.internal.util.android.ThemeUtils.FONT_KEY;
+import static com.android.internal.util.lunaris.ThemeUtils.FONT_KEY;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

@@ -32,7 +32,6 @@
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
         android:key="island_margin_top"
         android:title="@string/island_margin_top_title"
-        android:summary="@string/island_margin_top_summary"
         android:dependency="island_notification"
         android:defaultValue="45"
         settings:interval="1"

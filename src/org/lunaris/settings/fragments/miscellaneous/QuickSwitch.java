@@ -73,11 +73,6 @@ public class QuickSwitch extends SettingsPreferenceFragment
             quickSwitchValues.add(launcherValues[1]);
         }
 
-        if (SystemProperties.getInt("persist.sys.quickswitch_lawnchair_shipped", 0) != 0) {
-            quickSwitchEntries.add(launcherEntries[2]);
-            quickSwitchValues.add(launcherValues[2]);
-        }
-
         quickSwitchPref.setEntries(quickSwitchEntries.toArray(new CharSequence[0]));
         quickSwitchPref.setEntryValues(quickSwitchValues.toArray(new CharSequence[0]));
         quickSwitchPref.setValue(String.valueOf(defaultLauncher));
