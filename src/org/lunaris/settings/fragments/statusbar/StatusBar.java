@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 crDroid Android Project
+ * Copyright (C) 2016-2025 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,89 +13,98 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.lunaris.settings.fragments.statusbar;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.view.View;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
+import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.colorpicker.ColorPickerPreference;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.List;
+import org.lunaris.settings.fragments.statusbar.BatteryBar;
+import org.lunaris.settings.fragments.statusbar.Clock;
+import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
+import org.lunaris.settings.utils.DeviceUtils;
 
 import lineageos.preference.LineageSystemSettingListPreference;
+import lineageos.providers.LineageSettings;
 
-import org.lunaris.settings.preferences.SystemSettingListPreference;
-import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
-import org.lunaris.settings.preferences.colorpicker.ColorPickerPreference;
-import org.lunaris.settings.utils.DeviceUtils;
-import org.lunaris.settings.utils.SystemUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
-import com.android.internal.util.android.VibrationUtils;
+import java.util.List;
 
 @SearchIndexable
 public class StatusBar extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "StatusBar";
+    public static final String TAG = "StatusBar";
 
-    private static final String KEY_QUICK_PULLDOWN = "qs_quick_pulldown";
-
-    private static final String KEY_ICONS_CATEGORY = "status_bar_icons_category";
-    private static final String KEY_DATA_DISABLED_ICON = "data_disabled_icon";
-    private static final String KEY_BLUETOOTH_BATTERY_STATUS = "bluetooth_show_battery";
-    private static final String KEY_FOUR_G_ICON = "show_fourg_icon";
+    private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
+    private static final String QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String LOGO_COLOR = "status_bar_logo_color";
     private static final String LOGO_COLOR_PICKER = "status_bar_logo_color_picker";
-
-    private SystemSettingListPreference mLogoColor;
-    private ColorPickerPreference mLogoColorPicker;
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
     private static final int PULLDOWN_DIR_LEFT = 2;
-    private static final int PULLDOWN_DIR_BOTH = 3;
+    private static final int PULLDOWN_DIR_ALWAYS = 3;
 
+    private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mQuickPulldown;
-
-    private PreferenceCategory mIconsCategory;
-    private SystemSettingSwitchPreference mDataDisabledIcon;
-    private SystemSettingSwitchPreference mFourgIcon;
-    private SystemSettingSwitchPreference mBluetoothBatteryStatus;
+    private SystemSettingListPreference mLogoColor;
+    private ColorPickerPreference mLogoColorPicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.lunaris_settings_status_bar);
 
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
+        ContentResolver resolver = getActivity().getContentResolver();
+        Context mContext = getActivity().getApplicationContext();
+
         final PreferenceScreen prefScreen = getPreferenceScreen();
-        final Resources resources = context.getResources();
+
+        mStatusBarClock =
+                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
+
+        // Adjust status bar preferences for RTL
+        if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            if (DeviceUtils.hasCenteredCutout(mContext)) {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch_rtl);
+            } else {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
+            }
+        } else if (DeviceUtils.hasCenteredCutout(mContext)) {
+            mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+            mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        }
 
         mQuickPulldown =
-                (LineageSystemSettingListPreference) findPreference(KEY_QUICK_PULLDOWN);
+                (LineageSystemSettingListPreference) findPreference(QUICK_PULLDOWN);
         mQuickPulldown.setOnPreferenceChangeListener(this);
         updateQuickPulldownSummary(mQuickPulldown.getIntValue(0));
-
-        mIconsCategory = (PreferenceCategory) findPreference(KEY_ICONS_CATEGORY);
-        mBluetoothBatteryStatus = (SystemSettingSwitchPreference) findPreference(KEY_BLUETOOTH_BATTERY_STATUS);
-        mDataDisabledIcon = (SystemSettingSwitchPreference) findPreference(KEY_DATA_DISABLED_ICON);
-        mFourgIcon = (SystemSettingSwitchPreference) findPreference(KEY_FOUR_G_ICON);
 
         mLogoColor = (SystemSettingListPreference) findPreference(LOGO_COLOR);
         int logoColor = Settings.System.getIntForUser(resolver,
@@ -116,25 +125,16 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mLogoColorPicker.setOnPreferenceChangeListener(this);
         updateColorPrefs(logoColor);
 
+        // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-            mQuickPulldown.setEntries(R.array.status_bar_quick_pull_down_entries_rtl);
-            mQuickPulldown.setEntryValues(R.array.status_bar_quick_pull_down_values_rtl);
-        }
-
-        if (!DeviceUtils.deviceSupportsMobileData(context)) {
-            mIconsCategory.removePreference(mDataDisabledIcon);
-            mIconsCategory.removePreference(mFourgIcon);
-        }
-
-        if (!DeviceUtils.deviceSupportsBluetooth(context)) {
-            mIconsCategory.removePreference(mBluetoothBatteryStatus);
+            mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
+            mQuickPulldown.setEntryValues(R.array.status_bar_quick_qs_pulldown_values_rtl);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mQuickPulldown) {
             int value = Integer.parseInt((String) newValue);
             updateQuickPulldownSummary(value);
@@ -163,40 +163,33 @@ public class StatusBar extends SettingsPreferenceFragment implements
         return false;
     }
 
-    private void updateColorPrefs(int logoColor) {
-        if (mLogoColor != null) {
-            mLogoColorPicker.setEnabled(logoColor == 2);
-        }
-    }
-
     private void updateQuickPulldownSummary(int value) {
-        String summary = "";
+        String summary="";
         switch (value) {
             case PULLDOWN_DIR_NONE:
                 summary = getResources().getString(
-                    R.string.status_bar_quick_pull_down_off);
+                    R.string.status_bar_quick_qs_pulldown_off);
                 break;
-            case PULLDOWN_DIR_RIGHT:
-            case PULLDOWN_DIR_LEFT:
-            case PULLDOWN_DIR_BOTH:
+            case PULLDOWN_DIR_ALWAYS:
                 summary = getResources().getString(
-                    R.string.status_bar_quick_pull_down_summary,
-                    getResources().getString(
-                        value == PULLDOWN_DIR_RIGHT
-                            ? R.string.status_bar_quick_pull_down_right
-                            : value == PULLDOWN_DIR_LEFT
-                                ? R.string.status_bar_quick_pull_down_left
-                                : R.string.status_bar_quick_pull_down_both
-                    )
-                );
+                    R.string.status_bar_quick_qs_pulldown_always);
+                break;
+            case PULLDOWN_DIR_LEFT:
+            case PULLDOWN_DIR_RIGHT:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_summary,
+                    getResources().getString(value == PULLDOWN_DIR_LEFT
+                        ? R.string.status_bar_quick_qs_pulldown_summary_left
+                        : R.string.status_bar_quick_qs_pulldown_summary_right));
                 break;
         }
         mQuickPulldown.setSummary(summary);
     }
 
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.LUNARIS;
+    private void updateColorPrefs(int logoColor) {
+        if (mLogoColor != null) {
+            mLogoColorPicker.setEnabled(logoColor == 2);
+        }
     }
 
     @Override
@@ -207,22 +200,14 @@ public class StatusBar extends SettingsPreferenceFragment implements
         return super.onPreferenceTreeClick(preference);
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.LUNARIS;
+    }
+
+    /**
+     * For search
+     */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider(R.xml.lunaris_settings_status_bar) {
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-                final Resources resources = context.getResources();
-
-                if (!DeviceUtils.deviceSupportsMobileData(context)) {
-                    keys.add(KEY_DATA_DISABLED_ICON);
-                    keys.add(KEY_FOUR_G_ICON);
-                }
-                if (!DeviceUtils.deviceSupportsBluetooth(context)) {
-                    keys.add(KEY_BLUETOOTH_BATTERY_STATUS);
-                }
-                return keys;
-            }
-        };
+            new BaseSearchIndexProvider(R.xml.lunaris_settings_status_bar);
 }

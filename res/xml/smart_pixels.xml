@@ -19,10 +19,10 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/smart_pixels_title" >
 
-    <lineageos.preference.SystemSettingMainSwitchPreference
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
         android:key="smart_pixels_enable"
-        android:title="@string/enable"
-        android:defaultValue="false" />
+        android:title="@string/smart_pixels_enable_title"
+        android:summary="@string/smart_pixels_enable_summary" />
 
     <org.lunaris.settings.preferences.SystemSettingListPreference
         android:key="smart_pixels_pattern"

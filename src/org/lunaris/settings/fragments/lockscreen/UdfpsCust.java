@@ -37,7 +37,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import org.lunaris.settings.utils.UDFPSUtils;
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import java.io.File;
 

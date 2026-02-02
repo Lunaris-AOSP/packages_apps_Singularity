@@ -8,7 +8,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import androidx.preference.Preference;
 
-import com.android.internal.util.android.VibrationUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 @SearchIndexable
 public class LunarisSettings extends DashboardFragment {

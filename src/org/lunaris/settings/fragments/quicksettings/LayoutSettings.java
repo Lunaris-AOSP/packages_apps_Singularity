@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 crDroid Android Project
+ * Copyright (C) 2024-2025 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -29,67 +28,27 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import com.android.internal.util.android.VibrationUtils;
-
-import org.lunaris.settings.utils.SystemRestartUtils;
-import org.lunaris.settings.utils.SystemUtils;
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import java.util.List;
 
 @SearchIndexable
-public class LayoutSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class LayoutSettings extends SettingsPreferenceFragment {
 
     public static final String TAG = "LayoutSettings";
-
-    private static final String KEY_QS_TILE_SHAPE_STYLE = "qs_tile_shape_style";
-    private static final String KEY_QS_TILE_HORIZONTAL_SPACING = "qs_tile_horizontal_spacing";
-    private static final String KEY_QS_TILE_VERTICAL_SPACING = "qs_tile_vertical_spacing";
-    private static final String KEY_APPLY_CHANGES = "apply_qs_layout_changes";
-
-    private Preference mQsTileShapeStyle;
-    private Preference mQsTileHorizontalSpacing;
-    private Preference mQsTileVerticalSpacing;
-    private Preference mApplyChanges;
-
-    private boolean mHasPendingChanges = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.qs_layout_settings);
-
-        mQsTileShapeStyle = findPreference(KEY_QS_TILE_SHAPE_STYLE);
-        if (mQsTileShapeStyle != null) {
-            mQsTileShapeStyle.setOnPreferenceChangeListener(this);
-        }
-
-        mQsTileHorizontalSpacing = findPreference(KEY_QS_TILE_HORIZONTAL_SPACING);
-        if (mQsTileHorizontalSpacing != null) {
-            mQsTileHorizontalSpacing.setOnPreferenceChangeListener(this);
-        }
-
-        mQsTileVerticalSpacing = findPreference(KEY_QS_TILE_VERTICAL_SPACING);
-        if (mQsTileVerticalSpacing != null) {
-            mQsTileVerticalSpacing.setOnPreferenceChangeListener(this);
-        }
-
-        mApplyChanges = findPreference(KEY_APPLY_CHANGES);
-        if (mApplyChanges != null) {
-            updateApplyButtonState();
-        }
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mQsTileShapeStyle ||
-            preference == mQsTileHorizontalSpacing ||
-            preference == mQsTileVerticalSpacing) {
-            mHasPendingChanges = true;
-            updateApplyButtonState();
-            return true;
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
         }
-        return false;
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -97,46 +56,9 @@ public class LayoutSettings extends SettingsPreferenceFragment implements
         return MetricsProto.MetricsEvent.LUNARIS;
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference != null && preference.getKey() != null) {
-            VibrationUtils.triggerVibration(getContext(), 3);
-            
-            if (preference.getKey().equals(KEY_APPLY_CHANGES)) {
-                if (mHasPendingChanges) {
-                    SystemUtils.showSystemUiRestartDialog(getActivity());
-                    mHasPendingChanges = false;
-                    updateApplyButtonState();
-                }
-                return true;
-            }
-        }
-        return super.onPreferenceTreeClick(preference);
-    }
-
-    private void updateApplyButtonState() {
-        if (mApplyChanges != null) {
-            if (mHasPendingChanges) {
-                mApplyChanges.setSummary(R.string.apply_changes_summary_pending);
-                mApplyChanges.setEnabled(true);
-            } else {
-                mApplyChanges.setSummary(R.string.apply_changes_summary);
-                mApplyChanges.setEnabled(false);
-            }
-        }
-    }
-
     /**
      * For search
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.qs_layout_settings) {
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-
-                    return keys;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.qs_layout_settings);
 }

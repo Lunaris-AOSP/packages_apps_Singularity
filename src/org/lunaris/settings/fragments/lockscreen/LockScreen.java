@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2023-2024 The risingOS Android Project
+ * Copyright (C) 2016-2025 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,171 +13,149 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.lunaris.settings.fragments.lockscreen;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.database.ContentObserver;
-import android.hardware.fingerprint.FingerprintManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.provider.MediaStore;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.widget.Toast;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.lunaris.OmniJawsClient;
+import com.android.internal.util.lunaris.Utils;
+
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.lunaris.settings.fragments.lockscreen.PulseSettings;
+import org.lunaris.settings.fragments.lockscreen.MediaArtSettings;
+import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
+import org.lunaris.settings.utils.TelephonyUtils;
+
+import com.android.internal.util.lunaris.VibrationUtils;
 
 import java.util.List;
 
-import com.android.internal.util.android.VibrationUtils;
-
 @SearchIndexable
-public class LockScreen extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class LockScreen extends SettingsPreferenceFragment
+            implements Preference.OnPreferenceChangeListener  {
 
-    private static final String TAG = "LockScreen";
+    public static final String TAG = "LockScreen";
 
-    private static final String KEY_KG_USER_SWITCHER= "kg_user_switcher_enabled";
-    private static final String KEY_DOZE_ANIMATION = "screen_animation_enabled";
-    private static final String CATEGORY_UDFPS_CUSTOM = "lockscreen_custom_category";
+    private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
+    private static final String LOCKSCREEN_INTERFACE_CATEGORY = "lockscreen_interface_category";
+    private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+    private static final String KEY_SMARTSPACE = "lockscreen_smartspace_enabled";
+    private static final String KEY_WEATHER = "lockscreen_weather_enabled";
+    private static final String KEY_KG_USER_SWITCHER = "kg_user_switcher_enabled";
+    private static final String LUNARIS_UDFPS_CUSTOM_CATEGORY = "lunaris_udfps_custom";
+
+    private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
+    private static final String KEY_FP_ERROR = "fp_error_vibrate";
+
+    private static final String KEY_CARRIER_NAME = "lockscreen_show_carrier";
+
     private static final String PROP_CUSTOM_UDFPS = "lunaris_udfps_custom";
-    private static final String KEY_MEDIA_ART_FILTER = "ls_media_art_filter";
-    private static final String KEY_PIXEL_SIZE = "ls_media_art_pixel_size";
-    private static final int FILTER_PIXELATION = 7;
 
-    private Preference mUserSwitcher;
-    private Preference mDozeAnimation;
-    private PreferenceCategory mUdfpsCategory;
-    private ListPreference mMediaArtFilter;
-    private Preference mPixelSize;
+    private Preference mRippleEffect;
 
-    private ContentObserver mMediaFilterObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-        @Override
-        public void onChange(boolean selfChange) {
-            updatePixelSizeVisibility();
-        }
-    };
+    private SwitchPreferenceCompat mSmartspace;
+    private SwitchPreferenceCompat mWeather;
+    private SwitchPreferenceCompat mKgUserSwitcher;
+    private SwitchPreferenceCompat mFpSuccessVib;
+    private SwitchPreferenceCompat mFpErrorVib;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.lunaris_settings_lock_screen);
-
         final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
-        final PreferenceScreen prefScreen = getPreferenceScreen();
 
-        mUserSwitcher = (Preference) findPreference(KEY_KG_USER_SWITCHER);
-        if (mUserSwitcher != null) {
-            mUserSwitcher.setOnPreferenceChangeListener(this);
-        }
+        PreferenceCategory gestCategory = (PreferenceCategory) findPreference(LOCKSCREEN_GESTURES_CATEGORY);
+        PreferenceCategory lunarisUdfpsCategory = (PreferenceCategory) findPreference(LUNARIS_UDFPS_CUSTOM_CATEGORY);
 
-        mDozeAnimation = (Preference) findPreference(KEY_DOZE_ANIMATION);
-        if (mDozeAnimation != null) {
-            mDozeAnimation.setOnPreferenceChangeListener(this);
-        }
+        mFpSuccessVib = findPreference(KEY_FP_SUCCESS);
+        mFpErrorVib = findPreference(KEY_FP_ERROR);
+        mRippleEffect = (Preference) findPreference(KEY_RIPPLE_EFFECT);
 
-        mUdfpsCategory = findPreference(CATEGORY_UDFPS_CUSTOM);
-        if (mUdfpsCategory != null) {
-            boolean showUdfps = SystemProperties.getBoolean(PROP_CUSTOM_UDFPS, false);
-            if (!showUdfps) {
-                prefScreen.removePreference(mUdfpsCategory);
-            }
+        boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
+        if (!hasFingerprint) {
+            gestCategory.removePreference(mRippleEffect);
         }
 
-        mMediaArtFilter = (ListPreference) findPreference(KEY_MEDIA_ART_FILTER);
-        mPixelSize = findPreference(KEY_PIXEL_SIZE);
-        
-        if (mMediaArtFilter != null) {
-            mMediaArtFilter.setOnPreferenceChangeListener(this);
+        if (lunarisUdfpsCategory != null && !SystemProperties.getBoolean(PROP_CUSTOM_UDFPS, false)) {
+            getPreferenceScreen().removePreference(lunarisUdfpsCategory);
         }
-        
-        updatePixelSizeVisibility();
-        
-        if (resolver != null) {
-            resolver.registerContentObserver(
-                Settings.System.getUriFor(Settings.System.LS_MEDIA_ART_FILTER),
-                false,
-                mMediaFilterObserver,
-                UserHandle.USER_CURRENT
-            );
+
+        boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+        if (!hasFingerprint || !hapticAvailable) {
+            gestCategory.removePreference(mFpSuccessVib);
+            gestCategory.removePreference(mFpErrorVib);
         }
+
+        if (!TelephonyUtils.isVoiceCapable(context)) {
+            PreferenceCategory intCategory = (PreferenceCategory) findPreference(LOCKSCREEN_INTERFACE_CATEGORY);
+            SwitchPreferenceCompat carrierName = findPreference(KEY_CARRIER_NAME);
+            intCategory.removePreference(carrierName);
+        }
+
+        mSmartspace = (SwitchPreferenceCompat) findPreference(KEY_SMARTSPACE);
+        mSmartspace.setOnPreferenceChangeListener(this);
+
+        mWeather = (SwitchPreferenceCompat) findPreference(KEY_WEATHER);
+        mWeather.setOnPreferenceChangeListener(this);
+
+        mKgUserSwitcher = (SwitchPreferenceCompat) findPreference(KEY_KG_USER_SWITCHER);
+        mKgUserSwitcher.setOnPreferenceChangeListener(this);
+
+        updateWeatherSettings();
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mSmartspace) {
+            mSmartspace.setChecked((Boolean)newValue);
+            updateWeatherSettings();
+            SystemUtils.showSystemUiRestartDialog(getContext());
+            return true;
+        } else if (preference == mWeather) {
+            mWeather.setChecked((Boolean)newValue);
+            SystemUtils.showSystemUiRestartDialog(getContext());
+            return true;
+        } else if (preference == mKgUserSwitcher) {
+            mKgUserSwitcher.setChecked((Boolean)newValue);
+            SystemUtils.showSystemUiRestartDialog(getContext());
+            return true;
+        }
+
+        return false;
+    }
+
+    private void updateWeatherSettings() {
+        if (mWeather == null || mSmartspace == null) return;
+
+        boolean weatherEnabled = OmniJawsClient.get().isOmniJawsEnabled(getContext());
+        mWeather.setEnabled(!mSmartspace.isChecked() && weatherEnabled);
+        mWeather.setSummary(!mSmartspace.isChecked() && weatherEnabled ? R.string.lockscreen_weather_summary :
+            R.string.lockscreen_weather_enabled_info);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updatePixelSizeVisibility();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Context context = getContext();
-        if (context != null && context.getContentResolver() != null) {
-            context.getContentResolver().unregisterContentObserver(mMediaFilterObserver);
-        }
-    }
-
-    private void updatePixelSizeVisibility() {
-        if (mPixelSize == null) return;
-        
-        Context context = getContext();
-        if (context == null) return;
-        
-        final ContentResolver resolver = context.getContentResolver();
-        int currentFilter = Settings.System.getIntForUser(
-            resolver,
-            Settings.System.LS_MEDIA_ART_FILTER,
-            0,
-            UserHandle.USER_CURRENT
-        );
-        
-        mPixelSize.setVisible(currentFilter == FILTER_PIXELATION);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mUserSwitcher || preference == mDozeAnimation) {
-            Context context = getContext();
-            if (context != null) {
-                SystemUtils.showSystemUiRestartDialog(context);
-            }
-            return true;
-        } else if (preference == mMediaArtFilter) {
-            int filterValue = Integer.parseInt((String) newValue);
-            if (mPixelSize != null) {
-                mPixelSize.setVisible(filterValue == FILTER_PIXELATION);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.LUNARIS;
+        updateWeatherSettings();
     }
 
     @Override
@@ -188,27 +166,34 @@ public class LockScreen extends SettingsPreferenceFragment implements
         return super.onPreferenceTreeClick(preference);
     }
 
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider(R.xml.lunaris_settings_lock_screen) {
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.LUNARIS;
+    }
 
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-                final Resources resources = context.getResources();
-                
-                ContentResolver resolver = context.getContentResolver();
-                int currentFilter = Settings.System.getIntForUser(
-                    resolver,
-                    Settings.System.LS_MEDIA_ART_FILTER,
-                    0,
-                    UserHandle.USER_CURRENT
-                );
-                
-                if (currentFilter != 7) {
-                    keys.add(KEY_PIXEL_SIZE);
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.lunaris_settings_lock_screen) {
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+
+                    boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
+                    if (!hasFingerprint) {
+                        keys.add(KEY_RIPPLE_EFFECT);
+                    }
+                    if (!SystemProperties.getBoolean(PROP_CUSTOM_UDFPS, false)) {
+                        keys.add(LUNARIS_UDFPS_CUSTOM_CATEGORY);
+                    }
+                    boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+                    if (!hasFingerprint || !hapticAvailable) {
+                        keys.add(KEY_FP_SUCCESS);
+                        keys.add(KEY_FP_ERROR);
+                    }
+                    if (!TelephonyUtils.isVoiceCapable(context)) {
+                        keys.add(KEY_CARRIER_NAME);
+                    }
+                    return keys;
                 }
-                
-                return keys;
-            }
-        };
+            };
 }

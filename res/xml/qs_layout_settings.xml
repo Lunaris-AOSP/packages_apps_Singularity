@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2024 crDroid Android Project
+     Copyright (C) 2024-2025 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,111 +17,60 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/quick_settings_layout_columns_rows_title">
+    android:title="@string/qs_layout_columns_rows_title">
 
-    <org.lunaris.settings.preferences.SystemSettingListPreference
-        android:key="qs_tile_shape_style"
-        android:title="@string/qs_tile_shape_style_title"
-        android:summary="%s"
-        android:entries="@array/qs_tile_shape_style_entries"
-        android:entryValues="@array/qs_tile_shape_style_values"
-        android:defaultValue="0" />
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tiles_columns"
+        android:title="@string/qs_columns_portrait_title"
+        android:max="6"
+        settings:min="2"
+        settings:interval="1"
+        android:defaultValue="4" />
 
-    <PreferenceCategory
-        android:key="layout_one_category"
-        android:layout="@layout/settingslib_preference_category_no_title">
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tiles_columns_landscape"
+        android:title="@string/qs_columns_landscape_title"
+        android:max="6"
+        settings:min="2"
+        settings:interval="1"
+        android:defaultValue="4" />
 
-        <!-- QS Tile Spacing -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tile_horizontal_spacing"
-            android:title="@string/qs_tile_horizontal_spacing_title"
-            android:max="40"
-            settings:min="4"
-            android:defaultValue="25"
-            settings:units="dp" />
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tiles_rows"
+        android:title="@string/qs_rows_portrait_title"
+        android:max="5"
+        settings:min="2"
+        settings:interval="1"
+        android:defaultValue="4" />
 
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tile_vertical_spacing"
-            android:title="@string/qs_tile_vertical_spacing_title"
-            android:max="40"
-            settings:min="4"
-            android:defaultValue="21"
-            settings:units="dp" />
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_tiles_rows_landscape"
+        android:title="@string/qs_rows_landscape_title"
+        android:max="3"
+        settings:min="1"
+        settings:interval="1"
+        android:defaultValue="2" />
 
-    </PreferenceCategory>
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qqs_tiles_rows"
+        android:title="@string/qqs_rows_portrait_title"
+        android:max="3"
+        settings:min="1"
+        settings:interval="1"
+        android:defaultValue="2" />
 
-    <PreferenceCategory
-        android:key="layout_two_category"
-        android:layout="@layout/settingslib_preference_category_no_title">
+    <!--<org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qqs_tiles_rows_landscape"
+        android:title="@string/qqs_rows_landscape_title"
+        android:max="3"
+        settings:min="1"
+        settings:interval="1"
+        android:defaultValue="1" />-->
 
-        <!-- Columns (portrait) -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tiles_columns"
-            android:title="@string/quick_settings_columns_portrait_title"
-            android:max="6"
-            settings:min="2"
-            settings:interval="1"
-            android:defaultValue="4" />
-
-        <!-- Columns (landscape) -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tiles_columns_landscape"
-            android:title="@string/quick_settings_columns_landscape_title"
-            android:max="6"
-            settings:min="2"
-            settings:interval="1"
-            android:defaultValue="4" />
-
-        <!-- Rows (portrait) -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tiles_rows"
-            android:title="@string/quick_settings_rows_portrait_title"
-            android:max="5"
-            settings:min="2"
-            settings:interval="1"
-            android:defaultValue="4" />
-
-        <!-- Rows (landscape) -->
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tiles_rows_landscape"
-            android:title="@string/quick_settings_rows_landscape_title"
-            android:max="3"
-            settings:min="1"
-            settings:interval="1"
-            android:defaultValue="2" />
-
-        <!-- Quick QS rows (portrait) -->
-        <!--<org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qqs_layout_rows"
-            android:title="@string/quick_settings_qqs_rows_portrait_title"
-            android:max="3"
-            settings:min="1"
-            settings:interval="1"
-            android:defaultValue="2" />
-
-        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
-            android:key="qqs_layout_rows_landscape"
-            android:title="@string/quick_settings_qqs_rows_landscape_title"
-            android:max="3"
-            settings:min="1"
-            settings:interval="1"
-            android:defaultValue="1" /> -->
-
-    </PreferenceCategory>
-
-    <!-- Apply Button -->
-    <Preference
-        android:key="apply_qs_layout_changes"
-        android:title="@string/apply_changes_title"
-        android:summary="@string/apply_changes_summary"
-        android:persistent="false">
-        <intent android:action="android.intent.action.MAIN" />
-    </Preference>
-
-    <com.android.settingslib.widget.FooterPreference
+    <!--<com.android.settingslib.widget.FooterPreference
         android:key="qs_layout_columns_rows_footer"
-        android:title="@string/quick_settings_layout_columns_rows_footer_text"
+        android:title="@string/qs_layout_columns_rows_footer_text"
         android:selectable="false"
-        settings:searchable="false" />
+        settings:searchable="false" />-->
 
 </PreferenceScreen>
