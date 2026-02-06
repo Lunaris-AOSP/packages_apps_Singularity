@@ -59,14 +59,14 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String KEY_SMARTSPACE = "lockscreen_smartspace_enabled";
     private static final String KEY_WEATHER = "lockscreen_weather_enabled";
     private static final String KEY_KG_USER_SWITCHER = "kg_user_switcher_enabled";
-    private static final String LUNARIS_UDFPS_CUSTOM_CATEGORY = "lunaris_udfps_custom";
+    private static final String LUNARIS_UDFPS_CUSTOM_CATEGORY = "lockscreen_custom_category";
 
     private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
     private static final String KEY_FP_ERROR = "fp_error_vibrate";
 
     private static final String KEY_CARRIER_NAME = "lockscreen_show_carrier";
 
-    private static final String PROP_CUSTOM_UDFPS = "lunaris_udfps_custom";
+    private static final String PROP_CUSTOM_UDFPS = "persist.sys.udfps.custom";
 
     private Preference mRippleEffect;
 
