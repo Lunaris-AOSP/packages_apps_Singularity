@@ -64,6 +64,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_COMPACT_PLAYER = "qs_compact_media_player_mode";
     private static final String KEY_SINGLE_QS_TONE = "single_qs_tone_enabled";
     private static final String KEY_DUAL_TARGET_TILE_STYLE = "dual_target_tile_style";
+    private static final String KEY_QS_TILE_ALTERNATE_COLOR = "qs_tile_alternate_color";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -73,6 +74,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mQsCompactPlayer;
     private SwitchPreferenceCompat mSingleQsTone;
     private Preference mDualTargetTileStyle;
+    private SwitchPreferenceCompat mQsTileAlternateColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mDualTargetTileStyle = findPreference(KEY_DUAL_TARGET_TILE_STYLE);
         if (mDualTargetTileStyle != null) {
             mDualTargetTileStyle.setOnPreferenceChangeListener(this);
+        }
+
+        mQsTileAlternateColor = findPreference(KEY_QS_TILE_ALTERNATE_COLOR);
+        if (mQsTileAlternateColor != null) {
+            mQsTileAlternateColor.setOnPreferenceChangeListener(this);
         }
 
         mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
@@ -148,6 +155,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mDualTargetTileStyle) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsTileAlternateColor) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }

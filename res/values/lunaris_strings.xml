@@ -1876,6 +1876,10 @@
     <string name="qs_single_tone_title">Single Tone QS</string>
     <string name="qs_single_tone_summary">Hide notification scrim for unified Quick Settings appearance</string>
 
+    <!-- QS tile alternate color -->
+    <string name="qs_tile_alternate_color_title">Alternate QS tile color</string>
+    <string name="qs_tile_alternate_color_summary">Use pre-qpr color for QS tiles</string>
+
     <!-- Edge haptic -->
     <string name="haptics_settings_title">System haptics</string>
     <string name="haptics_settings_summary">Modify system haptics intensities</string>
