@@ -37,6 +37,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.fragments.themes.SmartPixels;
+import org.lunaris.settings.utils.SystemUtils;
+import org.lunaris.settings.preferences.SystemSettingListPreference;
 
 import com.android.internal.util.lunaris.VibrationUtils;
 
@@ -50,9 +52,11 @@ public class Themes extends SettingsPreferenceFragment implements
 
     private static final String KEY_FORCE_FULL_SCREEN = "display_cutout_force_fullscreen_settings";
     private static final String SMART_PIXELS = "smart_pixels";
+    private static final String KEY_VOLUME_DIALOG_TYPE = "volume_dialog_type";
 
     private Preference mShowCutoutForce;
     private Preference mSmartPixels;
+    private SystemSettingListPreference mVolumeDialogType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,10 +80,19 @@ public class Themes extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_supportSmartPixels);
         if (!mSmartPixelsSupported)
             prefScreen.removePreference(mSmartPixels);
+
+        mVolumeDialogType = findPreference(KEY_VOLUME_DIALOG_TYPE);
+        if (mVolumeDialogType != null) {
+            mVolumeDialogType.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mVolumeDialogType) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        }
         return false;
     }
 

@@ -1895,4 +1895,7 @@
 
     <string name="dual_target_tile_style_title">Use Single Tone tile style</string>
     <string name="dual_target_tile_style_summary">Apply full tile coloring for dual target tiles like WiFi and Bluetooth</string>
+
+    <string name="volume_dialog_type_title">Volume style</string>
+    <string name="volume_dialog_type_summary">Select volume dialog style</string>
 </resources>
