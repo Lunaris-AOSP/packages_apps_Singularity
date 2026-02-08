@@ -64,6 +64,14 @@
             android:summary="@string/edge_light_summary"
             android:fragment="org.lunaris.settings.fragments.themes.EdgeLightSettings" />
 
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="volume_dialog_type"
+            android:title="@string/volume_dialog_type_title"
+            android:summary="@string/volume_dialog_type_summary"
+            android:entries="@array/volume_dialog_type_entries"
+            android:entryValues="@array/volume_dialog_type_values"
+            android:defaultValue="1" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
