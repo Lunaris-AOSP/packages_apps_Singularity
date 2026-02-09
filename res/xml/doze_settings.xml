@@ -56,7 +56,7 @@
             android:key="doze_brightness"
             android:title="@string/ambient_doze_brightness_title"
             android:max="255"
-            settings:min="1"
+            settings:min="-1"
             android:persistent="false"
             settings:controller="org.lunaris.settings.fragments.themes.doze.DozeBrightnessPreferenceController" />
 
@@ -64,7 +64,7 @@
             android:key="pulse_brightness"
             android:title="@string/ambient_pulse_brightness_title"
             android:max="255"
-            settings:min="1"
+            settings:min="-1"
             android:persistent="false"
             settings:controller="org.lunaris.settings.fragments.themes.doze.DozeBrightnessPreferenceController" />
 
