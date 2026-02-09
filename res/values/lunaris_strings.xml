@@ -1887,4 +1887,11 @@
 
     <string name="volume_dialog_type_title">Volume style</string>
     <string name="volume_dialog_type_summary">Select volume dialog style</string>
+
+    <!-- Doze brightness -->
+    <string name="ambient_display_category_title">Ambient display category</string>
+    <string name="doze_brightness_force_title">Force brightness values</string>
+    <string name="doze_brightness_force_summary">Use custom brightness values instead of screen brightness</string>
+    <string name="ambient_pulse_brightness_title">Ambient display brightness</string>
+    <string name="ambient_doze_brightness_title">Always on display brightness</string>
 </resources>
