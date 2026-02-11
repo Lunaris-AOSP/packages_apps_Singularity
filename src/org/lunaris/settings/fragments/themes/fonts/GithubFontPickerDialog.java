@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025 Lunaris AOSP
+ * Copyright (C) 2024-2026 Lunaris AOSP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,15 +76,16 @@ public class GithubFontPickerDialog extends Dialog {
         super(context);
         mFontInstaller = new ExternalFontInstaller(context);
         
-        File externalFilesDir = context.getExternalFilesDir(null);
-        if (externalFilesDir != null) {
-            mFontsDirectory = new File(externalFilesDir, "Fonts");
-        } else {
-            mFontsDirectory = new File(context.getFilesDir(), "Fonts");
-        }
+        File sdcard = android.os.Environment.getExternalStorageDirectory();
+        mFontsDirectory = new File(sdcard, "LunarisFont");
 
         if (!mFontsDirectory.exists()) {
-            mFontsDirectory.mkdirs();
+            boolean created = mFontsDirectory.mkdirs();
+            if (created) {
+                Log.d(TAG, "Created fonts directory: " + mFontsDirectory.getAbsolutePath());
+            } else {
+                Log.e(TAG, "Failed to create fonts directory: " + mFontsDirectory.getAbsolutePath());
+            }
         }
     }
 
@@ -340,8 +341,19 @@ public class GithubFontPickerDialog extends Dialog {
     private void downloadFont(String downloadUrl, File targetFile) throws Exception {
         File parentDir = targetFile.getParentFile();
         if (parentDir != null && !parentDir.exists()) {
-            parentDir.mkdirs();
+            boolean created = parentDir.mkdirs();
+            if (!created && !parentDir.exists()) {
+                Log.e(TAG, "Failed to create parent directory: " + parentDir.getAbsolutePath());
+                throw new Exception("Failed to create directory: " + parentDir.getAbsolutePath());
+            }
         }
+        
+        if (parentDir != null && !parentDir.canWrite()) {
+            Log.e(TAG, "No write permission for directory: " + parentDir.getAbsolutePath());
+            throw new Exception("No write permission for directory: " + parentDir.getAbsolutePath());
+        }
+        
+        Log.d(TAG, "Downloading font to: " + targetFile.getAbsolutePath());
         
         URL url = new URL(downloadUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -355,19 +367,42 @@ public class GithubFontPickerDialog extends Dialog {
             throw new Exception("Server returned HTTP " + responseCode);
         }
         
-        try (InputStream inputStream = connection.getInputStream();
-             FileOutputStream outputStream = new FileOutputStream(targetFile)) {
+        FileOutputStream outputStream = null;
+        InputStream inputStream = null;
+        
+        try {
+            inputStream = connection.getInputStream();
+            outputStream = new FileOutputStream(targetFile);
             
             byte[] buffer = new byte[4096];
             int bytesRead;
+            long totalBytes = 0;
+            
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
+                totalBytes += bytesRead;
             }
+            
+            outputStream.flush();
+            Log.d(TAG, "Successfully downloaded " + totalBytes + " bytes to " + targetFile.getName());
+            
         } catch (Exception e) {
+            Log.e(TAG, "Error during download", e);
             if (targetFile.exists()) {
                 targetFile.delete();
             }
             throw e;
+        } finally {
+            try {
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error closing streams", e);
+            }
         }
     }
 
