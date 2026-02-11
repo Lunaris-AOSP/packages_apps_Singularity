@@ -1309,4 +1309,16 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="wifi_icon_style_entries">
+        <item>@string/default_value</item>
+        <item>@string/wifi_icon_style1</item>
+        <item>@string/wifi_icon_style2</item>
+    </string-array>
+
+    <string-array name="wifi_icon_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
