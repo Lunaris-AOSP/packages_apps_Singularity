@@ -94,13 +94,6 @@
     <PreferenceCategory
         android:title="@string/extras_category_title">
 
-        <!-- QuickSwitch -->
-        <Preference
-            android:key="quickswitch"
-            android:title="@string/quickswitch_launcher_title" 
-            android:summary="@string/quickswitch_launcher_summary" 
-            android:fragment="org.lunaris.settings.fragments.miscellaneous.QuickSwitch" /> 
-
         <!-- Three fingers swipe action -->
         <ListPreference
             android:key="three_fingers_swipe"

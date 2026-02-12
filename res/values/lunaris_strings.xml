@@ -1266,8 +1266,8 @@
     <string name="custom_vibration_pattern_summary">Set a custom vibration pattern</string>
 
     <!-- QuickSwitch -->
-    <string name="quickswitch_launcher_title">QuickSwitch</string>
-    <string name="quickswitch_launcher_summary">Customize default homescreen app</string>
+    <string name="quickswitch_launcher_title">Quick Switch</string>
+    <string name="quickswitch_launcher_summary">Switch default launcher</string>
     <string name="wallpaper_overlay_title">Wallpaper overlay</string>
     <string name="wallpaper_overlay_summary">Enable for Lunaris Launcher, disable for Pixel Launcher</string>
     <string name="quickswitch_not_supported">QuickSwitch is not supported; the system only has one launcher.</string>
