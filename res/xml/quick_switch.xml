@@ -31,7 +31,7 @@
         android:key="com.android.system.qs.wallpaperoverlay"
         android:title="@string/wallpaper_overlay_title"
         android:summary="@string/wallpaper_overlay_summary"
-        android:defaultValue="true" />
+        android:defaultValue="false" />
 
      <com.android.settingslib.widget.FooterPreference
         android:key="quickswitch_footer"
