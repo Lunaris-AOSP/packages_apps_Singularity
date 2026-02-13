@@ -1905,4 +1905,16 @@
     <string name="wifi_icon_style3">Linear</string>
     <string name="wifi_icon_style4">Nothing Dot</string>
     <string name="wifi_icon_style5">ZigZag</string>
+
+    <!-- Minimal style -->
+    <string name="qs_tile_style_minimal_title">Minimal style</string>
+    <string name="qs_tile_style_minimal_summary">Use minimal style for QS tiles</string>
+    
+    <!-- qs use modified tile spacing -->
+    <string name="qs_use_modified_tile_spacing_title">Use modified tile spacing</string>
+    <string name="qs_use_modified_tile_spacing_summary">Use modified tile spacing For proper symmetry</string>
+
+    <!-- Minimal style invert -->
+    <string name="qs_tile_style_minimal_invert_title">Invert tile shape</string>
+    <string name="qs_tile_style_minimal_invert_summary">Invert the shape of the minimal style tiles</string>
 </resources>

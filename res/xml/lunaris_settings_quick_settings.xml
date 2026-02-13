@@ -42,12 +42,30 @@
         android:key="qs_layout_category"
         android:title="@string/qs_layout_category_title">
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_style_minimal"
+            android:title="@string/qs_tile_style_minimal_title"
+            android:summary="@string/qs_tile_style_minimal_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_style_minimal_invert"
+            android:title="@string/qs_tile_style_minimal_invert_title"
+            android:summary="@string/qs_tile_style_minimal_invert_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_tile_shape"
             android:title="@string/qs_tile_shape_title"
             android:entries="@array/qs_tile_shape_entries"
             android:entryValues="@array/qs_tile_shape_values"
             android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_use_modified_tile_spacing"
+            android:title="@string/qs_use_modified_tile_spacing_title"
+            android:summary="@string/qs_use_modified_tile_spacing_summary"
+            android:defaultValue="false" />
 
         <Preference
             android:key="qs_layout_columns_rows"
