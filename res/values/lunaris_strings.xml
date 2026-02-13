@@ -1917,4 +1917,8 @@
     <!-- Minimal style invert -->
     <string name="qs_tile_style_minimal_invert_title">Invert tile shape</string>
     <string name="qs_tile_style_minimal_invert_summary">Invert the shape of the minimal style tiles</string>
+
+    <!-- Brightness slider style -->
+    <string name="qs_brightness_slider_style_title">Minimal slider style</string>
+    <string name="qs_brightness_slider_style_summary">Enable minimal style for brightness slider</string>
 </resources>
