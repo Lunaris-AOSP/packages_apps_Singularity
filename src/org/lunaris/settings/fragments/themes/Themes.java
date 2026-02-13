@@ -57,9 +57,11 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String SMART_PIXELS = "smart_pixels";
     private static final String KEY_VOLUME_DIALOG_TYPE = "volume_dialog_type";
     private static final String KEY_WIFI_ICON_STYLE = "wifi_icon_style";
+    private static final String KEY_QUICKSWITCH = "quickswitch";
 
     private Preference mShowCutoutForce;
     private Preference mSmartPixels;
+    private Preference mQuickSwitch;
     private SystemSettingListPreference mVolumeDialogType;
     private SystemSettingListPreference mWifiIconStyle;
     private ThemeUtils mThemeUtils;
@@ -96,6 +98,11 @@ public class Themes extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_supportSmartPixels);
         if (!mSmartPixelsSupported)
             prefScreen.removePreference(mSmartPixels);
+
+        mQuickSwitch = (Preference) prefScreen.findPreference(KEY_QUICKSWITCH);
+        boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
+        if (!withGoogleApps)
+            prefScreen.removePreference(mQuickSwitch);
 
         mVolumeDialogType = findPreference(KEY_VOLUME_DIALOG_TYPE);
         if (mVolumeDialogType != null) {
@@ -186,6 +193,10 @@ public class Themes extends SettingsPreferenceFragment implements
                             com.android.internal.R.bool.config_supportSmartPixels);
                     if (!mSmartPixelsSupported)
                         keys.add(SMART_PIXELS);
+
+                    boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
+                    if (!withGoogleApps)
+                        keys.add(KEY_QUICKSWITCH);
 
                     return keys;
                 }
