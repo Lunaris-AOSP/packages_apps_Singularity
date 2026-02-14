@@ -1921,4 +1921,18 @@
     <!-- Brightness slider style -->
     <string name="qs_brightness_slider_style_title">Minimal slider style</string>
     <string name="qs_brightness_slider_style_summary">Enable minimal style for brightness slider</string>
+
+    <!-- Shake Gestures -->
+    <string name="shake_gestures_enabled_title">Shake Gestures</string>
+    <string name="shake_gestures_enabled_summary">Shake your device to perform actions</string>
+    <string name="shake_gestures_action_title">Shake Gestures Actions</string>
+    <string name="shake_gestures_toggle_flashlight">Toggle Flashlight</string>
+    <string name="shake_gestures_media_playback">Play/Skip Media</string>
+    <string name="shake_gestures_volume_panel">Show Volume Panel</string>
+    <string name="shake_gestures_screen_wake">Turn Screen On/Off</string>
+    <string name="shake_gestures_clear_notifs">Clear All Notifications</string>
+    <string name="shake_gestures_toggle_ringer">Toggle Ringer Mode</string>
+    <string name="shake_gestures_screenshot">Take Screenshot</string>
+    <string name="shake_gestures_intensity_title">Shake Gestures Intensity</string>
+    <string name="shake_gestures_intensity_summary">Adjust the sensitivity of shake gestures</string>
 </resources>
