@@ -100,6 +100,6 @@
             android:key="persist.sys.vbmeta.update"
             android:title="@string/vbmeta_attestation_title"
             android:summary="@string/vbmeta_attestation_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>
