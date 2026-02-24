@@ -23,6 +23,12 @@
         android:key="lockscreen_interface_category"
         android:title="@string/lockscreen_interface_category">
 
+        <Preference
+            android:key="depth_wallpaper"
+            android:title="@string/dw_wallpaper_enabled_title"
+            android:summary="@string/dw_wallpaper_enabled_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.WallpaperDepth"/>
+
         <!-- Lockscreen Media Art -->
         <Preference
             android:key="media_art_settings"
