@@ -504,9 +504,8 @@
     <string name="theme_customization_wifi_icon_summary">Set custom wifi icon style</string>
     <string name="theme_customization_navbar_title">Navbar style</string>
     <string name="theme_customization_navbar_summary">Set custom navigation bar style</string>
-    <string name="theme_customization_lock_clock_title">Clock font style</string>
-    <string name="theme_customization_lock_clock_summary">Set lockscreen clock font style</string>
-    <string name="theme_customization_brightness_slider_title">Brightness slider style</string>
+    <string name="theme_customization_lock_clock_title">Clock face</string>
+    <string name="theme_customization_lock_clock_summary">Modify lockscreen clock appearance</string>
     <string name="theme_customization_brightness_slider_summary">Set custom brightness slider style</string>
 
     <!-- Refresh rate -->
@@ -2010,4 +2009,18 @@
     <string name="cutout_progress_charging_ring_summary">Display battery level as a symmetric ring around the cutout while charging</string>
     <string name="cutout_progress_charging_pulse_title">Charging pulse animation</string>
     <string name="cutout_progress_charging_pulse_summary">Animate a repeating pulse from center outward while charging</string>
+
+    <!-- Lockscreen Clock Highlight Guide --> 
+    <string name="ls_clock_face_highlight_text">Swipe left or right to preview clock styles</string>
+
+    <!-- Lockscreen Clock Accent Color -->
+    <string name="clock_text_accent_color_title">Use accent color for clock</string>
+    <string name="clock_text_accent_color_summary">Use system accent color instead of white for clock text</string>
+
+    <!-- Lockscreen Clock Opacity -->
+    <string name="clock_text_opacity_title">Clock text opacity</string>
+    <string name="clock_text_opacity_summary">Adjust the transparency of the clock text</string>
+
+    <!-- Lockscreen Clock Revamp --> 
+    <string name="ls_clock_custom_font_not_supported">Selected clock does not support custom fonts</string>
 </resources>

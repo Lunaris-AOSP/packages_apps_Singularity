@@ -15,7 +15,22 @@
             android:key="android.theme.customization.lockscreen_clock_font"
             android:title="@string/theme_customization_lock_clock_title"
             android:summary="@string/theme_customization_lock_clock_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.LockClockFontsPicker"/>
+            android:fragment="org.lunaris.settings.fragments.lockscreen.LockClockFontsPickerPreview"/>
+
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="clock_text_accent_color"
+            android:title="@string/clock_text_accent_color_title"
+            android:summary="@string/clock_text_accent_color_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="clock_text_opacity"
+            android:title="@string/clock_text_opacity_title"
+            android:summary="@string/clock_text_opacity_summary"
+            android:defaultValue="100"
+            android:max="100"
+            settings:min="10"
+	        settings:units="%" />
 
     </PreferenceCategory>
 
