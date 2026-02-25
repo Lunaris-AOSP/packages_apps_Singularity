@@ -65,7 +65,7 @@
             android:key="lockscreen_show_emergency_button"
             android:title="@string/lockscreen_emergency_button_title"
             android:summary="@string/lockscreen_emergency_button_summary"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <!-- Shortcuts -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
