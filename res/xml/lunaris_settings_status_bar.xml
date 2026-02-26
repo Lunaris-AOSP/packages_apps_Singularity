@@ -47,6 +47,12 @@
             android:fragment="org.lunaris.settings.fragments.statusbar.ClockBackgroundChipPicker" />
 
         <Preference
+            android:key="cutout_progress"
+            android:title="@string/cutout_progress_title"
+            android:summary="@string/cutout_progress_summary"
+            android:fragment="org.lunaris.settings.fragments.statusbar.CutoutProgressSettingsFragment" />
+
+        <Preference
             android:key="clock"
             android:title="@string/status_bar_clock_title"
             android:summary="@string/status_bar_clock_summary"
