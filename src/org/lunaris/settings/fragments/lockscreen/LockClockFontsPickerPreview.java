@@ -53,6 +53,7 @@ import org.lunaris.settings.fragments.lockscreen.fonts.FontManager;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import com.android.internal.util.lunaris.ThemeUtils;
+import org.lunaris.settings.utils.SystemUtils;
 
 import java.util.List;
 
@@ -194,10 +195,14 @@ public class LockClockFontsPickerPreview extends SettingsPreferenceFragment {
                     "clock_style", mClockPosition, UserHandle.USER_CURRENT);
                 Settings.Secure.putIntForUser(getContext().getContentResolver(), 
                     "lock_screen_custom_clock_face", 0, UserHandle.USER_CURRENT);
+                
+                final Context ctx = getContext().getApplicationContext();
+                
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       updateClockOverlays(mClockPosition);
+                        updateClockOverlays(mClockPosition);
+                        SystemUtils.showSystemUiRestartDialog(ctx);
                     }
                 }, 1250);
             }
