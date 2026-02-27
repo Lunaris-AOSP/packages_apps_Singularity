@@ -28,6 +28,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -76,8 +77,12 @@ public class LockScreen extends SettingsPreferenceFragment
 
     private static final String KEY_CUSTOM_AOD_IMAGE = "lockscreen_custom_image";
     private static final int CUSTOM_IMAGE_REQUEST_CODE = 1001;
-    private Preference mCustomImagePreference;
 
+    private static final String KEY_CLOCK_COLOR_MODE = "clock_color_mode";
+    private static final String KEY_CLOCK_CUSTOM_COLOR = "clock_custom_color";
+    private static final String COLOR_MODE_CUSTOM = "custom";
+
+    private Preference mCustomImagePreference;
     private Preference mRippleEffect;
 
     private SwitchPreferenceCompat mSmartspace;
@@ -85,6 +90,9 @@ public class LockScreen extends SettingsPreferenceFragment
     private SwitchPreferenceCompat mKgUserSwitcher;
     private SwitchPreferenceCompat mFpSuccessVib;
     private SwitchPreferenceCompat mFpErrorVib;
+
+    private ListPreference mClockColorMode;
+    private Preference mClockCustomColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +106,7 @@ public class LockScreen extends SettingsPreferenceFragment
 
         mFpSuccessVib = findPreference(KEY_FP_SUCCESS);
         mFpErrorVib = findPreference(KEY_FP_ERROR);
-        mRippleEffect = (Preference) findPreference(KEY_RIPPLE_EFFECT);
+        mRippleEffect = findPreference(KEY_RIPPLE_EFFECT);
 
         boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
         if (!hasFingerprint) {
@@ -135,7 +143,20 @@ public class LockScreen extends SettingsPreferenceFragment
             updateCustomImagePreference();
         }
 
+        mClockColorMode   = (ListPreference) findPreference(KEY_CLOCK_COLOR_MODE);
+        mClockCustomColor = findPreference(KEY_CLOCK_CUSTOM_COLOR);
+        if (mClockColorMode != null) {
+            mClockColorMode.setOnPreferenceChangeListener(this);
+            updateCustomColorPickerVisibility(mClockColorMode.getValue());
+        }
+
         updateWeatherSettings();
+    }
+
+    private void updateCustomColorPickerVisibility(String colorMode) {
+        if (mClockCustomColor != null) {
+            mClockCustomColor.setVisible(COLOR_MODE_CUSTOM.equals(colorMode));
+        }
     }
 
     private void updateCustomImagePreference() {
@@ -215,6 +236,9 @@ public class LockScreen extends SettingsPreferenceFragment
             mKgUserSwitcher.setChecked((Boolean)newValue);
             SystemUtils.showSystemUiRestartDialog(getContext());
             return true;
+        } else if (preference == mClockColorMode) {
+            updateCustomColorPickerVisibility((String)newValue);
+            return true;
         }
         return false;
     }
@@ -234,6 +258,9 @@ public class LockScreen extends SettingsPreferenceFragment
         super.onResume();
         updateWeatherSettings();
         updateCustomImagePreference();
+        if (mClockColorMode != null) {
+            updateCustomColorPickerVisibility(mClockColorMode.getValue());
+        }
     }
 
     @Override

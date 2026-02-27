@@ -17,11 +17,19 @@
             android:summary="@string/theme_customization_lock_clock_summary"
             android:fragment="org.lunaris.settings.fragments.lockscreen.LockClockFontsPickerPreview"/>
 
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="clock_text_accent_color"
-            android:title="@string/clock_text_accent_color_title"
-            android:summary="@string/clock_text_accent_color_summary"
-            android:defaultValue="false" />
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="clock_color_mode"
+            android:title="@string/clock_color_mode_title"
+            android:entries="@array/clock_color_mode_entries"
+            android:entryValues="@array/clock_color_mode_values"
+            android:summary="%s"
+            android:defaultValue="default" />
+
+        <org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference
+            android:key="clock_custom_color"
+            android:title="@string/custom_color"
+            android:defaultValue="#FFFFFF"
+            android:dependency="clock_color_mode" />
 
         <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
             android:key="clock_text_opacity"
