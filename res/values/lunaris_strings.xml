@@ -2070,4 +2070,8 @@
     <string name="lockscreen_custom_image_pick_summary">Select AOD image from gallery</string>
     <string name="custom_aod_image_not_supported">Clock style not supported</string>
     <string name="quick_settings_header_needs_gallery">You must install a gallery app!</string>
+
+    <!-- Lockscreen Weather -->
+    <string name="custom_clock_weather_title">Lockscreen weather</string>
+    <string name="custom_clock_weather_summary">Show weather on custom lockscreen clock</string>
 </resources>

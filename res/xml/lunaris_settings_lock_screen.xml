@@ -44,6 +44,12 @@
             android:summary="@string/lockscreen_custom_image_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="custom_clock_weather"
+            android:title="@string/custom_clock_weather_title"
+            android:summary="@string/custom_clock_weather_summary"
+            android:defaultValue="false" />
+
         <Preference
             android:key="lockscreen_custom_image"
             android:title="@string/lockscreen_custom_image_title"
