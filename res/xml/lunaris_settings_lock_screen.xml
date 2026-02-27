@@ -32,21 +32,24 @@
             settings:min="10"
 	        settings:units="%" />
 
-<<<<<<< HEAD
-=======
         <Preference
             android:key="lockscreen_widgets"
             android:title="@string/lockscreen_widgets_title"
             android:summary="@string/lockscreen_widgets_enabled_summary"
             android:fragment="org.lunaris.settings.fragments.lockscreen.LockScreenWidgets"/>
 
-        <Preference
-            android:key="depth_wallpaper"
-            android:title="@string/dw_wallpaper_enabled_title"
-            android:summary="@string/dw_wallpaper_enabled_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.WallpaperDepth"/>
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="custom_aod_image_enabled"
+            android:title="@string/lockscreen_custom_image_enabled_title"
+            android:summary="@string/lockscreen_custom_image_summary"
+            android:defaultValue="false" />
 
->>>>>>> e48d1788 (Add lockscreen widgets settings)
+        <Preference
+            android:key="lockscreen_custom_image"
+            android:title="@string/lockscreen_custom_image_title"
+            android:summary="@string/lockscreen_custom_image_pick_summary"
+            android:dependency="custom_aod_image_enabled" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

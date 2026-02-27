@@ -15,13 +15,18 @@
  */
 package org.lunaris.settings.fragments.lockscreen;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.provider.MediaStore;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -40,6 +45,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.fragments.lockscreen.PulseSettings;
 import org.lunaris.settings.fragments.lockscreen.MediaArtSettings;
 import org.lunaris.settings.utils.DeviceUtils;
+import org.lunaris.settings.utils.ImageUtils;
 import org.lunaris.settings.utils.SystemUtils;
 import org.lunaris.settings.utils.TelephonyUtils;
 
@@ -67,6 +73,10 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String KEY_CARRIER_NAME = "lockscreen_show_carrier";
 
     private static final String PROP_CUSTOM_UDFPS = "persist.sys.udfps.custom";
+
+    private static final String KEY_CUSTOM_AOD_IMAGE = "lockscreen_custom_image";
+    private static final int CUSTOM_IMAGE_REQUEST_CODE = 1001;
+    private Preference mCustomImagePreference;
 
     private Preference mRippleEffect;
 
@@ -120,7 +130,74 @@ public class LockScreen extends SettingsPreferenceFragment
         mKgUserSwitcher = (SwitchPreferenceCompat) findPreference(KEY_KG_USER_SWITCHER);
         mKgUserSwitcher.setOnPreferenceChangeListener(this);
 
+        mCustomImagePreference = findPreference(KEY_CUSTOM_AOD_IMAGE);
+        if (mCustomImagePreference != null) {
+            updateCustomImagePreference();
+        }
+
         updateWeatherSettings();
+    }
+
+    private void updateCustomImagePreference() {
+        if (mCustomImagePreference == null) return;
+        int clockStyle = Settings.Secure.getIntForUser(
+                getContext().getContentResolver(),
+                "clock_style", 0, UserHandle.USER_CURRENT);
+        String imagePath = Settings.System.getString(
+                getContext().getContentResolver(), "custom_aod_image_uri");
+        if (imagePath != null && clockStyle > 0) {
+            mCustomImagePreference.setSummary(imagePath);
+            mCustomImagePreference.setEnabled(true);
+        } else if (clockStyle == 0) {
+            mCustomImagePreference.setSummary(
+                    getContext().getString(R.string.custom_aod_image_not_supported));
+            mCustomImagePreference.setEnabled(false);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        if (preference == mCustomImagePreference) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(intent, CUSTOM_IMAGE_REQUEST_CODE);
+            } catch (Exception e) {
+                Toast.makeText(getContext(),
+                        R.string.quick_settings_header_needs_gallery,
+                        Toast.LENGTH_LONG).show();
+            }
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
+        if (requestCode == CUSTOM_IMAGE_REQUEST_CODE
+                && resultCode == Activity.RESULT_OK
+                && result != null) {
+            Uri imgUri = result.getData();
+            if (imgUri != null) {
+                String savedImagePath = ImageUtils.saveImageToInternalStorage(
+                        getContext(), imgUri,
+                        "lockscreen_aod_image",
+                        "LOCKSCREEN_CUSTOM_AOD_IMAGE");
+                if (savedImagePath != null) {
+                    Settings.System.putStringForUser(
+                            getContext().getContentResolver(),
+                            "custom_aod_image_uri",
+                            savedImagePath,
+                            UserHandle.USER_CURRENT);
+                    mCustomImagePreference.setSummary(savedImagePath);
+                }
+            }
+        }
     }
 
     @Override
@@ -139,7 +216,6 @@ public class LockScreen extends SettingsPreferenceFragment
             SystemUtils.showSystemUiRestartDialog(getContext());
             return true;
         }
-
         return false;
     }
 
@@ -148,22 +224,16 @@ public class LockScreen extends SettingsPreferenceFragment
 
         boolean weatherEnabled = OmniJawsClient.get().isOmniJawsEnabled(getContext());
         mWeather.setEnabled(!mSmartspace.isChecked() && weatherEnabled);
-        mWeather.setSummary(!mSmartspace.isChecked() && weatherEnabled ? R.string.lockscreen_weather_summary :
-            R.string.lockscreen_weather_enabled_info);
+        mWeather.setSummary(!mSmartspace.isChecked() && weatherEnabled
+                ? R.string.lockscreen_weather_summary
+                : R.string.lockscreen_weather_enabled_info);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         updateWeatherSettings();
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference != null && preference.getKey() != null) {
-            VibrationUtils.triggerVibration(getContext(), 3);
-        }
-        return super.onPreferenceTreeClick(preference);
+        updateCustomImagePreference();
     }
 
     @Override

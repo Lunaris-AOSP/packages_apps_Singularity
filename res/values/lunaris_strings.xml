@@ -2062,4 +2062,12 @@
     <string name="lockscreen_widgets_style4">Rounded Translucent</string>
     <string name="lockscreen_widgets_transparency_title">Translucent style transparency</string>
     <string name="lockscreen_widgets_transparency_summary">Configure translucent style widget opacity level</string>
+
+    <!-- AOD custom image -->
+    <string name="lockscreen_custom_image_enabled_title">AOD avater image</string>
+    <string name="lockscreen_custom_image_title">Select AOD image</string>
+    <string name="lockscreen_custom_image_summary">Set custom AOD image</string>
+    <string name="lockscreen_custom_image_pick_summary">Select AOD image from gallery</string>
+    <string name="custom_aod_image_not_supported">Clock style not supported</string>
+    <string name="quick_settings_header_needs_gallery">You must install a gallery app!</string>
 </resources>
