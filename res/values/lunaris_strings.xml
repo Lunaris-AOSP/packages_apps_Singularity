@@ -2074,4 +2074,8 @@
     <!-- Lockscreen Weather -->
     <string name="custom_clock_weather_title">Lockscreen weather</string>
     <string name="custom_clock_weather_summary">Show weather on custom lockscreen clock</string>
+
+    <!-- Custom clock frame margin top -->
+    <string name="custom_clock_frame_margin_top_title">Custom clock height</string>
+    <string name="custom_clock_frame_margin_top_summary">Adjust the height of custom clock style</string>
 </resources>
