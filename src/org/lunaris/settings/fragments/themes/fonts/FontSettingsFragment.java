@@ -52,7 +52,7 @@ public class FontSettingsFragment extends SettingsPreferenceFragment implements
     private static final String TAG = "FontSettingsFragment";
 
     private static final String KEY_FONT_MODE = "font_mode";
-    private static final String KEY_PREBUILT_FONTS = "android.theme.customization.fonts";
+    private static final String KEY_PREBUILT_FONTS = "system_font";
     private static final String KEY_CUSTOM_FONT_PICKER = "custom_font_picker";
     private static final String KEY_GITHUB_FONT_PICKER = "github_font_picker";
     private static final String KEY_CUSTOM_FONT_INFO = "custom_font_info";

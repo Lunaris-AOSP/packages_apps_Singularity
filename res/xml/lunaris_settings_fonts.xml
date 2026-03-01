@@ -28,11 +28,10 @@
         android:defaultValue="prebuilt" />
 
     <!-- Prebuilt Fonts -->
-    <Preference
-        android:key="android.theme.customization.fonts"
-        android:title="@string/themes_system_font_title"
-        android:summary="@string/themes_system_font_summary"
-        android:fragment="org.lunaris.settings.fragments.themes.fonts.FontsPicker" />
+    <org.lunaris.settings.preferences.FontsPickerPreference
+        android:key="system_font"
+        android:title="@string/theme_customization_font_title"
+        android:summary="@string/theme_customization_font_summary" />
 
     <!-- Custom Font Picker -->
     <Preference
