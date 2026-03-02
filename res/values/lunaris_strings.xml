@@ -2010,7 +2010,11 @@
     <string name="cutout_progress_charging_pulse_title">Charging pulse animation</string>
     <string name="cutout_progress_charging_pulse_summary">Animate a repeating pulse from center outward while charging</string>
 
-    <!-- Lockscreen Clock Highlight Guide --> 
+    <!-- Lockscreen Clock Highlight Guide -->
+    <string name="ls_clock_title">Lockscreen Clocks</string>
+    <string name="ls_clock_summary">Set your clock style and widgets</string>
+    <string name="clock_styles_disclaimer_title">Before you continue</string>
+    <string name="clock_styles_disclaimer_message">For the best experience with clock faces and widgets, please make sure to:\n\n• Disable lockscreen Smartspace\n• Disable lockscreen weather\n• Disable the large clock style\n\nYou can find these options in the Lockscreen settings.</string>
     <string name="ls_clock_face_highlight_text">Swipe left or right to preview clock styles</string>
 
     <!-- Lockscreen Clock Accent Color -->

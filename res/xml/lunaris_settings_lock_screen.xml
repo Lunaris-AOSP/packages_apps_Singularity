@@ -10,68 +10,11 @@
         android:key="lockscreen_clock_category"
         android:title="@string/qs_clock_title">
 
-        <!-- Lockscreen Clock Font style -->
         <Preference
-            android:key="android.theme.customization.lockscreen_clock_font"
-            android:title="@string/theme_customization_lock_clock_title"
-            android:summary="@string/theme_customization_lock_clock_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.LockClockFontsPickerPreview"/>
-
-        <org.lunaris.settings.preferences.SecureSettingListPreference
-            android:key="clock_color_mode"
-            android:title="@string/clock_color_mode_title"
-            android:entries="@array/clock_color_mode_entries"
-            android:entryValues="@array/clock_color_mode_values"
-            android:summary="%s"
-            android:defaultValue="default" />
-
-        <org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference
-            android:key="clock_custom_color"
-            android:title="@string/custom_color"
-            android:defaultValue="#FFFFFF"
-            android:dependency="clock_color_mode" />
-
-        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
-            android:key="clock_text_opacity"
-            android:title="@string/clock_text_opacity_title"
-            android:summary="@string/clock_text_opacity_summary"
-            android:defaultValue="100"
-            android:max="100"
-            settings:min="10"
-	        settings:units="%" />
-
-        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
-            android:key="custom_clock_frame_margin_top"
-            android:title="@string/custom_clock_frame_margin_top_title"
-            android:summary="@string/custom_clock_frame_margin_top_summary"
-            android:defaultValue="15"
-            android:max="100"
-            settings:min="0" 
-            settings:units="dp" />
-
-        <Preference
-            android:key="lockscreen_widgets"
-            android:title="@string/lockscreen_widgets_title"
-            android:summary="@string/lockscreen_widgets_enabled_summary"
-            android:fragment="org.lunaris.settings.fragments.lockscreen.LockScreenWidgets"/>
-
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="custom_aod_image_enabled"
-            android:title="@string/lockscreen_custom_image_enabled_title"
-            android:summary="@string/lockscreen_custom_image_summary"
-            android:defaultValue="false" />
-
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="custom_clock_weather"
-            android:title="@string/custom_clock_weather_title"
-            android:summary="@string/custom_clock_weather_summary"
-            android:defaultValue="false" />
-
-        <Preference
-            android:key="lockscreen_custom_image"
-            android:title="@string/lockscreen_custom_image_title"
-            android:summary="@string/lockscreen_custom_image_pick_summary"
-            android:dependency="custom_aod_image_enabled" />
+            android:key="clock_styles_settings"
+            android:title="@string/ls_clock_title"
+            android:summary="@string/ls_clock_summary"
+            android:fragment="org.lunaris.settings.fragments.lockscreen.ClockStyles" />
 
     </PreferenceCategory>
 
