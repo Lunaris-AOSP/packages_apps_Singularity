@@ -1172,6 +1172,19 @@
     <string name="solid_gradient_light">Gradient light</string>
     <string name="solid_gradient_shape">Sharp gradient corner</string>
     <string name="solid_gradient_void_light">Gradient Void light</string>
+    <string name="clock_chip_custom_gradient">Custom gradient</string>
+
+    <!-- Start color picker -->
+    <string name="clock_chip_gradient_start_color_title">Gradient start color</string>
+    <string name="clock_chip_gradient_start_color_summary">Color at the start of the gradient</string>
+
+    <!-- End color picker -->
+    <string name="clock_chip_gradient_end_color_title">Gradient end color</string>
+    <string name="clock_chip_gradient_end_color_summary">Color at the end of the gradient</string>
+
+    <!-- Angle seekbar -->
+    <string name="clock_chip_gradient_angle_title">Gradient angle</string>
+    <string name="clock_chip_gradient_angle_summary">Direction of the gradient (0° = left→right, 90° = top→bottom)</string>
 
     <!-- Weather -->
     <string name="weather_settings_title">Weather settings</string>
