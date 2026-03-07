@@ -1190,6 +1190,11 @@
     <string name="clock_chip_gradient_angle_title">Gradient angle</string>
     <string name="clock_chip_gradient_angle_summary">Direction of the gradient (0° = left→right, 90° = top→bottom)</string>
 
+    <!-- Mask text -->
+    <string name="clock_chip_gradient_mask_text_title">Clock text style</string>
+    <string name="clock_chip_gradient_mask_text_default">Default</string>
+    <string name="clock_chip_gradient_mask_text_mask">Transparent (Mask)</string>
+
     <!-- Weather -->
     <string name="weather_settings_title">Weather settings</string>
     <string name="weather_settings_summary">Setup icon pack and weather service</string>
