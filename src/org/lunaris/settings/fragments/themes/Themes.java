@@ -39,6 +39,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.fragments.themes.SmartPixels;
 import org.lunaris.settings.utils.SystemUtils;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 
 import com.android.internal.util.lunaris.VibrationUtils;
 import com.android.internal.util.lunaris.ThemeUtils;
@@ -58,12 +59,14 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_DIALOG_TYPE = "volume_dialog_type";
     private static final String KEY_WIFI_ICON_STYLE = "wifi_icon_style";
     private static final String KEY_QUICKSWITCH = "quickswitch";
+    private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
 
     private Preference mShowCutoutForce;
     private Preference mSmartPixels;
     private Preference mQuickSwitch;
     private SystemSettingListPreference mVolumeDialogType;
     private SystemSettingListPreference mWifiIconStyle;
+    private SystemSettingSwitchPreference mShowVolumePercentage;
     private ThemeUtils mThemeUtils;
 
     private static final String[] WIFI_ICON_OVERLAYS = {
@@ -113,6 +116,18 @@ public class Themes extends SettingsPreferenceFragment implements
         if (mWifiIconStyle != null) {
             mWifiIconStyle.setOnPreferenceChangeListener(this);
         }
+
+        mShowVolumePercentage = findPreference(KEY_SHOW_VOLUME_PERCENTAGE);
+        updateVolumePercentageVisibility();
+    }
+
+    private void updateVolumePercentageVisibility() {
+        if (mShowVolumePercentage == null) return;
+        int type = Settings.System.getIntForUser(
+                getContext().getContentResolver(),
+                KEY_VOLUME_DIALOG_TYPE, 1,
+                UserHandle.USER_CURRENT);
+        mShowVolumePercentage.setVisible(type == 1);
     }
 
     private void updateStyle(String key, String category, String target,
@@ -148,6 +163,10 @@ public class Themes extends SettingsPreferenceFragment implements
         
         if (preference == mVolumeDialogType) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
+            int val = Integer.parseInt((String) newValue);
+            if (mShowVolumePercentage != null) {
+                mShowVolumePercentage.setVisible(val == 1);
+            }
             return true;
         }
         

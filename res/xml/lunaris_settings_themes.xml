@@ -75,10 +75,17 @@
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="volume_dialog_type"
             android:title="@string/volume_dialog_type_title"
-            android:summary="@string/volume_dialog_type_summary"
+            android:summary="%s"
             android:entries="@array/volume_dialog_type_entries"
             android:entryValues="@array/volume_dialog_type_values"
             android:defaultValue="1" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="show_volume_percentage"
+            android:title="@string/show_volume_percentage_title"
+            android:summary="@string/show_volume_percentage_summary"
+            android:defaultValue="false"
+            android:dependency="volume_dialog_type" />
 
     </PreferenceCategory>
 

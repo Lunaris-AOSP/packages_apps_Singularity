@@ -2102,4 +2102,8 @@
 
     <!-- Clock color mode -->
     <string name="clock_color_mode_title">Clock color mode</string>
+
+    <!-- Show volume percentage -->
+    <string name="show_volume_percentage_title">Show volume percentage</string>
+    <string name="show_volume_percentage_summary">Show volume percentage in redesigned volume dialog</string>
 </resources>
