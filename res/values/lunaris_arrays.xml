@@ -1313,14 +1313,23 @@
     </string-array>
 
     <string-array name="volume_dialog_type_entries">
-        <item>Axion</item>
+        <item>Compose</item>
         <item>Redesigned</item>
         <item>Stock</item>
     </string-array>
-    <string-array name="volume_dialog_type_values">
+    <string-array name="volume_dialog_type_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <string-array name="compose_volume_style_entries">
+        <item>Axion</item>
+        <item>Lunaris</item>
+    </string-array>
+    <string-array name="compose_volume_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
     </string-array>
 
     <string-array name="wifi_icon_style_entries">

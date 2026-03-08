@@ -2111,4 +2111,8 @@
     <!-- Show volume percentage -->
     <string name="show_volume_percentage_title">Show volume percentage</string>
     <string name="show_volume_percentage_summary">Show volume percentage in redesigned volume dialog</string>
+
+    <!-- Compose Volume Panel -->
+    <string name="volume_category">Volume</string>
+    <string name="compose_volume_style_title">Compose volume panel</string>
 </resources>

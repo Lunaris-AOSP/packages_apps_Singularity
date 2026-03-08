@@ -60,12 +60,18 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_WIFI_ICON_STYLE = "wifi_icon_style";
     private static final String KEY_QUICKSWITCH = "quickswitch";
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
+    private static final String KEY_AXION_VOLUME_STYLE = "axion_volume_style";
+
+    private static final int VOLUME_TYPE_AXION = 0;
+    private static final int VOLUME_TYPE_REDESIGNED = 1;
+    private static final int VOLUME_TYPE_STOCK = 2;
 
     private Preference mShowCutoutForce;
     private Preference mSmartPixels;
     private Preference mQuickSwitch;
     private SystemSettingListPreference mVolumeDialogType;
     private SystemSettingListPreference mWifiIconStyle;
+    private SystemSettingListPreference mAxionVolumeStyle;
     private SystemSettingSwitchPreference mShowVolumePercentage;
     private ThemeUtils mThemeUtils;
 
@@ -117,17 +123,27 @@ public class Themes extends SettingsPreferenceFragment implements
             mWifiIconStyle.setOnPreferenceChangeListener(this);
         }
 
+        mAxionVolumeStyle = findPreference(KEY_AXION_VOLUME_STYLE);
         mShowVolumePercentage = findPreference(KEY_SHOW_VOLUME_PERCENTAGE);
-        updateVolumePercentageVisibility();
+
+        updateVolumeRelatedVisibility(getCurrentVolumeDialogType());
     }
 
-    private void updateVolumePercentageVisibility() {
-        if (mShowVolumePercentage == null) return;
-        int type = Settings.System.getIntForUser(
+    private int getCurrentVolumeDialogType() {
+        return Settings.System.getIntForUser(
                 getContext().getContentResolver(),
-                KEY_VOLUME_DIALOG_TYPE, 1,
+                KEY_VOLUME_DIALOG_TYPE,
+                VOLUME_TYPE_REDESIGNED,
                 UserHandle.USER_CURRENT);
-        mShowVolumePercentage.setVisible(type == 1);
+    }
+
+    private void updateVolumeRelatedVisibility(int type) {
+        if (mAxionVolumeStyle != null) {
+            mAxionVolumeStyle.setVisible(type == VOLUME_TYPE_AXION);
+        }
+        if (mShowVolumePercentage != null) {
+            mShowVolumePercentage.setVisible(type == VOLUME_TYPE_REDESIGNED);
+        }
     }
 
     private void updateStyle(String key, String category, String target,
@@ -151,7 +167,7 @@ public class Themes extends SettingsPreferenceFragment implements
     }
 
     private void updateWifiIconStyle() {
-        updateStyle(KEY_WIFI_ICON_STYLE, "android.theme.customization.wifi_icon", 
+        updateStyle(KEY_WIFI_ICON_STYLE, "android.theme.customization.wifi_icon",
                 "com.android.systemui", 0, WIFI_ICON_OVERLAYS, true);
     }
 
@@ -159,19 +175,16 @@ public class Themes extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
-        int value = 0;
-        
+
         if (preference == mVolumeDialogType) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             int val = Integer.parseInt((String) newValue);
-            if (mShowVolumePercentage != null) {
-                mShowVolumePercentage.setVisible(val == 1);
-            }
+            updateVolumeRelatedVisibility(val);
             return true;
         }
         
         if (preference == mWifiIconStyle) {
-            value = Integer.parseInt((String) newValue);
+            int value = Integer.parseInt((String) newValue);
             Settings.System.putIntForUser(resolver,
                     KEY_WIFI_ICON_STYLE, value, UserHandle.USER_CURRENT);
             updateWifiIconStyle();
