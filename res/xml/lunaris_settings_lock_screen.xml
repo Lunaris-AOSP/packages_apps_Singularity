@@ -19,6 +19,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/depth_wallpaper_category">
+        
+        <Preference
+            android:key="depth_wallpaper"
+            android:title="@string/depthwall_wallpaper_enabled_title"
+            android:summary="@string/depthwall_wallpaper_enabled_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.WallpaperDepth" />
+     </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="lockscreen_interface_category"
         android:title="@string/lockscreen_interface_category">
 
