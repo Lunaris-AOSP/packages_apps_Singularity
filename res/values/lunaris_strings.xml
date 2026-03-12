@@ -2117,4 +2117,8 @@
     <!-- Compose Volume Panel -->
     <string name="volume_category">Volume</string>
     <string name="compose_volume_style_title">Compose volume panel</string>
+
+    <!-- Status bar icon order -->
+    <string name="status_bar_icon_order_title">Status bar icon order</string>
+    <string name="status_bar_icon_order_summary">Enable legacy status bar icon order</string>
 </resources>

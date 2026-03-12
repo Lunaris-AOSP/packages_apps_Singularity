@@ -44,6 +44,7 @@ import org.lunaris.settings.fragments.statusbar.BatteryBar;
 import org.lunaris.settings.fragments.statusbar.Clock;
 import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
 import org.lunaris.settings.utils.DeviceUtils;
+import org.lunaris.settings.utils.SystemUtils;
 
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
@@ -62,6 +63,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String LOGO_COLOR = "status_bar_logo_color";
     private static final String LOGO_COLOR_PICKER = "status_bar_logo_color_picker";
+    private static final String STATUS_BAR_ICON_ORDER_LEGACY = "status_bar_icon_order_legacy";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -72,6 +74,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private LineageSystemSettingListPreference mQuickPulldown;
     private SystemSettingListPreference mLogoColor;
     private ColorPickerPreference mLogoColorPicker;
+    private SwitchPreferenceCompat mStatusBarIconOrderLegacy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,6 +128,11 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mLogoColorPicker.setOnPreferenceChangeListener(this);
         updateColorPrefs(logoColor);
 
+        mStatusBarIconOrderLegacy = findPreference(STATUS_BAR_ICON_ORDER_LEGACY);
+        if (mStatusBarIconOrderLegacy != null) {
+            mStatusBarIconOrderLegacy.setOnPreferenceChangeListener(this);
+        }
+
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
             mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
@@ -158,6 +166,9 @@ public class StatusBar extends SettingsPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_LOGO_COLOR_PICKER, intHex);
+            return true;
+        } else if (preference == mStatusBarIconOrderLegacy) {
+            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }
         return false;
