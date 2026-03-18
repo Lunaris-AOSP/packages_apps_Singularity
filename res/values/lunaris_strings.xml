@@ -2217,4 +2217,8 @@
     <string name="idle_manager_clear_stats_title">Clear stats</string>
     <string name="idle_manager_clear_stats_confirm">This will permanently delete all enforcement history. The idle manager will continue running normally.</string>
     <string name="idle_manager_clear_stats_button">Clear</string>
+
+    <!-- Lockscreen Clock Size -->
+    <string name="clock_size_title">Clock size</string>
+    <string name="clock_size_summary">Scale the lockscreen clock (50–150%)</string>
 </resources>

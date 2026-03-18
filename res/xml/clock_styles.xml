@@ -44,6 +44,15 @@
         settings:min="0" 
         settings:units="dp" />
 
+    <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+        android:key="clock_size_scale"
+        android:title="@string/clock_size_title"
+        android:summary="@string/clock_size_summary"
+        android:defaultValue="100"
+        android:max="150"
+        settings:min="50"
+        settings:units="%" />
+
     <Preference
         android:key="lockscreen_widgets"
         android:title="@string/lockscreen_widgets_title"
