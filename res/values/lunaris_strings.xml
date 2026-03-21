@@ -2223,4 +2223,8 @@
     <!-- Lockscreen Clock Size -->
     <string name="clock_size_title">Clock size</string>
     <string name="clock_size_summary">Scale the lockscreen clock (50–150%)</string>
+
+    <!-- Flash SMS -->
+    <string name="disable_flash_sms_title">Disable Flash SMS</string>
+    <string name="disable_flash_sms_summary">Converts full-screen flash messages into standard text SMS.</string>
 </resources>
