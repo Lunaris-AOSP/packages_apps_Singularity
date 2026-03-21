@@ -61,6 +61,13 @@
             android:summary="@string/miscellaneous_ignore_window_secure_summary"
             android:defaultValue="false" />
 
+        <!-- Block PairIP license activity -->
+        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.pairip.activity.block"
+            android:title="@string/miscellaneous_pairip_activity_block_title"
+            android:summary="@string/miscellaneous_pairip_activity_block_summary"
+            android:defaultValue="false" /> 
+
         <!-- Block wallpaper dimming -->
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="block_wallpaper_dimming"
