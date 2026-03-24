@@ -62,6 +62,12 @@
         settings:min="10" 
         settings:units="%" />
 
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lock_screen_custom_clock_aod_anim"
+        android:title="@string/lockscreen_custom_clock_aod_anim_title"
+        android:summary="@string/lockscreen_custom_clock_aod_anim_summary"
+        android:defaultValue="true" />
+
     <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
         android:key="lock_screen_custom_clock_margin_top"
         android:title="@string/lockscreen_custom_clock_frame_margin_top_title"
