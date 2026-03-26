@@ -2261,4 +2261,21 @@
     <string name="lockscreen_custom_clock_color_mode_title">Custom clock color mode</string>
     <string name="lockscreen_custom_clock_aod_anim_title">Custom clock AOD animation</string>
     <string name="lockscreen_custom_clock_aod_anim_summary">Set AOD animation for custom clock style</string>
+
+    <!-- Gradient styles -->
+    <string name="gradient_settings_title">Gradients customization</string>
+    <string name="gradient_settings_summary">Apply gradient colors to various system elements</string>
+    <string name="gradient_elements_category">System elements</string>
+    <string name="gradient_colors_category">Gradient colors</string>
+    <string name="qs_tile_gradient_title">QS tiles gradient</string>
+    <string name="qs_tile_gradient_summary">Enable gradient backgrounds for QS tiles (Use with default style only)</string>
+    <string name="qs_brightness_slider_gradient_title">QS brightness slider gradient</string>
+    <string name="qs_brightness_slider_gradient_summary">Enable gradient backgrounds for QS brightness slider (Use with default style only)</string>
+    <string name="volume_slider_gradient_title">Volume slider gradient</string>
+    <string name="volume_slider_gradient_summary">Enable gradient backgrounds for volume slider (Use with default style only)</string>
+    <string name="custom_gradient_color_mode_title">Gradient color mode</string>
+    <string name="custom_gradient_color_mode_auto">Auto mode</string>
+    <string name="custom_gradient_color_mode_custom">Custom mode</string>
+    <string name="custom_gradient_start_color_title">Gradient start color</string>
+    <string name="custom_gradient_end_color_title">Gradient end color</string>
 </resources>

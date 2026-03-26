@@ -23,6 +23,13 @@
             android:title="@string/monet_settings_title"
             android:summary="@string/monet_settings_summary"
             android:fragment="org.lunaris.settings.fragments.themes.ColorsSettingsFragment" />
+
+        <!-- Gradient Customization -->
+        <Preference
+            android:key="gradient_settings"
+            android:title="@string/gradient_settings_title"
+            android:summary="@string/gradient_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.GradientSettings" />
             
         <Preference
             android:key="android.theme.customization.navbar"
