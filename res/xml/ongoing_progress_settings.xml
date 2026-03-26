@@ -45,6 +45,15 @@
         android:key="ongoing_progress_category"
         android:title="@string/ongoing_progress_category_title">
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="ongoing_chip_bg_alpha"
+            android:title="@string/ongoing_chip_bg_alpha_title"
+            android:summary="@string/ongoing_chip_bg_alpha_summary"
+            android:defaultValue="100"
+            android:max="100"
+            settings:min="0"
+            settings:units="%" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="ongoing_action_chip"
             android:title="@string/ongoing_action_chip_title"

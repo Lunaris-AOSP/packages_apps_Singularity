@@ -182,6 +182,8 @@
     <string name="ongoing_chip_color_mode_accent">System accent color</string>
     <string name="ongoing_chip_color_mode_icon">App icon color</string>
     <string name="ongoing_chip_color_mode_album_art">Album art color</string>
+    <string name="ongoing_chip_bg_alpha_title">Chip background opacity</string>
+    <string name="ongoing_chip_bg_alpha_summary">Adjust the opacity of the ongoing action chip</string>
 
     <!-- Units -->
     <string name="unit_seconds">seconds</string>
