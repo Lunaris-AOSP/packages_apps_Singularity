@@ -73,6 +73,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_TILE_SHAPE = "qs_tile_shape";
     private static final String KEY_BRIGHTNESS_SLIDER_STYLE = "qs_brightness_slider_style";
     private static final String KEY_BRIGHTNESS_SLIDER_SHAPE = "qs_brightness_slider_shape";
+    private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
+    private static final String KEY_QS_TILE_ICON_SHAPE = "qs_tile_icon_shape";
+    private static final String KEY_QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -89,6 +92,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mQsTileStyleMinimalInvert;
     private SystemSettingSwitchPreference mQsUseModifiedTileSpacing;
     private SystemSettingListPreference mQsTileShape;
+    private SystemSettingListPreference mQsPanelStyle;
+    private Preference mQsTileIconShape;
+    private SystemSettingSwitchPreference mQsTileLabelHide;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,8 +145,17 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         if (mQsTileStyleMinimal != null) {
             mQsTileStyleMinimal.setOnPreferenceChangeListener(this);
-            updateMinimalStyleDependencies();
         }
+
+        mQsPanelStyle = findPreference(KEY_QS_PANEL_STYLE);
+        if (mQsPanelStyle != null) {
+            mQsPanelStyle.setOnPreferenceChangeListener(this);
+        }
+
+        mQsTileIconShape = findPreference(KEY_QS_TILE_ICON_SHAPE);
+        mQsTileLabelHide = findPreference(KEY_QS_TILE_LABEL_HIDE);
+
+        updatePanelStyleDependencies();
 
         mBrightnessSliderStyle = findPreference(KEY_BRIGHTNESS_SLIDER_STYLE);
         mBrightnessSliderShape = findPreference(KEY_BRIGHTNESS_SLIDER_SHAPE);
@@ -172,19 +187,43 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void updateMinimalStyleDependencies() {
+    private boolean isPanelStyleClassic() {
+        ContentResolver resolver = getContext().getContentResolver();
+        return Settings.System.getInt(resolver, KEY_QS_PANEL_STYLE, 0) == 1;
+    }
+
+    private void updatePanelStyleDependencies() {
+        boolean isClassic = isPanelStyleClassic();
+        boolean showClassicOffOptions = !isClassic;
+
+        if (mQsTileStyleMinimal != null)
+            mQsTileStyleMinimal.setVisible(showClassicOffOptions);
+        if (mQsUseModifiedTileSpacing != null)
+            mQsUseModifiedTileSpacing.setVisible(showClassicOffOptions);
+        if (mDualTargetTileStyle != null)
+            mDualTargetTileStyle.setVisible(showClassicOffOptions);
+
+        if (mQsTileIconShape != null)
+            mQsTileIconShape.setVisible(isClassic);
+        if (mQsTileLabelHide != null)
+            mQsTileLabelHide.setVisible(isClassic);
+
+        updateMinimalStyleDependencies(isClassic);
+    }
+
+    private void updateMinimalStyleDependencies(boolean isClassic) {
         if (mQsTileStyleMinimal == null) return;
 
         ContentResolver resolver = getContext().getContentResolver();
-        boolean isMinimalEnabled = Settings.System.getInt(resolver,
-                KEY_QS_TILE_STYLE_MINIMAL, 0) == 1;
+        boolean isMinimalEnabled = !isClassic &&
+                Settings.System.getInt(resolver, KEY_QS_TILE_STYLE_MINIMAL, 0) == 1;
 
         if (mQsTileStyleMinimalInvert != null) {
             mQsTileStyleMinimalInvert.setVisible(isMinimalEnabled);
         }
 
         if (mQsTileShape != null) {
-            mQsTileShape.setVisible(!isMinimalEnabled);
+            mQsTileShape.setVisible(!isClassic && !isMinimalEnabled);
         }
     }
 
@@ -221,6 +260,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 mShowAutoBrightness.setEnabled(value > 0);
             updateBrightnessSliderStyleDependencies();
             return true;
+        } else if (preference == mQsPanelStyle) {
+            updatePanelStyleDependencies();
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
         } else if (preference == mQsCompactPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
@@ -237,7 +280,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsTileStyleMinimal) {
-            updateMinimalStyleDependencies();
+            updateMinimalStyleDependencies(isPanelStyleClassic());
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mBrightnessSliderStyle) {
@@ -285,15 +328,28 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                         keys.add(KEY_QS_TILE_HAPTIC);
                     }
 
-                    boolean isMinimalEnabled = Settings.System.getInt(resolver,
-                            KEY_QS_TILE_STYLE_MINIMAL, 0) == 1;
-                    
-                    if (!isMinimalEnabled) {
+                    boolean isClassic = Settings.System.getInt(resolver,
+                            KEY_QS_PANEL_STYLE, 0) == 1;
+
+                    if (isClassic) {
+                        keys.add(KEY_QS_TILE_STYLE_MINIMAL);
                         keys.add(KEY_QS_TILE_STYLE_MINIMAL_INVERT);
-                    }
-                    
-                    if (isMinimalEnabled) {
                         keys.add(KEY_QS_TILE_SHAPE);
+                        keys.add(KEY_QS_USE_MODIFIED_TILE_SPACING);
+                        keys.add(KEY_DUAL_TARGET_TILE_STYLE);
+                    } else {
+                        keys.add(KEY_QS_TILE_ICON_SHAPE);
+                        keys.add(KEY_QS_TILE_LABEL_HIDE);
+                        boolean isMinimalEnabled = Settings.System.getInt(resolver,
+                                KEY_QS_TILE_STYLE_MINIMAL, 0) == 1;
+
+                        if (!isMinimalEnabled) {
+                            keys.add(KEY_QS_TILE_STYLE_MINIMAL_INVERT);
+                        }
+
+                        if (isMinimalEnabled) {
+                            keys.add(KEY_QS_TILE_SHAPE);
+                        }
                     }
 
                     boolean isSliderStyleEnabled = Settings.System.getInt(resolver,
