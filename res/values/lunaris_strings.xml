@@ -2307,4 +2307,8 @@
     <string name="shape_teardrop">Teardrop</string>
     <string name="shape_vessel">Vessel</string>
     <string name="shape_rounded_hexagon">Rounded hexagon</string>
+
+    <!-- Notification bubbles -->
+    <string name="notification_bubble_apps_title">Bubble Notifications</string>
+    <string name="notification_bubble_apps_summary">Launch apps in a bubble when clicking their notifications</string>
 </resources>
