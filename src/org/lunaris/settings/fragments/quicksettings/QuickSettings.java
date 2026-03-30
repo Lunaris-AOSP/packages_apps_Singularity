@@ -40,6 +40,8 @@ import org.lunaris.settings.fragments.quicksettings.QsHeaderImageSettings;
 import org.lunaris.settings.preferences.CustomSeekBarPreference;
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SecureSettingListPreference;
+import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
 
@@ -76,6 +78,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
     private static final String KEY_QS_TILE_ICON_SHAPE = "qs_tile_icon_shape";
     private static final String KEY_QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
+    private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -95,6 +98,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mQsPanelStyle;
     private Preference mQsTileIconShape;
     private SystemSettingSwitchPreference mQsTileLabelHide;
+    private SecureSettingSwitchPreference mQsShowMediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +122,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mQsCompactPlayer = (Preference) findPreference(KEY_QS_COMPACT_PLAYER);
         mQsCompactPlayer.setOnPreferenceChangeListener(this);
+
+        mQsShowMediaPlayer = (SecureSettingSwitchPreference) findPreference(KEY_QS_SHOW_MEDIA_PLAYER);
+        if (mQsShowMediaPlayer != null) {
+            mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
+        }
 
         mSingleQsTone = findPreference(KEY_SINGLE_QS_TONE);
         if (mSingleQsTone != null) {
@@ -285,6 +294,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mBrightnessSliderStyle) {
             updateBrightnessSliderStyleDependencies();
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mQsShowMediaPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         }

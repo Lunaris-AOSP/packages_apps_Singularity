@@ -206,12 +206,18 @@
         android:key="quick_settings_media_category"
         android:title="@string/quick_settings_media_category">
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="qs_show_media_player"
+            android:title="@string/qs_show_media_player_title"
+            android:summary="@string/qs_show_media_player_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_compact_media_player_mode"
             android:title="@string/qs_compact_media_player_mode_title"
             android:summary="@string/qs_compact_media_player_mode_summary"
             android:defaultValue="false" />
-        
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.system.qs.qsmedia"
             android:title="@string/qs_media_stock_title"
