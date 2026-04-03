@@ -1332,24 +1332,6 @@
         <item>1</item>
     </string-array>
 
-    <string-array name="wifi_icon_style_entries">
-        <item>@string/default_value</item>
-        <item>@string/wifi_icon_style1</item>
-        <item>@string/wifi_icon_style2</item>
-        <item>@string/wifi_icon_style3</item>
-        <item>@string/wifi_icon_style4</item>
-        <item>@string/wifi_icon_style5</item>
-    </string-array>
-
-    <string-array name="wifi_icon_style_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
     <string-array name="cutout_progress_finish_style_entries">
         <item>Pop</item>
         <item>Segmented cascade</item>

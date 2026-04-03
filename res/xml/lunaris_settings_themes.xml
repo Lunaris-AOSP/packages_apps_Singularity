@@ -37,14 +37,6 @@
             android:summary="@string/theme_customization_navbar_summary"
             android:fragment="org.lunaris.settings.fragments.themes.NavbarStyles"/>
 
-        <org.lunaris.settings.preferences.SystemSettingListPreference
-            android:key="wifi_icon_style"
-            android:title="@string/wifi_icon_style_title"
-            android:entries="@array/wifi_icon_style_entries"
-            android:entryValues="@array/wifi_icon_style_values"
-            android:summary="%s"
-            android:defaultValue="0" />
-
         <!-- Font style -->
         <Preference
             android:key="font_settings"
