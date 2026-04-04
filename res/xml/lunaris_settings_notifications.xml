@@ -74,6 +74,21 @@
             android:summary="@string/notification_row_transparency_lockscreen_summary"
             android:defaultValue="true" />
 
+        <!-- Notification app icon -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_use_app_icons"
+            android:title="@string/notification_use_app_icons_title"
+            android:summary="@string/notification_use_app_icons_summary"
+            android:defaultValue="true" />
+
+        <!-- Notification themed app icon -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_use_themed_app_icons"
+            android:title="@string/notification_use_themed_app_icons_title"
+            android:summary="@string/notification_use_themed_app_icons_summary"
+            android:defaultValue="false"
+            android:dependency="notification_use_app_icons" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
