@@ -456,6 +456,10 @@
     <string name="edge_light_animation_effect_sparkle">Sparkle</string>
     <string name="edge_light_animation_effect_chase">Chase</string>
     <string name="edge_light_animation_effect_comet">Comet</string>
+    <string name="edge_light_spread_title">Glow spread</string>
+    <string name="edge_light_spread_summary">How far inward the glow extends from the edge</string>
+    <string name="edge_light_intensity_title">Glow intensity</string>
+    <string name="edge_light_intensity_summary">Peak brightness of the glow effect</string>
 
     <!-- Ambient Ticker -->
     <string name="pulse_on_new_tracks_title">Music ticker</string>
