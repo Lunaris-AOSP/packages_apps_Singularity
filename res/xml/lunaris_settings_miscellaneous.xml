@@ -75,12 +75,11 @@
             android:summary="@string/ignore_wallpaper_dimming_requests_summary"
             android:defaultValue="false" />
 
-        <!-- Unlimit screenrecord -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        <!-- <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="unlimit_screenrecord"
             android:title="@string/unlimit_screenrecord_title"
             android:summary="@string/unlimit_screenrecord_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false" /> -->
 
         <!-- No storage restrict -->
         <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
