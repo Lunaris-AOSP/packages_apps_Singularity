@@ -20,11 +20,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.MediaStore;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -45,6 +48,7 @@ import org.lunaris.settings.fragments.statusbar.Clock;
 import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
+import org.lunaris.settings.utils.StatusBarLogoImageUtils;
 
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
@@ -63,18 +67,25 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String LOGO_COLOR = "status_bar_logo_color";
     private static final String LOGO_COLOR_PICKER = "status_bar_logo_color_picker";
+    private static final String LOGO_CUSTOM_STYLE = "status_bar_logo_style";
     private static final String STATUS_BAR_ICON_ORDER_LEGACY = "status_bar_icon_order_legacy";
+    private static final String LOGO_CUSTOM_IMAGE = "status_bar_logo_custom_image";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
     private static final int PULLDOWN_DIR_LEFT = 2;
     private static final int PULLDOWN_DIR_ALWAYS = 3;
 
+    private static final int LOGO_STYLE_CUSTOM = 33;
+    private static final int LOGO_CUSTOM_IMAGE_REQUEST = 3001;
+
     private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mQuickPulldown;
     private SystemSettingListPreference mLogoColor;
     private ColorPickerPreference mLogoColorPicker;
     private SwitchPreferenceCompat mStatusBarIconOrderLegacy;
+    private Preference mLogoCustomImage;
+    private Preference mLogoStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +144,14 @@ public class StatusBar extends SettingsPreferenceFragment implements
             mStatusBarIconOrderLegacy.setOnPreferenceChangeListener(this);
         }
 
+        mLogoStyle = findPreference(LOGO_CUSTOM_STYLE);
+        if (mLogoStyle != null) {
+            mLogoStyle.setOnPreferenceChangeListener(this);
+        }
+
+        mLogoCustomImage = findPreference(LOGO_CUSTOM_IMAGE);
+        updateCustomImagePrefVisibility();
+
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
             mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
@@ -155,6 +174,10 @@ public class StatusBar extends SettingsPreferenceFragment implements
             mLogoColor.setSummary(mLogoColor.getEntries()[index]);
             updateColorPrefs(logoColor);
             return true;
+        } else if (preference.getKey() != null
+                && preference.getKey().equals(LOGO_CUSTOM_STYLE)) {
+            updateCustomImagePrefVisibility();
+            return true;
         } else if (preference == mLogoColorPicker) {
             String hex = ColorPickerPreference.convertToARGB(
                     Integer.valueOf(String.valueOf(newValue)));
@@ -172,6 +195,56 @@ public class StatusBar extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGO_CUSTOM_IMAGE_REQUEST
+                && resultCode == Activity.RESULT_OK
+                && data != null) {
+            Uri imgUri = data.getData();
+            if (imgUri != null) {
+                String savedPath = StatusBarLogoImageUtils.saveLogoImage(
+                        getActivity(), imgUri);
+                if (savedPath != null) {
+                    Settings.System.putStringForUser(
+                            getActivity().getContentResolver(),
+                            Settings.System.STATUS_BAR_LOGO_CUSTOM_IMAGE_URI,
+                            savedPath,
+                            UserHandle.USER_CURRENT);
+                    updateCustomImagePrefSummary(savedPath);
+                } else {
+                    Toast.makeText(getContext(),
+                            R.string.qs_header_image_error,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private void updateCustomImagePrefVisibility() {
+        if (mLogoCustomImage == null) return;
+        int currentStyle = Settings.System.getIntForUser(
+                getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_LOGO_STYLE, 0,
+                UserHandle.USER_CURRENT);
+        mLogoCustomImage.setVisible(currentStyle == LOGO_STYLE_CUSTOM);
+        if (currentStyle == LOGO_STYLE_CUSTOM) {
+            String path = Settings.System.getStringForUser(
+                    getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_LOGO_CUSTOM_IMAGE_URI,
+                    UserHandle.USER_CURRENT);
+            updateCustomImagePrefSummary(path);
+        }
+    }
+
+    private void updateCustomImagePrefSummary(String path) {
+        if (mLogoCustomImage == null) return;
+        mLogoCustomImage.setSummary(
+                path != null && !path.isEmpty()
+                        ? path
+                        : getString(R.string.status_bar_logo_custom_image_pick_summary));
     }
 
     private void updateQuickPulldownSummary(int value) {
@@ -207,6 +280,19 @@ public class StatusBar extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference != null && preference.getKey() != null) {
             VibrationUtils.triggerVibration(getContext(), 3);
+        }
+        if (preference == mLogoCustomImage) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(intent, LOGO_CUSTOM_IMAGE_REQUEST);
+            } catch (Exception e) {
+                Toast.makeText(getContext(),
+                        R.string.quick_settings_header_needs_gallery,
+                        Toast.LENGTH_LONG).show();
+            }
+            return true;
         }
         return super.onPreferenceTreeClick(preference);
     }

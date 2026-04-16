@@ -705,6 +705,7 @@
         <item>@string/status_bar_logo_style_ubuntu</item>
         <item>@string/status_bar_logo_style_mint</item>
         <item>@string/status_bar_logo_style_amogus</item>
+        <item>@string/status_bar_logo_style_custom_image</item>
     </string-array>
 
     <string-array name="statusbar_logo_drawables" translatable="false">
@@ -741,6 +742,7 @@
         <item>ic_ubuntu_logo</item>
         <item>ic_mint_logo</item>
         <item>ic_amogus</item>
+        <item>custom_image</item>
     </string-array>
 
     <!-- Statusbar logo color -->

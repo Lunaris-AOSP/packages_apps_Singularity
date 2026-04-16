@@ -128,6 +128,12 @@
                 android:summary="@string/status_bar_logo_style_summary"
                 android:dependency="status_bar_logo" />
 
+            <Preference
+                android:key="status_bar_logo_custom_image"
+                android:title="@string/status_bar_logo_custom_image_title"
+                android:summary="@string/status_bar_logo_custom_image_pick_summary"
+                android:dependency="status_bar_logo" />
+
             <!-- Logo color type -->
             <org.lunaris.settings.preferences.SystemSettingListPreference
                 android:key="status_bar_logo_color"

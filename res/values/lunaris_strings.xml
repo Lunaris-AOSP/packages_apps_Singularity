@@ -1266,6 +1266,12 @@
     <string name="status_bar_logo_style_mint">Linux Mint</string>
     <string name="status_bar_logo_style_amogus">Amogus</string>
 
+    <!-- Custom image logo style -->
+    <string name="status_bar_logo_style_custom_image">Custom image</string>
+    <string name="status_bar_logo_custom_image_title">Select custom logo image</string>
+    <string name="status_bar_logo_custom_image_summary">Tap to pick an image from gallery</string>
+    <string name="status_bar_logo_custom_image_pick_summary">Choose an image from gallery</string>
+
     <!-- Statusbar logo color -->
     <string name="default_string">Default</string>
     <string name="status_bar_logo_color_title">Color</string>
