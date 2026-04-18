@@ -2445,4 +2445,8 @@
     <!-- Emoji style -->
     <string name="emoji_style_title">Emoji style</string>
     <string name="emoji_style_summary">Choose the system emoji pack without changing text fonts</string>
+
+    <!-- Animation -->
+    <string name="activity_anim_perf_override_title">Activity Animation Override</string>
+    <string name="activity_anim_perf_override_summary">Use optimized activity transition animations</string>
 </resources>
