@@ -39,13 +39,14 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.fragments.themes.SmartPixels;
 import org.lunaris.settings.utils.SystemUtils;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SystemPropertySwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 
 import com.android.internal.util.lunaris.VibrationUtils;
 
 import com.android.internal.util.lunaris.ThemeUtils;
 
-import org.lunaris.settings.utils.SystemRestartUtils;
+import com.android.internal.util.lunaris.SystemRestartUtils;
 
 import java.util.List;
 
@@ -61,6 +62,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_QUICKSWITCH = "quickswitch";
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
     private static final String KEY_AXION_VOLUME_STYLE = "axion_volume_style";
+    private static final String SYS_ANI_OVERRIDE_ENABLED = "persist.sys.activity_anim_perf_override";
 
     private static final int VOLUME_TYPE_AXION = 0;
     private static final int VOLUME_TYPE_REDESIGNED = 1;
@@ -73,6 +75,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mAxionVolumeStyle;
     private SystemSettingSwitchPreference mShowVolumePercentage;
     private ThemeUtils mThemeUtils;
+    private SystemPropertySwitchPreference mAniOverrideEnabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,9 @@ public class Themes extends SettingsPreferenceFragment implements
         boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
         if (!withGoogleApps)
             prefScreen.removePreference(mQuickSwitch);
+
+        mAniOverrideEnabled = (SystemPropertySwitchPreference) findPreference(SYS_ANI_OVERRIDE_ENABLED);
+        mAniOverrideEnabled.setOnPreferenceChangeListener(this);
 
         mVolumeDialogType = findPreference(KEY_VOLUME_DIALOG_TYPE);
         if (mVolumeDialogType != null) {
@@ -141,6 +147,11 @@ public class Themes extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             int val = Integer.parseInt((String) newValue);
             updateVolumeRelatedVisibility(val);
+            return true;
+        }
+
+        if (preference == mAniOverrideEnabled) {
+            SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }
         
