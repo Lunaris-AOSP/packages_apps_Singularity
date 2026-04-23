@@ -102,24 +102,23 @@ public class GithubFontPreviewDialog extends Dialog {
     }
 
     private void loadFontPreview() {
-        try {
-            File fontFile = new File(mFontUri.getPath());
-            Typeface typeface = mFontInstaller.loadTypefaceFromFile(getContext(), fontFile);
-            
-            if (typeface != null) {
-                mPreviewTitle.setTypeface(typeface);
-                mPreviewSubtitle.setTypeface(typeface);
-                mPreviewBody.setTypeface(typeface);
-                mPreviewNumbers.setTypeface(typeface);
-                mPreviewSpecial.setTypeface(typeface);
-            } else {
-                Toast.makeText(getContext(), R.string.font_preview_error, Toast.LENGTH_SHORT).show();
-                dismiss();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), R.string.font_preview_error, Toast.LENGTH_SHORT).show();
-            dismiss();
-        }
+        mInstallButton.setEnabled(false);
+        new Thread(() -> {
+            Typeface typeface = mFontInstaller.loadTypefaceFromUri(mFontUri);
+            mInstallButton.post(() -> {
+                if (typeface != null) {
+                    mPreviewTitle.setTypeface(typeface);
+                    mPreviewSubtitle.setTypeface(typeface);
+                    mPreviewBody.setTypeface(typeface);
+                    mPreviewNumbers.setTypeface(typeface);
+                    mPreviewSpecial.setTypeface(typeface);
+                    mInstallButton.setEnabled(true);
+                } else {
+                    Toast.makeText(getContext(), R.string.font_preview_error,
+                            Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+            });
+        }).start();
     }
 }

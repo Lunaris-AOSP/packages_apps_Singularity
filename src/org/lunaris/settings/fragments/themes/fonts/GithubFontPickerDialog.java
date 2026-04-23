@@ -232,18 +232,17 @@ public class GithubFontPickerDialog extends Dialog {
                 updateDownloadStatus(isDownloaded);
 
                 mPreviewButton.setOnClickListener(v -> {
-                    if (isDownloaded) {
+                    if (fontFile.exists()) {
                         openPreview(fontFile, item.displayName);
                     } else {
                         downloadAndPreview(item, fontFile);
                     }
                 });
-
                 mInstallButton.setOnClickListener(v -> {
-                    if (isDownloaded) {
+                    if (fontFile.exists()) {
                         installFont(fontFile, item.displayName);
                     } else {
-                        Toast.makeText(getContext(), 
+                        Toast.makeText(getContext(),
                                 R.string.download_first_message, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -309,8 +308,9 @@ public class GithubFontPickerDialog extends Dialog {
             }
 
             private void installFont(File fontFile, String displayName) {
-                new Thread(() -> {
-                    String postScriptName = mFontInstaller.installFontFromFile(getContext(), fontFile);
+            new Thread(() -> {
+                mFontInstaller.resetFontUpdates(); // ADD THIS
+                String postScriptName = mFontInstaller.installFontFromFile(fontFile);
                     
                     if (postScriptName != null) {
                         Settings.Secure.putStringForUser(

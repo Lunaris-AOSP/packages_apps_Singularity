@@ -33,7 +33,9 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.statusbar.IStatusBarService;
+
 import org.json.JSONObject;
 
 import java.io.File;
@@ -46,16 +48,19 @@ import java.util.List;
 public class ExternalFontInstaller {
 
     private static final String TAG = "ExternalFontInstaller";
+
     private static final String CUSTOM_FONT_FILE = "cust_font.ttf";
     private static final String TEMP_PREVIEW_FONT = "preview_font.ttf";
-    private static final String OVERLAY_CATEGORY_FONT = "android.theme.customization.font";
 
+    private static final String OVERLAY_CATEGORY_FONT = "android.theme.customization.font";
     public static final String DEFAULT_FONT_FAMILY = "ext_font";
     private static final String DEFAULT_FONT_OVERLAY = "com.android.theme.font.extfont";
 
     private static final String PROP_OVERLAY_FONTS = "persist.sys.ax_overlay_fonts";
 
-    private static final int[] FONT_WEIGHTS = {100, 200, 300, 400, 500, 600, 700, 800, 900};
+    private static final int[] FONT_WEIGHTS = {
+        100, 200, 300, 400, 500, 600, 700, 800, 900
+    };
 
     private final Context mContext;
     private final FontManager mFontManager;
@@ -68,15 +73,15 @@ public class ExternalFontInstaller {
     public static void rebootDevice() {
         try {
             android.os.IBinder binder = ServiceManager.getService("statusbar");
-            IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(binder);
-            statusBarService.reboot(false, "system_font_change");
+            IStatusBarService svc = IStatusBarService.Stub.asInterface(binder);
+            svc.reboot(false, "system_font_change");
         } catch (Exception e) {
             Log.e(TAG, "Failed to reboot device via statusbar service", e);
         }
     }
 
-    public Typeface loadTypefaceFromUri(Context context, Uri uri) {
-        File tempFile = copyUriToCache(context, uri, TEMP_PREVIEW_FONT);
+    public Typeface loadTypefaceFromUri(Uri uri) {
+        File tempFile = copyUriToCache(uri, TEMP_PREVIEW_FONT);
         if (tempFile == null) return null;
 
         String postScriptName = extractPostScriptName(tempFile);
@@ -84,28 +89,19 @@ public class ExternalFontInstaller {
             tempFile.delete();
             return null;
         }
-
         return Typeface.createFromFile(tempFile);
     }
 
-    public Typeface loadTypefaceFromFile(Context context, File fontFile) {
-        if (fontFile == null) {
-            return null;
-        }
-
+    public Typeface loadTypefaceFromFile(File fontFile) {
+        if (fontFile == null || !fontFile.exists()) return null;
         String postScriptName = extractPostScriptName(fontFile);
-        if (postScriptName == null) {
-            return null;
-        }
-
+        if (postScriptName == null) return null;
         return Typeface.createFromFile(fontFile);
     }
 
-    public String installFontFromUri(Context context, Uri uri) {
-        File fontFile = copyUriToCache(context, uri, CUSTOM_FONT_FILE);
-        if (fontFile == null) {
-            return null;
-        }
+    public String installFontFromUri(Uri uri) {
+        File fontFile = copyUriToCache(uri, CUSTOM_FONT_FILE);
+        if (fontFile == null) return null;
 
         String postScriptName = extractPostScriptName(fontFile);
         if (postScriptName == null) {
@@ -118,23 +114,19 @@ public class ExternalFontInstaller {
             return null;
         }
 
-        String fontProp = DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY
-                + ":" + DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY;
-        SystemProperties.set(PROP_OVERLAY_FONTS, fontProp);
-
-        updateThemeOverlays(context);
-        cleanupPreviewFont(context);
+        setOverlayFontProp();
+        updateThemeOverlays();
+        cleanupPreviewFont();
         return postScriptName;
     }
 
-    public String installFontFromFile(Context context, File sourceFile) {
+    public String installFontFromFile(File sourceFile) {
         try {
-            File fontFile = new File(context.getCacheDir(), CUSTOM_FONT_FILE);
-            FileInputStream input = new FileInputStream(sourceFile);
-            FileOutputStream output = new FileOutputStream(fontFile);
-            FileUtils.copy(input, output);
-            input.close();
-            output.close();
+            File fontFile = new File(mContext.getCacheDir(), CUSTOM_FONT_FILE);
+            try (FileInputStream in = new FileInputStream(sourceFile);
+                 FileOutputStream out = new FileOutputStream(fontFile)) {
+                FileUtils.copy(in, out);
+            }
 
             String postScriptName = extractPostScriptName(fontFile);
             if (postScriptName == null) {
@@ -147,39 +139,49 @@ public class ExternalFontInstaller {
                 return null;
             }
 
-            String fontProp = DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY
-                    + ":" + DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY;
-            SystemProperties.set(PROP_OVERLAY_FONTS, fontProp);
+            setOverlayFontProp();
+            updateThemeOverlays();
+            cleanupPreviewFont();
 
-            updateThemeOverlays(context);
-            cleanupPreviewFont(context);
-
-            if (sourceFile.getAbsolutePath().startsWith(context.getCacheDir().getAbsolutePath())) {
+            if (sourceFile.getAbsolutePath().startsWith(
+                    mContext.getCacheDir().getAbsolutePath())) {
                 sourceFile.delete();
             }
 
             return postScriptName;
         } catch (Exception e) {
-            Log.e(TAG, "Failed to install font from file", e);
+            Log.e(TAG, "installFontFromFile failed", e);
             return null;
         }
     }
 
-    private File copyUriToCache(Context context, Uri uri, String fileName) {
+    public void resetFontUpdates() {
         try {
-            File cacheFile = new File(context.getCacheDir(), fileName);
-            ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(uri, "r");
+            mFontManager.clearUpdates();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to clear FontManager updates", e);
+        }
+        SystemProperties.set(PROP_OVERLAY_FONTS, "");
+        cleanupPreviewFont();
+    }
+
+    private void setOverlayFontProp() {
+        String prop = DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY
+                + ":" + DEFAULT_FONT_FAMILY + ":" + DEFAULT_FONT_FAMILY;
+        SystemProperties.set(PROP_OVERLAY_FONTS, prop);
+    }
+
+    private File copyUriToCache(Uri uri, String fileName) {
+        try {
+            File cacheFile = new File(mContext.getCacheDir(), fileName);
+            ParcelFileDescriptor pfd =
+                    mContext.getContentResolver().openFileDescriptor(uri, "r");
             if (pfd == null) return null;
-
-            FileInputStream input = new FileInputStream(pfd.getFileDescriptor());
-            FileOutputStream output = new FileOutputStream(cacheFile);
-
-            FileUtils.copy(input, output);
-
-            input.close();
-            output.close();
+            try (FileInputStream in = new FileInputStream(pfd.getFileDescriptor());
+                 FileOutputStream out = new FileOutputStream(cacheFile)) {
+                FileUtils.copy(in, out);
+            }
             pfd.close();
-
             return cacheFile;
         } catch (Exception e) {
             Log.e(TAG, "Failed to copy URI to cache", e);
@@ -188,16 +190,13 @@ public class ExternalFontInstaller {
     }
 
     private String extractPostScriptName(File fontFile) {
-        try {
-            FileInputStream fis = new FileInputStream(fontFile);
+        try (FileInputStream fis = new FileInputStream(fontFile)) {
             FileChannel channel = fis.getChannel();
-            java.nio.MappedByteBuffer buffer = channel.map(
-                    FileChannel.MapMode.READ_ONLY, 0, channel.size());
-            String name = FontFileUtil.getPostScriptName(buffer, 0);
-            fis.close();
-            return name;
+            java.nio.MappedByteBuffer buf =
+                    channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+            return FontFileUtil.getPostScriptName(buf, 0);
         } catch (Exception e) {
-            Log.e(TAG, "Failed to extract PostScript name", e);
+            Log.e(TAG, "Failed to extract PostScript name from " + fontFile.getName(), e);
             return null;
         }
     }
@@ -222,8 +221,7 @@ public class ExternalFontInstaller {
 
             ParcelFileDescriptor pfd = ParcelFileDescriptor.open(
                     fontFile, ParcelFileDescriptor.MODE_READ_ONLY);
-            FontFileUpdateRequest fontFileUpdateRequest =
-                    new FontFileUpdateRequest(pfd, new byte[0]);
+            FontFileUpdateRequest fileRequest = new FontFileUpdateRequest(pfd, new byte[0]);
 
             boolean isVariable = isVariableFont(fontFile);
             List<FontFamilyUpdateRequest.Font> fonts = new ArrayList<>();
@@ -236,104 +234,86 @@ public class ExternalFontInstaller {
                     fonts.add(new FontFamilyUpdateRequest.Font.Builder(
                             postScriptName,
                             new FontStyle(weight, FontStyle.FONT_SLANT_UPRIGHT))
-                            .setAxes(axes)
-                            .build());
+                            .setAxes(axes).build());
 
                     fonts.add(new FontFamilyUpdateRequest.Font.Builder(
                             postScriptName,
                             new FontStyle(weight, FontStyle.FONT_SLANT_ITALIC))
-                            .setAxes(axes)
-                            .build());
+                            .setAxes(axes).build());
                 }
             } else {
                 fonts.add(new FontFamilyUpdateRequest.Font.Builder(
                         postScriptName,
-                        new FontStyle(FontStyle.FONT_WEIGHT_NORMAL, FontStyle.FONT_SLANT_UPRIGHT))
+                        new FontStyle(FontStyle.FONT_WEIGHT_NORMAL,
+                                FontStyle.FONT_SLANT_UPRIGHT))
                         .build());
-
                 fonts.add(new FontFamilyUpdateRequest.Font.Builder(
                         postScriptName,
-                        new FontStyle(FontStyle.FONT_WEIGHT_BOLD, FontStyle.FONT_SLANT_UPRIGHT))
+                        new FontStyle(FontStyle.FONT_WEIGHT_BOLD,
+                                FontStyle.FONT_SLANT_UPRIGHT))
                         .build());
             }
 
             FontFamilyUpdateRequest.FontFamily family =
-                    new FontFamilyUpdateRequest.FontFamily.Builder(DEFAULT_FONT_FAMILY, fonts)
-                            .build();
+                    new FontFamilyUpdateRequest.FontFamily.Builder(
+                            DEFAULT_FONT_FAMILY, fonts).build();
 
             FontFamilyUpdateRequest updateRequest = new FontFamilyUpdateRequest.Builder()
-                    .addFontFileUpdateRequest(fontFileUpdateRequest)
+                    .addFontFileUpdateRequest(fileRequest)
                     .addFontFamily(family)
                     .build();
 
             int result = mFontManager.updateFontFamily(
                     updateRequest,
-                    mFontManager.getFontConfig().getConfigVersion()
-            );
+                    mFontManager.getFontConfig().getConfigVersion());
 
             if (result != FontManager.RESULT_SUCCESS) {
+                Log.e(TAG, "FontManager.updateFontFamily failed with code " + result);
                 return false;
             }
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "Failed to update system font", e);
+            Log.e(TAG, "applyFontToSystem threw an exception", e);
             return false;
         }
     }
 
-    private void updateThemeOverlays(Context context) {
+    private void updateThemeOverlays() {
         try {
             int userId = UserHandle.myUserId();
             String current = Settings.Secure.getStringForUser(
-                    context.getContentResolver(),
+                    mContext.getContentResolver(),
                     Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
-                    userId
-            );
+                    userId);
 
-            JSONObject json;
-            if (current == null || current.isEmpty()) {
-                json = new JSONObject();
-            } else {
-                json = new JSONObject(current);
-            }
+            JSONObject json = (current == null || current.isEmpty())
+                    ? new JSONObject()
+                    : new JSONObject(current);
 
             if (json.has(OVERLAY_CATEGORY_FONT)) {
                 json.remove(OVERLAY_CATEGORY_FONT);
                 Settings.Secure.putStringForUser(
-                        context.getContentResolver(),
+                        mContext.getContentResolver(),
                         Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
                         json.toString(),
-                        userId
-                );
+                        userId);
             }
+
             json.put(OVERLAY_CATEGORY_FONT, DEFAULT_FONT_OVERLAY);
             Settings.Secure.putStringForUser(
-                    context.getContentResolver(),
+                    mContext.getContentResolver(),
                     Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
                     json.toString(),
-                    userId
-            );
+                    userId);
         } catch (Exception e) {
-            Log.e(TAG, "Failed to persist custom font overlay", e);
+            Log.e(TAG, "Failed to persist extfont overlay", e);
         }
     }
 
-    public void resetFontUpdates(Context context) {
+    private void cleanupPreviewFont() {
         try {
-            mFontManager.clearUpdates();
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to clear font updates", e);
-        }
-        SystemProperties.set(PROP_OVERLAY_FONTS, "");
-        cleanupPreviewFont(context);
-    }
-
-    private void cleanupPreviewFont(Context context) {
-        try {
-            File previewFile = new File(context.getCacheDir(), TEMP_PREVIEW_FONT);
-            if (previewFile.exists()) {
-                previewFile.delete();
-            }
+            File f = new File(mContext.getCacheDir(), TEMP_PREVIEW_FONT);
+            if (f.exists()) f.delete();
         } catch (Exception e) {
             Log.e(TAG, "Failed to cleanup preview font", e);
         }
