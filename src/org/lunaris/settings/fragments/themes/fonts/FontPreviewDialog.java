@@ -94,25 +94,23 @@ public class FontPreviewDialog extends Dialog {
     }
 
     private void loadFontPreview() {
-        try {
-            // Use ExternalFontInstaller to load typeface for preview
-            Typeface typeface = mFontInstaller.loadTypefaceFromUri(mContext, mFontUri);
-            
-            if (typeface != null) {
-                mPreviewTitle.setTypeface(typeface);
-                mPreviewSubtitle.setTypeface(typeface);
-                mPreviewBody.setTypeface(typeface);
-                mPreviewNumbers.setTypeface(typeface);
-                mPreviewSpecial.setTypeface(typeface);
-            } else {
-                Toast.makeText(mContext, R.string.font_preview_error, Toast.LENGTH_SHORT).show();
-                dismiss();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(mContext, R.string.font_preview_error, Toast.LENGTH_SHORT).show();
-            dismiss();
-        }
+        mInstallButton.setEnabled(false);
+        new Thread(() -> {
+            Typeface typeface = mFontInstaller.loadTypefaceFromUri(mFontUri);
+            mInstallButton.post(() -> {
+                if (typeface != null) {
+                    mPreviewTitle.setTypeface(typeface);
+                    mPreviewSubtitle.setTypeface(typeface);
+                    mPreviewBody.setTypeface(typeface);
+                    mPreviewNumbers.setTypeface(typeface);
+                    mPreviewSpecial.setTypeface(typeface);
+                    mInstallButton.setEnabled(true);
+                } else {
+                    Toast.makeText(mContext, R.string.font_preview_error,
+                            Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+            });
+        }).start();
     }
 }

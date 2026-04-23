@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025 Lunaris AOSP
+ * Copyright (C) 2024-2026 Lunaris AOSP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,43 +16,34 @@
 package org.lunaris.settings.fragments.themes.fonts;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.view.HapticFeedbackConstants;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.lunaris.ThemeUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.android.internal.util.lunaris.VibrationUtils;
+
 import org.lunaris.settings.preferences.SystemSettingListPreference;
 import org.lunaris.settings.utils.ExternalFontInstaller;
 
-import android.widget.Toast;
-
-import com.android.internal.util.lunaris.VibrationUtils;
-
-import java.util.List;
-
 @SearchIndexable
-public class FontSettingsFragment extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class FontSettingsFragment extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "FontSettingsFragment";
 
-    private static final String KEY_FONT_MODE = "font_mode";
     private static final String KEY_PREBUILT_FONTS = "system_font";
     private static final String KEY_CUSTOM_FONT_PICKER = "custom_font_picker";
     private static final String KEY_GITHUB_FONT_PICKER = "github_font_picker";
@@ -60,96 +51,79 @@ public class FontSettingsFragment extends SettingsPreferenceFragment implements
     private static final String KEY_RESET_CUSTOM_FONT = "reset_custom_font";
     private static final String KEY_REBOOT_FOR_FONT = "reboot_for_font";
     private static final String KEY_EMOJI_STYLE = "emoji_style";
-    private static final String PROP_EMOJI_STYLE = "persist.sys.ax_emoji_style";
-    private static final String DEFAULT_EMOJI_STYLE = "android";
+
+    private static final String SETTING_CUSTOM_FONT_NAME = "custom_font_name";
 
     private static final int REQUEST_PICK_FONT = 1001;
 
-    private SystemSettingListPreference mFontModePref;
     private Preference mPrebuiltFontsPref;
     private Preference mCustomFontPickerPref;
     private Preference mGithubFontPickerPref;
     private Preference mCustomFontInfoPref;
     private Preference mResetCustomFontPref;
     private Preference mRebootForFontPref;
-    private ThemeUtils mThemeUtils;
-    private ExternalFontInstaller mFontInstaller;
     private SystemSettingListPreference mEmojiStylePref;
+
+    private FontOverlayManager mOverlayManager;
+    private ExternalFontInstaller mFontInstaller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lunaris_settings_fonts);
 
-        mThemeUtils = ThemeUtils.getInstance(getActivity());
-        mFontInstaller = new ExternalFontInstaller(getActivity());
+        mOverlayManager = new FontOverlayManager(requireActivity());
+        mFontInstaller  = new ExternalFontInstaller(requireActivity());
 
-        final Context context = getContext();
-        final PreferenceScreen prefScreen = getPreferenceScreen();
+        bindPreferences();
+        updateUiState();
+    }
 
-        mFontModePref = findPreference(KEY_FONT_MODE);
-        mFontModePref.setOnPreferenceChangeListener(this);
-
+    private void bindPreferences() {
         mPrebuiltFontsPref = findPreference(KEY_PREBUILT_FONTS);
 
-        mEmojiStylePref = findPreference(KEY_EMOJI_STYLE);
-        if (mEmojiStylePref != null) {
-            mEmojiStylePref.setValue(SystemProperties.get(PROP_EMOJI_STYLE, DEFAULT_EMOJI_STYLE));
-            mEmojiStylePref.setOnPreferenceChangeListener(this);
-        }
-
         mCustomFontPickerPref = findPreference(KEY_CUSTOM_FONT_PICKER);
-        mCustomFontPickerPref.setOnPreferenceClickListener(preference -> {
-            showFontFilePicker();
+        mCustomFontPickerPref.setOnPreferenceClickListener(p -> {
+            launchFontFilePicker();
             return true;
         });
 
         mGithubFontPickerPref = findPreference(KEY_GITHUB_FONT_PICKER);
-        mGithubFontPickerPref.setOnPreferenceClickListener(preference -> {
-            openGithubFontPickerDialog();
+        mGithubFontPickerPref.setOnPreferenceClickListener(p -> {
+            openGithubPicker();
             return true;
         });
 
-        mCustomFontInfoPref = findPreference(KEY_CUSTOM_FONT_INFO);
+        mCustomFontInfoPref  = findPreference(KEY_CUSTOM_FONT_INFO);
 
         mResetCustomFontPref = findPreference(KEY_RESET_CUSTOM_FONT);
-        mResetCustomFontPref.setOnPreferenceClickListener(preference -> {
+        mResetCustomFontPref.setOnPreferenceClickListener(p -> {
             resetCustomFont();
             return true;
         });
 
         mRebootForFontPref = findPreference(KEY_REBOOT_FOR_FONT);
-        mRebootForFontPref.setOnPreferenceClickListener(preference -> {
+        mRebootForFontPref.setOnPreferenceClickListener(p -> {
             showRebootDialog();
             return true;
         });
 
-        updateFontPreferences();
+        mEmojiStylePref = findPreference(KEY_EMOJI_STYLE);
+        if (mEmojiStylePref != null) {
+            mEmojiStylePref.setOnPreferenceChangeListener(this);
+        }
     }
 
-    private void updateFontPreferences() {
-        final String fontMode = Settings.System.getStringForUser(
-                getContext().getContentResolver(),
-                KEY_FONT_MODE,
-                UserHandle.USER_CURRENT
-        );
-        final String customFontName = Settings.Secure.getStringForUser(
-                getContext().getContentResolver(),
-                "custom_font_name",
-                UserHandle.USER_CURRENT
-        );
+    private void updateUiState() {
+        String customFontName = getCustomFontName();
+        boolean hasCustomFont = customFontName != null && !customFontName.isEmpty();
 
-        final boolean isPrebuiltMode = "prebuilt".equals(fontMode);
-        final boolean isCustomMode = "custom".equals(fontMode);
-        final boolean isGithubMode = "github".equals(fontMode);
-        final boolean hasCustomFont = customFontName != null && !customFontName.isEmpty();
-
-        mPrebuiltFontsPref.setVisible(isPrebuiltMode);
-        mCustomFontPickerPref.setVisible(isCustomMode);
-        mGithubFontPickerPref.setVisible(isGithubMode);
-        mCustomFontInfoPref.setVisible((isCustomMode || isGithubMode) && hasCustomFont);
-        mResetCustomFontPref.setVisible((isCustomMode || isGithubMode) && hasCustomFont);
-        mRebootForFontPref.setVisible((isCustomMode || isGithubMode) && hasCustomFont);
+        mPrebuiltFontsPref.setVisible(true);
+        mCustomFontPickerPref.setVisible(true);
+        mGithubFontPickerPref.setVisible(true);
+        mCustomFontInfoPref.setVisible(hasCustomFont);
+        mResetCustomFontPref.setVisible(hasCustomFont);
+        mRebootForFontPref.setVisible(hasCustomFont);
 
         if (hasCustomFont) {
             mCustomFontInfoPref.setSummary(
@@ -157,103 +131,107 @@ public class FontSettingsFragment extends SettingsPreferenceFragment implements
         }
     }
 
-    private void showFontFilePicker() {
+    private String getCustomFontName() {
+        return Settings.Secure.getStringForUser(
+                requireContext().getContentResolver(),
+                SETTING_CUSTOM_FONT_NAME,
+                UserHandle.USER_CURRENT);
+    }
+
+    private void setCustomFontName(String name) {
+        Settings.Secure.putStringForUser(
+                requireContext().getContentResolver(),
+                SETTING_CUSTOM_FONT_NAME,
+                name != null ? name : "",
+                UserHandle.USER_CURRENT);
+    }
+
+    public void applyPrebuiltOverlay(String overlayPackage) {
+        mFontInstaller.resetFontUpdates();
+        setCustomFontName("");
+        boolean ok = mOverlayManager.applyOverlay(overlayPackage);
+        if (!ok) {
+            Toast.makeText(requireContext(),
+                    R.string.custom_font_install_failed, Toast.LENGTH_SHORT).show();
+        }
+        updateUiState();
+    }
+
+    private void launchFontFilePicker() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
-        String[] mimeTypes = {"font/ttf", "font/otf",
-                "application/x-font-ttf", "application/x-font-otf"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                new String[]{"font/ttf", "font/otf",
+                        "application/x-font-ttf", "application/x-font-otf"});
         startActivityForResult(intent, REQUEST_PICK_FONT);
-    }
-
-    private void openGithubFontPickerDialog() {
-        GithubFontPickerDialog dialog = new GithubFontPickerDialog(getActivity());
-        dialog.setOnFontSelectedListener(fontName -> {
-            updateFontPreferences();
-        });
-        dialog.show();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PICK_FONT && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getData() != null) {
-                Uri fontUri = data.getData();
-                showFontPreviewAndInstall(fontUri);
-            }
+        if (requestCode == REQUEST_PICK_FONT
+                && resultCode == Activity.RESULT_OK
+                && data != null && data.getData() != null) {
+            showPreviewAndInstall(data.getData());
         }
     }
 
-    private void showFontPreviewAndInstall(Uri fontUri) {
-        FontPreviewDialog dialog = new FontPreviewDialog(getContext(), fontUri);
+    private void showPreviewAndInstall(Uri fontUri) {
+        FontPreviewDialog dialog = new FontPreviewDialog(requireContext(), fontUri);
         dialog.setOnFontInstallListener(new FontPreviewDialog.OnFontInstallListener() {
-            @Override
-            public void onInstall(Uri uri) {
-                installCustomFont(uri);
-            }
-
-            @Override
-            public void onCancel() {
-            }
+            @Override public void onInstall(Uri uri) { installCustomFont(uri); }
+            @Override public void onCancel() {}
         });
         dialog.show();
     }
 
     private void installCustomFont(Uri fontUri) {
         new Thread(() -> {
-            String postScriptName = mFontInstaller.installFontFromUri(getContext(), fontUri);
-            if (postScriptName != null) {
-                Settings.Secure.putStringForUser(
-                        getContext().getContentResolver(),
-                        "custom_font_name",
-                        postScriptName,
-                        UserHandle.USER_CURRENT
-                );
-                getActivity().runOnUiThread(() -> {
-                    updateFontPreferences();
-                    Toast.makeText(getContext(),
-                            R.string.custom_font_installed_success, Toast.LENGTH_SHORT).show();
-                });
-            } else {
-                getActivity().runOnUiThread(() -> {
-                    Toast.makeText(getContext(),
-                            R.string.custom_font_install_failed, Toast.LENGTH_SHORT).show();
-                });
-            }
+            mFontInstaller.resetFontUpdates();
+            String postScriptName = mFontInstaller.installFontFromUri(fontUri);
+            requireActivity().runOnUiThread(() -> {
+                if (postScriptName != null) {
+                    setCustomFontName(postScriptName);
+                    updateUiState();
+                    Toast.makeText(requireContext(),
+                            R.string.custom_font_installed_success,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireContext(),
+                            R.string.custom_font_install_failed,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }).start();
     }
 
+    private void openGithubPicker() {
+        GithubFontPickerDialog dialog = new GithubFontPickerDialog(requireActivity());
+        dialog.setOnFontSelectedListener(fontName ->
+                requireActivity().runOnUiThread(this::updateUiState));
+        dialog.show();
+    }
+
     private void resetCustomFont() {
-        mFontInstaller.resetFontUpdates(getContext());
-
-        Settings.Secure.putStringForUser(
-                getContext().getContentResolver(),
-                "custom_font_name",
-                "",
-                UserHandle.USER_CURRENT
-        );
-
-        if (mThemeUtils != null) {
-            mThemeUtils.setOverlayEnabled(
-                    "android.theme.customization.font",
-                    "com.android.theme.font.extfont",
-                    "android"
-            );
-        }
-
-        updateFontPreferences();
-        Toast.makeText(getContext(), R.string.custom_font_reset_success, Toast.LENGTH_SHORT).show();
+        new Thread(() -> {
+            mFontInstaller.resetFontUpdates();
+            setCustomFontName("");
+            mOverlayManager.resetToDefault();
+            requireActivity().runOnUiThread(() -> {
+                updateUiState();
+                Toast.makeText(requireContext(),
+                        R.string.custom_font_reset_success, Toast.LENGTH_SHORT).show();
+            });
+        }).start();
     }
 
     private void showRebootDialog() {
-        new AlertDialog.Builder(getContext())
+        new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.reboot_required_title)
                 .setMessage(R.string.reboot_required_message)
-                .setPositiveButton(R.string.reboot_device, (dialog, which) -> {
-                    ExternalFontInstaller.rebootDevice();
-                })
+                .setPositiveButton(R.string.reboot_device,
+                        (d, w) -> ExternalFontInstaller.rebootDevice())
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
@@ -261,46 +239,18 @@ public class FontSettingsFragment extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference != null && preference.getKey() != null) {
-            VibrationUtils.triggerVibration(getContext(), 3);
+            VibrationUtils.triggerVibration(requireContext(), 3);
         }
         return super.onPreferenceTreeClick(preference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
-
-        if (preference == mFontModePref) {
-            String fontMode = (String) newValue;
-            Settings.System.putStringForUser(
-                    resolver,
-                    KEY_FONT_MODE,
-                    fontMode,
-                    UserHandle.USER_CURRENT
-            );
-
-            if ("prebuilt".equals(fontMode)) {
-                String customFontName = Settings.Secure.getStringForUser(
-                        resolver,
-                        "custom_font_name",
-                        UserHandle.USER_CURRENT
-                );
-                if (customFontName != null && !customFontName.isEmpty()) {
-                    resetCustomFont();
-                }
-            }
-
-            updateFontPreferences();
-            return true;
-        }
-
-        if (preference == mEmojiStylePref) {
-            SystemProperties.set(PROP_EMOJI_STYLE, (String) newValue);
+        if (mEmojiStylePref != null && preference == mEmojiStylePref) {
+            SystemProperties.set("persist.sys.ax_emoji_style", (String) newValue);
             showRebootDialog();
             return true;
         }
-
         return false;
     }
 
@@ -310,5 +260,5 @@ public class FontSettingsFragment extends SettingsPreferenceFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider(R.xml.lunaris_settings_fonts);
+            new BaseSearchIndexProvider(R.xml.lunaris_settings_fonts);
 }
