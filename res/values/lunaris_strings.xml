@@ -2447,4 +2447,12 @@
     <!-- Animation -->
     <string name="activity_anim_perf_override_title">Activity Animation Override</string>
     <string name="activity_anim_perf_override_summary">Use optimized activity transition animations</string>
+
+    <!-- QS widget -->
+    <string name="qs_widget_panel_title">Show widget in qs panel</string>
+    <string name="qs_widget_panel_summary">Show media and volume, brightness widget in quick settings panel</string>
+    <string name="qs_widget_ios_music_title">Show ios music widget</string>
+    <string name="qs_widget_ios_music_summary">Show ios like media panel</string>
+    <string name="qs_widget_slider_corner_title">Show rounded widget slider</string>
+    <string name="qs_widget_slider_corner_summary">Show rounded style vertical widget sliders in qs panel</string>
 </resources>

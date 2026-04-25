@@ -79,6 +79,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_TILE_ICON_SHAPE = "qs_tile_icon_shape";
     private static final String KEY_QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
     private static final String KEY_QS_SHOW_MEDIA_PLAYER = "qs_show_media_player";
+    private static final String KEY_QS_WIDGET_PANEL = "qs_widget_panel";
+    private static final String KEY_QS_WIDGET_IOS_MUSIC = "qs_widget_ios_music";
+    private static final String KEY_QS_WIDGET_SLIDER_CORNER = "qs_widget_slider_corner";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -99,6 +102,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private Preference mQsTileIconShape;
     private SystemSettingSwitchPreference mQsTileLabelHide;
     private SecureSettingSwitchPreference mQsShowMediaPlayer;
+    private SystemSettingSwitchPreference mQsWidgetPanel;
+    private SystemSettingSwitchPreference mQsWidgetIosMusic;
+    private SystemSettingSwitchPreference mQsWidgetSliderCorner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +133,16 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mQsShowMediaPlayer != null) {
             mQsShowMediaPlayer.setOnPreferenceChangeListener(this);
         }
+
+        mQsWidgetPanel = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_PANEL);
+        if (mQsWidgetPanel != null) {
+            mQsWidgetPanel.setOnPreferenceChangeListener(this);
+        }
+
+        mQsWidgetIosMusic = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_IOS_MUSIC);
+        mQsWidgetSliderCorner = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_SLIDER_CORNER);
+
+        updateWidgetPanelDependencies();
 
         mSingleQsTone = findPreference(KEY_SINGLE_QS_TONE);
         if (mSingleQsTone != null) {
@@ -220,6 +236,21 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         updateMinimalStyleDependencies(isClassic);
     }
 
+    private void updateWidgetPanelDependencies() {
+        if (mQsWidgetPanel == null) return;
+
+        ContentResolver resolver = getContext().getContentResolver();
+        boolean isWidgetPanelEnabled = Settings.System.getInt(resolver,
+                KEY_QS_WIDGET_PANEL, 0) == 1;
+
+        if (mQsWidgetIosMusic != null)
+            mQsWidgetIosMusic.setVisible(isWidgetPanelEnabled);
+        if (mQsWidgetSliderCorner != null)
+            mQsWidgetSliderCorner.setVisible(isWidgetPanelEnabled);
+        if (mQsShowMediaPlayer != null)
+            mQsShowMediaPlayer.setVisible(!isWidgetPanelEnabled);
+    }
+
     private void updateMinimalStyleDependencies(boolean isClassic) {
         if (mQsTileStyleMinimal == null) return;
 
@@ -299,6 +330,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else if (preference == mQsShowMediaPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
+        } else if (preference == mQsWidgetPanel) {
+            updateWidgetPanelDependencies();
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
         }
         return false;
     }
@@ -370,6 +405,16 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                     if (isSliderStyleEnabled) {
                         keys.add(KEY_BRIGHTNESS_SLIDER_SHAPE);
                         keys.add(KEY_SHOW_AUTO_BRIGHTNESS);
+                    }
+
+                    boolean isWidgetPanelEnabled = Settings.System.getInt(resolver,
+                            KEY_QS_WIDGET_PANEL, 0) == 1;
+
+                    if (isWidgetPanelEnabled) {
+                        keys.add(KEY_QS_SHOW_MEDIA_PLAYER);
+                    } else {
+                        keys.add(KEY_QS_WIDGET_IOS_MUSIC);
+                        keys.add(KEY_QS_WIDGET_SLIDER_CORNER);
                     }
 
                     return keys;
