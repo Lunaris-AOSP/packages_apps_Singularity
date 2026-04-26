@@ -56,20 +56,6 @@
         android:dependency="ax_dynamic_bar_enabled">
 
         <SwitchPreferenceCompat
-            android:key="event_screen_recording"
-            android:title="@string/dynamic_bar_event_recording"
-            android:summary="@string/dynamic_bar_event_recording_summary"
-            android:icon="@drawable/ic_fiber_manual_record"
-            android:defaultValue="true" />
-
-        <SwitchPreferenceCompat
-            android:key="event_privacy"
-            android:title="@string/dynamic_bar_event_privacy"
-            android:summary="@string/dynamic_bar_event_privacy_summary"
-            android:icon="@drawable/ic_videocam"
-            android:defaultValue="true" />
-
-        <SwitchPreferenceCompat
             android:key="event_audio_recording"
             android:title="@string/dynamic_bar_event_audio_recording"
             android:summary="@string/dynamic_bar_event_audio_recording_summary"
@@ -89,14 +75,6 @@
             android:summary="@string/dynamic_bar_event_notification_summary"
             android:icon="@drawable/ic_notifications"
             android:defaultValue="true" />
-
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
-            android:key="ax_dynamic_bar_compact_notifications"
-            android:title="@string/dynamic_bar_compact_notifications"
-            android:summary="@string/dynamic_bar_compact_notifications_summary"
-            android:icon="@drawable/ic_compact_notifications"
-            android:defaultValue="true"
-            android:dependency="event_notification" />
 
         <SwitchPreferenceCompat
             android:key="event_timer"
@@ -166,13 +144,6 @@
             android:title="@string/dynamic_bar_event_torch"
             android:summary="@string/dynamic_bar_event_torch_summary"
             android:icon="@drawable/ic_flashlight"
-            android:defaultValue="true" />
-
-        <SwitchPreferenceCompat
-            android:key="event_casting"
-            android:title="@string/dynamic_bar_event_casting"
-            android:summary="@string/dynamic_bar_event_casting_summary"
-            android:icon="@drawable/ic_cast"
             android:defaultValue="true" />
 
         <SwitchPreferenceCompat
