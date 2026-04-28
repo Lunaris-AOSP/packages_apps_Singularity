@@ -80,6 +80,13 @@
             android:summary="@string/kg_user_switcher_enabled_summary"
             android:defaultValue="false" />
 
+        <!-- Scrim -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="keyguard_scrim_transparent"
+            android:title="@string/keyguard_scrim_transparent_title"
+            android:summary="@string/keyguard_scrim_transparent_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

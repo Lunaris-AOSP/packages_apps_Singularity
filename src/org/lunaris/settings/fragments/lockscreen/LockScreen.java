@@ -54,6 +54,7 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String KEY_WEATHER = "lockscreen_weather_enabled";
     private static final String KEY_KG_USER_SWITCHER = "kg_user_switcher_enabled";
     private static final String LUNARIS_UDFPS_CUSTOM_CATEGORY = "lockscreen_custom_category";
+    private static final String KEY_KEYGUARD_SCRIM = "keyguard_scrim_transparent";
 
     private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
     private static final String KEY_FP_ERROR = "fp_error_vibrate";
@@ -69,6 +70,7 @@ public class LockScreen extends SettingsPreferenceFragment
     private SwitchPreferenceCompat mKgUserSwitcher;
     private SwitchPreferenceCompat mFpSuccessVib;
     private SwitchPreferenceCompat mFpErrorVib;
+    private SwitchPreferenceCompat mKeyguardScrim;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,9 @@ public class LockScreen extends SettingsPreferenceFragment
         mKgUserSwitcher = (SwitchPreferenceCompat) findPreference(KEY_KG_USER_SWITCHER);
         mKgUserSwitcher.setOnPreferenceChangeListener(this);
 
+        mKeyguardScrim = (SwitchPreferenceCompat) findPreference(KEY_KEYGUARD_SCRIM);
+        mKeyguardScrim.setOnPreferenceChangeListener(this);
+
         updateWeatherSettings();
     }
 
@@ -138,6 +143,10 @@ public class LockScreen extends SettingsPreferenceFragment
             return true;
         } else if (preference == mKgUserSwitcher) {
             mKgUserSwitcher.setChecked((Boolean)newValue);
+            SystemUtils.showSystemUiRestartDialog(getContext());
+            return true;
+        } else if (preference == mKeyguardScrim) {
+            mKeyguardScrim.setChecked((Boolean) newValue);
             SystemUtils.showSystemUiRestartDialog(getContext());
             return true;
         }
