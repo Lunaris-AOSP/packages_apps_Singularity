@@ -2323,8 +2323,10 @@
     <string name="notification_bubble_apps_summary">Launch apps in a bubble when clicking their notifications</string>
 
     <!-- QS media player -->
-    <string name="qs_show_media_player_title">QS Media player</string>
-    <string name="qs_show_media_player_summary">Display media controls in Quick Settings</string>
+    <string name="qs_show_media_player_title">Media player position</string>
+    <string name="qs_show_media_player_hide">Hide</string>
+    <string name="qs_show_media_player_top">Show at top</string>
+    <string name="qs_show_media_player_bottom">Show at bottom</string>
 
     <!-- Dynamic Bar -->
     <string name="dynamic_bar">Dynamic Bar</string>

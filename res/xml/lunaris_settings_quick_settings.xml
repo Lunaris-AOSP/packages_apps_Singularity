@@ -230,11 +230,13 @@
         android:key="quick_settings_media_category"
         android:title="@string/quick_settings_media_category">
 
-        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        <org.lunaris.settings.preferences.SecureSettingListPreference
             android:key="qs_show_media_player"
             android:title="@string/qs_show_media_player_title"
-            android:summary="@string/qs_show_media_player_summary"
-            android:defaultValue="true" />
+            android:summary="%s"
+            android:entries="@array/qs_show_media_player_entries"
+            android:entryValues="@array/qs_show_media_player_values"
+            android:defaultValue="2" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_compact_media_player_mode"
