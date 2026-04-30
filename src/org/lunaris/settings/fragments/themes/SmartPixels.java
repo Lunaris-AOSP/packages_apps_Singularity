@@ -39,15 +39,11 @@ public class SmartPixels extends SettingsPreferenceFragment {
 
     private static final String TAG = "SmartPixels";
 
-    private static final String SMART_PIXELS_FOOTER = "smart_pixels_footer";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.smart_pixels);
-
-        findPreference(SMART_PIXELS_FOOTER).setTitle(R.string.smart_pixels_warning_text);
     }
 
     @Override

@@ -57,7 +57,6 @@ public class Themes extends SettingsPreferenceFragment implements
     public static final String TAG = "UserInterface";
 
     private static final String KEY_FORCE_FULL_SCREEN = "display_cutout_force_fullscreen_settings";
-    private static final String SMART_PIXELS = "smart_pixels";
     private static final String KEY_VOLUME_DIALOG_TYPE = "volume_dialog_type";
     private static final String KEY_QUICKSWITCH = "quickswitch";
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
@@ -69,7 +68,6 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final int VOLUME_TYPE_STOCK = 2;
 
     private Preference mShowCutoutForce;
-    private Preference mSmartPixels;
     private Preference mQuickSwitch;
     private SystemSettingListPreference mVolumeDialogType;
     private SystemSettingListPreference mAxionVolumeStyle;
@@ -95,12 +93,6 @@ public class Themes extends SettingsPreferenceFragment implements
             mShowCutoutForce = (Preference) findPreference(KEY_FORCE_FULL_SCREEN);
             prefScreen.removePreference(mShowCutoutForce);
         }
-
-        mSmartPixels = (Preference) prefScreen.findPreference(SMART_PIXELS);
-        boolean mSmartPixelsSupported = getResources().getBoolean(
-                com.android.internal.R.bool.config_supportSmartPixels);
-        if (!mSmartPixelsSupported)
-            prefScreen.removePreference(mSmartPixels);
 
         mQuickSwitch = (Preference) prefScreen.findPreference(KEY_QUICKSWITCH);
         boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
@@ -184,11 +176,6 @@ public class Themes extends SettingsPreferenceFragment implements
                     if (TextUtils.isEmpty(displayCutout)) {
                         keys.add(KEY_FORCE_FULL_SCREEN);
                     }
-
-                    boolean mSmartPixelsSupported = context.getResources().getBoolean(
-                            com.android.internal.R.bool.config_supportSmartPixels);
-                    if (!mSmartPixelsSupported)
-                        keys.add(SMART_PIXELS);
 
                     boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
                     if (!withGoogleApps)
