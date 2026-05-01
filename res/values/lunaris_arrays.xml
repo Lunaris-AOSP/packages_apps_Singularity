@@ -1658,12 +1658,16 @@
         <item>Stock</item>
         <item>iOS</item>
         <item>Samsung</item>
+        <item>SwiftUI</item>
+        <item>Facebook</item>
     </string-array>
 
     <string-array name="emoji_style_values">
         <item>android</item>
         <item>ios</item>
         <item>samsung</item>
+        <item>swiftui</item>
+        <item>facebook</item>
     </string-array>
 
     <string-array name="qs_show_media_player_entries" translatable="false">
