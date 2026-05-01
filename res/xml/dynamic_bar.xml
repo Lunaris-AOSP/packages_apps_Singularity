@@ -29,6 +29,13 @@
         android:defaultValue="false" />
 
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="ax_dynamic_bar_hide_on_foreground"
+        android:title="@string/dynamic_bar_hide_on_foreground"
+        android:summary="@string/dynamic_bar_hide_on_foreground_summary"
+        android:defaultValue="false"
+        android:dependency="ax_dynamic_bar_enabled" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         android:key="ax_dynamic_bar_keyguard_enabled"
         android:title="@string/dynamic_bar_keyguard_enable"
         android:summary="@string/dynamic_bar_keyguard_enable_summary"
