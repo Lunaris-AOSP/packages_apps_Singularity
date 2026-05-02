@@ -65,7 +65,7 @@
             android:key="fidelity_enabled"
             android:title="@string/fidelity_title"
             android:summary="@string/fidelity_desc"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.CustomSeekBarPreference
             android:key="contrast_level"

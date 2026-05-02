@@ -95,7 +95,7 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
             val style = json.optString("android.theme.customization.theme_style", "TONAL_SPOT")
             themeStyle.value = style
 
-            val fidelityValue = json.optBoolean("_fidelity_enabled", true)
+            val fidelityValue = json.optBoolean("_fidelity_enabled", false)
             fidelity.isChecked = fidelityValue
 
             contrast?.let {
