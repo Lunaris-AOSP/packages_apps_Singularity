@@ -38,6 +38,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.lunaris.SystemRestartUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -45,6 +46,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.fragments.themes.doze.Utils;
 import org.lunaris.settings.preferences.SecureSettingSeekBarPreference;
+import org.lunaris.settings.preferences.SystemPropertySwitchPreference;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -67,6 +69,7 @@ public class DozeSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE_POCKET_GESTURE = "doze_pocket_gesture";
     private static final String KEY_RAISE_TO_WAKE_GESTURE = "raise_to_wake_gesture";
     private static final String KEY_DOZE_GESTURE_VIBRATE = "doze_gesture_vibrate";
+    private static final String KEY_DOZE_FIX = "persist.sys.enable_doze_fix";
 
     private SwitchPreferenceCompat mDozeEnabledPreference;
     private SwitchPreferenceCompat mDozeAlwaysOnPreference;
@@ -76,6 +79,7 @@ public class DozeSettings extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mPocketPreference;
     private SwitchPreferenceCompat mRaiseToWakePreference;
     private SecureSettingSeekBarPreference mDozeVibratePreference;
+    private SystemPropertySwitchPreference mDozeFix;
 
     private Preference mDozeAlwaysOnSchedulePreference;
 
@@ -97,6 +101,11 @@ public class DozeSettings extends SettingsPreferenceFragment implements
 
         mDozeAlwaysOnPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_ALWAYS_ON);
         mDozeAlwaysOnSchedulePreference = findPreference(KEY_DOZE_ALWAYS_ON_SCHEDULE);
+
+        mDozeFix = (SystemPropertySwitchPreference) findPreference(KEY_DOZE_FIX);
+        if (mDozeFix != null) {
+            mDozeFix.setOnPreferenceChangeListener(this);
+        }
 
         mTiltPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_TILT_GESTURE);
         mPickUpPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_PICK_UP_GESTURE);
@@ -182,6 +191,9 @@ public class DozeSettings extends SettingsPreferenceFragment implements
             Settings.Secure.putIntForUser(resolver, Settings.Secure.RAISE_TO_WAKE_GESTURE, 
                  value ? 1 : 0, UserHandle.USER_CURRENT);
             checkService(context);
+            return true;
+        } else if (preference == mDozeFix) {
+            SystemRestartUtils.showSystemRestartDialog(context);
             return true;
         }
         return false;

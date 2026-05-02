@@ -52,6 +52,36 @@
         android:key="ambient_display_category"
         android:title="@string/ambient_display_category_title">
 
+        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.enable_doze_fix"
+            android:title="@string/doze_screen_state_fix_title"
+            android:summary="@string/doze_screen_state_fix_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="screen_off_aod_enabled"
+            android:title="@string/screen_off_aod"
+            android:summary="@string/screen_off_aod_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="screen_off_aod_animation"
+            android:title="@string/screen_off_animation"
+            android:summary="@string/screen_off_animation_summary"
+            android:defaultValue="true" 
+            android:dependency="screen_off_aod_enabled" />
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="screen_off_aod_duration"
+            android:title="@string/screen_off_aod_duration"
+            android:summary="@string/screen_off_aod_duration_summary"
+            android:defaultValue="4000"
+            android:max="10000"
+            settings:min="1000"
+            settings:interval="500"
+            settings:units="@string/unit_milliseconds" 
+            android:dependency="screen_off_aod_enabled" />
+
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="ambient_show_settings"
             android:title="@string/ambient_bottom_title"

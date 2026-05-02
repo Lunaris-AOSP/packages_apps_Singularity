@@ -2453,4 +2453,14 @@
     <!-- Scrim -->
     <string name="keyguard_scrim_transparent_title">Transparent lockscreen scrim</string>
     <string name="keyguard_scrim_transparent_summary">Hide the lockscreen wallpaper dimming layer</string>
+
+    <!-- Screen Off AOD -->
+    <string name="screen_off_aod">Screen Off AOD</string>
+    <string name="screen_off_aod_summary">Keep AOD active when screen turns off</string>
+    <string name="screen_off_aod_duration">AOD Duration</string>
+    <string name="screen_off_aod_duration_summary">How long to show AOD before entering doze</string>
+    <string name="screen_off_animation">Screen Off Animation</string>
+    <string name="screen_off_animation_summary">Animate the transition to AOD</string>
+    <string name="doze_screen_state_fix_title">Doze screen state</string>
+    <string name="doze_screen_state_fix_summary">Apply screen state fix only if aod proximity sensor broken in AOD </string>
 </resources>
