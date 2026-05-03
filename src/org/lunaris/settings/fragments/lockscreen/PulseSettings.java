@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2025 crDroid Android Project
+ * Copyright (C) 2016-2026 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreferenceCompat;
+import org.lunaris.settings.utils.DeviceUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -42,6 +43,7 @@ public class PulseSettings extends SettingsPreferenceFragment implements
     private static final String KEY_PULSE_RENDERER = "pulse_renderer";
     private static final String KEY_PULSE_COLOR = "pulse_color";
     private static final String KEY_PULSE_CUSTOM_COLOR = "pulse_custom_color";
+    private static final String KEY_PULSE_BASS_HAPTICS = "pulse_bass_haptics";
 
     private SecureSettingListPreference mPulseRenderer;
     private SecureSettingListPreference mPulseColor;
@@ -69,6 +71,11 @@ public class PulseSettings extends SettingsPreferenceFragment implements
         if (mPulseColor != null) {
             mPulseColor.setOnPreferenceChangeListener(this);
             updatePreferenceVisibility(getCurrentRenderer(), getCurrentColorMode());
+        }
+
+        boolean hapticAvailable = DeviceUtils.hasVibrator(getContext());
+        if (!hapticAvailable) {
+            getPreferenceScreen().removePreference(findPreference(KEY_PULSE_BASS_HAPTICS));
         }
     }
 
