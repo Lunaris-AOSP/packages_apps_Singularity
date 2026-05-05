@@ -176,7 +176,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
             return true;
         } else if (preference.getKey() != null
                 && preference.getKey().equals(LOGO_CUSTOM_STYLE)) {
-            updateCustomImagePrefVisibility();
+            int newStyle = Integer.parseInt(String.valueOf(newValue));
+            updateCustomImagePrefVisibility(newStyle);
             return true;
         } else if (preference == mLogoColorPicker) {
             String hex = ColorPickerPreference.convertToARGB(
@@ -229,8 +230,13 @@ public class StatusBar extends SettingsPreferenceFragment implements
                 getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_LOGO_STYLE, 0,
                 UserHandle.USER_CURRENT);
-        mLogoCustomImage.setVisible(currentStyle == LOGO_STYLE_CUSTOM);
-        if (currentStyle == LOGO_STYLE_CUSTOM) {
+        updateCustomImagePrefVisibility(currentStyle);
+    }
+
+    private void updateCustomImagePrefVisibility(int style) {
+        if (mLogoCustomImage == null) return;
+        mLogoCustomImage.setVisible(style == LOGO_STYLE_CUSTOM);
+        if (style == LOGO_STYLE_CUSTOM) {
             String path = Settings.System.getStringForUser(
                     getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_LOGO_CUSTOM_IMAGE_URI,
