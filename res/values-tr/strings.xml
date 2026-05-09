@@ -2,3 +2,31 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
 </resources>
+    <!-- Singularity -->
+    <string name="lunaris_dashboard_title">Singularity</string>
+    <string name="lunaris_dashboard_summary">Sistem özelleştirmelerini keşfet</string>
+
+    <!-- Categories -->
+    <string name="themes_title">Kullanıcı arayüzü</string>
+    <string name="themes_summary">Tema, ikon, yazı tipi ve arayüz görünümünü özelleştirir</string>
+
+    <string name="lock_screen_title">Ekran kilidi</string>
+    <string name="lock_screen_summary">Kilit ekranı görünümünü ve kilit ekranı özelliklerini ayarlar</string>
+
+    <string name="status_bar_title">Durum çubuğu</string>
+    <string name="status_bar_summary">Saat, pil, ağ, bildirim ve gizlilik göstergelerini özelleştirir</string>
+
+    <string name="quick_settings_title">Hızlı ayarlar</string>
+    <string name="quick_settings_summary">Hızlı ayarlar panelinin görünümünü ve davranışını ayarlar</string>
+
+    <string name="notifications_title">Bildirimler</string>
+    <string name="notifications_summary">Bildirim görünümünü, uyarı biçimini ve bildirim davranışlarını düzenler</string>
+
+    <string name="power_menu_title">Güç menüsü</string>
+    <string name="power_menu_summary">Kapatma menüsünde gösterilecek seçenekleri ayarlar</string>
+
+    <string name="buttons_title">Tuşlar</string>
+    <string name="buttons_summary">Sistem tuşları, ses tuşları ve tuş davranışlarını özelleştirir</string>
+
+    <string name="miscellaneous_title">Sistem</string>
+    <string name="miscellaneous_summary">Ek sistem davranışları, gizlilik ve gelişmiş seçenekleri ayarlar</string>
