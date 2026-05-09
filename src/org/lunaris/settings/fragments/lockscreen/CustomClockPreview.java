@@ -264,6 +264,8 @@ public class CustomClockPreview extends SettingsPreferenceFragment {
             "iOS 8",
             "iOS 9",
             "iOS 10",
+            "iOS 11",
+            "iOS 12",
             "Big 1",
             "Big 2",
             "Big 3",
