@@ -36,6 +36,12 @@
             android:summary="@string/lockscreen_quick_settings_summary"
             android:defaultValue="true" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_split_shade"
+            android:title="@string/qs_split_shade_title"
+            android:summary="@string/qs_split_shade_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

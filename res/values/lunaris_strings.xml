@@ -494,6 +494,10 @@
     <string name="status_bar_quick_qs_pulldown_right">Right</string>
     <string name="status_bar_quick_qs_pulldown_always">Always show quick settings on status bar pull down</string>
 
+    <!-- QS Split Shade -->
+    <string name="qs_split_shade_title">Split Quick settings</string>
+    <string name="qs_split_shade_summary">Swipe down from the left for notifications and right for quick settings</string>
+
     <!-- Status bar - Smart pulldown-->
     <string name="smart_pulldown_title">Smart pulldown</string>
     <string name="smart_pulldown_summary">Open quick settings when there are %1$s notifications</string>
