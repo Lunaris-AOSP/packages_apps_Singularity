@@ -95,7 +95,7 @@ public class Themes extends SettingsPreferenceFragment implements
         }
 
         mQuickSwitch = (Preference) prefScreen.findPreference(KEY_QUICKSWITCH);
-        boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
+        boolean withGoogleApps = android.os.SystemProperties.getBoolean("persist.sys.with_google_apps", false);
         if (!withGoogleApps)
             prefScreen.removePreference(mQuickSwitch);
 
@@ -177,7 +177,7 @@ public class Themes extends SettingsPreferenceFragment implements
                         keys.add(KEY_FORCE_FULL_SCREEN);
                     }
 
-                    boolean withGoogleApps = android.os.SystemProperties.getBoolean("with_google_apps", false);
+                    boolean withGoogleApps = android.os.SystemProperties.getBoolean("persist.sys.with_google_apps", false);
                     if (!withGoogleApps)
                         keys.add(KEY_QUICKSWITCH);
 
