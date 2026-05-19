@@ -328,10 +328,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsShowMediaPlayer) {
-            int value = Integer.parseInt((String) newValue);
-            if (value == 0) {
-                SystemUtils.showSystemUiRestartDialog(getActivity());
-            }
+            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsWidgetPanel) {
             updateWidgetPanelDependencies();
