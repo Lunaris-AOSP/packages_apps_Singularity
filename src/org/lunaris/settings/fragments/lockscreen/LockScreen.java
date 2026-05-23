@@ -35,7 +35,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
-import org.lunaris.settings.utils.TelephonyUtils;
 
 import com.android.internal.util.lunaris.VibrationUtils;
 
@@ -58,8 +57,6 @@ public class LockScreen extends SettingsPreferenceFragment
 
     private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
     private static final String KEY_FP_ERROR = "fp_error_vibrate";
-
-    private static final String KEY_CARRIER_NAME = "lockscreen_show_carrier";
 
     private static final String PROP_CUSTOM_UDFPS = "persist.sys.udfps.custom";
 
@@ -99,12 +96,6 @@ public class LockScreen extends SettingsPreferenceFragment
         if (!hasFingerprint || !hapticAvailable) {
             gestCategory.removePreference(mFpSuccessVib);
             gestCategory.removePreference(mFpErrorVib);
-        }
-
-        if (!TelephonyUtils.isVoiceCapable(context)) {
-            PreferenceCategory intCategory = (PreferenceCategory) findPreference(LOCKSCREEN_INTERFACE_CATEGORY);
-            SwitchPreferenceCompat carrierName = findPreference(KEY_CARRIER_NAME);
-            intCategory.removePreference(carrierName);
         }
 
         mSmartspace = (SwitchPreferenceCompat) findPreference(KEY_SMARTSPACE);
@@ -192,9 +183,6 @@ public class LockScreen extends SettingsPreferenceFragment
                     if (!hasFingerprint || !hapticAvailable) {
                         keys.add(KEY_FP_SUCCESS);
                         keys.add(KEY_FP_ERROR);
-                    }
-                    if (!TelephonyUtils.isVoiceCapable(context)) {
-                        keys.add(KEY_CARRIER_NAME);
                     }
                     return keys;
                 }
