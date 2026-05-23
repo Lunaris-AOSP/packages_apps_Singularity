@@ -16,8 +16,10 @@
 package org.lunaris.settings.fragments.statusbar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -26,7 +28,11 @@ import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.preference.ListPreference;
@@ -48,6 +54,7 @@ import org.lunaris.settings.fragments.statusbar.Clock;
 import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
+import org.lunaris.settings.utils.TelephonyUtils;
 import org.lunaris.settings.utils.StatusBarLogoImageUtils;
 
 import lineageos.preference.LineageSystemSettingListPreference;
@@ -70,6 +77,9 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String LOGO_CUSTOM_STYLE = "status_bar_logo_style";
     private static final String STATUS_BAR_ICON_ORDER_LEGACY = "status_bar_icon_order_legacy";
     private static final String LOGO_CUSTOM_IMAGE = "status_bar_logo_custom_image";
+    private static final String STATUS_BAR_CARRIER_KEY = "status_bar_carrier_key";
+    private static final String CARRIER_NAME = "lockscreen_show_carrier";
+    private static final String CUSTOM_CARRIER_LABEL = "lockscreen_show_custom_carrier_text";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -86,6 +96,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mStatusBarIconOrderLegacy;
     private Preference mLogoCustomImage;
     private Preference mLogoStyle;
+    private Preference mCustomCarrierTextPref;
+    private String mCustomCarrierText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,6 +168,16 @@ public class StatusBar extends SettingsPreferenceFragment implements
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
             mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
             mQuickPulldown.setEntryValues(R.array.status_bar_quick_qs_pulldown_values_rtl);
+        }
+
+        if (!TelephonyUtils.isVoiceCapable(mContext)) {
+            Preference carrierCategory = findPreference(STATUS_BAR_CARRIER_KEY);
+            if (carrierCategory != null) {
+                prefScreen.removePreference(carrierCategory);
+            }
+        } else {
+            mCustomCarrierTextPref = findPreference(CUSTOM_CARRIER_LABEL);
+            updateCustomCarrierTextSummary();
         }
     }
 
@@ -300,7 +322,55 @@ public class StatusBar extends SettingsPreferenceFragment implements
             }
             return true;
         }
+        if (CUSTOM_CARRIER_LABEL.equals(preference.getKey())) {
+            final ContentResolver resolver = getActivity().getContentResolver();
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_dialog_message);
+
+            LinearLayout container = new LinearLayout(getActivity());
+            container.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(55, 20, 55, 20);
+
+            final EditText input = new EditText(getActivity());
+            input.setText(TextUtils.isEmpty(mCustomCarrierText) ? "" : mCustomCarrierText);
+            input.setSelection(input.getText().length());
+            input.setLayoutParams(lp);
+            input.setGravity(Gravity.START | Gravity.TOP);
+            container.addView(input);
+            alert.setView(container);
+
+            alert.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String value = input.getText().toString();
+                            Settings.System.putStringForUser(resolver,
+                                    CUSTOM_CARRIER_LABEL, value, UserHandle.USER_CURRENT);
+                            updateCustomCarrierTextSummary();
+                        }
+                    });
+            alert.setNegativeButton(getString(android.R.string.cancel), null);
+            alert.show();
+            return true;
+        }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    private void updateCustomCarrierTextSummary() {
+        if (mCustomCarrierTextPref == null) return;
+        mCustomCarrierText = Settings.System.getStringForUser(
+                getActivity().getContentResolver(),
+                CUSTOM_CARRIER_LABEL, UserHandle.USER_CURRENT);
+        if (TextUtils.isEmpty(mCustomCarrierText)) {
+            mCustomCarrierTextPref.setSummary(R.string.custom_carrier_label_summary);
+        } else {
+            mCustomCarrierTextPref.setSummary(mCustomCarrierText);
+        }
     }
 
     @Override
@@ -312,5 +382,17 @@ public class StatusBar extends SettingsPreferenceFragment implements
      * For search
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.lunaris_settings_status_bar);
+            new BaseSearchIndexProvider(R.xml.lunaris_settings_status_bar) {
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!TelephonyUtils.isVoiceCapable(context)) {
+                        keys.add(CARRIER_NAME);
+                        keys.add(CUSTOM_CARRIER_LABEL);
+                    }
+                    return keys;
+                }
+            };
 }
