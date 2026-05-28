@@ -36,6 +36,21 @@
         android:dependency="doze_always_on" />
 
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="doze_peek"
+        android:title="@string/doze_peek_title"
+        android:summary="@string/doze_peek_summary"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SecureSettingListPreference
+        android:key="doze_peek_duration"
+        android:title="@string/doze_peek_duration_title"
+        android:entries="@array/doze_peek_duration_entries"
+        android:entryValues="@array/doze_peek_duration_values"
+        android:defaultValue="5"
+        android:dependency="doze_peek"
+        android:summary="%s" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         android:key="doze_on_charge"
         android:title="@string/doze_on_charge_title"
         android:summary="@string/doze_on_charge_summary" />

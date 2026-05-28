@@ -2590,4 +2590,9 @@
     <!-- Scrim -->
     <string name="keyguard_scrim_transparent_title">Transparent lockscreen scrim</string>
     <string name="keyguard_scrim_transparent_summary">Hide the lockscreen wallpaper dimming layer</string>
+
+    <!-- AOD Peek -->
+    <string name="doze_peek_title">AOD Peek</string>
+    <string name="doze_peek_summary">Show ambient display briefly when the screen turns off</string>
+    <string name="doze_peek_duration_title">Peek duration</string>
 </resources>
