@@ -145,6 +145,7 @@
     <string name="wallpaper_color">壁纸颜色</string>
     <string name="rainbow_color">彩虹色</string>
     <string name="custom_color">自定义颜色</string>
+    <string name="custom_color_summary">为某些时钟样式自定义颜色</string>
     <string name="restart_systemui">请重启系统界面以使更改生效！</string>
     <string name="default_value">默认</string>
     <string name="apply">应用</string>
@@ -480,15 +481,22 @@
     <!-- Status bar - Brightness control -->
     <string name="status_bar_toggle_brightness_title">亮度控制</string>
     <string name="status_bar_toggle_brightness_summary">在状态栏上滑动可调节亮度</string>
+    <string name="status_bar_toggle_brightness_lockscreen_title">锁屏亮度控制</string>
+    <string name="status_bar_toggle_brightness_lockscreen_summary">允许在锁屏状态栏上控制亮度</string>
 
     <!-- Status bar - Quick pulldown -->
-    <string name="status_bar_quick_qs_pulldown_summary">在状态栏的%1$s边缘下拉可展开快速设置</string>
+    <string name="status_bar_quick_qs_pulldown_title">快速下拉</string>
+    <string name="status_bar_quick_qs_pulldown_summary">%1$s边缘状态栏下拉显示快捷设置</string>
     <string name="status_bar_quick_qs_pulldown_summary_left">左侧</string>
     <string name="status_bar_quick_qs_pulldown_summary_right">右侧</string>
     <string name="status_bar_quick_qs_pulldown_off">关闭</string>
     <string name="status_bar_quick_qs_pulldown_left">左侧</string>
     <string name="status_bar_quick_qs_pulldown_right">右侧</string>
-    <string name="status_bar_quick_qs_pulldown_always">在状态栏下拉时始终显示快速设置</string>
+    <string name="status_bar_quick_qs_pulldown_always">始终在状态栏下拉时显示快捷设置</string>
+
+    <!-- QS Split Shade -->
+    <string name="qs_split_shade_title">分离快捷设置</string>
+    <string name="qs_split_shade_summary">从左侧下滑显示通知，从右侧下滑显示快捷设置</string>
 
     <!-- Status bar - Smart pulldown-->
     <string name="smart_pulldown_title">智能下拉</string>
@@ -956,40 +964,178 @@
     <string name="display_cutout_force_fullscreen_summary">强制应用忽略刘海区域</string>
     <string name="display_cutout_force_fullscreen_no_apps">无应用</string>
 
-    <!-- Unlimited google photos storage -->
+    <!-- Generic actions & labels -->
+    <string name="action_enable">启用</string>
+    <string name="action_disable">禁用</string>
+    <string name="action_apply">应用</string>
+    <string name="applied">已应用</string>
+    <string name="action_delete">删除</string>
+    <string name="action_clear">清除</string>
+    <string name="action_yes">是</string>
+    <string name="action_set">设置</string>
+    <string name="action_reset">重置</string>
+    <string name="action_remove">移除</string>
+    <string name="action_add">添加</string>
+    <string name="action_add_apps">添加应用</string>
+    <string name="action_choose_app">选择应用</string>
+    <string name="action_search_apps">搜索应用</string>
+    <string name="action_select_all">全选</string>
+    <string name="action_restart">重启</string>
+    <string name="action_reboot_now">立即重启</string>
+    <string name="show_system_apps">显示系统应用</string>
+    <string name="hide_system_apps">隐藏系统应用</string>
+    <string name="top">顶部</string>
+    <string name="bottom">底部</string>
+    <string name="active_content_desc">活跃</string>
+    <string name="boot_animation_applied">开机动画已应用</string>
+    <string name="action_later">稍后</string>
+    <string name="reset_default_title">恢复默认</string>
+
+
+    <!-- Miscellaneous/Spoofing -->
+    <string name="spoofing_title">伪装</string>
+    <string name="spoofing_summary">Play Integrity、设备标识和功能伪装</string>
+    <string name="spoofing_integrity_category">Play Integrity</string>
+    <string name="spoofing_identity_category">设备标识</string>
+    <string name="spoofing_features_category">硬件功能</string>
+    <string name="spoofing_pixel_props_title">Pixel 属性</string>
+    <string name="spoofing_pixel_props_summary">向一组精选的 Google 应用报告最新的 Pixel 设备标识</string>
+    <string name="spoofing_app_specific_category">应用单独覆盖</string>
+    <string name="spoofing_photos_title">Google 相册</string>
+    <string name="spoofing_photos_summary">将 Google 相册伪装成 Pixel XL</string>
     <string name="spoofing_snap_title">Snapchat</string>
     <string name="spoofing_snap_summary">将 Snapchat 伪装成 Pixel XL 以修复可能的聊天问题</string>
-    <string name="spoofing_vending_title">Play 商店</string>
-    <string name="spoofing_vending_summary">将 Play 商店伪装成 Pixel 设备</string>
-    <string name="use_photos_spoof_title">无限照片存储空间</string>
-    <string name="use_photos_spoof_summary">仅对 Google 相册应用将设备伪装成 Pixel XL，以提供无限备份存储空间</string>
-    <string name="spoofing_summary">设备伪装及其他杂项</string>
-    <string name="spoofing_app_specific_category">特定应用</string>
-    <string name="gameprops_title">启用游戏/应用属性伪装</string>
-    <string name="gameprops_summary">为特定游戏/应用将设备伪装成不同型号</string>
-    <string name="gameprops_load_json_title">选择游戏/应用属性的 JSON 文件</string>
-    <string name="gameprops_load_json_summary">选取用于伪装游戏/应用的 JSON 文件</string>
-    <string name="spoofing_qsb_title">Google 应用</string>
-    <string name="spoofing_qsb_summary">将 Google 应用伪装成最新 Pixel 设备以解锁专属功能</string>
-    <string name="tensor_spoof_title">伪装 Tensor 特性</string>
-    <string name="tensor_spoof_summary">解锁 Tensor/Pixel 特性</string>
-    <string name="spoofing_pixel_props_title">Pixel 属性</string>
-    <string name="spoofing_pixel_props_summary">将一组选定的 Google 应用伪装成最新 Pixel 设备</string>
+    <string name="spoofing_applying_changes">正在应用伪装更改…</string>
+    <string name="tensor_spoof_title">Tensor 功能目标</string>
+    <string name="tensor_spoof_summary">授予所选应用访问 Pixel Tensor 独占 AI 功能的权限</string>
+    <string name="tensor_spoof_enable">Tensor 伪装</string>
+    <string name="tensor_spoof_enable_summary">授予所选应用访问 Pixel Tensor 独占功能的权限</string>
+    <string name="tensor_targets_none_configured">未指定目标应用</string>
+    <string name="tensor_targets_count">已指定 %1$d 个应用</string>
+    <string name="tensor_targets_empty_description">所选应用将报告 Tensor 硬件功能，以解锁 AI 和 Pixel 独占功能</string>
+    <string name="user_selectable_app_spoofing_title">应用和游戏伪装</string>
+    <string name="user_selectable_app_spoofing_summary">为特定应用和游戏伪装设备属性</string>
+    <string name="user_select_spoofing_profile_title">选择伪装配置文件</string>
+    <string name="app_spoofing_category_title">单独应用伪装</string>
+    <string name="app_spoofing_header_title">启用伪装</string>
+    <string name="app_spoofing_configured_count">已伪装 %1$d 个应用和游戏</string>
+    <string name="app_spoofing_disabled">已禁用</string>
+    <string name="app_spoofing_add_apps">添加应用和游戏</string>
+    <string name="app_spoofing_spoofed_model">选择型号</string>
+    <string name="app_spoofing_clear_all">全部清除</string>
+    <string name="app_spoofing_configured_apps">已配置的应用和游戏</string>
+    <string name="app_spoofing_no_apps_configured">未配置任何应用或游戏</string>
+    <string name="app_spoofing_spoof_model">伪装型号</string>
+    <string name="app_spoofing_select_spoof_model">选择伪装型号</string>
+    <string name="app_spoofing_change_app">更改应用</string>
+    <string name="app_spoofing_empty_description">所选应用将报告伪装的设备标识以绕过硬件检查</string>
+    <string name="app_spoofing_clear_all_confirm">这将移除所有已配置的应用伪装条目。</string>
+    <string name="app_spoofing_no_apps_available">没有可用的应用或游戏</string>
+    <string name="app_spoofing_no_apps_found">未找到“%s”的结果</string>
+    <string name="app_spoofing_longpress_hint">长按以快速重新分配配置文件</string>
+    <string name="app_spoofing_remove_title">移除应用？</string>
+    <string name="app_spoofing_remove_confirm">从伪装列表中移除 %1$s？</string>
+    <string name="add_new_spoof_profile">添加新配置文件</string>
+    <string name="add_custom_spoof_profile_title">添加自定义伪装配置文件</string>
+    <string name="custom_spoof_profile_name">配置文件名称</string>
+    <string name="custom_spoof_profile_brand">品牌</string>
+    <string name="custom_spoof_profile_manufacturer">制造商</string>
+    <string name="custom_spoof_profile_device">设备</string>
+    <string name="custom_spoof_profile_model">型号</string>
+    <string name="custom_spoof_profile_fingerprint">指纹（可选）</string>
+    <string name="custom_spoof_profile_product">产品（可选）</string>
+    <string name="common_clear_search">清除搜索</string>
+    <string name="common_system_badge">系统</string>
+    <string name="app_spoofing_clear_search">清除搜索</string>
 
-    <!-- Miscellaneous/Spoofing/Play Integrity fix JSON update -->
-    <string name="spoofing_title">伪装设置</string>
-    <string name="gms_spoof_title">Play Integrity 修复</string>
-    <string name="spoofing_system_wide_category">系统级</string>
-    <string name="gms_spoof_summary">伪装设备以通过 Google Play 认证</string>
-    <string name="toast_spoofing_success">已成功下载 pif.json。正在以 %1$s 的身份伪装 Play Integrity</string>
-    <string name="toast_spoofing_failure">伪装属性失败。</string>
-    <string name="update_pif_json_title">更新 Play Integrity 修复</string>
-    <string name="update_pif_json_summary">更新 PIF 伪装设备，需要网络连接。</string>
-    <string name="show_pif_properties_title">Play Integrity 修复属性</string>
-    <string name="show_pif_properties_summary">显示当前设置的所有 PIF 属性</string>
-    <string name="error_loading_properties">加载 PIF 属性时出错</string>
-    <string name="pif_spoofing_title">选择 PIF JSON 文件</string>
-    <string name="pif_spoofing_summary">选取用于伪装 Play Integrity 的 PIF JSON 文件</string>
+    <!-- Miscellaneous/Play Integrity & TrickyStore -->
+    <string name="play_integrity_fix_title">Play Integrity 修复</string>
+    <string name="play_integrity_fix_summary">管理 PIF 配置和设备指纹以实现基本完整性</string>
+    <string name="pif_status">状态</string>
+    <string name="pif_active_config">当前配置</string>
+    <string name="pif_no_config">未加载配置</string>
+    <string name="pif_config_loaded">配置已加载</string>
+    <string name="pif_fetch_pixel_beta">获取 Pixel Beta 指纹</string>
+    <string name="pif_fetch_pixel_beta_summary">从 Google 下载最新的 Pixel Beta 指纹</string>
+    <string name="pif_fetching">正在从 Google 获取…</string>
+    <string name="pif_fetched_model">已获取 %s 的指纹</string>
+    <string name="pif_import_config">导入配置</string>
+    <string name="pif_import_config_summary">从文件导入 PIF 配置</string>
+    <string name="pif_imported_as">已导入为 %s</string>
+    <string name="pif_delete_config">删除当前配置</string>
+    <string name="pif_delete_config_summary">移除当前激活的配置文件</string>
+    <string name="pif_delete_title">删除 %s？</string>
+    <string name="pif_delete_message">此配置文件将被永久删除</string>
+    <string name="pif_deleted">已删除 %s</string>
+    <string name="pif_config_details">配置详情</string>
+    <string name="pif_failed">失败：%s</string>
+    <string name="pif_select_device">选择设备</string>
+    <string name="pif_generating">正在生成配置…</string>
+    <string name="pif_footer_title">通过基本完整性</string>
+    <string name="pif_footer_body">1. 点击“获取 Pixel Beta 指纹”并从列表中选择一个设备。\n2. 如果没有找到设备，请从可信源导入一个可用的 PIF 配置文件。不提供配置文件。\n3. 重新检查您的 Play Integrity 状态。\n\n在加载新配置之前，请务必删除当前激活的配置。加载过期的 PIF 配置将导致即使拥有有效的 keybox，TrickyStore 强完整性也会失败</string>
+    <string name="pif_select_channel">选择渠道</string>
+    <string name="pif_channel_latest_release">最新发布版</string>
+    <string name="pif_channel_canary_release">金丝雀版</string>
+    <string name="pif_invalid_fingerprint">无效的指纹格式</string>
+    <string name="pif_no_devices_found">未找到设备</string>
+    <string name="pif_no_api_key">无法提取 Flash Tool API 密钥</string>
+    <string name="pif_master_switch_title">启用 Play Integrity 修复</string>
+    <string name="tricky_store_title">TrickyStore</string>
+    <string name="tricky_store_summary">管理 keybox 和目标应用以实现强完整性认证</string>
+    <string name="ts_master_switch_title">启用 TrickyStore 伪装</string>
+    <string name="ts_keybox_management">Keybox 管理</string>
+    <string name="ts_import_keybox">导入 keybox</string>
+    <string name="ts_no_keybox">未安装 keybox</string>
+    <string name="ts_keybox_installed">Keybox 已安装</string>
+    <string name="ts_keybox_imported">Keybox 导入成功</string>
+    <string name="ts_delete_keybox">删除 keybox</string>
+    <string name="ts_delete_keybox_summary">移除 keybox 文件</string>
+    <string name="ts_delete_keybox_title">删除 keybox？</string>
+    <string name="ts_delete_keybox_message">keybox 文件将被永久删除</string>
+    <string name="ts_keybox_deleted">Keybox 已删除</string>
+    <string name="ts_target_configuration">目标配置</string>
+    <string name="ts_manage_target_apps">管理目标应用</string>
+    <string name="ts_no_targets">未配置目标应用</string>
+    <string name="ts_target_apps_count">已配置 %d 个应用</string>
+    <string name="ts_import_target_list">导入目标列表</string>
+    <string name="ts_import_target_list_summary">从文件导入 target.txt</string>
+    <string name="ts_invalid_patch_date">无效的日期格式,请使用 YYYY-MM-DD</string>
+    <string name="ts_target_list_imported">目标列表已导入</string>
+    <string name="ts_targets_saved">目标列表已保存</string>
+    <string name="ts_failed">失败：%s</string>
+    <string name="ts_footer_title">通过强完整性</string>
+    <string name="ts_footer_body">1. 从可信源获取有效的 keybox XML。不提供 keybox，您必须自己寻找。\n2. 点击“导入 keybox”并加载文件。\n3. 打开“管理目标应用”并选择 Google Play 服务和 Google Play 商店。\n4. 如果您的设备具有可用的 TEE，将目标模式设置为“Leaf”；否则保持为“自动”。\n5. 重新检查您的 Play Integrity 状态。\n\n在导入新的 keybox 之前，请始终删除现有的 keybox。如果 Google 撤销了一个 keybox，即使强完整性会失败，它可能仍然允许通过设备完整性。</string>
+    <string name="ts_patch_date_hint" translatable="false">YYYY-MM-DD</string>
+    <string name="ts_security_patch">安全补丁日期</string>
+    <string name="ts_no_patch">未设置（使用设备默认）</string>
+    <string name="ts_select_target_apps">选择目标应用</string>
+    <string name="ts_select_target_apps_desc">选择要启用认证伪装的应用</string>
+    <string name="ts_selected_count">已选择 %d 个</string>
+    <string name="ts_mode_auto">自动</string>
+    <string name="ts_mode_leaf">Leaf</string>
+    <string name="ts_mode_cert">Cert</string>
+    <string name="ts_verification_mode">验证模式</string>
+    <string name="ts_verification_mode_auto">自动</string>
+    <string name="ts_verification_mode_cert">Cert</string>
+    <string name="ts_verification_mode_leaf">Leaf</string>
+    <string name="ts_verification_auto_count">%1$d 自动</string>
+    <string name="ts_verification_cert_count">%1$d cert</string>
+    <string name="ts_verification_leaf_count">%1$d leaf</string>
+    <string name="ts_revocation_status">撤销状态</string>
+    <string name="ts_revocation_checking">正在检查撤销状态…</string>
+    <string name="ts_revocation_no_keybox">未安装 keybox</string>
+    <string name="ts_revocation_valid">✓ 有效 — 未撤销</string>
+    <string name="ts_revocation_revoked">✗ 已撤销（%s）</string>
+    <string name="ts_revocation_suspended">⚠ 已暂停（%s）</string>
+    <string name="ts_revocation_network_error">无法连接到撤销服务器</string>
+    <string name="ts_revocation_error">检查失败：%s</string>
+    <string name="ts_fetch_keybox">获取官方 keybox</string>
+    <string name="ts_fetch_keybox_summary">从 Evolution X 服务器下载 keybox</string>
+    <string name="ts_fetch_keybox_fetching">正在获取 keybox…</string>
+    <string name="ts_fetch_keybox_success">官方 keybox 获取成功</string>
+    <string name="ts_fetch_keybox_failed">获取失败：%s</string>
+    <string name="ts_fetch_keybox_revoked_refetch">Keybox 已撤销，正在获取更新的…</string>
+    <string name="ts_fetch_keybox_same_file">Keybox 已经是最新</string>
 
     <!-- Volume panel -->
     <string name="volume_panel_category">音量面板</string>
@@ -1133,22 +1279,19 @@
     <string name="qs_show_data_usage_summary">在 WiFi 和蜂窝数据的快速设置磁贴中显示数据使用量信息</string>
 
     <!-- QS Tiles animation  -->
-    <string name="qs_tile_animation_title">磁贴动画</string>
-    <string name="qs_tile_animation_style_title">动画样式</string>
-    <string name="qs_tile_animation_duration_title">动画时长</string>
-    <string name="qs_tile_animation_interpolator_title">动画插值器</string>
-    <string name="qs_tile_animation_style_off">无动画</string>
-    <string name="qs_tile_animation_style_rotate">旋转</string>
-    <string name="qs_tile_animation_style_flipx">X轴翻转</string>
-    <string name="qs_tile_animation_style_flipy">Y轴翻转</string>
-    <string name="qs_tile_animation_interpolator_linearInterpolator">线性</string>
-    <string name="qs_tile_animation_interpolator_accelerateInterpolator">加速</string>
-    <string name="qs_tile_animation_interpolator_decelerateInterpolator">减速</string>
-    <string name="qs_tile_animation_interpolator_accelerateDecelerateInterpolator">先加速后减速</string>
-    <string name="qs_tile_animation_interpolator_bounceInterpolator">弹跳</string>
-    <string name="qs_tile_animation_interpolator_overshootInterpolator">过冲</string>
-    <string name="qs_tile_animation_interpolator_anticipateInterpolator">预备</string>
-    <string name="qs_tile_animation_interpolator_anticipateOvershootInterpolator">预备过冲</string>
+    <string name="qs_tile_animation_style_title">快捷设置磁贴动画</string>
+    <string name="qs_tile_animation_style_bounce">弹跳</string>
+    <string name="qs_tile_animation_style_ripple">涟漪</string>
+    <string name="qs_tile_animation_style_flip">翻转</string>
+    <string name="qs_tile_animation_style_fade">淡入淡出</string>
+    <string name="qs_tile_animation_style_pulse">脉冲</string>
+    <string name="qs_tile_animation_style_shake">抖动</string>
+    <string name="qs_tile_animation_style_wobble">摆动</string>
+    <string name="qs_tile_animation_style_spin">旋转</string>
+    <string name="qs_tile_animation_style_squish">挤压</string>
+    <string name="qs_tile_animation_style_tilt">倾斜</string>
+    <string name="qs_tile_animation_style_heartbeat">心跳</string>
+    <string name="qs_tile_animation_style_swing">摇摆</string>
 
     <!-- Screenshot shutter sound  -->
     <string name="screenshot_shutter_sound_title">截屏声音</string>
@@ -1312,8 +1455,7 @@
     <string name="quickswitch_not_supported">不支持快速切换；系统中只有一个启动器。</string>
     <string name="quickswitch_footer_text">
         注意：\n\n
-        1. 外部启动器模块/修改必须适配 QuickSwitch 结构才能正常工作。\n\n
-        2. 切换之前或之后，请根据需求启用/禁用壁纸叠加层：使用 Lunaris 启动器时启用，使用 Pixel 启动器时禁用，以确保壁纸和样式正常生效
+        外部启动器模块/修改必须适配 QuickSwitch 结构才能正常工作
     </string>
 
     <!-- Floating rotation button -->
@@ -1423,9 +1565,15 @@
     <string name="qs_bt_show_dialog_title">蓝牙磁贴对话框</string>
     <string name="qs_bt_show_dialog_summary">点击蓝牙磁贴时显示蓝牙对话框或切换蓝牙状态</string>
 
-    <!-- Carrier name on lockscreen -->
-    <string name="lockscreen_show_carrier_title">运营商名称</string>
-    <string name="lockscreen_show_carrier_summary">在状态栏显示运营商名称</string>
+    <!-- Carrier name on lockscreen/statusbar -->
+    <string name="status_bar_carrier_category_title">运营商标签</string>
+    <string name="lockscreen_show_carrier_title">显示运营商标签</string>
+    <string name="carrier_show_lockscreen_only">仅锁屏</string>
+    <string name="carrier_show_statusbar_only">仅状态栏</string>
+    <string name="carrier_show_both">锁屏和状态栏</string>
+    <string name="custom_carrier_label_title">自定义运营商标签</string>
+    <string name="custom_carrier_label_summary">点击设置自定义运营商标签</string>
+    <string name="custom_carrier_label_dialog_message">用自定义文本替换运营商标签。留空以使用真实运营商标签。</string>
 
     <!-- Statusbar Padding -->
     <string name="statusbar_extra_padding_category">额外内边距</string>
@@ -1596,6 +1744,10 @@
     <string name="pulse_settings_summary">播放音乐时在锁屏上显示条形可视化器</string>
     <string name="ambient_pulse_enabled_title">环境脉冲</string>
     <string name="ambient_pulse_enabled_summary">在环境显示上显示可视化器</string>
+    <string name="pulse_bass_haptics_title">低音触感</string>
+    <string name="pulse_bass_haptics_none">尖锐低音峰值时无轻微振动</string>
+    <string name="pulse_bass_haptics_running">仅当脉冲显示时</string>
+    <string name="pulse_bass_haptics_always">每当媒体播放活跃时</string>
     <string name="pulse_rounded_bars_title">圆角条</string>
     <string name="pulse_rounded_bars_summary">显示带有圆角的可视化器条形</string>
     <string name="pulse_color">可视化器颜色</string>
@@ -1613,6 +1765,8 @@
     <string name="pulse_renderer_minimal_wave">极简波形</string>
     <string name="pulse_renderer_sparkle">闪烁</string>
     <string name="pulse_renderer_matrix">矩阵</string>
+    <string name="pulse_renderer_particle">粒子</string>
+    <string name="pulse_renderer_waveform">波形</string>
 
     <!-- Pulse height multiplier -->
     <string name="pulse_height_multiplier_title">脉冲高度</string>
@@ -1741,21 +1895,21 @@
     <!-- Wallpaper Glymps -->
     <string name="lock_glymps_title">壁纸快览</string>
     <string name="lock_glymps_enable_title">启用壁纸快览</string>
-    <string name="lock_glymps_enable_summary">每次屏幕亮起时更换壁纸</string>
+    <string name="lock_glymps_enable_summary">每次屏幕点亮时更换壁纸</string>
     <string name="lock_glymps_wallpaper_target_title">壁纸应用至</string>
     <string name="lock_glymps_source_category">壁纸来源</string>
     <string name="lock_glymps_source_title">壁纸来源</string>
-    <string name="lock_glymps_source_summary">选择壁纸获取来源</string>
+    <string name="lock_glymps_source_summary">选择壁纸的来源位置</string>
 
-    <string name="lock_glymps_custom_urls_title">管理自定义 URL</string>
-    <string name="lock_glymps_custom_urls_summary">添加或移除自定义壁纸 URL</string>
+    <string name="lock_glymps_custom_urls_title">管理自定义网址</string>
+    <string name="lock_glymps_custom_urls_summary">添加或移除自定义壁纸网址</string>
 
     <string name="lock_glymps_folder_title">本地文件夹</string>
-    <string name="lock_glymps_folder_summary">查看文件夹位置和壁纸数量（最多 10 张）</string>
+    <string name="lock_glymps_folder_summary">查看文件夹位置和壁纸数量（最多 10 张壁纸）</string>
 
     <string name="lock_glymps_download_category">下载设置</string>
-    <string name="lock_glymps_wifi_only_title">仅限 WiFi</string>
-    <string name="lock_glymps_wifi_only_summary">仅在连接 WiFi 时下载壁纸</string>
+    <string name="lock_glymps_wifi_only_title">仅限 Wi-Fi</string>
+    <string name="lock_glymps_wifi_only_summary">仅在连接 Wi-Fi 时下载壁纸</string>
 
     <string name="lock_glymps_cache_size_title">缓存大小</string>
     <string name="lock_glymps_cache_size_summary">预下载的壁纸数量</string>
@@ -1768,10 +1922,10 @@
     <string name="lock_glymps_change_on_title">更换壁纸时机</string>
     <string name="lock_glymps_change_on_summary">何时更换屏幕壁纸</string>
 
-    <string name="lock_glymps_timer_interval_title">定时间隔</string>
+    <string name="lock_glymps_timer_interval_title">定时器间隔</string>
     <string name="lock_glymps_timer_interval_summary">自动更换壁纸的频率</string>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <string name="lock_glymps_footer_title">重要信息</string>
     <string name="lock_glymps_footer_text">📁 本地文件夹：/sdcard/LunarisGlymps\n\n⚠️ 低端设备可能会出现轻微卡顿\n\n🎨 提示：在 Monet 设置中使用自定义强调色以获得稳定的颜色</string>
 
@@ -2150,43 +2304,6 @@
     <!-- Status bar icon order -->
     <string name="status_bar_icon_order_title">状态栏图标顺序</string>
     <string name="status_bar_icon_order_summary">启用旧版状态栏图标顺序</string>
-    
-    <!-- App Spoofing -->
-    <string name="user_selectable_app_spoofing_title">应用伪装</string>
-    <string name="user_selectable_app_spoofing_summary">选择要对哪些应用伪装设备属性</string>
-    <string name="user_select_spoofing_profile_title">选择伪装配置</string>
-    <string name="app_spoofing_category_title">按应用伪装</string>
-    <string name="app_spoofing_header_title">启用伪装</string>
-    <string name="app_spoofing_configured_count">已伪装 %1$d 个应用</string>
-    <string name="app_spoofing_disabled">已禁用</string>
-    <string name="app_spoofing_add_apps">添加应用</string>
-    <string name="app_spoofing_spoofed_model">选择型号</string>
-    <string name="app_spoofing_clear_all">全部清除</string>
-    <string name="app_spoofing_configured_apps">已配置的应用列表</string>
-    <string name="app_spoofing_no_apps_configured">未配置任何应用</string>
-    <string name="app_spoofing_spoof_model">伪装型号</string>
-    <string name="app_spoofing_select_spoof_model">选择伪装型号</string>
-    <string name="app_spoofing_change_app">更改应用</string>
-    <string name="show_system_apps">显示系统应用</string>
-    <string name="hide_system_apps">隐藏系统应用</string>
-
-    <!-- Custom App Spoofing Profiles -->
-    <string name="add_new_spoof_profile">新建</string>
-    <string name="add_custom_spoof_profile_title">添加自定义伪装配置</string>
-    <string name="custom_spoof_profile_name">配置名称</string>
-    <string name="custom_spoof_profile_brand">品牌</string>
-    <string name="custom_spoof_profile_manufacturer">制造商</string>
-    <string name="custom_spoof_profile_device">设备代号</string>
-    <string name="custom_spoof_profile_model">型号</string>
-    <string name="custom_spoof_profile_fingerprint">指纹（可选）</string>
-    <string name="custom_spoof_profile_product">产品名称（可选）</string>
-    <string name="app_spoofing_clear_all_confirm">这将清除所有已配置的应用伪装条目</string>
-    <string name="app_spoofing_no_apps_available">没有可用应用</string>
-    <string name="app_spoofing_no_apps_found">未找到与“%s”相关的应用</string>
-    <string name="app_spoofing_clear_search">清除搜索</string>
-    <string name="app_spoofing_longpress_hint">长按可快速重新分配配置</string>
-    <string name="app_spoofing_remove_title">移除应用？</string>
-    <string name="app_spoofing_remove_confirm">将 %1$s 从伪装列表中移除？</string>
 
     <!-- Idle Manager -->
     <string name="idle_manager_title">空闲管理器</string>
@@ -2246,6 +2363,8 @@
     <string name="idle_manager_clear_stats_title">清除统计</string>
     <string name="idle_manager_clear_stats_confirm">这将永久删除所有执行历史记录，空闲管理器将继续正常运行</string>
     <string name="idle_manager_clear_stats_button">清除</string>
+    <string name="idle_manager_sleep_mode_trigger_title">睡眠模式时触发</string>
+    <string name="idle_manager_sleep_mode_trigger_summary">仅在睡眠模式激活时执行空闲规则</string>
 
     <!-- Lockscreen Clock Size -->
     <string name="clock_size_title">时钟大小</string>
@@ -2323,45 +2442,45 @@
     <string name="notification_bubble_apps_summary">点击通知时在气泡中启动应用</string>
 
     <!-- QS media player -->
-    <string name="qs_show_media_player_title">快捷设置媒体播放器</string>
-    <string name="qs_show_media_player_summary">在快捷设置中显示媒体控件</string>
+    <string name="qs_show_media_player_title">媒体播放器位置</string>
+    <string name="qs_show_media_player_hide">隐藏</string>
+    <string name="qs_show_media_player_top">显示在顶部</string>
+    <string name="qs_show_media_player_bottom">显示在底部</string>
 
     <!-- Dynamic Bar -->
     <string name="dynamic_bar">动态栏</string>
-    <string name="dynamic_bar_summary">用于录制、媒体、计时器等活动事件的状态栏智能芯片</string>
+    <string name="dynamic_bar_summary">智能状态栏芯片，用于显示录制、媒体、计时器等活动事件</string>
     <string name="dynamic_bar_enable">启用动态栏</string>
-    <string name="dynamic_bar_enable_summary">在状态栏上为实时事件显示动态芯片</string>
+    <string name="dynamic_bar_enable_summary">在状态栏上显示动态芯片以展示实时事件</string>
     <string name="dynamic_bar_keyguard_enable">锁屏上的动态栏</string>
-    <string name="dynamic_bar_keyguard_enable_summary">在锁屏上使用带控件和快速操作的动态栏芯片替换锁屏指示</string>
+    <string name="dynamic_bar_keyguard_enable_summary">在锁屏上用动态栏芯片替换锁屏提示，并提供控制和快捷操作</string>
     <string name="dynamic_bar_keyguard_battery_chip">锁屏上的电池信息</string>
     <string name="dynamic_bar_keyguard_battery_chip_disabled">从不显示</string>
-    <string name="dynamic_bar_keyguard_battery_chip_charging">仅在充电时显示</string>
+    <string name="dynamic_bar_keyguard_battery_chip_charging">仅在充电时</string>
     <string name="dynamic_bar_keyguard_battery_chip_always">始终显示</string>
     <string name="dynamic_bar_keyguard_music_pill">锁屏上的音乐药丸</string>
-    <string name="dynamic_bar_keyguard_music_pill_summary">在锁屏上以药丸形式显示音乐播放器</string>
+    <string name="dynamic_bar_keyguard_music_pill_summary">在锁屏上将音乐播放器显示为药丸形状</string>
     <string name="dynamic_bar_keyguard_compact_chip">紧凑型锁屏芯片</string>
-    <string name="dynamic_bar_keyguard_compact_chip_summary">始终在锁屏上使用紧凑型芯片样式。禁用时，仅在空间有限时使用紧凑模式</string>
+    <string name="dynamic_bar_keyguard_compact_chip_summary">在锁屏上始终使用紧凑型芯片样式。禁用时，仅在空间有限时使用紧凑模式</string>
     <string name="dynamic_bar_events">事件</string>
     <string name="dynamic_bar_event_recording">屏幕录制</string>
-    <string name="dynamic_bar_event_recording_summary">正在屏幕录制指示器</string>
+    <string name="dynamic_bar_event_recording_summary">活动屏幕录制指示器</string>
     <string name="dynamic_bar_event_privacy">隐私指示器</string>
     <string name="dynamic_bar_event_privacy_summary">相机和麦克风访问提醒</string>
-    <string name="dynamic_bar_event_audio_recording">录音</string>
-    <string name="dynamic_bar_event_audio_recording_summary">语音录制和音频捕捉</string>
-    <string name="dynamic_bar_event_call">进行中的通话</string>
-    <string name="dynamic_bar_event_call_summary">来电和活跃通话</string>
+    <string name="dynamic_bar_event_audio_recording">音频录制</string>
+    <string name="dynamic_bar_event_audio_recording_summary">录音机和音频捕获</string>
     <string name="dynamic_bar_event_media">媒体播放</string>
-    <string name="dynamic_bar_event_media_summary">正在播放的音乐和音频控件</string>
+    <string name="dynamic_bar_event_media_summary">正在播放的音乐和音频控制</string>
     <string name="dynamic_bar_event_notification">通知</string>
     <string name="dynamic_bar_event_notification_summary">新通知提醒</string>
     <string name="dynamic_bar_compact_notifications">紧凑型通知</string>
-    <string name="dynamic_bar_compact_notifications_summary">先将通知显示为一个小芯片，点击可展开</string>
+    <string name="dynamic_bar_compact_notifications_summary">先将通知显示为小型芯片，点击可展开</string>
     <string name="dynamic_bar_event_timer">计时器</string>
-    <string name="dynamic_bar_event_timer_summary">来自时钟应用的倒计时</string>
+    <string name="dynamic_bar_event_timer_summary">来自时钟应用的倒计时器</string>
     <string name="dynamic_bar_event_stopwatch">秒表</string>
     <string name="dynamic_bar_event_stopwatch_summary">来自时钟应用的运行中秒表</string>
     <string name="dynamic_bar_event_alarm">闹钟</string>
-    <string name="dynamic_bar_event_alarm_summary">响铃和即将响起的闹钟</string>
+    <string name="dynamic_bar_event_alarm_summary">响铃中的闹钟和即将响起的闹钟</string>
     <string name="dynamic_bar_event_charging">开始充电</string>
     <string name="dynamic_bar_event_charging_summary">插入电源时的电池电量</string>
     <string name="dynamic_bar_event_bluetooth">蓝牙</string>
@@ -2369,36 +2488,36 @@
     <string name="dynamic_bar_event_hotspot">热点</string>
     <string name="dynamic_bar_event_hotspot_summary">移动热点活动指示器</string>
     <string name="dynamic_bar_event_ringer">响铃模式</string>
-    <string name="dynamic_bar_event_ringer_summary">静音、振动和响铃模式切换</string>
+    <string name="dynamic_bar_event_ringer_summary">静音、振动和响铃模式更改</string>
     <string name="dynamic_bar_event_vpn">VPN</string>
-    <string name="dynamic_bar_event_vpn_summary">VPN 连接活动指示器</string>
+    <string name="dynamic_bar_event_vpn_summary">VPN 活动连接指示器</string>
     <string name="dynamic_bar_event_clipboard">剪贴板</string>
-    <string name="dynamic_bar_event_clipboard_summary">复制的文本和图片预览</string>
+    <string name="dynamic_bar_event_clipboard_summary">复制文本和图片预览</string>
     <string name="dynamic_bar_event_torch">手电筒</string>
     <string name="dynamic_bar_event_torch_summary">手电筒开关和亮度</string>
-    <string name="dynamic_bar_event_casting">投屏</string>
+    <string name="dynamic_bar_event_casting">投射</string>
     <string name="dynamic_bar_event_casting_summary">屏幕投射和媒体投射状态</string>
     <string name="dynamic_bar_event_ongoing">进行中的活动</string>
-    <string name="dynamic_bar_event_ongoing_summary">导航、配送和其他实时活动</string>
+    <string name="dynamic_bar_event_ongoing_summary">导航、外卖和其他实时活动</string>
     <string name="dynamic_bar_event_sports">体育</string>
-    <string name="dynamic_bar_event_sports_summary">实时比分和赛事更新</string>
+    <string name="dynamic_bar_event_sports_summary">实时比分和比赛更新</string>
     <string name="dynamic_bar_event_app_switch">最近应用切换</string>
     <string name="dynamic_bar_event_app_switch_summary">在最近应用之间切换时显示芯片</string>
     <string name="dynamic_bar_event_biometric">生物识别解锁</string>
-    <string name="dynamic_bar_event_biometric_summary">指纹或面部解锁时显示芯片</string>
+    <string name="dynamic_bar_event_biometric_summary">在指纹或人脸解锁时显示芯片</string>
     <string name="dynamic_bar_guide_title">如何使用动态栏</string>
-    <string name="dynamic_bar_guide_chip">事件会显示在状态栏中，展示正在进行中的活动，如录制、媒体播放和计时器等</string>
+    <string name="dynamic_bar_guide_chip">事件会在状态栏中显示，展示录制、媒体播放、计时器等进行中的事件</string>
     <string name="dynamic_bar_guide_swipe">当有多个事件同时活动时，在芯片上向左或向右滑动可在它们之间切换</string>
-    <string name="dynamic_bar_guide_expand">点击芯片可将其展开为带有控件和附加信息的详细卡片</string>
-    <string name="dynamic_bar_guide_dismiss">将展开的卡片滑走可将其关闭，但事件将继续在后台运行</string>
-    <string name="dynamic_bar_guide_keyguard">动态栏芯片也会出现在锁屏底部，提供播放控制和快速操作</string>
+    <string name="dynamic_bar_guide_expand">点击芯片可将其展开为包含控制和附加信息的详细卡片</string>
+    <string name="dynamic_bar_guide_dismiss">将展开的卡片滑走即可关闭。事件仍在后台继续运行</string>
+    <string name="dynamic_bar_guide_keyguard">动态栏芯片也会出现在锁屏底部，提供播放控制和快捷操作</string>
     <string name="dynamic_bar_guide_chip_title">芯片外观</string>
-    <string name="dynamic_bar_guide_swipe_title">在芯片间滑动</string>
+    <string name="dynamic_bar_guide_swipe_title">芯片间滑动</string>
     <string name="dynamic_bar_guide_expand_title">点击展开</string>
     <string name="dynamic_bar_guide_dismiss_title">滑动关闭</string>
     <string name="dynamic_bar_guide_keyguard_title">锁屏芯片</string>
     <string name="dynamic_bar_footer_title">关于动态栏</string>
-    <string name="dynamic_bar_footer_body">动态栏将您的状态栏转变为一个交互中心。状态芯片会根据系统事件出现并带有动画效果，让您在不打断工作流程的情况下快速获取信息。\n\n每种事件类型都有其专属的强调色和带有快速操作的展开卡片</string>
+    <string name="dynamic_bar_footer_body">动态栏将您的状态栏转变为一个交互中心。状态芯片会根据系统事件出现并动画化，让您在不中断工作流程的情况下快速获取信息。\n\n每种事件类型都有自己的强调色和带有快捷操作的展开卡片</string>
 
     <!-- Themes -->
     <string name="custom_system_theme_title">主题商店</string>
@@ -2448,4 +2567,16 @@
     <!-- Animation -->
     <string name="activity_anim_perf_override_title">活动动画覆盖</string>
     <string name="activity_anim_perf_override_summary">使用优化后的活动过渡动画</string>
+
+    <!-- QS widget -->
+    <string name="qs_widget_panel_title">在快捷设置面板中显示小部件</string>
+    <string name="qs_widget_panel_summary">在快捷设置面板中显示媒体、音量和亮度小部件</string>
+    <string name="qs_widget_ios_music_title">显示 iOS 风格音乐小部件</string>
+    <string name="qs_widget_ios_music_summary">显示类似 iOS 的媒体面板</string>
+    <string name="qs_widget_slider_corner_title">显示圆角小部件滑块</string>
+    <string name="qs_widget_slider_corner_summary">在快捷设置面板中显示圆角风格的垂直小部件滑块</string>
+
+    <!-- Scrim -->
+    <string name="keyguard_scrim_transparent_title">透明锁屏遮罩</string>
+    <string name="keyguard_scrim_transparent_summary">隐藏锁屏壁纸变暗层</string>
 </resources>
