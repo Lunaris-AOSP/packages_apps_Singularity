@@ -2251,6 +2251,7 @@
     <string name="lockscreen_widgets_enabled_title">Enable Lockscreen Widgets</string>
     <string name="lockscreen_widgets_enabled_summary">Add widgets to lockscreen</string>
     <string name="lockscreen_display_widgets_title">Device info Widget</string>
+    <string name="lockscreen_widgets_color_mode_title">Info Widget color mode</string>
     <string name="lockscreen_display_widgets_summary">Show device info widget on lockscreen</string>
 	<string name="large_widgets_category_title">Big widgets</string>
     <string name="main_custom_widgets1">Big widget 1</string>
