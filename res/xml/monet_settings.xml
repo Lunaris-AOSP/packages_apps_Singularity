@@ -58,6 +58,24 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+       android:title="@string/secondary_seed_category"
+       android:key="secondary_seed_category">
+
+       <SwitchPreferenceCompat
+           android:key="use_secondary_seed"
+           android:title="@string/use_secondary_seed_title"
+           android:summary="@string/use_secondary_seed_desc"
+           android:defaultValue="false" />
+
+       <Preference
+           android:key="secondary_seed_color"
+           android:title="@string/secondary_seed_color_title"
+           android:summary="#FF5500"
+           android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/advanced_settings_category"
         android:key="advanced_settings_category">
 
@@ -86,13 +104,107 @@
             settings:units="%"
             android:defaultValue="0"
             android:persistent="false" />
+        
+        <org.lunaris.settings.preferences.CustomSeekBarPreference
+            android:key="chroma_boost_accent1"
+            android:title="@string/chroma_accent1_title"
+            android:max="100"
+            settings:min="0"
+            settings:interval="1"
+            settings:units="%"
+            android:defaultValue="0"
+            android:persistent="false" />
 
-    </PreferenceCategory>
+        <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="chroma_boost_accent2"
+           android:title="@string/chroma_accent2_title"
+           android:max="100"
+           settings:min="0"
+           settings:interval="1"
+           settings:units="%"
+           android:defaultValue="0"
+           android:persistent="false" />
 
-    <Preference
-        android:key="about_color_customization"
-        android:title="@string/about_color_customization_title"
-        android:summary="@string/about_color_customization_desc"
-        android:selectable="false" />
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="chroma_boost_accent3"
+           android:title="@string/chroma_accent3_title"
+           android:max="100"
+           settings:min="0"
+           settings:interval="1"
+           settings:units="%"
+           android:defaultValue="0"
+           android:persistent="false" />
+
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="chroma_boost_neutral1"
+           android:title="@string/chroma_neutral1_title"
+           android:max="100"
+           settings:min="0"
+           settings:interval="1"
+           settings:units="%"
+           android:defaultValue="0"
+           android:persistent="false" />
+
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="chroma_boost_neutral2"
+           android:title="@string/chroma_neutral2_title"
+           android:max="100"
+           settings:min="0"
+           settings:interval="1"
+           settings:units="%"
+           android:defaultValue="0"
+           android:persistent="false" />
+
+   </PreferenceCategory>
+
+   <PreferenceCategory
+       android:title="@string/hue_tone_settings_category"
+       android:key="hue_tone_settings_category">
+
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="hue_shift"
+           android:title="@string/hue_shift_title"
+           android:summary="@string/hue_shift_desc"
+           android:max="180"
+           settings:min="-180"
+           settings:interval="1"
+           settings:units="°"
+           android:defaultValue="0"
+           android:persistent="false" />
+
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="tone_shift_light"
+           android:title="@string/tone_shift_light_title"
+           android:summary="@string/tone_shift_light_desc"
+           android:max="50"
+           settings:min="-50"
+           settings:interval="1"
+           settings:units=""
+           android:defaultValue="0"
+           android:persistent="false" />
+
+       <org.lunaris.settings.preferences.CustomSeekBarPreference
+           android:key="tone_shift_dark"
+           android:title="@string/tone_shift_dark_title"
+           android:summary="@string/tone_shift_dark_desc"
+           android:max="50"
+           settings:min="-50"
+           settings:interval="1"
+           settings:units=""
+           android:defaultValue="0"
+           android:persistent="false" />
+
+   </PreferenceCategory>
+
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+            android:key="monet_two_category">
+            
+        <Preference
+            android:key="about_color_customization"
+            android:title="@string/about_color_customization_title"
+            android:summary="@string/about_color_customization_desc"
+            android:selectable="false" />
+
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
 
 </PreferenceScreen>

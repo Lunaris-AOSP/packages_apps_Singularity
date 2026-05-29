@@ -38,6 +38,16 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
         private const val KEY_SEED_COLOR = "custom_seed_color"
         private const val KEY_WALLPAPER_SEED_COLOR = "wallpaper_seed_color"
         private const val KEY_THEME_STYLE = "theme_style"
+        private const val KEY_CHROMA_ACCENT1 = "chroma_boost_accent1"
+        private const val KEY_CHROMA_ACCENT2 = "chroma_boost_accent2"
+        private const val KEY_CHROMA_ACCENT3 = "chroma_boost_accent3"
+        private const val KEY_CHROMA_NEUTRAL1 = "chroma_boost_neutral1"
+        private const val KEY_CHROMA_NEUTRAL2 = "chroma_boost_neutral2"
+        private const val KEY_HUE_SHIFT = "hue_shift"
+        private const val KEY_TONE_SHIFT_LIGHT = "tone_shift_light"
+        private const val KEY_TONE_SHIFT_DARK = "tone_shift_dark"
+        private const val KEY_USE_SECONDARY_SEED = "use_secondary_seed"
+        private const val KEY_SECONDARY_SEED_COLOR = "secondary_seed_color"
         private const val KEY_FIDELITY = "fidelity_enabled"
         private const val KEY_CONTRAST = "contrast_level"
         private const val KEY_CHROMA = "chroma_boost"
@@ -50,6 +60,16 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
     private lateinit var fidelity: SwitchPreferenceCompat
     private var contrast: CustomSeekBarPreference? = null
     private var chroma: CustomSeekBarPreference? = null
+    private var chromaAccent1: CustomSeekBarPreference? = null
+    private var chromaAccent2: CustomSeekBarPreference? = null
+    private var chromaAccent3: CustomSeekBarPreference? = null
+    private var chromaNeutral1: CustomSeekBarPreference? = null
+    private var chromaNeutral2: CustomSeekBarPreference? = null
+    private var hueShift: CustomSeekBarPreference? = null
+    private var toneShiftLight: CustomSeekBarPreference? = null
+    private var toneShiftDark: CustomSeekBarPreference? = null
+    private lateinit var useSecondarySeed: SwitchPreferenceCompat
+    private lateinit var secondarySeedColorPref: Preference
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.monet_settings)
@@ -61,8 +81,33 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
         fidelity = findPreference(KEY_FIDELITY)!!
         contrast = findPreference(KEY_CONTRAST)
         chroma = findPreference(KEY_CHROMA)
+        chromaAccent1 = findPreference(KEY_CHROMA_ACCENT1)
+        chromaAccent2 = findPreference(KEY_CHROMA_ACCENT2)
+        chromaAccent3 = findPreference(KEY_CHROMA_ACCENT3)
+        chromaNeutral1 = findPreference(KEY_CHROMA_NEUTRAL1)
+        chromaNeutral2 = findPreference(KEY_CHROMA_NEUTRAL2)
+        hueShift = findPreference(KEY_HUE_SHIFT)
+        toneShiftLight = findPreference(KEY_TONE_SHIFT_LIGHT)
+        toneShiftDark = findPreference(KEY_TONE_SHIFT_DARK)
+        useSecondarySeed = findPreference(KEY_USE_SECONDARY_SEED)!!
+        secondarySeedColorPref = findPreference(KEY_SECONDARY_SEED_COLOR)!!
 
         useWallpaperColors.onPreferenceChangeListener = this
+
+        secondarySeedColorPref.setOnPreferenceClickListener {
+            showSecondarySeedColorPickerDialog()
+            true
+        }
+        useSecondarySeed.onPreferenceChangeListener = this
+
+        chromaAccent1?.onPreferenceChangeListener = this
+        chromaAccent2?.onPreferenceChangeListener = this
+        chromaAccent3?.onPreferenceChangeListener = this
+        chromaNeutral1?.onPreferenceChangeListener = this
+        chromaNeutral2?.onPreferenceChangeListener = this
+        hueShift?.onPreferenceChangeListener = this
+        toneShiftLight?.onPreferenceChangeListener = this
+        toneShiftDark?.onPreferenceChangeListener = this
         
         seedColorPref.setOnPreferenceClickListener {
             showColorPickerDialog()
@@ -82,6 +127,8 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
         loadCurrentSettings()
         updateSeedColorSummary()
         updateSeedColorDependency(useWallpaperColors.isChecked)
+        updateSecondarySeedColorSummary()
+        updateSecondarySeedDependency(useSecondarySeed.isChecked)
     }
 
     private fun loadCurrentSettings() {
@@ -107,6 +154,20 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
                 val chromaValue = json.optDouble("_chroma_boost", 0.0).toInt()
                 it.value = chromaValue
             }
+            chromaAccent1?.value = json.optDouble("_chroma_accent1", 0.0).toInt()
+            chromaAccent2?.value = json.optDouble("_chroma_accent2", 0.0).toInt()
+            chromaAccent3?.value = json.optDouble("_chroma_accent3", 0.0).toInt()
+            chromaNeutral1?.value = json.optDouble("_chroma_neutral1", 0.0).toInt()
+            chromaNeutral2?.value = json.optDouble("_chroma_neutral2", 0.0).toInt()
+
+            hueShift?.value = json.optDouble("_hue_shift", 0.0).toInt()
+
+            toneShiftLight?.value = json.optDouble("_tone_shift_light", 0.0).toInt()
+            toneShiftDark?.value  = json.optDouble("_tone_shift_dark",  0.0).toInt()
+
+            val hasSecondarySeed = json.has("_secondary_seed_color")
+                    && json.optString("_secondary_seed_color", "").isNotEmpty()
+            useSecondarySeed.isChecked = hasSecondarySeed
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -115,6 +176,21 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         when (preference.key) {
             KEY_USE_WALLPAPER -> {
+                val useWallpaper = newValue as Boolean
+                applyWallpaperColorsSetting(useWallpaper)
+                updateSeedColorDependency(useWallpaper)
+                return true
+            }
+            KEY_USE_SECONDARY_SEED -> {
+                val enabled = newValue as Boolean
+                if (!enabled) {
+                    // Clear secondary seed from JSON when the switch is turned off.
+                    applySecondarySeedEnabled(false)
+                }
+                updateSecondarySeedDependency(enabled)
+                return true
+            }
+            KEY_WALLPAPER_SEED_COLOR -> {
                 val useWallpaper = newValue as Boolean
                 applyWallpaperColorsSetting(useWallpaper)
                 updateSeedColorDependency(useWallpaper)
@@ -134,6 +210,38 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
             }
             KEY_CHROMA -> {
                 applyChromaBoost(newValue as Int)
+                return true
+            }
+            KEY_CHROMA_ACCENT1 -> {
+                applyDoubleKey("_chroma_accent1", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_CHROMA_ACCENT2 -> {
+                applyDoubleKey("_chroma_accent2", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_CHROMA_ACCENT3 -> {
+                applyDoubleKey("_chroma_accent3", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_CHROMA_NEUTRAL1 -> {
+                applyDoubleKey("_chroma_neutral1", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_CHROMA_NEUTRAL2 -> {
+                applyDoubleKey("_chroma_neutral2", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_HUE_SHIFT -> {
+                applyDoubleKey("_hue_shift", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_TONE_SHIFT_LIGHT -> {
+                applyDoubleKey("_tone_shift_light", (newValue as Int).toDouble())
+                return true
+            }
+            KEY_TONE_SHIFT_DARK -> {
+                applyDoubleKey("_tone_shift_dark", (newValue as Int).toDouble())
                 return true
             }
         }
@@ -167,6 +275,36 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun showSecondarySeedColorPickerDialog() {
+        try {
+            val json = getCurrentSettings()
+            val secondarySeedHex = json.optString("_secondary_seed_color", "FF5500")
+
+            val dialog = ColorPickerDialogFragment.newInstance(secondarySeedHex)
+            dialog.setOnColorSelectedListener { color ->
+                applySecondarySeedColor(color)
+                updateSecondarySeedColorSummary()
+            }
+            dialog.show(parentFragmentManager, ColorPickerDialogFragment.TAG)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun updateSecondarySeedColorSummary() {
+        try {
+            val json = getCurrentSettings()
+            val seedColor = json.optString("_secondary_seed_color", "FF5500")
+            secondarySeedColorPref.summary = "#${seedColor.uppercase().replace("#", "")}"
+        } catch (e: Exception) {
+            secondarySeedColorPref.summary = "#FF5500"
+        }
+    }
+
+    private fun updateSecondarySeedDependency(enabled: Boolean) {
+        secondarySeedColorPref.isEnabled = enabled
     }
 
     private fun updateSeedColorSummary() {
@@ -273,6 +411,44 @@ class ColorsSettingsFragment : SettingsPreferenceFragment(),
         try {
             val json = getCurrentSettings()
             json.put("_contrast_level", value / 100.0)
+            applySettings(json)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun applyDoubleKey(jsonKey: String, value: Double) {
+        try {
+            val json = getCurrentSettings()
+            json.put(jsonKey, value)
+            applySettings(json)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun applySecondarySeedColor(color: ComposeColor) {
+        try {
+            val json = getCurrentSettings()
+            val argb = color.toArgb()
+            val hexColor = String.format("%06X", 0xFFFFFF and argb)
+            json.put("_secondary_seed_color", hexColor)
+            applySettings(json)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun applySecondarySeedEnabled(enabled: Boolean) {
+        try {
+            val json = getCurrentSettings()
+            if (enabled) {
+                if (!json.has("_secondary_seed_color")) {
+                    json.put("_secondary_seed_color", "FF5500")
+                }
+            } else {
+                json.remove("_secondary_seed_color")
+            }
             applySettings(json)
         } catch (e: Exception) {
             e.printStackTrace()
