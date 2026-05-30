@@ -80,6 +80,12 @@
             android:summary="@string/notification_row_transparency_lockscreen_summary"
             android:defaultValue="true" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_icons_center_aligned"
+            android:title="@string/notification_icons_center_aligned_title"
+            android:summary="@string/notification_icons_center_aligned_summary"
+            android:defaultValue="false" />
+
         <!-- Notification app icon -->
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="notification_use_app_icons"

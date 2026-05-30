@@ -2622,4 +2622,9 @@
     <string name="doze_peek_title">AOD Peek</string>
     <string name="doze_peek_summary">Show ambient display briefly when the screen turns off</string>
     <string name="doze_peek_duration_title">Peek duration</string>
+    
+    <!-- Notification icons center aligned -->
+    <string name="notification_icons_center_aligned_title">Notification icons center aligned</string>
+    <string name="notification_icons_center_aligned_summary">Center align lockscreen notification icons (compact style)</string>
+    
 </resources>
