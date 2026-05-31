@@ -31,6 +31,12 @@
         android:title="@string/theme_customization_lock_clock_title"
         android:summary="theme_customization_lock_clock_summary" />
 
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lock_screen_custom_clock_album_art_color"
+        android:title="@string/clock_album_art_color_title"
+        android:summary="@string/clock_album_art_color_summary"
+        android:defaultValue="false" />
+
     <org.lunaris.settings.preferences.SecureSettingListPreference
         android:key="lock_screen_custom_clock_color_mode"
         android:title="@string/lockscreen_custom_clock_color_mode_title"

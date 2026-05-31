@@ -2628,4 +2628,8 @@
     <string name="notification_icons_center_aligned_title">Notification icons center aligned</string>
     <string name="notification_icons_center_aligned_summary">Center align lockscreen notification icons (compact style)</string>
     
+    <!-- Lockscreen clock: album art color override -->
+    <string name="clock_album_art_color_title">Album art color clocks</string>
+    <string name="clock_album_art_color_summary">Override clock color with the album art palette when media is playing</string>
+
 </resources>
