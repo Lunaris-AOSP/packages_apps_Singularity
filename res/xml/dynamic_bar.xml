@@ -68,6 +68,13 @@
             android:summary="@string/dynamic_bar_event_media_summary"
             android:icon="@drawable/ic_music_note"
             android:defaultValue="true" />
+        
+        <SwitchPreferenceCompat
+            android:key="event_call"
+            android:title="@string/dynamic_bar_event_call"
+            android:summary="@string/dynamic_bar_event_call_summary"
+            android:icon="@drawable/ic_call_ring"
+            android:defaultValue="true" />
 
         <SwitchPreferenceCompat
             android:key="event_notification"
@@ -75,6 +82,14 @@
             android:summary="@string/dynamic_bar_event_notification_summary"
             android:icon="@drawable/ic_notifications"
             android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="ax_dynamic_bar_compact_notifications"
+            android:title="@string/dynamic_bar_compact_notifications"
+            android:summary="@string/dynamic_bar_compact_notifications_summary"
+            android:icon="@drawable/ic_compact_notifications"
+            android:defaultValue="true"
+            android:dependency="event_notification" />
 
         <SwitchPreferenceCompat
             android:key="event_timer"
