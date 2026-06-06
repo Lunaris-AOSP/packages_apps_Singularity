@@ -70,6 +70,12 @@
         settings:units="%" />
 
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lock_screen_custom_clock_wobble_on_charge"
+        android:title="@string/lock_screen_custom_clock_wobble_on_charge_title"
+        android:summary="@string/lock_screen_custom_clock_wobble_on_charge_summary"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         android:key="lock_screen_custom_clock_aod_anim"
         android:title="@string/lockscreen_custom_clock_aod_anim_title"
         android:summary="@string/lockscreen_custom_clock_aod_anim_summary"
