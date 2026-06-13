@@ -32,7 +32,7 @@
         android:summary="%s"
         android:entries="@array/charging_animation_style_entries"
         android:entryValues="@array/charging_animation_style_values"
-        android:defaultValue="3"
+        android:defaultValue="0"
         android:dependency="charging_animation_enabled" />
 
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
@@ -42,7 +42,7 @@
         android:max="100"
         android:min="0"
         settings:units="%"
-        android:defaultValue="60"
+        android:defaultValue="100"
         android:dependency="charging_animation_enabled" />
 
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
@@ -75,7 +75,7 @@
             android:summary="%s"
             android:entries="@array/charging_color_mode_entries"
             android:entryValues="@array/charging_color_mode_values"
-            android:defaultValue="0"
+            android:defaultValue="1"
             android:dependency="charging_animation_enabled" />
 
     </PreferenceCategory>
