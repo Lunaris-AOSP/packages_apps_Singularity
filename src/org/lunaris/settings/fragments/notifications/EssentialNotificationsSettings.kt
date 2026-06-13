@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.lunaris.settings.fragments.notification
+package org.lunaris.settings.fragments.notifications
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -194,15 +194,18 @@ private fun EssentialNotificationsContent(context: Context) {
             allApps = allApps,
             selectedPackages = selectedApps,
             onDismiss = { showAddDialog = false },
-            onAppAdded = { pkg ->
-                selectedApps = selectedApps + pkg
+            onAppsAdded = { pkgs ->
+                selectedApps = selectedApps + pkgs
                 writeEssentialApps(context, selectedApps)
                 showAddDialog = false
             },
         )
     }
 
-    Scaffold(containerColor = Color.Transparent) { innerPadding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        containerColor = Color.Transparent,
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -361,7 +364,7 @@ private fun EssentialNotificationsContent(context: Context) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(100.dp))
+            Spacer(modifier = Modifier.height(180.dp))
         }
     }
 }
@@ -436,11 +439,11 @@ private fun AddAppDialog(
     allApps: List<AppItem>,
     selectedPackages: Set<String>,
     onDismiss: () -> Unit,
-    onAppAdded: (String) -> Unit,
+    onAppsAdded: (Set<String>) -> Unit,
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var showSystemApps by remember { mutableStateOf(false) }
-    var pendingSelection by remember { mutableStateOf<String?>(null) }
+    var pendingSelections by remember { mutableStateOf(setOf<String>()) }
 
     val filtered = allApps.filter { app ->
         if (app.packageName in selectedPackages) return@filter false
@@ -536,11 +539,17 @@ private fun AddAppDialog(
                             val icon = remember(app.packageName) {
                                 app.icon.toBitmap(96, 96).asImageBitmap()
                             }
-                            val isSelected = pendingSelection == app.packageName
+                            val isSelected = app.packageName in pendingSelections
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { pendingSelection = app.packageName }
+                                    .clickable {
+                                        pendingSelections = if (isSelected) {
+                                            pendingSelections - app.packageName
+                                        } else {
+                                            pendingSelections + app.packageName
+                                        }
+                                    }
                                     .background(
                                         if (isSelected)
                                             MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
@@ -597,11 +606,19 @@ private fun AddAppDialog(
                 Spacer(modifier = Modifier.width(8.dp))
                 TextButton(
                     onClick = {
-                        pendingSelection?.let { onAppAdded(it) }
+                        if (pendingSelections.isNotEmpty()) {
+                            onAppsAdded(pendingSelections)
+                        }
                     },
-                    enabled = pendingSelection != null,
+                    enabled = pendingSelections.isNotEmpty(),
                 ) {
-                    Text(stringResource(R.string.add))
+                    Text(
+                        if (pendingSelections.isEmpty()) {
+                            stringResource(R.string.add)
+                        } else {
+                            "${stringResource(R.string.add)} (${pendingSelections.size})"
+                        }
+                    )
                 }
             }
         },
