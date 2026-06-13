@@ -86,7 +86,7 @@
         android:title="@string/lockscreen_custom_clock_frame_margin_top_title"
         android:summary="@string/lockscreen_custom_clock_frame_margin_top_summary"
         android:defaultValue="15"
-	    android:max="100"
+        android:max="200"
         settings:min="0" 
         settings:units="@string/unit_pixels" />
 
