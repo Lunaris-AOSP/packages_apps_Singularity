@@ -40,6 +40,32 @@
         settings:interval="1"
         settings:units="%"
         android:defaultValue="100" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="depth_wallpaper_bottom_fade"
+        android:title="@string/depth_wallpaper_bottom_fade_title"
+        android:summary="@string/depth_wallpaper_bottom_fade_summary"
+        android:max="600"
+        settings:min="0"
+        android:defaultValue="100" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="depth_wallpaper_fade_curve"
+        android:title="@string/depth_wallpaper_fade_curve_title"
+        android:summary="@string/depth_wallpaper_fade_curve_summary"
+        android:max="100"
+        settings:min="0"
+        settings:units="%"
+        android:defaultValue="50" />
+    
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="depth_wallpaper_bottom_inset"
+        android:title="@string/depth_wallpaper_bottom_inset_title"
+        android:summary="@string/depth_wallpaper_bottom_inset_summary"
+        android:max="400"
+        settings:min="0"
+        settings:units="dp"
+        android:defaultValue="180" />
         
     <com.android.settingslib.widget.FooterPreference
         android:key="depthwall_footer"

@@ -2609,6 +2609,12 @@
     <string name="depthwall_footer_text">
         The depth wallpaper feature, inspired by iOS\'s Wallpaper Subject Segmentation, enables overlaying of a subject above the lockscreen clock to show a wallpaper depth effect.\n\nTo setup Depth Wallpaper Feature:\n1. Set a wallpaper with the subject or a background you want the subject to be above of.\n2. Select a subject image to track, this image will be overlaid above the lockscreen clock.\n3. Modify the offsets and opacity according to your needs.
     </string>
+    <string name="depth_wallpaper_bottom_fade_title">Bottom fade</string>
+    <string name="depth_wallpaper_bottom_fade_summary">Fade out the wallpaper at the bottom</string>
+    <string name="depth_wallpaper_fade_curve_title">Fade curve</string>
+    <string name="depth_wallpaper_fade_curve_summary">Adjust the fade curve of the wallpaper</string>
+    <string name="depth_wallpaper_bottom_inset_title">Bottom inset</string>
+    <string name="depth_wallpaper_bottom_inset_summary">Adjust the inset of the wallpaper at the bottom</string>
 
     <!-- Essential Notifications -->
     <string name="essential_notifications">Essential notifications</string>
