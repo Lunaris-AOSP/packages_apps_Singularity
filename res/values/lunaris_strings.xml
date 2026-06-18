@@ -1330,6 +1330,7 @@
     <string name="qs_tile_animation_style_tilt">Tilt</string>
     <string name="qs_tile_animation_style_heartbeat">Heartbeat</string>
     <string name="qs_tile_animation_style_swing">Swing</string>
+    <string name="default_value_tile">Default aosp</string>
 
     <!-- Screenshot shutter sound  -->
     <string name="screenshot_shutter_sound_title">Screenshot sound</string>
