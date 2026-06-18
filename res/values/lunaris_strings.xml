@@ -2451,6 +2451,8 @@
     <string name="lockscreen_custom_clock_aod_anim_summary">Set AOD animation for custom clock style</string>
     <string name="lock_screen_custom_clock_wobble_on_charge_title">Wobble charging effect</string>
     <string name="lock_screen_custom_clock_wobble_on_charge_summary">Show wobble effect on clock when connected to charger</string>
+    <string name="lockscreen_custom_clock_frame_margin_start_title">Custom clock width</string>
+    <string name="lockscreen_custom_clock_frame_margin_start_summary">Adjust the width of custom clock style</string>
 
     <!-- Gradient styles -->
     <string name="gradient_settings_title">Gradients customization</string>
