@@ -2668,4 +2668,8 @@
     <string name="clock_album_art_color_title">Album art color clocks</string>
     <string name="clock_album_art_color_summary">Override clock color with the album art palette when media is playing</string>
 
+    <!-- AppLock and Sandbox -->
+    <string name="applocker_sandbox_title">AppLock and Sandbox</string>
+    <string name="applocker_sandbox_summary">Open the AppLock and Sandbox management app</string>
+
 </resources>
