@@ -2618,6 +2618,13 @@
     <string name="depth_wallpaper_fade_curve_summary">Adjust the fade curve of the wallpaper</string>
     <string name="depth_wallpaper_bottom_inset_title">Bottom inset</string>
     <string name="depth_wallpaper_bottom_inset_summary">Adjust the inset of the wallpaper at the bottom</string>
+    <string name="depthwall_auto_subject_title">Depth wallpaper auto subject</string>
+    <string name="depthwall_auto_subject_summary">Automatically extract subject from wallpaper for depth effect</string>
+    <string name="depthwall_extract_now_title">Extract now</string>
+    <string name="depthwall_extract_now_summary">Trigger subject extraction immediately</string>
+    <string name="depthwall_extracting_toast">Extracting subject from wallpaper…</string>
+    <string name="depthwall_extraction_complete_toast">Subject extraction complete!</string>
+    <string name="depthwall_storage_permission_denied">Storage permission is required to automatically extract subjects from wallpapers.</string>
 
     <!-- Essential Notifications -->
     <string name="essential_notifications">Essential notifications</string>

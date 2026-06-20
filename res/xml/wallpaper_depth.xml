@@ -25,6 +25,20 @@
         android:summary="@string/depthwall_wallpaper_enabled_summary"
         android:defaultValue="false" />
 
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="depth_wallpaper_auto_subject"
+        android:dependency="depth_wallpaper_enabled"
+        android:title="@string/depthwall_auto_subject_title"
+        android:summary="@string/depthwall_auto_subject_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="depth_wallpaper_extract_now"
+        android:dependency="depth_wallpaper_enabled"
+        android:title="@string/depthwall_extract_now_title"
+        android:summary="@string/depthwall_extract_now_summary"
+        android:persistent="false" />
+
     <Preference
         android:key="depth_wallpaper_subject_image_uri"
         android:dependency="depth_wallpaper_enabled"

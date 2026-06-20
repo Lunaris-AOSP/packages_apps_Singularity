@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2023-2024 the risingOS Android Project
+ * Copyright (C) 2025-2026 Lunaris OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +17,21 @@
 
 package org.lunaris.settings.fragments.lockscreen;
 
+import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.MediaStore;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -46,26 +42,51 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.utils.ImageUtils;
+import org.lunaris.settings.utils.WallpaperSubjectExtractorService;
 
 import java.util.List;
 
 @SearchIndexable
 public class WallpaperDepth extends SettingsPreferenceFragment
-            implements Preference.OnPreferenceChangeListener  {
+        implements Preference.OnPreferenceChangeListener {
 
     public static final String TAG = "WallpaperDepth";
 
+    private static final int REQUEST_PICK_IMAGE = 10001;
+    private static final int REQUEST_WRITE_STORAGE = 10002;
+
     private Preference mDepthWallpaperCustomImagePicker;
+    private SwitchPreferenceCompat mAutoSubjectPref;
+    private Preference mExtractNowPref;
+
+    private boolean mPendingExtraction = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.wallpaper_depth);
+
         mDepthWallpaperCustomImagePicker = findPreference("depth_wallpaper_subject_image_uri");
+        mAutoSubjectPref = findPreference("depth_wallpaper_auto_subject");
+        mExtractNowPref = findPreference("depth_wallpaper_extract_now");
+
+        if (mAutoSubjectPref != null) {
+            mAutoSubjectPref.setOnPreferenceChangeListener(this);
+        }
+
+        syncExtractNowVisibility();
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mAutoSubjectPref) {
+            boolean autoOn = Boolean.TRUE.equals(newValue);
+            syncExtractNowVisibility(autoOn);
+            if (autoOn) {
+                triggerExtraction();
+            }
+            return true;
+        }
         return false;
     }
 
@@ -77,13 +98,11 @@ public class WallpaperDepth extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mDepthWallpaperCustomImagePicker) {
-            try {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(intent, 10001);
-            } catch(Exception e) {
-                Toast.makeText(getContext(), R.string.quick_settings_header_needs_gallery, Toast.LENGTH_LONG).show();
-            }
+            launchImagePicker();
+            return true;
+        }
+        if (preference == mExtractNowPref) {
+            triggerExtraction();
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -91,30 +110,100 @@ public class WallpaperDepth extends SettingsPreferenceFragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent result) {
-        if (requestCode == 10001) {
-            if (resultCode != Activity.RESULT_OK) {
-                return;
-            }
+        if (requestCode == REQUEST_PICK_IMAGE && resultCode == Activity.RESULT_OK && result != null) {
             final Uri imgUri = result.getData();
             if (imgUri != null) {
-                String savedImagePath = ImageUtils.saveImageToInternalStorage(getContext(), imgUri, "depthwallpaper", "DEPTH_WALLPAPER_SUBJECT");
-                if (savedImagePath != null) {
-                    ContentResolver resolver = getContext().getContentResolver();
-                    Settings.System.putStringForUser(resolver, "depth_wallpaper_subject_image_uri", savedImagePath, UserHandle.USER_CURRENT);
+                String path = ImageUtils.saveImageToInternalStorage(
+                        getContext(), imgUri, "depthwallpaper", "DEPTH_WALLPAPER_SUBJECT");
+                if (path != null) {
+                    Settings.System.putStringForUser(
+                            getContext().getContentResolver(),
+                            "depth_wallpaper_subject_image_uri",
+                            path,
+                            UserHandle.USER_CURRENT);
                 }
             }
         }
     }
 
-    /**
-     * For search
-     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+            String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_WRITE_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (mPendingExtraction) {
+                    mPendingExtraction = false;
+                    startExtractionService();
+                }
+            } else {
+                mPendingExtraction = false;
+                Toast.makeText(getContext(),
+                        R.string.depthwall_storage_permission_denied,
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void launchImagePicker() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            startActivityForResult(intent, REQUEST_PICK_IMAGE);
+        } catch (Exception e) {
+            Toast.makeText(getContext(),
+                    R.string.quick_settings_header_needs_gallery,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void triggerExtraction() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+
+        if (ctx.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            mPendingExtraction = true;
+            requestPermissions(
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_STORAGE);
+            return;
+        }
+
+        startExtractionService();
+    }
+
+    private void startExtractionService() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+
+        Toast.makeText(ctx, R.string.depthwall_extracting_toast, Toast.LENGTH_SHORT).show();
+
+        try {
+            Intent intent = new Intent(ctx, WallpaperSubjectExtractorService.class);
+            intent.setAction(WallpaperSubjectExtractorService.ACTION_EXTRACT_NOW);
+            intent.setComponent(new ComponentName(ctx, WallpaperSubjectExtractorService.class));
+            ctx.startService(intent);
+        } catch (Exception e) {
+            Toast.makeText(ctx, "Failed to start extractor: " + e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void syncExtractNowVisibility() {
+        if (mAutoSubjectPref == null || mExtractNowPref == null) return;
+        mExtractNowPref.setVisible(mAutoSubjectPref.isChecked());
+    }
+
+    private void syncExtractNowVisibility(boolean autoOn) {
+        if (mExtractNowPref != null) mExtractNowPref.setVisible(autoOn);
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wallpaper_depth) {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
+                    return super.getNonIndexableKeys(context);
                 }
             };
 }
