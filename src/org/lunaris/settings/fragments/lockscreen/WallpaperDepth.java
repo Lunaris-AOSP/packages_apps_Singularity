@@ -19,12 +19,14 @@ package org.lunaris.settings.fragments.lockscreen;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -43,6 +45,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.utils.ImageUtils;
 import org.lunaris.settings.utils.WallpaperSubjectExtractorService;
 
+import java.io.File;
 import java.util.List;
 
 @SearchIndexable
@@ -54,8 +57,12 @@ public class WallpaperDepth extends SettingsPreferenceFragment
     private static final int REQUEST_PICK_IMAGE = 10001;
     private static final int REQUEST_WRITE_STORAGE = 10002;
 
+    private static final String FILE_PREFIX = "DEPTH_WALLPAPER_SUBJECT";
+    private static final String SAVE_DIR = "Lunaris-OS/depthwallpaper";
+
     private Preference mDepthWallpaperCustomImagePicker;
     private Preference mExtractNowPref;
+    private Preference mClearSubjectPref;
 
     private boolean mPendingExtraction = false;
 
@@ -66,12 +73,15 @@ public class WallpaperDepth extends SettingsPreferenceFragment
 
         mDepthWallpaperCustomImagePicker = findPreference("depth_wallpaper_subject_image_uri");
         mExtractNowPref = findPreference("depth_wallpaper_extract_now");
+        mClearSubjectPref = findPreference("depth_wallpaper_clear_subject");
 
         Settings.System.putIntForUser(
             getContext().getContentResolver(),
             "depth_wallpaper_auto_subject",
             1,
             UserHandle.USER_CURRENT);
+
+        updateClearSubjectState();
     }
 
     @Override
@@ -94,6 +104,10 @@ public class WallpaperDepth extends SettingsPreferenceFragment
             triggerExtraction();
             return true;
         }
+        if (preference == mClearSubjectPref) {
+            confirmClearSubject();
+            return true;
+        }
         return super.onPreferenceTreeClick(preference);
     }
 
@@ -110,6 +124,7 @@ public class WallpaperDepth extends SettingsPreferenceFragment
                             "depth_wallpaper_subject_image_uri",
                             path,
                             UserHandle.USER_CURRENT);
+                    updateClearSubjectState();
                 }
             }
         }
@@ -177,6 +192,56 @@ public class WallpaperDepth extends SettingsPreferenceFragment
             Toast.makeText(ctx, "Failed to start extractor: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void confirmClearSubject() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+
+        new AlertDialog.Builder(ctx)
+                .setTitle(R.string.depthwall_clear_subject_title)
+                .setMessage(R.string.depthwall_clear_subject_confirm_message)
+                .setPositiveButton(android.R.string.ok, (d, w) -> clearSubject())
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void clearSubject() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+
+        Settings.System.putStringForUser(
+                ctx.getContentResolver(),
+                "depth_wallpaper_subject_image_uri",
+                null,
+                UserHandle.USER_CURRENT);
+
+        try {
+            File dir = new File(Environment.getExternalStorageDirectory(), SAVE_DIR);
+            if (dir.exists()) {
+                File[] files = dir.listFiles((d, name) ->
+                        name.startsWith(FILE_PREFIX) && name.endsWith(".png"));
+                if (files != null) {
+                    for (File f : files) f.delete();
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "clearSubject: failed to delete cached files", e);
+        }
+
+        Toast.makeText(ctx, R.string.depthwall_clear_subject_done_toast, Toast.LENGTH_SHORT).show();
+        updateClearSubjectState();
+    }
+
+    private void updateClearSubjectState() {
+        if (mClearSubjectPref == null) return;
+        Context ctx = getContext();
+        if (ctx == null) return;
+        String uri = Settings.System.getStringForUser(
+                ctx.getContentResolver(),
+                "depth_wallpaper_subject_image_uri",
+                UserHandle.USER_CURRENT);
+        mClearSubjectPref.setEnabled(uri != null && !uri.isEmpty());
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
