@@ -32,7 +32,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -56,7 +55,6 @@ public class WallpaperDepth extends SettingsPreferenceFragment
     private static final int REQUEST_WRITE_STORAGE = 10002;
 
     private Preference mDepthWallpaperCustomImagePicker;
-    private SwitchPreferenceCompat mAutoSubjectPref;
     private Preference mExtractNowPref;
 
     private boolean mPendingExtraction = false;
@@ -67,26 +65,17 @@ public class WallpaperDepth extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.wallpaper_depth);
 
         mDepthWallpaperCustomImagePicker = findPreference("depth_wallpaper_subject_image_uri");
-        mAutoSubjectPref = findPreference("depth_wallpaper_auto_subject");
         mExtractNowPref = findPreference("depth_wallpaper_extract_now");
 
-        if (mAutoSubjectPref != null) {
-            mAutoSubjectPref.setOnPreferenceChangeListener(this);
-        }
-
-        syncExtractNowVisibility();
+        Settings.System.putIntForUser(
+            getContext().getContentResolver(),
+            "depth_wallpaper_auto_subject",
+            1,
+            UserHandle.USER_CURRENT);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mAutoSubjectPref) {
-            boolean autoOn = Boolean.TRUE.equals(newValue);
-            syncExtractNowVisibility(autoOn);
-            if (autoOn) {
-                triggerExtraction();
-            }
-            return true;
-        }
         return false;
     }
 
@@ -188,15 +177,6 @@ public class WallpaperDepth extends SettingsPreferenceFragment
             Toast.makeText(ctx, "Failed to start extractor: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void syncExtractNowVisibility() {
-        if (mAutoSubjectPref == null || mExtractNowPref == null) return;
-        mExtractNowPref.setVisible(mAutoSubjectPref.isChecked());
-    }
-
-    private void syncExtractNowVisibility(boolean autoOn) {
-        if (mExtractNowPref != null) mExtractNowPref.setVisible(autoOn);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
