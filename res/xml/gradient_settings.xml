@@ -33,6 +33,11 @@
             android:summary="@string/qs_brightness_slider_gradient_summary" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_volume_slider_gradient"
+            android:title="@string/qs_volume_slider_gradient_title"
+            android:summary="@string/qs_volume_slider_gradient_summary" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="volume_slider_gradient"
             android:title="@string/volume_slider_gradient_title"
             android:summary="@string/volume_slider_gradient_summary" />

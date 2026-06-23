@@ -2683,4 +2683,21 @@
     <string name="applocker_sandbox_title">AppLock and Sandbox</string>
     <string name="applocker_sandbox_summary">Open the AppLock and Sandbox management app</string>
 
+    <!-- QS Volume slider -->
+    <string name="qs_volume_slider_category">Volume slider</string>
+    <string name="qs_volume_slider_style_title">Volume slider style</string>
+    <string name="qs_volume_slider_style_summary">Change the style of the volume slider</string>
+    <string name="qs_show_volume_slider_title">Show volume slider</string>
+    <string name="qs_show_volume_slider_summary">Show the volume slider in the quick settings panel</string>
+    <string name="qs_volume_slider_shape_title">Volume slider shape</string>
+    <string name="qs_volume_slider_shape_summary">Change the shape of the volume slider</string>
+    <string name="qs_volume_slider_position_title">Volume slider position</string>
+    <string name="qs_volume_slider_position_summary">Change the position of the volume slider</string>
+    <string name="qs_show_ringer_button_title">Show ringer button</string>
+    <string name="qs_show_ringer_button_summary">Show the ringer button in the quick settings panel</string>
+    <string name="qs_volume_slider_gradient_title">QS volume slider gradient</string>
+    <string name="qs_volume_slider_gradient_summary">Show gradient in QS volume slider</string>
+    <string name="qs_show_haptic_title">Haptic feedback</string>
+    <string name="qs_show_haptic_summary">Provide haptic feedback on changing QS volume slider</string>
+
 </resources>

@@ -205,6 +205,51 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+         android:key="qs_volume_slider_category"
+         android:title="@string/qs_volume_slider_category">
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_volume_slider_style"
+            android:title="@string/qs_volume_slider_style_title"
+            android:summary="@string/qs_volume_slider_style_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="qs_show_volume_slider"
+            android:title="@string/qs_show_volume_slider_title"
+            android:entries="@array/qs_show_brightness_slider_entries"
+            android:entryValues="@array/qs_show_brightness_slider_values"
+            android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="qs_volume_slider_shape"
+            android:title="@string/qs_volume_slider_shape_title"
+            android:entries="@array/qs_brightness_slider_shape_entries"
+            android:entryValues="@array/qs_brightness_slider_shape_values"
+            android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="qs_volume_slider_position"
+            android:title="@string/qs_volume_slider_position_title"
+            android:entries="@array/qs_brightness_slider_position_entries"
+            android:entryValues="@array/qs_brightness_slider_position_values"
+            android:defaultValue="1" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_volume_slider_haptic"
+            android:title="@string/qs_show_haptic_title"
+            android:summary="@string/qs_show_haptic_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_show_ringer_button"
+            android:title="@string/qs_show_ringer_button_title"
+            android:summary="@string/qs_show_ringer_button_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory 
          android:title="@string/qs_footer_category">
 

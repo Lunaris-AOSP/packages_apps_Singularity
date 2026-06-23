@@ -82,6 +82,13 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_WIDGET_PANEL = "qs_widget_panel";
     private static final String KEY_QS_WIDGET_IOS_MUSIC = "qs_widget_ios_music";
     private static final String KEY_QS_WIDGET_SLIDER_CORNER = "qs_widget_slider_corner";
+    private static final String QS_VOLUME_CATEGORY = "qs_volume_slider_category";
+    private static final String KEY_SHOW_VOLUME_SLIDER = "qs_show_volume_slider";
+    private static final String KEY_VOLUME_SLIDER_POSITION = "qs_volume_slider_position";
+    private static final String KEY_VOLUME_SLIDER_HAPTIC = "qs_volume_slider_haptic";
+    private static final String KEY_SHOW_RINGER_BUTTON = "qs_show_ringer_button";
+    private static final String KEY_VOLUME_SLIDER_STYLE = "qs_volume_slider_style";
+    private static final String KEY_VOLUME_SLIDER_SHAPE = "qs_volume_slider_shape";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -105,6 +112,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mQsWidgetPanel;
     private SystemSettingSwitchPreference mQsWidgetIosMusic;
     private SystemSettingSwitchPreference mQsWidgetSliderCorner;
+    private ListPreference mShowVolumeSlider;
+    private ListPreference mVolumeSliderPosition;
+    private SwitchPreferenceCompat mVolumeSliderHaptic;
+    private SwitchPreferenceCompat mShowRingerButton;
+    private SystemSettingSwitchPreference mVolumeSliderStyle;
+    private SystemSettingListPreference mVolumeSliderShape;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +129,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = context.getContentResolver();
 
         PreferenceCategory brightnessCategory = (PreferenceCategory) findPreference(QS_BRIGHTNESS_CATEGORY);
+        PreferenceCategory volumeCategory = findPreference(QS_VOLUME_CATEGORY);
         PreferenceCategory tileCategory = (PreferenceCategory) findPreference(QS_LAYOUT_CATEGORY);
 
         mShowBrightnessSlider = findPreference(KEY_SHOW_BRIGHTNESS_SLIDER);
@@ -210,6 +224,43 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else {
             brightnessCategory.removePreference(mShowAutoBrightness);
         }
+
+        mShowVolumeSlider = findPreference(KEY_SHOW_VOLUME_SLIDER);
+        mShowVolumeSlider.setOnPreferenceChangeListener(this);
+
+        boolean showVolumeSlider =
+                Settings.System.getIntForUser(resolver,
+                KEY_SHOW_VOLUME_SLIDER, 0,
+                UserHandle.USER_CURRENT) > 0;
+
+        mVolumeSliderPosition =
+                findPreference(KEY_VOLUME_SLIDER_POSITION);
+        mVolumeSliderPosition.setEnabled(showVolumeSlider);
+
+        mVolumeSliderStyle =
+                findPreference(KEY_VOLUME_SLIDER_STYLE);
+
+        mVolumeSliderShape =
+                findPreference(KEY_VOLUME_SLIDER_SHAPE);
+
+        if (mVolumeSliderStyle != null) {
+            mVolumeSliderStyle.setOnPreferenceChangeListener(this);
+            updateVolumeSliderStyleDependencies();
+        }
+
+        mVolumeSliderHaptic =
+                findPreference(KEY_VOLUME_SLIDER_HAPTIC);
+
+        mShowRingerButton =
+                findPreference(KEY_SHOW_RINGER_BUTTON);
+
+        if (hapticAvailable) {
+            mVolumeSliderHaptic.setEnabled(showVolumeSlider);
+        } else {
+            volumeCategory.removePreference(mVolumeSliderHaptic);
+        }
+
+        mShowRingerButton.setEnabled(showVolumeSlider);
     }
 
     private boolean isPanelStyleClassic() {
@@ -287,6 +338,25 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateVolumeSliderStyleDependencies() {
+        if (mVolumeSliderStyle == null) return;
+
+        ContentResolver resolver =
+                getContext().getContentResolver();
+
+        boolean isSliderStyleEnabled =
+                Settings.System.getInt(resolver,
+                KEY_VOLUME_SLIDER_STYLE, 0) == 1;
+
+        if (mVolumeSliderShape != null) {
+            mVolumeSliderShape.setVisible(!isSliderStyleEnabled);
+        }
+
+        if (mShowRingerButton != null) {
+            mShowRingerButton.setVisible(!isSliderStyleEnabled);
+        }
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getContext().getContentResolver();
@@ -334,6 +404,19 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             updateWidgetPanelDependencies();
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
+        } else if (preference == mShowVolumeSlider) {
+            int value = Integer.parseInt((String) newValue);
+            mVolumeSliderPosition.setEnabled(value > 0);
+            if (mVolumeSliderHaptic != null)
+                mVolumeSliderHaptic.setEnabled(value > 0);
+            if (mShowRingerButton != null)
+                mShowRingerButton.setEnabled(value > 0);
+            updateVolumeSliderStyleDependencies();
+            return true;
+        } else if (preference == mVolumeSliderStyle) {
+            updateVolumeSliderStyleDependencies();
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
         }
         return false;
     }
@@ -373,6 +456,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                     if (!hapticAvailable) {
                         keys.add(KEY_BRIGHTNESS_SLIDER_HAPTIC);
                         keys.add(KEY_QS_TILE_HAPTIC);
+                        keys.add(KEY_VOLUME_SLIDER_HAPTIC);
                     }
 
                     boolean isClassic = Settings.System.getInt(resolver,
@@ -397,6 +481,14 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                         if (isMinimalEnabled) {
                             keys.add(KEY_QS_TILE_SHAPE);
                         }
+                    }
+
+                    boolean isVolumeSliderStyleEnabled = Settings.System.getInt(resolver,
+                        KEY_VOLUME_SLIDER_STYLE, 0) == 1;
+
+                    if (isVolumeSliderStyleEnabled) {
+                        keys.add(KEY_VOLUME_SLIDER_SHAPE);
+                        keys.add(KEY_SHOW_RINGER_BUTTON);
                     }
 
                     boolean isSliderStyleEnabled = Settings.System.getInt(resolver,
