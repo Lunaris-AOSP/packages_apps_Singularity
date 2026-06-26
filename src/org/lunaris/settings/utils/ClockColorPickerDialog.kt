@@ -42,9 +42,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import com.github.skydoves.colorpicker.compose.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -195,6 +201,7 @@ fun ClockColorPickerDialog(
                     )
                     ClockColorTab.CUSTOM -> CustomTab(
                         controller = customController,
+                        initialHex = initialColor,
                         onColorChanged = { selectedColor = it }
                     )
                 }
@@ -319,11 +326,35 @@ private fun WallpaperTab(
     }
 }
 
+private fun Color.toRgbHex(): String =
+    String.format("%06X", toArgb() and 0x00FFFFFF)
+
+private fun parseHexColor(hex: String): Color? {
+    val clean = hex.trimStart('#')
+    if (clean.length != 6) return null
+    return try {
+        Color(android.graphics.Color.parseColor("#$clean"))
+    } catch (_: Exception) { null }
+}
+
 @Composable
 private fun CustomTab(
     controller: ColorPickerController,
+    initialHex: String = "FFFFFF",
     onColorChanged: (Color) -> Unit
 ) {
+    val seedHex = remember(initialHex) {
+        initialHex.trimStart('#').uppercase().take(6).padEnd(6, '0')
+    }
+    var hexText by remember { mutableStateOf(seedHex) }
+    var hexError by remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
+
+    var isHexFieldFocused by remember { mutableStateOf(false) }
+
+    LaunchedEffect(seedHex) {
+        parseHexColor(seedHex)?.let { controller.selectByColor(it, false) }
+    }
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -334,7 +365,13 @@ private fun CustomTab(
                 .height(160.dp)
                 .clip(RoundedCornerShape(12.dp)),
             controller = controller,
-            onColorChanged = { envelope -> onColorChanged(envelope.color) }
+            onColorChanged = { envelope ->
+                onColorChanged(envelope.color)
+                if (!isHexFieldFocused) {
+                    hexText = envelope.color.toRgbHex()
+                    hexError = false
+                }
+            }
         )
         BrightnessSlider(
             modifier = Modifier
@@ -352,6 +389,59 @@ private fun CustomTab(
             tileOddColor = Color.White,
             tileEvenColor = Color.LightGray
         )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "#",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            OutlinedTextField(
+                value = hexText,
+                onValueChange = { raw ->
+                    val filtered = raw.trimStart('#')
+                        .filter { it.isDigit() || it.lowercaseChar() in 'a'..'f' }
+                        .take(6)
+                        .uppercase()
+                    hexText = filtered
+                    val parsed = parseHexColor(filtered)
+                    if (parsed != null) {
+                        hexError = false
+                        val withAlpha = Color(
+                            red = parsed.red,
+                            green = parsed.green,
+                            blue = parsed.blue,
+                            alpha = controller.selectedColor.value.alpha
+                        )
+                        controller.selectByColor(withAlpha, true)
+                        onColorChanged(withAlpha)
+                    } else {
+                        hexError = filtered.isNotEmpty()
+                    }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .onFocusChanged { isHexFieldFocused = it.isFocused },
+                singleLine = true,
+                isError = hexError,
+                label = { Text("HEX") },
+                placeholder = { Text("RRGGBB") },
+                supportingText = if (hexError) {
+                    { Text("Enter a valid 6-digit hex colour") }
+                } else null,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                    errorBorderColor = MaterialTheme.colorScheme.error,
+                )
+            )
+        }
     }
 }
 
