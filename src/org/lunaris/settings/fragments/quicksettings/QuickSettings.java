@@ -92,6 +92,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_SLIDER_STYLE = "qs_volume_slider_style";
     private static final String KEY_VOLUME_SLIDER_SHAPE = "qs_volume_slider_shape";
     private static final String SHADE_SCRIM_ALPHA = "shade_scrim_alpha";
+    private static final String NOTIFICATION_SCRIM_ALPHA = "notification_scrim_alpha";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -122,6 +123,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mVolumeSliderStyle;
     private SystemSettingListPreference mVolumeSliderShape;
     private SystemSettingSeekBarPreference mShadeScrimAlphaPref;
+    private SystemSettingSeekBarPreference mNotificationScrimAlphaPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -270,7 +272,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         (SystemProperties.getBoolean("ro.custom.blur.enable", false)
                 && Settings.Global.getInt(resolver,
                         Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0)
-                ? 60 : 100;
+                ? 75 : 100;
 
         mShadeScrimAlphaPref = findPreference(SHADE_SCRIM_ALPHA);
         mShadeScrimAlphaPref.setDefaultValue(defScrimAlpha);
@@ -278,6 +280,19 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         int shadeScrimAlpha = Settings.System.getIntForUser(resolver,
                 SHADE_SCRIM_ALPHA, defScrimAlpha, UserHandle.USER_CURRENT);
         mShadeScrimAlphaPref.setValue(shadeScrimAlpha);
+
+        final int defNotiAlpha =
+        (SystemProperties.getBoolean("ro.custom.blur.enable", false)
+                && Settings.Global.getInt(resolver,
+                        Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0)
+                ? 30 : 100;
+
+        mNotificationScrimAlphaPref = findPreference(NOTIFICATION_SCRIM_ALPHA);
+        mNotificationScrimAlphaPref.setDefaultValue(defNotiAlpha);
+        mNotificationScrimAlphaPref.setOnPreferenceChangeListener(this);
+        int notificationScrimAlpha = Settings.System.getIntForUser(resolver,
+                NOTIFICATION_SCRIM_ALPHA, defNotiAlpha, UserHandle.USER_CURRENT);
+        mNotificationScrimAlphaPref.setValue(notificationScrimAlpha);
     }
 
     private boolean isPanelStyleClassic() {
@@ -437,6 +452,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else if (preference == mShadeScrimAlphaPref) {
             int value = (Integer) newValue;
             Settings.System.putIntForUser(resolver, SHADE_SCRIM_ALPHA,
+                    value, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mNotificationScrimAlphaPref) {
+            int value = (Integer) newValue;
+            Settings.System.putIntForUser(resolver,NOTIFICATION_SCRIM_ALPHA,
                     value, UserHandle.USER_CURRENT);
             return true;
         }
