@@ -2700,4 +2700,7 @@
     <string name="qs_show_haptic_title">Haptic feedback</string>
     <string name="qs_show_haptic_summary">Provide haptic feedback on changing QS volume slider</string>
 
+    <!-- QS Shade Scrim Alpha -->
+    <string name="shade_scrim_alpha_title">Notification shade scrim opacity</string>
+    <string name="shade_scrim_alpha_summary">Adjust the scrim opacity behind the notification shade</string>
 </resources>

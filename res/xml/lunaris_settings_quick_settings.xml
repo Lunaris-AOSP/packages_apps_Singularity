@@ -66,6 +66,16 @@
             android:summary="@string/qs_widget_slider_corner_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="shade_scrim_alpha"
+            android:title="@string/shade_scrim_alpha_title"
+            android:summary="@string/shade_scrim_alpha_summary"
+            android:max="100"
+            settings:min="0"
+            android:defaultValue="100"
+            settings:units="%"
+            settings:interval="1" />
+
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_panel_style"
             android:title="@string/qs_panel_style_title"

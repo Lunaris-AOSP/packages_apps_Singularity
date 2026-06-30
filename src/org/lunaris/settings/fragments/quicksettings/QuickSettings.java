@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.SystemProperties;
 import android.provider.Settings;
 
 import androidx.preference.ListPreference;
@@ -42,6 +43,7 @@ import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
 import org.lunaris.settings.preferences.SecureSettingListPreference;
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
 
@@ -89,6 +91,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SHOW_RINGER_BUTTON = "qs_show_ringer_button";
     private static final String KEY_VOLUME_SLIDER_STYLE = "qs_volume_slider_style";
     private static final String KEY_VOLUME_SLIDER_SHAPE = "qs_volume_slider_shape";
+    private static final String SHADE_SCRIM_ALPHA = "shade_scrim_alpha";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -118,6 +121,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mShowRingerButton;
     private SystemSettingSwitchPreference mVolumeSliderStyle;
     private SystemSettingListPreference mVolumeSliderShape;
+    private SystemSettingSeekBarPreference mShadeScrimAlphaPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -261,6 +265,19 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
 
         mShowRingerButton.setEnabled(showVolumeSlider);
+
+        final int defScrimAlpha =
+        (SystemProperties.getBoolean("ro.custom.blur.enable", false)
+                && Settings.Global.getInt(resolver,
+                        Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0)
+                ? 60 : 100;
+
+        mShadeScrimAlphaPref = findPreference(SHADE_SCRIM_ALPHA);
+        mShadeScrimAlphaPref.setDefaultValue(defScrimAlpha);
+        mShadeScrimAlphaPref.setOnPreferenceChangeListener(this);
+        int shadeScrimAlpha = Settings.System.getIntForUser(resolver,
+                SHADE_SCRIM_ALPHA, defScrimAlpha, UserHandle.USER_CURRENT);
+        mShadeScrimAlphaPref.setValue(shadeScrimAlpha);
     }
 
     private boolean isPanelStyleClassic() {
@@ -416,6 +433,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         } else if (preference == mVolumeSliderStyle) {
             updateVolumeSliderStyleDependencies();
             SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mShadeScrimAlphaPref) {
+            int value = (Integer) newValue;
+            Settings.System.putIntForUser(resolver, SHADE_SCRIM_ALPHA,
+                    value, UserHandle.USER_CURRENT);
             return true;
         }
         return false;
