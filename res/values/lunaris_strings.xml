@@ -2706,4 +2706,8 @@
     <string name="notification_scrim_alpha_summary">Adjust the scrim opacity behind the notification shade</string>
     <string name="shade_scrim_alpha_title">QS shade scrim opacity</string>
     <string name="shade_scrim_alpha_summary">Adjust the scrim opacity behind the QS shade</string>
+
+    <!-- Atmosphere Effect -->
+    <string name="atmosphereeffect_settings_title">Atmosphere Effect</string>
+<string name="atmosphereeffect_settings_summary">Configure effects and animation settings</string>
 </resources>
