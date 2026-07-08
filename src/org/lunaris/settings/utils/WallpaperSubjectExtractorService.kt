@@ -18,8 +18,11 @@ package org.lunaris.settings.utils
 
 import android.app.Service
 import android.app.WallpaperManager
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.Context
 import android.database.ContentObserver
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -61,9 +64,18 @@ class WallpaperSubjectExtractorService : Service() {
     }
 
     private val handler = Handler(Looper.getMainLooper())
-    private var processingThread: Thread? = null
+    @Volatile private var currentGeneration = 0
+    private var pendingExtraction: Runnable? = null
     private var lastScreenW = 0
     private var lastScreenH = 0
+
+    private val DEBOUNCE_DELAY_MS = 500L
+
+    private val wallpaperChangedReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (isAutoSubjectEnabled() && isDepthEnabled()) scheduleExtraction()
+        }
+    }
 
     private val colorsListener =
         WallpaperManager.OnColorsChangedListener { _, which ->
@@ -89,6 +101,10 @@ class WallpaperSubjectExtractorService : Service() {
         lastScreenW = resources.displayMetrics.widthPixels
         lastScreenH = resources.displayMetrics.heightPixels
         WallpaperManager.getInstance(this).addOnColorsChangedListener(colorsListener, handler)
+        registerReceiver(
+            wallpaperChangedReceiver,
+            IntentFilter(Intent.ACTION_WALLPAPER_CHANGED),
+            Context.RECEIVER_NOT_EXPORTED)
         contentResolver.registerContentObserver(
             Settings.System.getUriFor(SETTING_DEPTH_ENABLED), false, depthEnabledObserver)
         contentResolver.registerContentObserver(
@@ -116,9 +132,11 @@ class WallpaperSubjectExtractorService : Service() {
 
     override fun onDestroy() {
         WallpaperManager.getInstance(this).removeOnColorsChangedListener(colorsListener)
+        unregisterReceiver(wallpaperChangedReceiver)
         contentResolver.unregisterContentObserver(depthEnabledObserver)
         contentResolver.unregisterContentObserver(autoSubjectObserver)
-        processingThread?.interrupt()
+        pendingExtraction?.let { handler.removeCallbacks(it) }
+        currentGeneration++
         super.onDestroy()
     }
 
@@ -129,22 +147,26 @@ class WallpaperSubjectExtractorService : Service() {
         Settings.System.getInt(contentResolver, SETTING_AUTO_SUBJECT, 0) != 0
 
     private fun scheduleExtraction(force: Boolean = false) {
-        processingThread?.interrupt()
-        processingThread = Thread {
-            try {
-                runExtraction(force)
-            } catch (e: InterruptedException) {
-                // extraction cancelled
-            } catch (e: Exception) {
-                Log.e(TAG, "Extraction threw unexpected exception", e)
-            }
-        }.also { it.start() }
+        pendingExtraction?.let { handler.removeCallbacks(it) }
+        val gen = ++currentGeneration
+        val runnable = Runnable {
+            Thread {
+                try {
+                    runExtraction(force, gen)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Extraction threw unexpected exception", e)
+                }
+            }.start()
+        }
+        pendingExtraction = runnable
+        handler.postDelayed(runnable, if (force) 0L else DEBOUNCE_DELAY_MS)
     }
 
-    private fun runExtraction(force: Boolean) {
+    private fun runExtraction(force: Boolean, gen: Int) {
         if (!force) {
             if (!isAutoSubjectEnabled() || !isDepthEnabled()) return
         }
+        if (gen != currentGeneration) return
 
         val storageState = Environment.getExternalStorageState()
         if (storageState != Environment.MEDIA_MOUNTED) {
@@ -160,9 +182,17 @@ class WallpaperSubjectExtractorService : Service() {
             Log.e(TAG, "loadWallpaperBitmap returned null — cannot extract")
             return
         }
+        if (gen != currentGeneration) {
+            wallpaperBitmap.recycle()
+            return
+        }
 
         val (cropped, _) = centerCropToDisplay(wallpaperBitmap)
         if (cropped !== wallpaperBitmap && !wallpaperBitmap.isRecycled) wallpaperBitmap.recycle()
+        if (gen != currentGeneration) {
+            if (!cropped.isRecycled) cropped.recycle()
+            return
+        }
 
         val segmenter = PortraitSegmenter(this)
         segmenter.init()
@@ -179,6 +209,10 @@ class WallpaperSubjectExtractorService : Service() {
                 Log.w(TAG, "segment() returned null — no subject detected in wallpaper")
                 return
             }
+            if (gen != currentGeneration) {
+                foreground.recycle()
+                return
+            }
 
             val savedPath = saveForeground(foreground)
             foreground.recycle()
@@ -187,6 +221,7 @@ class WallpaperSubjectExtractorService : Service() {
                 Log.e(TAG, "saveForeground() failed — check storage permissions and path")
                 return
             }
+            if (gen != currentGeneration) return
 
             Settings.System.putStringForUser(
                 contentResolver,
