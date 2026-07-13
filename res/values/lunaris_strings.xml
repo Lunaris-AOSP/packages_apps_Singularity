@@ -2710,4 +2710,8 @@
     <!-- Atmosphere Effect -->
     <string name="atmosphereeffect_settings_title">Atmosphere Effect</string>
 <string name="atmosphereeffect_settings_summary">Configure effects and animation settings</string>
+
+    <!-- Screen-on memory reclaim -->
+    <string name="screen_on_memory_reclaim_title">Screen-on memory reclaim</string>
+    <string name="screen_on_memory_reclaim_summary">Kill cached background apps shortly after the screen turns on to free memory</string>
 </resources>

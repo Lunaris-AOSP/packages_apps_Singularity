@@ -153,6 +153,13 @@
                 android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
         </Preference>
 
+        <!-- Screen-on memory reclaim -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="screen_on_memory_reclaim"
+            android:title="@string/screen_on_memory_reclaim_title"
+            android:summary="@string/screen_on_memory_reclaim_summary"
+            android:defaultValue="true" />
+
         <!-- Pocket Judge -->
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="pocket_judge"
