@@ -319,6 +319,7 @@
     <string name="hardware_keys_action_expand_qs_panel">Expand QS panel</string>
     <string name="hardware_keys_action_ringer_modes">Change ringer mode</string>
     <string name="hardware_keys_action_ambient_display">Trigger ambient display</string>
+    <string name="hardware_keys_action_system_popup">Trigger system popup ui</string>
     <string name="home_answer_call_title">Answer call</string>
     <string name="home_answer_call_summary">Answer incoming calls by pressing the home button</string>
     <string name="camera_sleep_on_release_title">Screen peek</string>
@@ -2721,5 +2722,5 @@
 
     <!-- status bar system icons popup -->
     <string name="status_bar_icons_popup_title">System icons popup</string>
-    <string name="status_bar_icons_popup_summary">Long-press the status bar icons to show quick toggles, battery, and network info</string>
+    <string name="status_bar_icons_popup_summary">Long-press the status bar icons to show quick toggles, battery, and network info (not use with split shade)</string>
 </resources>
