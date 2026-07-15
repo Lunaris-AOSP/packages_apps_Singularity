@@ -69,6 +69,12 @@
             android:title="@string/status_bar_clock_title"
             android:summary="@string/status_bar_clock_summary"
             android:fragment="org.lunaris.settings.fragments.statusbar.Clock" />
+            
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="statusbar_system_icons_popup_enabled"
+            android:title="@string/status_bar_icons_popup_title"
+            android:summary="@string/status_bar_icons_popup_summary"
+            android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="bluetooth_show_battery"
