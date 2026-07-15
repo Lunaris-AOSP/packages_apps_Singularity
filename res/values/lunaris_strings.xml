@@ -2723,4 +2723,8 @@
     <!-- status bar system icons popup -->
     <string name="status_bar_icons_popup_title">System icons popup</string>
     <string name="status_bar_icons_popup_summary">Long-press the status bar icons to show quick toggles, battery, and network info (not use with split shade)</string>
+
+    <!-- Split notification -->
+    <string name="qs_split_notification_title">Split notification shade</string>
+    <string name="qs_split_notification_summary">Allow the notification shade to split into two panes in landscape mode</string>
 </resources>

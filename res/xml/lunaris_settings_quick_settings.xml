@@ -42,6 +42,12 @@
             android:summary="@string/qs_split_shade_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_split_notification"
+            android:title="@string/qs_split_notification_title"
+            android:summary="@string/qs_split_notification_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
