@@ -2467,6 +2467,10 @@
     <string name="lockscreen_custom_clock_gradient_anchor_y_summary">Control where the gradient is vertically centered</string>
     <string name="lockscreen_custom_clock_gradient_radius_title">Gradient spread</string>
     <string name="lockscreen_custom_clock_gradient_radius_summary">Control how far the gradient spreads from its anchor point</string>
+    <string name="lockscreen_custom_clock_color_category_title">Color</string>
+    <string name="lockscreen_custom_clock_gradient_category_title">Gradient</string>
+    <string name="lockscreen_custom_clock_layout_category_title">Size &amp; position</string>
+    <string name="lockscreen_custom_clock_animation_category_title">Animation</string>
     <string name="unit_degrees">°</string>
 
     <!-- Gradient styles -->
