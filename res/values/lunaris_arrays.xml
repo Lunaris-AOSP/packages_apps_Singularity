@@ -1753,4 +1753,13 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="dynamic_bar_chip_style_entries">
+        <item>Pill</item>
+        <item>Circle</item>
+    </string-array>
+    <string-array name="dynamic_bar_chip_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

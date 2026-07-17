@@ -28,6 +28,14 @@
         android:title="@string/dynamic_bar_enable"
         android:defaultValue="false" />
 
+    <org.lunaris.settings.preferences.SecureSettingListPreference
+        android:key="ax_dynamic_bar_chip_style"
+        android:title="@string/dynamic_bar_chip_style_title"
+        android:summary="%s"
+        android:entries="@array/dynamic_bar_chip_style_entries"
+        android:entryValues="@array/dynamic_bar_chip_style_values"
+        android:defaultValue="0" />    
+
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         android:key="ax_dynamic_bar_keyguard_enabled"
         android:title="@string/dynamic_bar_keyguard_enable"
