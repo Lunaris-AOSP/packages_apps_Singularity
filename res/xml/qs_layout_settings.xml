@@ -73,4 +73,22 @@
         android:selectable="false"
         settings:searchable="false" />-->
 
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_classic_tile_icon_size"
+        android:title="@string/qs_classic_tile_icon_size_title"
+        android:summary="@string/qs_classic_tile_icon_size_summary"
+        android:max="96"
+        settings:min="40"
+        settings:interval="2"
+        android:defaultValue="64" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="qs_classic_tile_row_spacing"
+        android:title="@string/qs_classic_tile_row_spacing_title"
+        android:summary="@string/qs_classic_tile_row_spacing_summary"
+        android:max="32"
+        settings:min="0"
+        settings:interval="1"
+        android:defaultValue="8" />
+
 </PreferenceScreen>

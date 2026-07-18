@@ -1356,6 +1356,10 @@
     <string name="qs_rows_landscape_title">Rows (landscape)</string>
     <string name="qqs_rows_portrait_title">Quick QS Rows (portrait)</string>
     <string name="qqs_rows_landscape_title">Quick QS Rows (landscape)</string>
+    <string name="qs_classic_tile_icon_size_title">Classic tile icon size</string>
+    <string name="qs_classic_tile_icon_size_summary">Adjust the icon size for classic QS tiles</string>
+    <string name="qs_classic_tile_row_spacing_title">Classic tile row spacing</string>
+    <string name="qs_classic_tile_row_spacing_summary">Adjust the vertical spacing between rows in classic mode</string>
 
     <!-- Statusbar Clock background chip -->
     <string name="statusbar_clock_chip_title">Background chip</string>
