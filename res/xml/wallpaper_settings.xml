@@ -21,7 +21,7 @@
         android:summary="@string/atmosphereeffect_settings_summary">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="com.app.nosatmosphereeffect"
+            android:targetPackage="com.saad_khan_rind.atmosphere_effect"
             android:targetClass="com.app.nosatmosphereeffect.MainActivity" />
     </Preference>
     
