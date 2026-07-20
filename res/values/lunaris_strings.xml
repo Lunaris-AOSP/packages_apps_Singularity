@@ -2043,6 +2043,8 @@
     <string name="nowplaying_info_summary">Now Playing displays the currently playing music title and artist on your lockscreen and Always-On Display. It automatically appears when music is playing and disappears when stopped. The position can be adjusted to appear anywhere from the top to bottom of the screen.</string>
     <string name="nowplaying_expand_dialog">Expand dialog</string>
     <string name="nowplaying_expand_dialog_summary">Expand Now Playing dialog</string>
+    <string name="nowplaying_lyrics_mode_title">Lyrics mode</string>
+    <string name="nowplaying_lyrics_mode_summary">Show synced lyrics instead of track title and icon</string>
 
     <!-- Smart Space -->
     <string name="quickspace_psa_title">Smartspace random messages</string>

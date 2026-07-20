@@ -45,6 +45,13 @@
         settings:units="dp" />
 
     <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="nowplaying_lyrics_mode"
+        android:title="@string/nowplaying_lyrics_mode_title"
+        android:summary="@string/nowplaying_lyrics_mode_summary"
+        android:dependency="nowplaying_enabled"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
         android:key="nowplaying_use_compact_style"
         android:title="@string/nowplaying_compact_style_title"
         android:summary="@string/nowplaying_compact_style_summary"
