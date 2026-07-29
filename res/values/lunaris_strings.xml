@@ -2759,4 +2759,11 @@
     <string name="status_bar_lyric_options_title">Options</string>
     <string name="disguise_props_for_music_app_title">Disguise device for music apps</string>
     <string name="disguise_props_for_music_app_summary">Disguise device in some music applications for support status bar lyric. After changing this toggle, you have to restart applications for the change to take effect.</string>
+
+    <!-- System Animation styles -->
+    <string name="system_animation_style_title">System animation style</string>
+    <string name="pie_system_animation_style">Android P</string>
+    <string name="scale_system_animation_style">Scale</string>
+    <string name="slide_system_animation_style">Slide</string>
+    <string name="md3_system_animation_style">MD3 spring</string>
 </resources>

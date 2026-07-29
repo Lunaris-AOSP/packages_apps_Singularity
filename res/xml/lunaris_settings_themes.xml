@@ -174,11 +174,14 @@
         android:key="extras_category"
         android:title="@string/extras_category">
 
-        <org.lunaris.settings.preferences.SystemPropertySwitchPreference
-            android:key="persist.sys.activity_anim_perf_override"
-            android:title="@string/activity_anim_perf_override_title"
-            android:summary="@string/activity_anim_perf_override_summary"
-            android:defaultValue="false" />
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="system_animation_style"
+            android:title="@string/system_animation_style_title"
+            android:dialogTitle="@string/system_animation_style_title"
+            android:entries="@array/system_animation_styles_entries"
+            android:entryValues="@array/system_animation_styles_values"
+            android:defaultValue="0"
+            android:summary="%s" />
 
         <!-- Display Cutout -->
         <Preference

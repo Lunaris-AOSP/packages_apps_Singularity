@@ -1762,4 +1762,21 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <!-- System Animation styles  -->
+    <string-array name="system_animation_styles_entries">
+        <item>@string/color_default</item>
+        <item>@string/pie_system_animation_style</item>
+        <item>@string/scale_system_animation_style</item>
+        <item>@string/slide_system_animation_style</item>
+        <item>@string/md3_system_animation_style</item>
+    </string-array>
+
+    <string-array name="system_animation_styles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>
