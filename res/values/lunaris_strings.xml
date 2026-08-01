@@ -2748,9 +2748,11 @@
     <string name="qs_split_notification_title">Split notification shade</string>
     <string name="qs_split_notification_summary">Allow the notification shade to split into two panes in landscape mode</string>
 
-    <!-- Screenshots to clipboard -->
+    <!-- Screenshots -->
     <string name="screenshot_clipboard_only_title">Copy to clipboard only</string>
     <string name="screenshot_clipboard_only_summary">Copy screenshot to clipboard instead of saving in storage</string>
+    <string name="hide_status_bar_in_screenshot_title">Hide status bar in screenshots</string>
+    <string name="hide_status_bar_in_screenshot_summary">Crop the status bar area out of full screenshots</string>
 
     <!-- Statusbar lyric -->
     <string name="status_bar_lyric_title">Status bar lyric</string>
