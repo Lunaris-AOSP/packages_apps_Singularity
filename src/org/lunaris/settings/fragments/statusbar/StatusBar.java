@@ -80,6 +80,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_CARRIER_KEY = "status_bar_carrier_key";
     private static final String CARRIER_NAME = "lockscreen_show_carrier";
     private static final String CUSTOM_CARRIER_LABEL = "lockscreen_show_custom_carrier_text";
+    private static final String DYNAMIC_ISLAND = "status_bar_dynamic_island";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -97,6 +98,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private Preference mLogoCustomImage;
     private Preference mLogoStyle;
     private Preference mCustomCarrierTextPref;
+    private Preference mDynamicIsland;
     private String mCustomCarrierText;
 
     @Override
@@ -125,6 +127,11 @@ public class StatusBar extends SettingsPreferenceFragment implements
         } else if (DeviceUtils.hasCenteredCutout(mContext)) {
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+        }
+
+        mDynamicIsland = findPreference(DYNAMIC_ISLAND);
+        if (mDynamicIsland != null) {
+            mDynamicIsland.setVisible(DeviceUtils.hasCenteredCutout(mContext));
         }
 
         mQuickPulldown =
@@ -391,6 +398,10 @@ public class StatusBar extends SettingsPreferenceFragment implements
                     if (!TelephonyUtils.isVoiceCapable(context)) {
                         keys.add(CARRIER_NAME);
                         keys.add(CUSTOM_CARRIER_LABEL);
+                    }
+
+                    if (!DeviceUtils.hasCenteredCutout(context)) {
+                        keys.add(DYNAMIC_ISLAND);
                     }
                     return keys;
                 }
