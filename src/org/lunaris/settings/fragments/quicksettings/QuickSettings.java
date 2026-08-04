@@ -93,6 +93,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_SLIDER_SHAPE = "qs_volume_slider_shape";
     private static final String SHADE_SCRIM_ALPHA = "shade_scrim_alpha";
     private static final String NOTIFICATION_SCRIM_ALPHA = "notification_scrim_alpha";
+    private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
 
     private ListPreference mShowBrightnessSlider;
     private ListPreference mBrightnessSliderPosition;
@@ -124,6 +125,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mVolumeSliderShape;
     private SystemSettingSeekBarPreference mShadeScrimAlphaPref;
     private SystemSettingSeekBarPreference mNotificationScrimAlphaPref;
+    private SystemSettingListPreference mQsHeaderClockStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -157,6 +159,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mQsWidgetPanel = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_PANEL);
         if (mQsWidgetPanel != null) {
             mQsWidgetPanel.setOnPreferenceChangeListener(this);
+        }
+
+        mQsHeaderClockStyle = (SystemSettingListPreference) findPreference(KEY_QS_HEADER_CLOCK_STYLE);
+        if (mQsHeaderClockStyle != null) {
+            mQsHeaderClockStyle.setOnPreferenceChangeListener(this);
         }
 
         mQsWidgetIosMusic = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_IOS_MUSIC);
@@ -458,6 +465,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             int value = (Integer) newValue;
             Settings.System.putIntForUser(resolver,NOTIFICATION_SCRIM_ALPHA,
                     value, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsHeaderClockStyle) {
+            String value = newValue.toString();
+            if ("0".equals(value)) {
+                SystemUtils.restartSystemUI(getContext());
+            }
             return true;
         }
         return false;
