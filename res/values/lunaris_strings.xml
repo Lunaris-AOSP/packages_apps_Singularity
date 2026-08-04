@@ -2792,4 +2792,12 @@
     <string name="dynamic_island_customization_title">Dynamic Island Customization</string>
     <string name="dynamic_island_width_scale_title">Width Scale</string>
     <string name="dynamic_island_height_scale_title">Height Scale</string>
+
+    <!-- Fling velocity tuning -->
+    <string name="fling_velocity_category_title">Fling velocity</string>
+    <string name="fling_velocity_min_title">Minimum fling velocity</string>
+    <string name="fling_velocity_min_summary">Lower values make flings easier to trigger with a light flick</string>
+    <string name="fling_velocity_max_title">Maximum fling velocity</string>
+    <string name="fling_velocity_max_summary">Higher values require a faster flick to reach the fastest fling speed</string>
+    <string name="fling_velocity_units" translatable="false">dp/s</string>
 </resources>

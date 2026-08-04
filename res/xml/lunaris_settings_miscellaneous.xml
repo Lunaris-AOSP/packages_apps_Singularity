@@ -31,6 +31,32 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="fling_velocity_category"
+        android:title="@string/fling_velocity_category_title">
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="fling_velocity_min"
+            android:title="@string/fling_velocity_min_title"
+            android:summary="@string/fling_velocity_min_summary"
+            settings:min="10"
+            android:max="600"
+            android:defaultValue="50"
+            settings:units="@string/fling_velocity_units"
+            settings:interval="10" />
+
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="fling_velocity_max"
+            android:title="@string/fling_velocity_max_title"
+            android:summary="@string/fling_velocity_max_summary"
+            settings:min="4000"
+            android:max="12000"
+            android:defaultValue="8000"
+            settings:units="@string/fling_velocity_units"
+            settings:interval="100" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/miscellaneous_spoofing_category">
 
         <!-- Application downgrade -->
