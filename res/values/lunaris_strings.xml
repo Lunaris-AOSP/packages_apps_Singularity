@@ -2685,8 +2685,11 @@
     <string name="qs_widget_panel_summary">Show media and volume, brightness widget in quick settings panel</string>
     <string name="qs_widget_ios_music_title">Show ios music widget</string>
     <string name="qs_widget_ios_music_summary">Show ios like media panel</string>
-    <string name="qs_widget_slider_corner_title">Show rounded widget slider</string>
-    <string name="qs_widget_slider_corner_summary">Show rounded style vertical widget sliders in qs panel</string>
+    <string name="qs_widget_slider_corner_title">Widget slider style</string>
+    <string name="qs_widget_slider_corner_summary">Choose the corner style for the brightness and volume sliders</string>
+    <string name="qs_widget_slider_corner_default">Default</string>
+    <string name="qs_widget_slider_corner_rounded">Rounded</string>
+    <string name="qs_widget_slider_corner_thumb">Thumb</string>
 
     <!-- Scrim -->
     <string name="keyguard_scrim_transparent_title">Transparent lockscreen scrim</string>

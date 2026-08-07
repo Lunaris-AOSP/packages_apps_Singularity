@@ -116,7 +116,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SecureSettingListPreference mQsShowMediaPlayer;
     private SystemSettingSwitchPreference mQsWidgetPanel;
     private SystemSettingSwitchPreference mQsWidgetIosMusic;
-    private SystemSettingSwitchPreference mQsWidgetSliderCorner;
+    private SystemSettingListPreference mQsWidgetSliderCorner;
     private ListPreference mShowVolumeSlider;
     private ListPreference mVolumeSliderPosition;
     private SwitchPreferenceCompat mVolumeSliderHaptic;
@@ -167,7 +167,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
 
         mQsWidgetIosMusic = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_IOS_MUSIC);
-        mQsWidgetSliderCorner = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_SLIDER_CORNER);
+        mQsWidgetSliderCorner = (SystemSettingListPreference) findPreference(KEY_QS_WIDGET_SLIDER_CORNER);
 
         updateWidgetPanelDependencies();
 

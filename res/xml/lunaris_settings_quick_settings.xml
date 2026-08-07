@@ -74,11 +74,13 @@
             android:summary="@string/qs_widget_ios_music_summary"
             android:defaultValue="false" />
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_widget_slider_corner"
             android:title="@string/qs_widget_slider_corner_title"
-            android:summary="@string/qs_widget_slider_corner_summary"
-            android:defaultValue="false" />
+            android:summary="%s"
+            android:entries="@array/qs_widget_slider_corner_entries"
+            android:entryValues="@array/qs_widget_slider_corner_values"
+            android:defaultValue="0" />
 
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="shade_scrim_alpha"
