@@ -19,7 +19,6 @@ package org.lunaris.settings.utils
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -119,9 +118,7 @@ fun ClockColorPickerDialog(
             isWallpaperLoading = true
             val bmp = withContext(Dispatchers.IO) {
                 try {
-                    val wm = WallpaperManager.getInstance(context)
-                    val drawable = wm.drawable
-                    if (drawable is BitmapDrawable) scaleBitmap(drawable.bitmap) else null
+                    loadLockScreenWallpaperBitmap(context)
                 } catch (e: Exception) { null }
             }
             wallpaperBitmap = bmp
@@ -451,6 +448,17 @@ private fun scaleBitmap(src: Bitmap, maxSize: Int = 800): Bitmap {
     return if (scale < 1f)
         Bitmap.createScaledBitmap(src, (src.width * scale).toInt(), (src.height * scale).toInt(), true)
     else src
+}
+
+private fun loadLockScreenWallpaperBitmap(context: android.content.Context): Bitmap? {
+    val wm = WallpaperManager.getInstance(context)
+    val pfd = wm.getWallpaperFile(WallpaperManager.FLAG_LOCK)
+        ?: wm.getWallpaperFile(WallpaperManager.FLAG_SYSTEM)
+        ?: return null
+
+    return pfd.use {
+        BitmapFactory.decodeFileDescriptor(it.fileDescriptor)?.let { bmp -> scaleBitmap(bmp) }
+    }
 }
 
 private fun loadAndScaleBitmap(context: android.content.Context, uri: Uri): Bitmap? {
