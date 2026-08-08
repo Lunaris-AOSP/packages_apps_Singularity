@@ -79,7 +79,7 @@
         android:dependency="nowplaying_enabled"
         android:max="100"
         android:min="10"
-        android:defaultValue="98"
+        android:defaultValue="88"
         settings:interval="1"
         settings:units="%" />
 

@@ -2023,7 +2023,7 @@
     <string name="nowplaying_summary">Show currently playing music info on lockscreen and AOD</string>
     <string name="nowplaying_appearance_title">Appearance</string>
     <string name="nowplaying_color_mode_title">Text color mode</string>
-    <string name="nowplaying_vertical_position_title">Vertical position</string>
+    <string name="nowplaying_vertical_position_title">top padding</string>
     <string name="nowplaying_vertical_position_summary">Adjust position from top to bottom of screen</string>
     <string name="nowplaying_track_text_size_title">Track title size</string>
     <string name="nowplaying_track_text_size_summary">Size of the track title text</string>
