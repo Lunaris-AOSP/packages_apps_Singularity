@@ -2322,6 +2322,8 @@
     <string name="lockscreen_widgets_style2">Material Square</string>
     <string name="lockscreen_widgets_style3">Square Translucent</string>
     <string name="lockscreen_widgets_style4">Rounded Translucent</string>
+    <string name="lockscreen_widgets_style5">Square blur</string>
+    <string name="lockscreen_widgets_style6">Rounded blur</string>
     <string name="lockscreen_widgets_transparency_title">Translucent style transparency</string>
     <string name="lockscreen_widgets_transparency_summary">Configure translucent style widget opacity level</string>
 

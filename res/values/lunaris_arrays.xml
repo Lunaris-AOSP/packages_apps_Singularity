@@ -1473,6 +1473,8 @@
         <item>@string/lockscreen_widgets_style2</item>
         <item>@string/lockscreen_widgets_style3</item>
         <item>@string/lockscreen_widgets_style4</item>
+        <item>@string/lockscreen_widgets_style5</item>
+        <item>@string/lockscreen_widgets_style6</item>
     </string-array>
 
     <string-array name="lockscreen_widgets_style_values" translatable="false">
@@ -1480,6 +1482,8 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="ongoing_chip_color_mode_entries">
