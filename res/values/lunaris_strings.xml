@@ -2822,4 +2822,13 @@
     <string name="qs_media_art_scrim_title">Media art QS background</string>
     <string name="qs_media_art_scrim_summary">Use blurred media artwork as Quick Settings background</string>
     <string name="qs_media_art_dim_amount_title">QS media art scrim dim amount</string>
+
+    <!-- Scrim custom color category -->
+    <string name="qs_scrim_color_category_title">Scrim colors</string>
+    <string name="custom_shade_color_enabled_title">Custom shade panel color</string>
+    <string name="custom_shade_color_enabled_summary">Override the shade panel background color</string>
+    <string name="custom_shade_color_title">Shade panel color</string>
+    <string name="custom_notif_scrim_color_enabled_title">Custom notification scrim color</string>
+    <string name="custom_notif_scrim_color_enabled_summary">Override the notification scrim background color (tinted and not accurate)</string>
+    <string name="custom_notif_scrim_color_title">Notification scrim color</string>
 </resources>

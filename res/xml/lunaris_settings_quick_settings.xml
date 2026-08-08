@@ -212,6 +212,36 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="qs_scrim_color_category"
+        android:title="@string/qs_scrim_color_category_title">
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="custom_shade_color_enabled"
+            android:title="@string/custom_shade_color_enabled_title"
+            android:summary="@string/custom_shade_color_enabled_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.colorpicker.SystemSettingColorPickerPreference
+            android:key="custom_shade_color"
+            android:title="@string/custom_shade_color_title"
+            android:dependency="custom_shade_color_enabled"
+            android:defaultValue="#1a1a1a" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="custom_notif_scrim_color_enabled"
+            android:title="@string/custom_notif_scrim_color_enabled_title"
+            android:summary="@string/custom_notif_scrim_color_enabled_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.colorpicker.SystemSettingColorPickerPreference
+            android:key="custom_notif_scrim_color"
+            android:title="@string/custom_notif_scrim_color_title"
+            android:dependency="custom_notif_scrim_color_enabled"
+            android:defaultValue="#1a1a1a" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
          android:key="qs_brightness_slider_category"
          android:title="@string/qs_brightness_slider_category">
 
