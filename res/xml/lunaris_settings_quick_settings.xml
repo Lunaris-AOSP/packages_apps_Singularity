@@ -245,11 +245,12 @@
          android:key="qs_brightness_slider_category"
          android:title="@string/qs_brightness_slider_category">
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_brightness_slider_style"
             android:title="@string/qs_brightness_slider_style_title"
-            android:summary="@string/qs_brightness_slider_style_summary"
-            android:defaultValue="false" />
+            android:entries="@array/qs_brightness_slider_style_entries"
+            android:entryValues="@array/qs_brightness_slider_style_values"
+            android:defaultValue="0" />
 
         <lineageos.preference.LineageSecureSettingListPreference
             android:key="qs_show_brightness_slider"
@@ -290,11 +291,12 @@
          android:key="qs_volume_slider_category"
          android:title="@string/qs_volume_slider_category">
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_volume_slider_style"
             android:title="@string/qs_volume_slider_style_title"
-            android:summary="@string/qs_volume_slider_style_summary"
-            android:defaultValue="false" />
+            android:entries="@array/qs_volume_slider_style_entries"
+            android:entryValues="@array/qs_volume_slider_style_values"
+            android:defaultValue="0" />
 
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="qs_show_volume_slider"

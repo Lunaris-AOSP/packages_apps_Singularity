@@ -75,8 +75,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_TILE_STYLE_MINIMAL_INVERT = "qs_tile_style_minimal_invert";
     private static final String KEY_QS_USE_MODIFIED_TILE_SPACING = "qs_use_modified_tile_spacing";
     private static final String KEY_QS_TILE_SHAPE = "qs_tile_shape";
-    private static final String KEY_BRIGHTNESS_SLIDER_STYLE = "qs_brightness_slider_style";
-    private static final String KEY_BRIGHTNESS_SLIDER_SHAPE = "qs_brightness_slider_shape";
     private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
     private static final String KEY_QS_TILE_ICON_SHAPE = "qs_tile_icon_shape";
     private static final String KEY_QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
@@ -89,8 +87,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_SLIDER_POSITION = "qs_volume_slider_position";
     private static final String KEY_VOLUME_SLIDER_HAPTIC = "qs_volume_slider_haptic";
     private static final String KEY_SHOW_RINGER_BUTTON = "qs_show_ringer_button";
-    private static final String KEY_VOLUME_SLIDER_STYLE = "qs_volume_slider_style";
-    private static final String KEY_VOLUME_SLIDER_SHAPE = "qs_volume_slider_shape";
     private static final String SHADE_SCRIM_ALPHA = "shade_scrim_alpha";
     private static final String NOTIFICATION_SCRIM_ALPHA = "notification_scrim_alpha";
     private static final String KEY_QS_HEADER_CLOCK_STYLE = "qs_header_clock_style";
@@ -99,8 +95,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mBrightnessSliderPosition;
     private SwitchPreferenceCompat mBrightnessSliderHaptic;
     private SwitchPreferenceCompat mShowAutoBrightness;
-    private SystemSettingSwitchPreference mBrightnessSliderStyle;
-    private SystemSettingListPreference mBrightnessSliderShape;
     private SwitchPreferenceCompat mQsTileHaptic;
     private Preference mQsCompactPlayer;
     private SwitchPreferenceCompat mSingleQsTone;
@@ -121,8 +115,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private ListPreference mVolumeSliderPosition;
     private SwitchPreferenceCompat mVolumeSliderHaptic;
     private SwitchPreferenceCompat mShowRingerButton;
-    private SystemSettingSwitchPreference mVolumeSliderStyle;
-    private SystemSettingListPreference mVolumeSliderShape;
     private SystemSettingSeekBarPreference mShadeScrimAlphaPref;
     private SystemSettingSeekBarPreference mNotificationScrimAlphaPref;
     private SystemSettingListPreference mQsHeaderClockStyle;
@@ -209,14 +201,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         updatePanelStyleDependencies();
 
-        mBrightnessSliderStyle = findPreference(KEY_BRIGHTNESS_SLIDER_STYLE);
-        mBrightnessSliderShape = findPreference(KEY_BRIGHTNESS_SLIDER_SHAPE);
-
-        if (mBrightnessSliderStyle != null) {
-            mBrightnessSliderStyle.setOnPreferenceChangeListener(this);
-            updateBrightnessSliderStyleDependencies();
-        }
-
         mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
         mQsTileHaptic = findPreference(KEY_QS_TILE_HAPTIC);
         boolean hapticAvailable = DeviceUtils.hasVibrator(context);
@@ -249,17 +233,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mVolumeSliderPosition =
                 findPreference(KEY_VOLUME_SLIDER_POSITION);
         mVolumeSliderPosition.setEnabled(showVolumeSlider);
-
-        mVolumeSliderStyle =
-                findPreference(KEY_VOLUME_SLIDER_STYLE);
-
-        mVolumeSliderShape =
-                findPreference(KEY_VOLUME_SLIDER_SHAPE);
-
-        if (mVolumeSliderStyle != null) {
-            mVolumeSliderStyle.setOnPreferenceChangeListener(this);
-            updateVolumeSliderStyleDependencies();
-        }
 
         mVolumeSliderHaptic =
                 findPreference(KEY_VOLUME_SLIDER_HAPTIC);
@@ -357,45 +330,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void updateBrightnessSliderStyleDependencies() {
-        if (mBrightnessSliderStyle == null) return;
-
-        ContentResolver resolver = getContext().getContentResolver();
-        boolean isSliderStyleEnabled = Settings.System.getInt(resolver,
-                KEY_BRIGHTNESS_SLIDER_STYLE, 0) == 1;
-
-        if (mBrightnessSliderShape != null) {
-            mBrightnessSliderShape.setVisible(!isSliderStyleEnabled);
-        }
-
-        if (mShowAutoBrightness != null) {
-            boolean automaticAvailable = getContext().getResources().getBoolean(
-                    com.android.internal.R.bool.config_automatic_brightness_available);
-            if (automaticAvailable) {
-                mShowAutoBrightness.setVisible(!isSliderStyleEnabled);
-            }
-        }
-    }
-
-    private void updateVolumeSliderStyleDependencies() {
-        if (mVolumeSliderStyle == null) return;
-
-        ContentResolver resolver =
-                getContext().getContentResolver();
-
-        boolean isSliderStyleEnabled =
-                Settings.System.getInt(resolver,
-                KEY_VOLUME_SLIDER_STYLE, 0) == 1;
-
-        if (mVolumeSliderShape != null) {
-            mVolumeSliderShape.setVisible(!isSliderStyleEnabled);
-        }
-
-        if (mShowRingerButton != null) {
-            mShowRingerButton.setVisible(!isSliderStyleEnabled);
-        }
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getContext().getContentResolver();
@@ -407,7 +341,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 mBrightnessSliderHaptic.setEnabled(value > 0);
             if (mShowAutoBrightness != null)
                 mShowAutoBrightness.setEnabled(value > 0);
-            updateBrightnessSliderStyleDependencies();
             return true;
         } else if (preference == mQsPanelStyle) {
             updatePanelStyleDependencies();
@@ -432,10 +365,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             updateMinimalStyleDependencies(isPanelStyleClassic());
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
-        } else if (preference == mBrightnessSliderStyle) {
-            updateBrightnessSliderStyleDependencies();
-            SystemUtils.showSystemUiRestartDialog(getActivity());
-            return true;
         } else if (preference == mQsShowMediaPlayer) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
@@ -450,11 +379,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 mVolumeSliderHaptic.setEnabled(value > 0);
             if (mShowRingerButton != null)
                 mShowRingerButton.setEnabled(value > 0);
-            updateVolumeSliderStyleDependencies();
-            return true;
-        } else if (preference == mVolumeSliderStyle) {
-            updateVolumeSliderStyleDependencies();
-            SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mShadeScrimAlphaPref) {
             int value = (Integer) newValue;
@@ -536,22 +460,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                         if (isMinimalEnabled) {
                             keys.add(KEY_QS_TILE_SHAPE);
                         }
-                    }
-
-                    boolean isVolumeSliderStyleEnabled = Settings.System.getInt(resolver,
-                        KEY_VOLUME_SLIDER_STYLE, 0) == 1;
-
-                    if (isVolumeSliderStyleEnabled) {
-                        keys.add(KEY_VOLUME_SLIDER_SHAPE);
-                        keys.add(KEY_SHOW_RINGER_BUTTON);
-                    }
-
-                    boolean isSliderStyleEnabled = Settings.System.getInt(resolver,
-                            KEY_BRIGHTNESS_SLIDER_STYLE, 0) == 1;
-                    
-                    if (isSliderStyleEnabled) {
-                        keys.add(KEY_BRIGHTNESS_SLIDER_SHAPE);
-                        keys.add(KEY_SHOW_AUTO_BRIGHTNESS);
                     }
 
                     boolean isWidgetPanelEnabled = Settings.System.getInt(resolver,

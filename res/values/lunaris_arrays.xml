@@ -1834,4 +1834,28 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="qs_brightness_slider_style_entries" translatable="false">
+        <item>@string/qs_brightness_slider_style_default</item>
+        <item>@string/qs_brightness_slider_style_thumb</item>
+        <item>@string/qs_brightness_slider_style_minimal</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_volume_slider_style_entries" translatable="false">
+        <item>@string/qs_volume_slider_style_default</item>
+        <item>@string/qs_volume_slider_style_thumb</item>
+        <item>@string/qs_volume_slider_style_minimal</item>
+    </string-array>
+
+    <string-array name="qs_volume_slider_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
