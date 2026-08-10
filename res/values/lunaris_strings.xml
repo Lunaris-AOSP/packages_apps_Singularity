@@ -2841,4 +2841,10 @@
     <string name="custom_notif_scrim_color_enabled_title">Custom notification scrim color</string>
     <string name="custom_notif_scrim_color_enabled_summary">Override the notification scrim background color (tinted and not accurate)</string>
     <string name="custom_notif_scrim_color_title">Notification scrim color</string>
+
+    <!-- Power menu styles -->
+    <string name="power_menu_compose_style_title">Power menu style</string>
+    <string name="power_menu_compose_style_legacy">Legacy</string>
+    <string name="power_menu_compose_style_grid">Grid</string>
+    <string name="power_menu_compose_style_slider">Slider</string>
 </resources>
