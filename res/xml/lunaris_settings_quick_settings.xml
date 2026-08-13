@@ -97,6 +97,12 @@
             android:entryValues="@array/qs_widget_slider_corner_values"
             android:defaultValue="0" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_widget_panel_order"
+            android:title="@string/qs_widget_panel_order_title"
+            android:summary="@string/qs_widget_panel_order_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="shade_scrim_alpha"
             android:title="@string/shade_scrim_alpha_title"

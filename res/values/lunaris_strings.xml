@@ -2699,6 +2699,8 @@
     <string name="qs_widget_slider_corner_default">Default</string>
     <string name="qs_widget_slider_corner_rounded">Rounded</string>
     <string name="qs_widget_slider_corner_thumb">Thumb</string>
+    <string name="qs_widget_panel_order_title">Sliders first</string>
+    <string name="qs_widget_panel_order_summary">Show brightness and volume sliders before the media player</string>
 
     <!-- Scrim -->
     <string name="keyguard_scrim_transparent_title">Transparent lockscreen scrim</string>
