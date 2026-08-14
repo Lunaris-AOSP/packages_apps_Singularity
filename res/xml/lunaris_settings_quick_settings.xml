@@ -74,8 +74,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="qs_layout_category"
-        android:title="@string/qs_layout_category_title">
+        android:key="qs_widget_category"
+        android:title="@string/qs_widget_category_title">
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_widget_panel"
@@ -87,6 +87,7 @@
             android:key="qs_widget_ios_music"
             android:title="@string/qs_widget_ios_music_title"
             android:summary="@string/qs_widget_ios_music_summary"
+            android:dependency="qs_widget_panel"
             android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.SystemSettingListPreference
@@ -95,13 +96,21 @@
             android:summary="%s"
             android:entries="@array/qs_widget_slider_corner_entries"
             android:entryValues="@array/qs_widget_slider_corner_values"
+            android:dependency="qs_widget_panel"
             android:defaultValue="0" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_widget_panel_order"
             android:title="@string/qs_widget_panel_order_title"
             android:summary="@string/qs_widget_panel_order_summary"
+            android:dependency="qs_widget_panel"
             android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="qs_layout_category"
+        android:title="@string/qs_layout_category_title">
 
         <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
             android:key="shade_scrim_alpha"

@@ -2690,6 +2690,7 @@
     <string name="activity_anim_perf_override_summary">Use optimized activity transition animations</string>
 
     <!-- QS widget -->
+    <string name="qs_widget_category_title">Widget panel</string>
     <string name="qs_widget_panel_title">Show widget in qs panel</string>
     <string name="qs_widget_panel_summary">Show media and volume, brightness widget in quick settings panel</string>
     <string name="qs_widget_ios_music_title">Show ios music widget</string>

@@ -109,8 +109,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mQsTileLabelHide;
     private SecureSettingListPreference mQsShowMediaPlayer;
     private SystemSettingSwitchPreference mQsWidgetPanel;
-    private SystemSettingSwitchPreference mQsWidgetIosMusic;
-    private SystemSettingListPreference mQsWidgetSliderCorner;
     private ListPreference mShowVolumeSlider;
     private ListPreference mVolumeSliderPosition;
     private SwitchPreferenceCompat mVolumeSliderHaptic;
@@ -157,11 +155,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (mQsHeaderClockStyle != null) {
             mQsHeaderClockStyle.setOnPreferenceChangeListener(this);
         }
-
-        mQsWidgetIosMusic = (SystemSettingSwitchPreference) findPreference(KEY_QS_WIDGET_IOS_MUSIC);
-        mQsWidgetSliderCorner = (SystemSettingListPreference) findPreference(KEY_QS_WIDGET_SLIDER_CORNER);
-
-        updateWidgetPanelDependencies();
 
         mSingleQsTone = findPreference(KEY_SINGLE_QS_TONE);
         if (mSingleQsTone != null) {
@@ -299,21 +292,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         updateMinimalStyleDependencies(isClassic);
     }
 
-    private void updateWidgetPanelDependencies() {
-        if (mQsWidgetPanel == null) return;
-
-        ContentResolver resolver = getContext().getContentResolver();
-        boolean isWidgetPanelEnabled = Settings.System.getInt(resolver,
-                KEY_QS_WIDGET_PANEL, 0) == 1;
-
-        if (mQsWidgetIosMusic != null)
-            mQsWidgetIosMusic.setVisible(isWidgetPanelEnabled);
-        if (mQsWidgetSliderCorner != null)
-            mQsWidgetSliderCorner.setVisible(isWidgetPanelEnabled);
-        if (mQsShowMediaPlayer != null)
-            mQsShowMediaPlayer.setVisible(!isWidgetPanelEnabled);
-    }
-
     private void updateMinimalStyleDependencies(boolean isClassic) {
         if (mQsTileStyleMinimal == null) return;
 
@@ -369,7 +347,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mQsWidgetPanel) {
-            updateWidgetPanelDependencies();
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;
         } else if (preference == mShowVolumeSlider) {
@@ -460,16 +437,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                         if (isMinimalEnabled) {
                             keys.add(KEY_QS_TILE_SHAPE);
                         }
-                    }
-
-                    boolean isWidgetPanelEnabled = Settings.System.getInt(resolver,
-                            KEY_QS_WIDGET_PANEL, 0) == 1;
-
-                    if (isWidgetPanelEnabled) {
-                        keys.add(KEY_QS_SHOW_MEDIA_PLAYER);
-                    } else {
-                        keys.add(KEY_QS_WIDGET_IOS_MUSIC);
-                        keys.add(KEY_QS_WIDGET_SLIDER_CORNER);
                     }
 
                     return keys;
