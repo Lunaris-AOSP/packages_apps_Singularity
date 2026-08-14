@@ -83,6 +83,21 @@
             android:summary="@string/qs_widget_panel_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="qs_widget_utility_panel"
+            android:title="@string/qs_widget_utility_panel_title"
+            android:summary="%s"
+            android:entries="@array/qs_widget_utility_panel_entries"
+            android:entryValues="@array/qs_widget_utility_panel_values"
+            android:dependency="qs_widget_panel"
+            android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_widget_utility_tile_rounded"
+            android:title="@string/qs_widget_utility_tile_rounded_title"
+            android:summary="@string/qs_widget_utility_tile_rounded_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_widget_ios_music"
             android:title="@string/qs_widget_ios_music_title"

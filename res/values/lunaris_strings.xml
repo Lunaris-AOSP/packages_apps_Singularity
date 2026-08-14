@@ -2702,6 +2702,12 @@
     <string name="qs_widget_slider_corner_thumb">Thumb</string>
     <string name="qs_widget_panel_order_title">Sliders first</string>
     <string name="qs_widget_panel_order_summary">Show brightness and volume sliders before the media player</string>
+    <string name="qs_widget_utility_panel_title">Show utility box</string>
+    <string name="qs_widget_utility_panel_none">Only music widget</string>
+    <string name="qs_widget_utility_panel_dual">Music and utility box</string>
+    <string name="qs_widget_utility_panel_only">Only utility box</string>
+    <string name="qs_widget_utility_tile_rounded_title">Icon only utility</string>
+    <string name="qs_widget_utility_tile_rounded_summary">Show only icon in utility tiles</string>
 
     <!-- Scrim -->
     <string name="keyguard_scrim_transparent_title">Transparent lockscreen scrim</string>
