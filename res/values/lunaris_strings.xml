@@ -2025,6 +2025,11 @@
     <string name="charging_display_category_title">Display options</string>
     <string name="charging_show_on_lockscreen_summary">Display animation when lockscreen is visible</string>
     <string name="charging_show_on_aod_summary">Display animation in ambient mode</string>
+    <string name="charging_image_flow_style_title">Image flow style</string>
+    <string name="charging_image_flow_opacity_title">Image flow opacity</string>
+    <string name="charging_image_flow_opacity_summary">Adjust the opacity of the charging image flow</string>
+    <string name="charging_image_flow_strength_title">Image flow strength</string>
+    <string name="charging_image_flow_strength_summary">Adjust the intensity of the charging image flow</string>
 
     <!-- Now Playing -->
     <string name="nowplaying_title">Now Playing</string>

@@ -35,6 +35,35 @@
         android:defaultValue="0"
         android:dependency="charging_animation_enabled" />
 
+    <org.lunaris.settings.preferences.SystemSettingListPreference
+        android:key="charging_image_flow_style"
+        android:title="@string/charging_image_flow_style_title"
+        android:summary="%s"
+        android:entries="@array/charging_image_flow_style_entries"
+        android:entryValues="@array/charging_image_flow_style_values"
+        android:defaultValue="0"
+        android:dependency="charging_animation_enabled" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="charging_image_flow_opacity"
+        android:title="@string/charging_image_flow_opacity_title"
+        android:summary="@string/charging_image_flow_opacity_summary"
+        android:max="100"
+        android:min="0"
+        settings:units="%"
+        android:defaultValue="80"
+        android:dependency="charging_animation_enabled" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="charging_image_flow_strength"
+        android:title="@string/charging_image_flow_strength_title"
+        android:summary="@string/charging_image_flow_strength_summary"
+        android:max="10"
+        android:min="0"
+        settings:units="%"
+        android:defaultValue="5"
+        android:dependency="charging_animation_enabled" />
+
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
         android:key="charging_ripple_opacity"
         android:title="@string/charging_ripple_opacity_title"

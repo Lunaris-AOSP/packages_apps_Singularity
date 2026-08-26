@@ -50,6 +50,8 @@ class ChargingAnimationSettings : SettingsPreferenceFragment(),
         private const val STYLE_NEBULA = 5
         private const val STYLE_DIGITAL_MATRIX = 6
         private const val STYLE_GEOFLOW = 7
+        private const val STYLE_IMAGE_FLOW = 8
+        private const val STYLE_IMAGE_LINEAR = 9
         
         private fun getHiddenKeysForStyle(style: Int): List<String> {
             return when (style) {
@@ -61,6 +63,16 @@ class ChargingAnimationSettings : SettingsPreferenceFragment(),
                 STYLE_NEBULA -> listOf("charging_arc_count")
                 STYLE_DIGITAL_MATRIX -> listOf("charging_ripple_opacity", "charging_arc_count")
                 STYLE_GEOFLOW -> listOf("charging_glow_intensity", "charging_arc_count")
+                STYLE_IMAGE_FLOW -> listOf(
+                    "charging_ripple_opacity",
+                    "charging_glow_intensity",
+                    "charging_arc_count"
+                )
+                STYLE_IMAGE_LINEAR -> listOf(
+                    "charging_ripple_opacity",
+                    "charging_glow_intensity",
+                    "charging_arc_count"
+                )
                 else -> emptyList()
             }
         }
@@ -156,6 +168,16 @@ class ChargingAnimationSettings : SettingsPreferenceFragment(),
             }
             STYLE_GEOFLOW -> {
                 rippleOpacityPref?.isVisible = true
+                glowIntensityPref?.isVisible = false
+                arcCountPref?.isVisible = false
+            }
+            STYLE_IMAGE_FLOW -> {
+                rippleOpacityPref?.isVisible = false
+                glowIntensityPref?.isVisible = false
+                arcCountPref?.isVisible = false
+            }
+            STYLE_IMAGE_LINEAR -> {
+                rippleOpacityPref?.isVisible = false
                 glowIntensityPref?.isVisible = false
                 arcCountPref?.isVisible = false
             }

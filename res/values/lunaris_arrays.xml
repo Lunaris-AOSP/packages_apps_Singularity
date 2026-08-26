@@ -1191,6 +1191,8 @@
         <item>Nebula Diffusion</item>
         <item>Digital Matrix</item>
         <item>Geoflow</item>
+        <item>Image Flow</item>
+        <item>Image linear</item>
     </string-array>
 
     <string-array name="charging_animation_style_values" translatable="false">
@@ -1202,6 +1204,32 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="charging_image_flow_style_entries">
+        <item>Leaf</item>
+        <item>Glow round</item>
+        <item>Snow</item>
+        <item>Light</item>
+        <item>Shell</item>
+        <item>Shape</item>
+        <item>Bubble</item>
+	<item>Red leaf</item>
+	<item>Cherry</item>
+    </string-array>
+
+    <string-array name="charging_image_flow_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
 
     <!-- Charging Animation Color Mode Options -->
