@@ -2494,6 +2494,7 @@
     <string name="lockscreen_custom_clock_animation_category_title">Animation</string>
     <string name="clock_tilt_x_title">Tilt clock around the horizontal axis</string>
     <string name="clock_tilt_y_title">Tilt clock around the vertical axis </string>
+    <string name="custom_clock_rotation_title">Clock layout rotation</string>
     <string name="unit_degrees">°</string>
 
     <!-- Gradient styles -->
