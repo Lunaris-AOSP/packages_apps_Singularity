@@ -144,6 +144,22 @@
             settings:min="-200"
             settings:units="@string/unit_pixels" />
 
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="lock_screen_custom_clock_tilt_y"
+            android:title="@string/clock_tilt_y_title"
+            android:defaultValue="0"
+            settings:min="-75"
+            android:max="75"
+            settings:units="°" />
+
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="lock_screen_custom_clock_tilt_x"
+            android:title="@string/clock_tilt_x_title"
+            android:defaultValue="0"
+            settings:min="-75"
+            android:max="75"
+            settings:units="°" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
