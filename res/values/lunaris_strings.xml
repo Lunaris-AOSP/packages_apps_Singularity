@@ -1793,6 +1793,9 @@
     <string name="pulse_settings_title">Pulse Visualizer</string>
     <string name="pulse_show_on_ambient_title">Show on ambient display</string>
     <string name="pulse_show_on_ambient_summary">Display visualizer on always-on display and ambient mode. Disable to show only on lockscreen.</string>
+    <string name="pulse_show_on_ambient_disabled_player">Visualizer is not available for ambient display when media player background is enabled</string>
+    <string name="pulse_show_on_media_player_title">Show on media player background</string>
+    <string name="pulse_show_on_media_player_summary">Display visualizer on media player background for lockscreen and quick settings</string>
     <string name="pulse_settings_summary">Show a bar visualizer on the lock screen while music is playing</string>
     <string name="ambient_pulse_enabled_title">Ambient Pulse</string>
     <string name="ambient_pulse_enabled_summary">Show visualizer on Ambient Display</string>

@@ -35,17 +35,22 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.util.lunaris.VibrationUtils;
 
 import org.lunaris.settings.preferences.SecureSettingListPreference;
+import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
 import org.lunaris.settings.preferences.colorpicker.SecureSettingColorPickerPreference;
 
 public class PulseSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_PULSE_SHOW_ON_MEDIA_PLAYER = Settings.Secure.PULSE_SHOW_ON_MEDIA_PLAYER;
     private static final String KEY_PULSE_RENDERER = "pulse_renderer";
     private static final String KEY_PULSE_COLOR = "pulse_color";
     private static final String KEY_PULSE_CUSTOM_COLOR = "pulse_custom_color";
     private static final String KEY_PULSE_BASS_HAPTICS = "pulse_bass_haptics";
     private static final String KEY_PULSE_CAPTURE_MODE = "pulse_capture_mode";
+    private static final String KEY_PULSE_SHOW_ON_AMBIENT = "pulse_show_on_ambient";
 
+    private SecureSettingSwitchPreference mPulseShowOnMediaPlayer;
+    private SecureSettingSwitchPreference mPulseShowOnAmbient;
     private SecureSettingListPreference mPulseRenderer;
     private SecureSettingListPreference mPulseColor;
     private SecureSettingListPreference mPulseBassHaptics;
@@ -58,6 +63,8 @@ public class PulseSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.pulse_settings);
 
+        mPulseShowOnMediaPlayer = findPreference(KEY_PULSE_SHOW_ON_MEDIA_PLAYER);
+        mPulseShowOnAmbient = findPreference(KEY_PULSE_SHOW_ON_AMBIENT);
         mPulseRenderer = (SecureSettingListPreference) findPreference(KEY_PULSE_RENDERER);
         mPulseColor = (SecureSettingListPreference) findPreference(KEY_PULSE_COLOR);
         mPulseCustomColor = (SecureSettingColorPickerPreference) findPreference(KEY_PULSE_CUSTOM_COLOR);
@@ -86,6 +93,15 @@ public class PulseSettings extends SettingsPreferenceFragment implements
         if (mPulseCaptureMode != null) {
             mPulseCaptureMode.setOnPreferenceChangeListener(this);
         }
+
+        if (mPulseShowOnMediaPlayer != null) mPulseShowOnMediaPlayer.setOnPreferenceChangeListener(this);
+        if (mPulseShowOnAmbient != null) {
+            boolean mediaPlayerEnabled = Settings.Secure.getIntForUser(
+                    getContentResolver(),
+                    Settings.Secure.PULSE_SHOW_ON_MEDIA_PLAYER,
+                    UserHandle.USER_CURRENT, 0) == 1;
+            updateAmbientPreference(!mediaPlayerEnabled);
+        }
     }
 
     @Override
@@ -102,8 +118,17 @@ public class PulseSettings extends SettingsPreferenceFragment implements
             String value = (String) newValue; 
             updatePreferenceVisibility(getCurrentRenderer(), getCurrentColorMode(), value);
             return true;
+        } else if (preference == mPulseShowOnMediaPlayer) {
+            boolean mediaPlayerState = (Boolean) newValue;
+            updateAmbientPreference(!mediaPlayerState);
+            return true;
         }
         return false;
+    }
+
+    private void updateAmbientPreference(boolean state) {
+        mPulseShowOnAmbient.setEnabled(state);
+        mPulseShowOnAmbient.setSummary(state ? R.string.pulse_show_on_ambient_summary : R.string.pulse_show_on_ambient_disabled_player);
     }
 
     private void updatePreferenceVisibility(String rendererValue, String colorValue, String captureModeValue) {
