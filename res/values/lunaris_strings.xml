@@ -2868,4 +2868,8 @@
     <string name="power_menu_compose_style_legacy">Legacy</string>
     <string name="power_menu_compose_style_grid">Grid</string>
     <string name="power_menu_compose_style_slider">Slider</string>
+
+    <!-- Settings homepage styles -->
+    <string name="compose_homepage_title">Compose homepage</string>
+    <string name="compose_homepage_summary">Use the new Compose-based Settings homepage. Restart Settings to apply.</string>
 </resources>

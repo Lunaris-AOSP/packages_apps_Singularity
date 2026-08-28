@@ -209,6 +209,12 @@
             android:summary="@string/smart_pixels_summary" 
             android:fragment="org.lunaris.settings.fragments.themes.SmartPixels" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="compose_homepage_enabled"
+            android:title="@string/compose_homepage_title"
+            android:summary="@string/compose_homepage_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.settingslib.smileswitch"
             android:title="@string/smile_switch_title"
