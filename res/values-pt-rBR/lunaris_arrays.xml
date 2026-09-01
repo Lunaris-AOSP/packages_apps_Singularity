@@ -1,0 +1,1888 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2016-2025 crDroid Android Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Status bar - Quick pulldown -->
+    <string-array name="status_bar_quick_qs_pulldown_entries" translatable="false">
+        <item>@string/status_bar_quick_qs_pulldown_off</item>
+        <item>@string/status_bar_quick_qs_pulldown_right</item>
+        <item>@string/status_bar_quick_qs_pulldown_left</item>
+        <item>@string/status_bar_quick_qs_pulldown_always</item>
+    </string-array>
+
+    <string-array name="status_bar_quick_qs_pulldown_entries_rtl" translatable="false">
+        <item>@string/status_bar_quick_qs_pulldown_off</item>
+        <item>@string/status_bar_quick_qs_pulldown_left</item>
+        <item>@string/status_bar_quick_qs_pulldown_right</item>
+        <item>@string/status_bar_quick_qs_pulldown_always</item>
+    </string-array>
+
+    <string-array name="status_bar_quick_qs_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="status_bar_quick_qs_pulldown_values_rtl" translatable="false">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Status bar - Smart pulldown-->
+    <string-array name="smart_pulldown_entries" translatable="false">
+        <item>@string/smart_pulldown_off</item>
+        <item>@string/smart_pulldown_dismissable</item>
+        <item>@string/smart_pulldown_ongoing</item>
+        <item>@string/smart_pulldown_none</item>
+    </string-array>
+
+    <string-array name="smart_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Status bar - Clock -->
+    <string-array name="status_bar_clock_position_entries" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_left</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_right</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values_rtl" translatable="false">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_left</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_right</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values_notch" translatable="false">
+        <item>0</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values_notch_rtl" translatable="false">
+        <item>2</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="status_bar_am_pm_entries" translatable="false">
+        <item>@string/status_bar_am_pm_hidden</item>
+        <item>@string/status_bar_am_pm_normal</item>
+        <item>@string/status_bar_am_pm_small</item>
+    </string-array>
+
+    <string-array name="status_bar_am_pm_values" translatable="false">
+        <item>2</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="clock_date_position_entries" translatable="false">
+        <item>@string/clock_date_left</item>
+        <item>@string/clock_date_right</item>
+    </string-array>
+
+    <string-array name="clock_date_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="status_bar_date_entries" translatable="false">
+        <item>@string/status_bar_date_none</item>
+        <item>@string/status_bar_date_small</item>
+        <item>@string/status_bar_date_normal</item>
+    </string-array>
+
+    <string-array name="status_bar_date_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_date_style_entries" translatable="false">
+        <item>@string/status_bar_date_style_normal</item>
+        <item>@string/status_bar_date_style_lowercase</item>
+        <item>@string/status_bar_date_style_uppercase</item>
+    </string-array>
+
+    <string-array name="status_bar_date_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_date_format_entries_values" translatable="false">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>@string/status_bar_date_format_custom</item>
+    </string-array>
+
+     <!-- Status bar chip styles-->
+    <string-array name="statusbar_clock_chip_labels" translatable="false">
+        <item>@string/disabled</item>
+        <item>@string/solid_accent</item>
+        <item>@string/outline</item>
+        <item>@string/solid_accent_gradient</item>
+        <item>@string/solid_gradient</item>
+        <item>@string/solid_gradient_corner</item>
+        <item>@string/solid_gradient_void</item>
+        <item>@string/solid_gradient_neumorph</item>
+        <item>@string/solid_gradient_stroke</item>
+        <item>@string/solid_accent_transperent</item>
+        <item>@string/solid_gradient_light</item>
+        <item>@string/solid_gradient_shape</item>
+        <item>@string/solid_gradient_void_light</item>
+        <item>@string/clock_chip_custom_gradient</item>
+    </string-array>
+
+    <string-array name="statusbar_clock_chip_drawables" translatable="false">
+        <item>0</item>
+        <item>sb_date_bg1</item>
+        <item>sb_date_bg2</item>
+        <item>sb_date_bg3</item>
+        <item>sb_date_bg4</item>
+        <item>sb_date_bg5</item>
+        <item>sb_date_bg6</item>
+        <item>sb_date_bg7</item>
+        <item>sb_date_bg8</item>
+        <item>sb_date_bg9</item>
+        <item>sb_date_bg10</item>
+        <item>sb_date_bg11</item>
+        <item>sb_date_bg12</item>
+        <item>custom_gradient</item>
+    </string-array>
+
+    <!-- Status bar - Battery -->
+    <string-array name="status_bar_battery_style_entries" translatable="false">
+        <!--<item>@string/status_bar_battery_style_icon_portrait</item>--> 
+        <item>@string/status_bar_battery_style_icon_rlandscape</item> 
+        <!--<item>@string/status_bar_battery_style_icon_landscape</item> -->
+        <item>@string/status_bar_battery_style_circle</item>
+        <item>@string/status_bar_battery_style_dotted_circle</item>
+        <!--<item>@string/status_bar_battery_style_filled_circle</item>-->
+        <item>@string/status_bar_battery_style_text</item>
+        <!--<item>@string/status_bar_battery_style_hidden</item>-->
+    </string-array>
+
+    <string-array name="status_bar_battery_style_values" translatable="false">
+        <item>0</item>
+        <!--<item>6</item>
+        <item>7</item>-->
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+        <!--<item>4</item>
+        <item>5</item>-->
+    </string-array>
+
+    <string-array name="status_bar_battery_percent_entries" translatable="false">
+        <item>@string/status_bar_battery_percent_hidden</item>
+        <item>@string/status_bar_battery_percent_text_inside</item>
+        <item>@string/status_bar_battery_percent_text_next</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Status bar - Battery Bar -->
+    <string-array name="battery_bar_style_entries" translatable="false">
+        <item>@string/battery_bar_style_regular</item>
+        <item>@string/battery_bar_style_center_mirrored</item>
+        <item>@string/battery_bar_style_reversed</item>
+    </string-array>
+
+    <string-array name="battery_bar_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- QS battery style  -->
+    <string-array name="qs_battery_style_entries" translatable="false">
+        <item>@string/qs_use_status_bar_battery_style</item>
+        <item>@string/status_bar_battery_style_icon_portrait</item> 
+        <item>@string/status_bar_battery_style_icon_rlandscape</item> 
+        <item>@string/status_bar_battery_style_icon_landscape</item> 
+        <item>@string/status_bar_battery_style_circle</item>
+        <item>@string/status_bar_battery_style_dotted_circle</item>
+        <item>@string/status_bar_battery_style_filled_circle</item>
+        <item>@string/status_bar_battery_style_text</item>
+        <item>@string/status_bar_battery_style_hidden</item>
+    </string-array>
+
+    <string-array name="qs_battery_style_values" translatable="false">
+        <item>-1</item>
+        <item>0</item>
+        <item>6</item>
+        <item>7</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- Network Traffic -->
+    <string-array name="network_traffic_location_entries" translatable="false">
+        <item>@string/network_traffic_location_disable</item>
+        <item>@string/network_traffic_location_statusbar</item>
+        <!--<item>@string/network_traffic_location_quick_statusbar</item>-->
+    </string-array>
+
+    <string-array name="network_traffic_location_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <!--<item>2</item>-->
+    </string-array>
+
+    <string-array name="network_traffic_mode_entries" translatable="false">
+        <item>@string/network_traffic_mode_all</item>
+        <item>@string/network_traffic_mode_up</item>
+        <item>@string/network_traffic_mode_down</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_entries" translatable="false">
+        <item>@string/network_traffic_units_bits</item>
+        <item>@string/network_traffic_units_bytes</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Edge light -->
+    <string-array name="edge_light_color_mode_entries" translatable="false">
+        <item>@string/accent_color</item>
+        <item>@string/notification_color</item>
+        <item>@string/wallpaper_color</item>
+        <item>@string/rainbow_color</item>
+        <item>@string/custom_color</item>
+    </string-array>
+
+    <string-array name="edge_light_color_mode_values" translatable="false">
+        <item>accent</item>
+        <item>notification</item>
+        <item>wallpaper</item>
+        <item>rainbow</item>
+        <item>custom</item>
+    </string-array>
+
+    <string-array name="edge_light_style_entries" translatable="false">
+        <item>@string/edge_light_style_default</item>
+        <item>@string/edge_light_style_frame</item>
+    </string-array>
+
+    <string-array name="edge_light_style_values" translatable="false">
+        <item>default</item>
+        <item>rounded</item>
+    </string-array>
+
+    <string-array name="edge_light_animation_entries" translatable="false">
+        <item>@string/edge_light_animation_effect_none</item>
+        <item>@string/edge_light_animation_effect_breathing</item>
+        <item>@string/edge_light_animation_effect_wave</item>
+        <item>@string/edge_light_animation_effect_sparkle</item>
+        <item>@string/edge_light_animation_effect_chase</item>
+        <item>@string/edge_light_animation_effect_comet</item>
+    </string-array>
+
+    <string-array name="edge_light_animation_values" translatable="false">
+        <item>none</item>
+        <item>breathing</item>
+        <item>wave</item>
+        <item>sparkle</item>
+        <item>chase</item>
+        <item>comet</item>
+    </string-array>
+
+    <!-- Hardware key rebinding -->
+    <string-array name="hardware_keys_action_entries" translatable="false">
+        <item>@string/hardware_keys_action_nothing</item>
+        <item>@string/hardware_keys_action_menu</item>
+        <item>@string/hardware_keys_action_app_switch</item>
+        <item>@string/hardware_keys_action_search</item>
+        <item>@string/hardware_keys_action_voice_search</item>
+        <item>@string/hardware_keys_action_in_app_search</item>
+        <item>@string/hardware_keys_action_launch_camera</item>
+        <item>@string/hardware_keys_action_sleep</item>
+        <item>@string/hardware_keys_action_last_app</item>
+        <item>@string/hardware_keys_action_split_screen</item>
+        <item>@string/hardware_keys_action_close_app</item>
+        <item>@string/hardware_keys_action_play_pause_music</item>
+        <item>@string/hardware_keys_action_torch</item>
+        <item>@string/hardware_keys_action_screenshot</item>
+        <item>@string/hardware_keys_action_partial_screenshot</item>
+        <item>@string/hardware_keys_action_volume_panel</item>
+        <item>@string/hardware_keys_action_clear_all_notifications</item>
+        <item>@string/hardware_keys_action_notifications_panel</item>
+        <item>@string/hardware_keys_action_expand_qs_panel</item>
+        <item>@string/hardware_keys_action_ringer_modes</item>
+        <item>@string/hardware_keys_action_ambient_display</item>
+        <item>@string/hardware_keys_action_system_popup</item>
+    </string-array>
+
+    <string-array name="hardware_keys_action_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+    </string-array>
+
+    <!-- Volume key cursor control -->
+    <string-array name="volbtn_cursor_control_entries" translatable="false">
+        <item>@string/volbtn_cursor_control_off</item>
+        <item>@string/volbtn_cursor_control_on</item>
+        <item>@string/volbtn_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volbtn_cursor_control_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- SysUI Tuner: Labels for different types of navigation bar layouts [CHAR LIMIT=60] -->
+    <string-array name="navbar_layout_entries" translatable="false">
+        <item>@string/navbar_layout_normal</item>
+        <item>@string/navbar_layout_compact</item>
+        <!--<item>@string/navbar_layout_expanded</item>-->
+        <item>@string/navbar_layout_leftleaning</item>
+        <item>@string/navbar_layout_rightleaning</item>
+    </string-array>
+
+    <string-array name="navbar_layout_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Quick Settings brightness slider -->
+    <string-array name="qs_show_brightness_slider_entries" translatable="false">
+        <item>@string/qs_show_brightness_slider_never</item>
+        <item>@string/qs_show_brightness_slider_expanded</item>
+        <item>@string/qs_show_brightness_slider_always</item>
+    </string-array>
+
+    <string-array name="qs_show_brightness_slider_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_entries" translatable="false">
+        <item>@string/qs_brightness_slider_position_top</item>
+        <item>@string/qs_brightness_slider_position_bottom</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Values for the notification light pulse spinners -->
+    <string-array name="notification_breath_length_entries" translatable="false">
+        <item>@string/pulse_length_always_on</item>
+        <item>@string/pulse_length_blink</item>
+    </string-array>
+
+    <string-array name="notification_breath_length_values" translatable="false">
+        <item>1</item>
+        <item>1000</item>
+    </string-array>
+
+    <string-array name="notification_pulse_length_entries" translatable="false">
+        <item>@string/pulse_length_always_on</item>
+        <item>@string/pulse_length_very_short</item>
+        <item>@string/pulse_length_short</item>
+        <item>@string/pulse_length_normal</item>
+        <item>@string/pulse_length_long</item>
+        <item>@string/pulse_length_very_long</item>
+    </string-array>
+
+    <string-array name="notification_pulse_length_values" translatable="false">
+        <item>1</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_entries" translatable="false">
+        <item>@string/pulse_speed_very_fast</item>
+        <item>@string/pulse_speed_fast</item>
+        <item>@string/pulse_speed_normal</item>
+        <item>@string/pulse_speed_slow</item>
+        <item>@string/pulse_speed_very_slow</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_values" translatable="false">
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+    </string-array>
+
+    <!-- Blink flashlight for incoming calls -->
+    <string-array name="flashlight_on_call_entries" translatable="false">
+        <item>@string/flashlight_on_call_disabled</item>
+        <item>@string/flashlight_on_call_ringer</item>
+        <item>@string/flashlight_on_call_no_ringer</item>
+        <item>@string/flashlight_on_call_silent</item>
+        <item>@string/flashlight_on_call_always</item>
+    </string-array>
+
+    <string-array name="flashlight_on_call_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Screen off animation -->
+    <string-array name="screen_off_animation_entries" translatable="false">
+        <item>@string/screen_off_animation_default</item>
+        <item>@string/screen_off_animation_crt</item>
+        <item>@string/screen_off_animation_scale</item>
+    </string-array>
+
+    <string-array name="screen_off_animation_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Face Unlock -->
+    <string-array name="face_unlock_method_entries">
+        <item>@string/face_unlock_method_default</item>
+        <item>@string/face_unlock_method_swipe</item>
+    </string-array>
+    <string-array name="face_unlock_method_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Custom timeout for Wifi/Bluetooth -->
+    <string-array name="custom_timeout_entries">
+        <item>@string/custom_timeout_summary_never</item>
+        <item>@string/custom_timeout_summary_15secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_2mins</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+        <item>@string/custom_timeout_summary_1hour</item>
+        <item>@string/custom_timeout_summary_2hours</item>
+        <item>@string/custom_timeout_summary_4hours</item>
+        <item>@string/custom_timeout_summary_8hours</item>
+    </string-array>
+
+    <string-array name="custom_timeout_values" translatable="false">
+        <item>0</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+    </string-array>
+
+    <!-- Smart Pixels -->
+    <string-array name="smart_pixels_percent_strings" translatable="false">
+        <item>12</item>
+        <item>25</item>
+        <item>38</item>
+        <item>50</item>
+        <item>62</item>
+        <item>75</item>
+        <item>88</item>
+    </string-array>
+
+    <string-array name="smart_pixels_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_times" translatable="false">
+        <item>@string/custom_timeout_summary_15secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_2mins</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_20mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+        <item>@string/custom_timeout_summary_1hour</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <!-- QS Tiles animation style -->
+    <string-array name="qs_tile_animation_style_entries" translatable="false">
+        <item>@string/qs_tile_animation_style_squish</item>
+        <item>@string/qs_tile_animation_style_bounce</item>
+        <item>@string/qs_tile_animation_style_ripple</item>
+        <item>@string/qs_tile_animation_style_flip</item>
+        <item>@string/qs_tile_animation_style_fade</item>
+        <item>@string/qs_tile_animation_style_pulse</item>
+        <item>@string/qs_tile_animation_style_shake</item>
+        <item>@string/qs_tile_animation_style_wobble</item>
+        <item>@string/qs_tile_animation_style_spin</item>
+        <item>@string/default_value_tile</item>
+        <item>@string/qs_tile_animation_style_tilt</item>
+        <item>@string/qs_tile_animation_style_heartbeat</item>
+        <item>@string/qs_tile_animation_style_swing</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_style_values" translatable="false">
+        <item>9</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>0</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <!-- Custom logo -->
+    <string-array name="status_bar_logo_position_entries" translatable="false">
+        <item>@string/status_bar_quick_qs_pulldown_left</item>
+        <item>@string/status_bar_quick_qs_pulldown_right</item>
+    </string-array>
+
+    <string-array name="status_bar_logo_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Custom logo style -->
+    <string-array name="statusbar_logo_labels" translatable="false">
+        <item>@string/status_bar_logo_style_android</item>
+        <item>@string/status_bar_logo_style_adidas</item>
+        <item>@string/status_bar_logo_style_alien</item>
+        <item>@string/status_bar_logo_style_apple</item>
+        <item>@string/status_bar_logo_style_avengers</item>
+        <item>@string/status_bar_logo_style_batman</item>
+        <item>@string/status_bar_logo_style_batman_tdk</item>
+        <item>@string/status_bar_logo_style_beats</item>
+        <item>@string/status_bar_logo_style_biohazard</item>
+        <item>@string/status_bar_logo_style_blackberry</item>
+        <item>@string/status_bar_logo_style_cannabis</item>
+        <item>@string/status_bar_logo_style_emoticon_cool</item>
+        <item>@string/status_bar_logo_style_emoticon_devil</item>
+        <item>@string/status_bar_logo_style_fire</item>
+        <item>@string/status_bar_logo_style_heart</item>
+        <item>@string/status_bar_logo_style_nike</item>
+        <item>@string/status_bar_logo_style_pacman</item>
+        <item>@string/status_bar_logo_style_puma</item>
+        <item>@string/status_bar_logo_style_rog</item>
+        <item>@string/status_bar_logo_style_spiderman</item>
+        <item>@string/status_bar_logo_style_superman</item>
+        <item>@string/status_bar_logo_style_windows</item>
+        <item>@string/status_bar_logo_style_xbox</item>
+        <item>@string/status_bar_logo_style_ghost</item>
+        <item>@string/status_bar_logo_style_ninja</item>
+        <item>@string/status_bar_logo_style_robot</item>
+        <item>@string/status_bar_logo_style_ironman</item>
+        <item>@string/status_bar_logo_style_captain_america</item>
+        <item>@string/status_bar_logo_style_flash</item>
+        <item>@string/status_bar_logo_style_tux</item>
+        <item>@string/status_bar_logo_style_ubuntu</item>
+        <item>@string/status_bar_logo_style_mint</item>
+        <item>@string/status_bar_logo_style_amogus</item>
+        <item>@string/status_bar_logo_style_custom_image</item>
+    </string-array>
+
+    <string-array name="statusbar_logo_drawables" translatable="false">
+        <item>ic_android_logo</item>
+        <item>ic_adidas</item>
+        <item>ic_alien</item>
+        <item>ic_apple_logo</item>
+        <item>ic_avengers</item>
+        <item>ic_batman</item>
+        <item>ic_batman_tdk</item>
+        <item>ic_beats</item>
+        <item>ic_biohazard</item>
+        <item>ic_blackberry</item>
+        <item>ic_cannabis</item>
+        <item>ic_emoticon_cool</item>
+        <item>ic_emoticon_devil</item>
+        <item>ic_fire</item>
+        <item>ic_heart</item>
+        <item>ic_nike</item>
+        <item>ic_pac_man</item>
+        <item>ic_puma</item>
+        <item>ic_rog</item>
+        <item>ic_spiderman</item>
+        <item>ic_superman</item>
+        <item>ic_windows</item>
+        <item>ic_xbox</item>
+        <item>ic_ghost</item>
+        <item>ic_ninja</item>
+        <item>ic_robot</item>
+        <item>ic_ironman</item>
+        <item>ic_captain_america</item>
+        <item>ic_flash</item>
+        <item>ic_tux_logo</item>
+        <item>ic_ubuntu_logo</item>
+        <item>ic_mint_logo</item>
+        <item>ic_amogus</item>
+        <item>custom_image</item>
+    </string-array>
+
+    <!-- Statusbar logo color -->
+    <string-array name="status_bar_logo_color_entries" translatable="false">
+        <item>@string/status_bar_logo_color_default</item>
+        <item>@string/status_bar_logo_color_accent</item>
+        <item>@string/status_bar_logo_color_custom</item>
+    </string-array>
+    
+    <string-array name="status_bar_logo_color_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="quickswitch_launcher_entries">
+        <item>Lunaris Launcher</item>
+        <item>Pixel Launcher</item>
+    </string-array>
+
+    <string-array name="quickswitch_launcher_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Vibration patterns -->
+    <string-array name="vibration_pattern_entries" translatable="false">
+        <item>@string/pattern_dzzz_dzzz</item>
+        <item>@string/pattern_dzzz_da</item>
+        <item>@string/pattern_mm_mm_mm</item>
+        <item>@string/pattern_da_da_dzzz</item>
+        <item>@string/pattern_da_dzzz_da</item>
+        <item>@string/pattern_custom</item>
+    </string-array>
+
+    <string-array name="vibration_pattern_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- Apps list to hide from Hide developer status setting -->
+    <string-array name="hide_applist_hidden_apps" translatable="false">
+        <item>android</item>
+        <item>com.android.settings</item>
+        <item>com.android.systemui</item>
+        <item>com.android.shell</item>
+        <item>com.android.chrome</item>
+        <item>com.android.webview</item>
+        <item>com.google.android.webview</item>
+    </string-array>
+
+    <!-- App lock timeout -->
+    <string-array name="app_lock_timeout_entries" translatable="false">
+        <item>@string/custom_timeout_summary_5secs</item>
+        <item>@string/custom_timeout_summary_10secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+    </string-array>
+
+    <string-array name="app_lock_timeout_values" translatable="false">
+        <item>5000</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+    </string-array>
+
+    <!-- Monet theme styles  -->
+    <string-array name="monet_engine_style_entries" translatable="false">
+        <item>@string/monet_engine_style_tonal_spot</item>
+        <item>@string/monet_engine_style_vibrant</item>
+        <item>@string/monet_engine_style_expressive</item>
+        <item>@string/monet_engine_style_spritz</item>
+        <item>@string/monet_engine_style_rainbow</item>
+        <item>@string/monet_engine_style_fruit_salad</item>
+        <item>@string/monet_engine_style_monochromatic</item>
+    </string-array>
+
+    <string-array name="monet_engine_style_values" translatable="false">
+        <item>TONAL_SPOT</item>
+        <item>VIBRANT</item>
+        <item>EXPRESSIVE</item>
+        <item>SPRITZ</item>
+        <item>RAINBOW</item>
+        <item>FRUIT_SALAD</item>
+        <item>MONOCHROMATIC</item>
+    </string-array>
+
+    <!-- Monet color sources  -->
+    <string-array name="monet_engine_color_source_entries" translatable="false">
+        <item>@string/monet_engine_color_source_both</item>
+        <item>@string/monet_engine_color_source_home</item>
+        <item>@string/monet_engine_color_source_lock</item>
+        <item>@string/monet_engine_color_source_preset</item>
+    </string-array>
+
+    <string-array name="monet_engine_color_source_values" translatable="false">
+        <item>both</item>
+        <item>home_wallpaper</item>
+        <item>lock_wallpaper</item>
+        <item>preset</item>
+    </string-array>
+
+    <!-- Wallpaper Blur  -->
+    <string-array name="wallpaper_blur_entries">
+        <item>@string/disabled</item>
+        <item>@string/monet_engine_color_source_both</item>
+        <item>@string/monet_engine_color_source_lock</item>
+        <item>@string/monet_engine_color_source_home</item>
+    </string-array>
+
+    <string-array name="wallpaper_blur_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Wallpaper Effect  -->
+    <string-array name="wallpaper_effect_target_entries">
+        <item>@string/monet_engine_color_source_both</item>
+        <item>@string/monet_engine_color_source_lock</item>
+        <item>@string/monet_engine_color_source_home</item>
+    </string-array>
+
+    <string-array name="wallpaper_effect_target_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="wallpaper_blur_filter_entries">
+        <item>@string/glass_blur</item>
+        <item>@string/frosted_blur</item>
+    </string-array>
+
+    <string-array name="wallpaper_blur_filter_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Visual Effects -->
+    <string-array name="wallpaper_effect_entries">
+        <item>Nenhum</item>
+        <item>Grão desfocado</item>
+        <item>Aberração cromática</item>
+        <item>Vinheta</item>
+        <item>Pixelização</item>
+        <item>Saturação</item>
+        <item>Sépia</item>
+        <item>Nitidez</item>
+        <item>Escala de cinza</item>
+        <item>Negativo</item>
+        <item>Desfoque radial</item>
+        <item>Posterizar</item>
+    </string-array>
+    
+    <string-array name="wallpaper_effect_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+    <!-- AOD Schedule -->
+    <string-array name="doze_always_on_auto_mode_entries" translatable="false">
+        <item>@string/disable</item>
+        <item>@string/night_display_auto_mode_twilight</item>
+        <item>@string/always_on_display_schedule_mixed_sunset</item>
+        <item>@string/always_on_display_schedule_mixed_sunrise</item>
+        <item>@string/night_display_auto_mode_custom</item>
+    </string-array>
+
+    <string-array name="doze_always_on_auto_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- QS Header -->
+    <string-array name="qs_header_provider_entries" translatable="false">
+        <item>@string/qs_header_daylight_provider_title</item>
+        <item>@string/qs_header_static_provider_title</item>
+        <item>@string/qs_header_file_provider_title</item>
+    </string-array>
+
+    <string-array name="qs_header_provider_values" translatable="false">
+        <item>daylight</item>
+        <item>static</item>
+        <item>file</item>
+    </string-array>
+
+    <!-- Wi-Fi MAC address randomization -->
+    <string-array name="wifi_privacy_entries_ext">
+        <item>@string/wifi_per_connection_random_mac_addr</item>
+        <item>@string/wifi_per_network_random_mac_addr</item>
+        <item>@string/wifi_device_mac_addr</item>
+    </string-array>
+
+    <string-array name="wifi_privacy_values_ext" translatable="false">
+        <item>100</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <!-- Clipboard auto clear settings. The delay before the clipboard is cleared. These are shown in a list dialog. -->
+    <string-array name="clipboard_auto_clear_timeout_entries">
+        <item>@string/clipboard_auto_clear_timeout_disable_clipboard</item>
+        <item>@string/custom_timeout_summary_15secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_2mins</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+        <item>@string/custom_timeout_summary_1hour_def</item>
+        <item>@string/custom_timeout_summary_2hours</item>
+        <item>@string/custom_timeout_summary_4hours</item>
+        <item>@string/custom_timeout_summary_8hours</item>
+        <item>@string/custom_timeout_summary_12hours</item>
+        <item>@string/custom_timeout_summary_24hours</item>
+        <item>@string/custom_timeout_summary_36hours</item>
+        <item>@string/custom_timeout_summary_48hours</item>
+        <item>@string/custom_timeout_summary_72hours</item>
+    </string-array>
+
+    <string-array name="clipboard_auto_clear_timeout_values" translatable="false">
+        <item>0</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+        <item>129600000</item>
+        <item>172800000</item>
+        <item>259200000</item>
+    </string-array>
+
+    <!-- Notification styles  -->
+    <string-array name="custom_style_entries">
+        <item>@string/default_value</item>
+        <item>@string/custom_style_cyberpunk</item>
+        <item>@string/custom_style_duoline</item>
+        <item>@string/custom_style_fluid</item>
+        <item>@string/custom_style_ios</item>
+        <item>@string/custom_style_layers</item>
+    </string-array>
+
+    <string-array name="custom_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- QS Tiles Shape -->
+    <string-array name="qs_tile_shape_entries" translatable="false">
+        <item>@string/qs_tile_shape_dynamic</item>
+        <item>@string/qs_tile_shape_rounded_square_smooth</item>
+        <item>@string/qs_tile_shape_rounded_square</item>
+        <item>@string/qs_tile_shape_square</item>
+        <item>@string/qs_tile_shape_circle</item>
+    </string-array>
+
+    <string-array name="qs_tile_shape_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!--Brightness Slider Shape -->
+    <string-array name="qs_brightness_slider_shape_entries" translatable="false">
+        <item>@string/default_value</item>
+        <item>@string/qs_tile_shape_circle</item>
+        <item>@string/qs_tile_shape_rounded_square</item>
+        <item>@string/qs_tile_shape_square</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_shape_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="font_mode_entries">
+        <item>Fontes pré-instaladas</item>
+        <item>Fonte personalizada do armazenamento</item>
+        <item>Baixar do GitHub</item>
+    </string-array>
+    
+    <string-array name="font_mode_values">
+        <item>prebuilt</item>
+        <item>custom</item>
+        <item>github</item>
+    </string-array>
+
+    <!-- Media Art Filter Options -->
+    <string-array name="lockscreen_media_art_filter_entries">
+        <item>Nenhum</item>
+        <item>Desfoque</item>
+        <item>Escala de cinza</item>
+        <item>Sépia</item>
+        <item>Tonalidade personalizada</item>
+        <item>Inverter</item>
+        <item>Escala de cinza + Desfoque</item>
+        <item>Efeito de pixelização/mosaico</item>
+    </string-array>
+    
+    <string-array name="lockscreen_media_art_filter_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Pulse music visualizer -->
+    <string-array name="pulse_color_entries" translatable="false">
+        <item>@string/pulse_color_lavalamp</item>
+        <item>@string/pulse_color_album</item>
+        <item>@string/pulse_color_accent</item>
+        <item>@string/custom_color</item>
+    </string-array>
+
+    <string-array name="pulse_color_values" translatable="false">
+        <item>lavalamp</item>
+        <item>album</item>
+        <item>accent</item>
+        <item>custom</item>
+    </string-array>
+
+    <string-array name="pulse_capture_mode_entries" translatable="false">
+        <item>@string/pulse_capture_mode_fft</item>
+        <item>@string/pulse_capture_mode_amplitude</item>
+    </string-array>
+
+    <string-array name="pulse_capture_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="pulse_renderer_entries" translatable="false">
+        <item>@string/pulse_renderer_solid</item>
+        <item>@string/pulse_renderer_fading</item>
+        <item>@string/pulse_renderer_neon_glow</item>
+        <item>@string/pulse_renderer_retro_vu_meter</item>
+        <item>@string/pulse_renderer_minimal_wave</item>
+        <item>@string/pulse_renderer_sparkle</item>
+        <item>@string/pulse_renderer_matrix</item>
+        <item>@string/pulse_renderer_particle</item>
+        <item>@string/pulse_renderer_waveform</item>
+        <item>@string/pulse_renderer_dot_wave</item>
+    </string-array>
+
+    <string-array name="pulse_renderer_values" translatable="false">
+        <item>solid</item>
+        <item>fading</item>
+        <item>neon</item>
+        <item>retro</item>
+        <item>minimal</item>
+        <item>sparkle</item>
+        <item>matrix</item>
+        <item>particle</item>
+        <item>waveform</item>
+        <item>dotwave</item>
+    </string-array>
+
+    <string-array name="pulse_bass_haptics_entries" translatable="false">
+        <item>@string/pulse_bass_haptics_none</item>
+        <item>@string/pulse_bass_haptics_running</item>
+        <item>@string/pulse_bass_haptics_always</item>
+    </string-array>
+
+    <string-array name="pulse_bass_haptics_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- UDFPS Icon Type -->
+    <string-array name="udfps_icon_type_entries">
+        <item>Ícones pré-instalados</item>
+        <item>Ícone personalizado</item>
+    </string-array>
+
+    <string-array name="udfps_icon_type_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="nowplaying_icon_style_entries">
+        <item>Desativado</item>
+        <item>Ícone do app</item>
+        <item>Ícone de nota musical</item>
+    </string-array>
+
+    <string-array name="nowplaying_icon_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Charging Animation Style Options -->
+    <string-array name="charging_animation_style_entries">
+        <item>Fluxo de Bolhas</item>
+        <item>Névoa de brilho neon</item>
+        <item>Efeitos de feixe</item>
+        <item>Efeito plasma</item>
+        <item>Faíscas Quânticas</item>
+        <item>Difusão de Nebulosa</item>
+        <item>Matriz Digital</item>
+        <item>Geoflow</item>
+    </string-array>
+
+    <string-array name="charging_animation_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Charging Animation Color Mode Options -->
+    <string-array name="charging_color_mode_entries">
+        <item>Verde padrão</item>
+        <item>Cor de destaque</item>
+        <item>Arco-íris</item>
+    </string-array>
+
+    <string-array name="charging_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Ripple Shape Options -->
+    <string-array name="ripple_shape_entries">
+        <item>Círculo</item>
+        <item>Caixa arredondada</item>
+    </string-array>
+
+    <string-array name="ripple_shape_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="ambient_bottom_entries" translatable="false">
+        <item>@string/ambient_battery_disable_title</item>
+        <item>@string/ambient_battery_percent_title</item>
+        <item>@string/ambient_battery_both_title</item>
+        <item>@string/ambient_battery_cpu_battery_temperature_title</item>
+        <item>@string/ambient_user_name_title</item>
+    </string-array>
+
+    <string-array name="ambient_bottom_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="playback_speed_entries">
+        <item>0.25x (Muito lento)</item>
+        <item>0.5x (Lento)</item>
+        <item>0.75x (Levemente lento)</item>
+        <item>1.0x (Normal)</item>
+        <item>1.25x (Levemente rápido)</item>
+        <item>1.5x (Rápido)</item>
+        <item>2.0x (Muito rápido)</item>
+    </string-array>
+
+    <string-array name="playback_speed_values" translatable="false">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1.0</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+
+    <!-- Lock Glymps Source -->
+    <string-array name="lock_glymps_source_entries">
+        <item>Papéis de parede aleatórios (Picsum)</item>
+        <item>Lista de URLs personalizada</item>
+        <item>Pasta local</item>
+    </string-array>
+
+    <string-array name="lock_glymps_source_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Wallpaper Target -->
+    <string-array name="lock_glymps_wallpaper_target_entries">
+        <item>@string/monet_engine_color_source_lock</item>
+        <item>@string/monet_engine_color_source_home</item>
+        <item>@string/monet_engine_color_source_both</item>
+    </string-array>
+    
+    <string-array name="lock_glymps_wallpaper_target_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Lock Glymps Cache Size -->
+    <string-array name="lock_glymps_cache_size_entries">
+        <item>3 papéis de parede (~30MB)</item>
+        <item>5 papéis de parede (~50MB)</item>
+        <item>10 papéis de parede (~100MB)</item>
+    </string-array>
+
+    <string-array name="lock_glymps_cache_size_values" translatable="false">
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="lock_glymps_change_on_entries">
+        <item>Tela liga</item>
+        <item>Tela desliga (recomendado)</item>
+        <item>Com base em temporizador</item>
+    </string-array>
+
+    <string-array name="lock_glymps_change_on_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="lock_glymps_timer_entries">
+        <item>5 minutos</item>
+        <item>10 minutos</item>
+        <item>15 minutos</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>2 horas</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
+        <item>12 horas</item>
+        <item>24 horas</item>
+    </string-array>
+
+    <string-array name="lock_glymps_timer_values" translatable="false">
+        <item>300000</item>
+        <item>600000</item>
+        <item>900000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>10800000</item>
+        <item>21600000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+    </string-array>
+
+    <string-array name="volume_dialog_type_entries">
+        <item>Compose</item>
+        <item>Redesenhado</item>
+        <item>Padrão</item>
+    </string-array>
+    <string-array name="volume_dialog_type_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="compose_volume_style_entries">
+        <item>Axion</item>
+        <item>Lunaris</item>
+    </string-array>
+    <string-array name="compose_volume_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="cutout_progress_finish_style_entries">
+        <item>Pop</item>
+        <item>Cascata segmentada</item>
+        <item>Instantâneo</item>
+    </string-array>
+
+    <string-array name="cutout_progress_finish_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="cutout_progress_easing_entries">
+        <item>Linear</item>
+        <item>Acelerar</item>
+        <item>Desacelerar</item>
+        <item>Suavizar entrada e saída</item>
+    </string-array>
+
+    <string-array name="cutout_progress_easing_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="cutout_progress_position_entries">
+        <item>Direita</item>
+        <item>Esquerda</item>
+        <item>Superior</item>
+        <item>Inferior</item>
+        <item>Superior direita</item>
+        <item>Superior esquerda</item>
+        <item>Inferior direita</item>
+        <item>Inferior esquerda</item>
+    </string-array>
+
+    <string-array name="cutout_progress_position_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="cutout_progress_truncate_entries">
+        <item>Meio</item>
+        <item>Início</item>
+        <item>Fim</item>
+    </string-array>
+    
+    <string-array name="cutout_progress_truncate_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="cutout_progress_ring_color_mode_entries">
+        <item>@string/cutout_progress_ring_color_mode_accent</item>
+        <item>@string/cutout_progress_ring_color_mode_rainbow</item>
+        <item>@string/cutout_progress_ring_color_mode_custom</item>
+    </string-array>
+
+    <string-array name="cutout_progress_ring_color_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+     <string-array name="cutout_progress_music_color_mode_entries" translatable="false">
+        <item>@string/cutout_progress_music_color_mode_album_icon</item>
+        <item>@string/cutout_progress_music_color_mode_accent</item>
+        <item>@string/cutout_progress_music_color_mode_album_art</item>
+        <item>@string/cutout_progress_music_color_mode_custom</item>
+    </string-array>
+ 
+    <string-array name="cutout_progress_music_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="widget_entries">
+        <item>@string/status_bar_date_none</item>
+     	<item>@string/calculator</item>
+     	<item>@string/media</item>
+     	<item>@string/clock_timer</item>
+        <item>@string/torch</item>
+        <item>@string/weather</item>
+        <item>@string/wifi</item>
+        <item>@string/data</item>
+        <item>@string/ringer</item>
+        <item>@string/bt</item>
+        <item>@string/hotspot</item>
+        <item>@string/wallet</item>
+        <item>@string/qr_scanner</item>
+    </string-array>
+ 
+    <string-array name="widget_values">
+     	<item>none</item>
+     	<item>calculator</item>
+     	<item>media</item>
+     	<item>timer</item>
+        <item>torch</item>
+        <item>weather</item>
+        <item>wifi</item>
+        <item>data</item>
+        <item>ringer</item>
+        <item>bt</item>
+        <item>hotspot</item>
+        <item>wallet</item>
+        <item>qrscanner</item>
+    </string-array>
+ 
+    <!-- Lockscreen widget style  -->
+    <string-array name="lockscreen_widgets_style_entries">
+        <item>@string/lockscreen_widgets_style1</item>
+        <item>@string/lockscreen_widgets_style2</item>
+        <item>@string/lockscreen_widgets_style3</item>
+        <item>@string/lockscreen_widgets_style4</item>
+        <item>@string/lockscreen_widgets_style5</item>
+        <item>@string/lockscreen_widgets_style6</item>
+    </string-array>
+
+    <string-array name="lockscreen_widgets_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="ongoing_chip_color_mode_entries">
+        <item>@string/ongoing_chip_color_mode_accent</item>
+        <item>@string/ongoing_chip_color_mode_icon</item>
+        <item>@string/ongoing_chip_color_mode_album_art</item>
+    </string-array>
+
+    <string-array name="ongoing_chip_color_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_chip_gradient_mask_text_entries">
+        <item>@string/clock_chip_gradient_mask_text_default</item>
+        <item>@string/clock_chip_gradient_mask_text_mask</item>
+    </string-array>
+
+    <string-array name="clock_chip_gradient_mask_text_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- App Spoofing -->
+    <string-array name="perapp_spoof_profile_values" translatable="false">
+        <item>BS4C</item>
+        <item>F5</item>
+        <item>GZF5</item>
+        <item>HMV2R</item>
+        <item>LY700</item>
+        <item>LY70023</item>
+        <item>MI11TP</item>
+        <item>MI13</item>
+        <item>MI13P</item>
+        <item>MI14P</item>
+        <item>OP12</item>
+        <item>OP13</item>
+        <item>OP8P5G</item>
+        <item>PXL</item>
+        <item>PXL10PXL</item>
+        <item>RM9P</item>
+        <item>RM10P</item>
+        <item>RM15P5G</item>
+        <item>RMX14</item>
+        <item>RMP35G</item>
+        <item>ROG6DU</item>
+        <item>ROG8P</item>
+        <item>ROG9P</item>
+        <item>S25U</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="perapp_spoof_profile_labels">
+        <item>Black Shark 4 (China)</item>
+        <item>Poco F5</item>
+        <item>Samsung Galaxy Z Fold 5</item>
+        <item>Honor Magic V2 RSR</item>
+        <item>Lenovo Legion Y700</item>
+        <item>Lenovo Legion Y700 (2023)</item>
+        <item>Xiaomi 11T Pro</item>
+        <item>Xiaomi 13</item>
+        <item>Xiaomi 13 Pro</item>
+        <item>Xiaomi 14 Pro</item>
+        <item>OnePlus 12</item>
+        <item>OnePlus 13</item>
+        <item>OnePlus 8 Pro 5G</item>
+        <item>Pixel XL</item>
+        <item>Pixel 10 Pro XL</item>
+        <item>REDMAGIC 9 Pro</item>
+        <item>RedMagic 10 Pro</item>
+        <item>Realme 15 Pro 5G</item>
+        <item>Realme 14</item>
+        <item>Realme P3 5G</item>
+        <item>ROG Phone 6D Ultimate</item>
+        <item>Asus ROG Phone 8 Pro</item>
+        <item>Asus ROG Phone 9 Pro</item>
+        <item>Samsung Galaxy S25 Ultra</item>
+        <item>None</item>
+    </string-array>
+
+    <!-- Custom clock style -->
+    <string-array name="lockscreen_custom_clock_color_mode_entries" translatable="false">
+        <item>@string/default_value</item>
+        <item>@string/accent_color</item>
+        <item>@string/custom_color</item>
+    </string-array>
+
+    <string-array name="lockscreen_custom_clock_color_mode_values" translatable="false">
+        <item>default</item>
+        <item>accent</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- Gradient customization -->
+    <string-array name="custom_gradient_color_mode_entries" translatable="false">
+        <item>@string/custom_gradient_color_mode_auto</item>
+        <item>@string/custom_gradient_color_mode_custom</item>
+    </string-array>
+
+    <string-array name="custom_gradient_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- QS Panel style -->
+    <string-array name="qs_panel_style_entries" translatable="false">
+        <item>@string/qs_panel_style_card</item>
+        <item>@string/qs_panel_style_classic</item>
+    </string-array>
+
+    <string-array name="qs_panel_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="qs_tile_icon_shape_entries" translatable="false">
+        <item>@string/shape_circle</item>
+        <item>@string/shape_square</item>
+        <item>@string/shape_four_sided_cookie</item>
+        <item>@string/shape_seven_sided_cookie</item>
+        <item>@string/shape_arch</item>
+        <item>@string/shape_ios_rounded_square</item>
+        <item>@string/shape_meow</item>
+        <item>@string/shape_flower</item>
+        <item>@string/shape_heart</item>
+        <item>@string/shape_hexagon</item>
+        <item>@string/shape_leaf</item>
+        <item>@string/shape_cloudy</item>
+        <item>@string/shape_cylindrical</item>
+        <item>@string/shape_stretched</item>
+        <item>@string/shape_pebble</item>
+        <item>@string/shape_rice_balls</item>
+        <item>@string/shape_rounded_rect</item>
+        <item>@string/shape_squircle</item>
+        <item>@string/shape_tapered_rect</item>
+        <item>@string/shape_teardrop</item>
+        <item>@string/shape_vessel</item>
+        <item>@string/shape_rounded_hexagon</item>
+        <item>@string/shape_pokesign</item>
+        <item>@string/shape_ninja</item>
+        <item>@string/shape_just_icons</item>
+        <item>@string/shape_outline_style</item>
+        <item>@string/shape_dotted_circle</item>
+        <item>@string/shape_squaremedo</item>
+    </string-array>
+
+    <string-array name="qs_tile_icon_shape_values" translatable="false">
+        <item>circle</item>
+        <item>square</item>
+        <item>four_sided_cookie</item>
+        <item>seven_sided_cookie</item>
+        <item>arch</item>
+        <item>ios_rounded_square</item>
+        <item>meow</item>
+        <item>flower</item>
+        <item>heart</item>
+        <item>hexagon</item>
+        <item>leaf</item>
+        <item>cloudy</item>
+        <item>cylindrical</item>
+        <item>stretched</item>
+        <item>pebble</item>
+        <item>rice_balls</item>
+        <item>rounded_rect</item>
+        <item>squircle</item>
+        <item>tapered_rect</item>
+        <item>teardrop</item>
+        <item>vessel</item>
+        <item>rounded_hexagon</item>
+        <item>pokesign</item>
+        <item>ninja</item>
+        <item>just_icons</item>
+        <item>outline_style</item>
+        <item>dotted_circle</item>
+        <item>squaremedo</item>
+    </string-array>
+
+    <!-- Dynamic bar -->
+    <string-array name="dynamic_bar_keyguard_battery_chip_entries" translatable="false">
+        <item>@string/dynamic_bar_keyguard_battery_chip_disabled</item>
+        <item>@string/dynamic_bar_keyguard_battery_chip_charging</item>
+        <item>@string/dynamic_bar_keyguard_battery_chip_always</item>
+    </string-array>
+
+    <string-array name="dynamic_bar_keyguard_battery_chip_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="emoji_style_entries">
+        <item>Padrão</item>
+        <item>iOS</item>
+        <item>Samsung</item>
+        <item>SwiftUI</item>
+        <item>Facebook</item>
+    </string-array>
+
+    <string-array name="emoji_style_values">
+        <item>android</item>
+        <item>ios</item>
+        <item>samsung</item>
+        <item>swiftui</item>
+        <item>facebook</item>
+    </string-array>
+
+    <string-array name="qs_show_media_player_entries" translatable="false">
+        <item>@string/qs_show_media_player_hide</item>
+        <item>@string/qs_show_media_player_top</item>
+        <item>@string/qs_show_media_player_bottom</item>
+    </string-array>
+
+    <string-array name="qs_show_media_player_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Apps excluded from the Tensor targets picker -->
+    <string-array name="tensor_targets_hidden_apps" translatable="false">
+        <item>android</item>
+        <item>com.android.settings</item>
+        <item>com.android.systemui</item>
+        <item>com.google.android.apps.photos</item>
+    </string-array>
+
+    <!-- Apps pre-selected in the Tensor targets picker -->
+    <string-array name="tensor_targets_default_apps" translatable="false">
+        <item>com.google.android.googlequicksearchbox</item>
+        <item>com.google.android.apps.pixel.agent</item>
+        <item>com.google.android.apps.pixel.creativeassistant</item>
+    </string-array>
+
+    <!-- Carrier name on lockscreen/statusbar -->
+    <string-array name="status_bar_carrier_display_entries">
+        <item>@string/never</item>
+        <item>@string/carrier_show_lockscreen_only</item>
+        <item>@string/carrier_show_statusbar_only</item>
+        <item>@string/carrier_show_both</item>
+    </string-array>
+ 
+    <string-array name="status_bar_carrier_display_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- AOD Peek -->
+    <string-array name="doze_peek_duration_entries">
+        <item>5 segundos</item>
+        <item>7 segundos</item>
+        <item>10 segundos</item>
+    </string-array>
+
+    <string-array name="doze_peek_duration_values" translatable="false">
+        <item>5</item>
+        <item>7</item>
+        <item>10</item>
+    </string-array>
+
+    <!-- nowplaying color -->
+    <string-array name="nowplaying_color_mode_entries" translatable="false">
+        <item>White</item>
+        <item>Accent color</item>
+        <item>Album art</item>
+    </string-array>
+    <string-array name="nowplaying_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="dynamic_bar_chip_style_entries">
+        <item>Pílula</item>
+        <item>Círculo</item>
+    </string-array>
+    <string-array name="dynamic_bar_chip_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- System Animation styles  -->
+    <string-array name="system_animation_styles_entries">
+        <item>@string/color_default</item>
+        <item>@string/pie_system_animation_style</item>
+        <item>@string/scale_system_animation_style</item>
+        <item>@string/slide_system_animation_style</item>
+        <item>@string/md3_system_animation_style</item>
+    </string-array>
+
+    <string-array name="system_animation_styles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- QS Header clock styles  -->
+    <string-array name="qs_header_clock_style_entries">
+        <item>@string/default_value</item>
+        <item>@string/qs_header_style1</item>
+        <item>@string/qs_header_style2</item>
+        <item>@string/qs_header_style3</item>
+        <item>@string/qs_header_style4</item>
+    </string-array>
+
+    <string-array name="qs_header_clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="dynamic_island_popup_color_mode_entries">
+        <item>@string/dynamic_island_popup_color_mode_entry_default</item>
+        <item>@string/dynamic_island_popup_color_mode_entry_blur</item>
+        <item>@string/dynamic_island_popup_color_mode_entry_solid_black</item>
+    </string-array>
+
+    <string-array name="dynamic_island_popup_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_widget_slider_corner_entries">
+        <item>@string/qs_widget_slider_corner_default</item>
+        <item>@string/qs_widget_slider_corner_rounded</item>
+        <item>@string/qs_widget_slider_corner_thumb</item>
+    </string-array>
+
+    <string-array name="qs_widget_slider_corner_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_style_entries" translatable="false">
+        <item>@string/qs_brightness_slider_style_default</item>
+        <item>@string/qs_brightness_slider_style_thumb</item>
+        <item>@string/qs_brightness_slider_style_minimal</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_volume_slider_style_entries" translatable="false">
+        <item>@string/qs_volume_slider_style_default</item>
+        <item>@string/qs_volume_slider_style_thumb</item>
+        <item>@string/qs_volume_slider_style_minimal</item>
+    </string-array>
+
+    <string-array name="qs_volume_slider_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="power_menu_compose_style_entries">
+        <item>@string/power_menu_compose_style_legacy</item>
+        <item>@string/power_menu_compose_style_grid</item>
+        <item>@string/power_menu_compose_style_slider</item>
+    </string-array>
+
+    <string-array name="power_menu_compose_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_widget_utility_panel_entries" translatable="false">
+        <item>@string/qs_widget_utility_panel_none</item>
+        <item>@string/qs_widget_utility_panel_dual</item>
+        <item>@string/qs_widget_utility_panel_only</item>
+    </string-array>
+
+    <string-array name="qs_widget_utility_panel_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>
