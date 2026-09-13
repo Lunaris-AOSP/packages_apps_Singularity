@@ -59,6 +59,15 @@
     <PreferenceCategory
         android:title="@string/miscellaneous_spoofing_category">
 
+        <Preference
+            android:title="@string/optimization_engine_title"
+            android:summary="@string/optimization_engine_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.lunaris.optimizer"
+                android:targetClass="com.lunaris.optimizer.MainActivity" />
+        </Preference>
+
         <!-- Application downgrade -->
         <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
             android:key="pm_downgrade_allowed"

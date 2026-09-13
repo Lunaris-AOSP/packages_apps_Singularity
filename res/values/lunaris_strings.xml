@@ -2900,4 +2900,7 @@
     <string name="advanced_spoof_label_gpu">GPU</string>
     <string name="advanced_spoof_label_cpu">CPU</string>
     <string name="advanced_spoof_none">None</string>
+
+    <string name="optimization_engine_title">Optimization Engine</string>
+    <string name="optimization_engine_summary">App compilation, cache cleanup and storage maintenance</string>
 </resources>
