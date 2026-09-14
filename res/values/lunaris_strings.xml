@@ -2837,6 +2837,34 @@
     <string name="dynamic_island_popup_color_mode_entry_default">Default</string>
     <string name="dynamic_island_popup_color_mode_entry_blur">Blur</string>
     <string name="dynamic_island_popup_color_mode_entry_solid_black">Solid black</string>
+    <string name="dynamic_island_battery_title">Battery and charging</string>
+    <string name="dynamic_island_battery_summary">Show charging status and battery level</string>
+    <string name="dynamic_island_unlock_title">Unlock</string>
+    <string name="dynamic_island_unlock_summary">Show successful biometric unlocks</string>
+    <string name="dynamic_island_bluetooth_title">Bluetooth</string>
+    <string name="dynamic_island_bluetooth_summary">Show newly connected Bluetooth devices</string>
+    <string name="dynamic_island_calls_title">Calls</string>
+    <string name="dynamic_island_calls_summary">Show calls and call controls</string>
+    <string name="dynamic_island_notifications_title">Notifications</string>
+    <string name="dynamic_island_notifications_summary">Show notification previews and actions</string>
+    <string name="dynamic_island_ongoing_activities_title">Ongoing activities</string>
+    <string name="dynamic_island_ongoing_activities_summary">Show promoted ongoing notifications and progress</string>
+    <string name="dynamic_island_hotspot_title">Hotspot</string>
+    <string name="dynamic_island_hotspot_summary">Show hotspot connections</string>
+    <string name="dynamic_island_vpn_title">VPN</string>
+    <string name="dynamic_island_vpn_summary">Show VPN connection status</string>
+    <string name="dynamic_island_ringer_title">Sound mode</string>
+    <string name="dynamic_island_ringer_summary">Show sound mode changes and controls</string>
+    <string name="dynamic_island_clipboard_title">Clipboard</string>
+    <string name="dynamic_island_clipboard_summary">Show copied content previews</string>
+    <string name="dynamic_island_timer_title">Timer</string>
+    <string name="dynamic_island_timer_summary">Show countdown timers and controls</string>
+    <string name="dynamic_island_audio_recording_title">Audio recording</string>
+    <string name="dynamic_island_audio_recording_summary">Show audio recorder status and controls</string>
+    <string name="dynamic_island_now_playing_title">Now Playing</string>
+    <string name="dynamic_island_now_playing_summary">Show recognized songs</string>
+    <string name="dynamic_island_recent_apps_title">Recent apps</string>
+    <string name="dynamic_island_recent_apps_summary">Show recent app shortcuts alongside active events</string>
 
     <!-- Fling velocity tuning -->
     <string name="fling_velocity_category_title">Fling velocity</string>
