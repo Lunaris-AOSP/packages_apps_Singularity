@@ -206,6 +206,10 @@
     <string name="miscellaneous_unlimit_screenrecord_title">Unlimit screenrecord</string>
     <string name="miscellaneous_unlimit_screenrecord_summary">Remove the 15GiB file size limit\nMay result in a larger than needed output file</string>
 
+    <!-- Wallpaper zoom -->
+    <string name="wallpaper_zoom_title">Wallpaper zoom</string>
+    <string name="wallpaper_zoom_summary">Turn off to show the wallpaper without extra zoom</string>
+
     <!-- Wallpaper Styles -->
     <string name="wallpaper_settings_title">Wallpaper styles</string>
     <string name="wallpaper_settings_summary">Configure wallpaper styles and settings</string>
