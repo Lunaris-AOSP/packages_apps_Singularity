@@ -199,6 +199,13 @@
                 android:targetClass="org.lunaris.settings.fragments.themes.DisplayCutoutForceFullscreenActivity"/>
         </Preference>
 
+        <!-- Screen on animation -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_water_ripple_enabled"
+            android:title="@string/lockscreen_water_ripple_title"
+            android:summary="@string/lockscreen_water_ripple_summary"
+            android:defaultValue="false" />
+
         <!-- Screen Off animation -->
         <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="screen_off_animation"

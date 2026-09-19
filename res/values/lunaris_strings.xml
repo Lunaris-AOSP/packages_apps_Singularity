@@ -2935,4 +2935,8 @@
 
     <string name="optimization_engine_title">Optimization Engine</string>
     <string name="optimization_engine_summary">App compilation, cache cleanup and storage maintenance</string>
+    
+    <!-- Screen on animation -->
+    <string name="lockscreen_water_ripple_title">Water ripple unlock</string>
+    <string name="lockscreen_water_ripple_summary">Show a water ripple from the fingerprint sensor when unlocking</string>
 </resources>
