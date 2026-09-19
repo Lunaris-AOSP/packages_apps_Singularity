@@ -1249,11 +1249,13 @@
     <string-array name="ripple_shape_entries">
         <item>Circle</item>
         <item>Rounded Box</item>
+        <item>Water ripple</item>
     </string-array>
 
     <string-array name="ripple_shape_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="ambient_bottom_entries" translatable="false">
@@ -1908,6 +1910,18 @@
     </string-array>
 
     <string-array name="qs_widget_utility_panel_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="lockscreen_unlock_animation_entries">
+        <item>Default</item>
+        <item>Water</item>
+        <item>Watercolor</item>
+    </string-array>
+
+    <string-array name="lockscreen_unlock_animation_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>

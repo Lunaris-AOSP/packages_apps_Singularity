@@ -200,10 +200,23 @@
         </Preference>
 
         <!-- Screen on animation -->
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="lockscreen_unlock_animation"
+            android:title="@string/lockscreen_unlock_animation_title"
+            android:entries="@array/lockscreen_unlock_animation_entries"
+            android:entryValues="@array/lockscreen_unlock_animation_values"
+            android:defaultValue="0" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="lockscreen_water_ripple_enabled"
-            android:title="@string/lockscreen_water_ripple_title"
-            android:summary="@string/lockscreen_water_ripple_summary"
+            android:key="lockscreen_unlock_effect_hfr"
+            android:title="@string/lockscreen_unlock_effect_hfr_title"
+            android:summary="@string/lockscreen_unlock_effect_hfr_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_water_ripple_fullscreen"
+            android:title="@string/lockscreen_water_ripple_fullscreen_title"
+            android:summary="@string/lockscreen_water_ripple_fullscreen_summary"
             android:defaultValue="false" />
 
         <!-- Screen Off animation -->
