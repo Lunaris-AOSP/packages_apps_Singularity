@@ -29,6 +29,12 @@
             android:summary="@string/ls_media_art_summary"
             android:fragment="org.lunaris.settings.fragments.lockscreen.MediaArtSettings" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="ax_dynamic_bar_keyguard_music_pill"
+            android:title="@string/dynamic_bar_keyguard_music_pill"
+            android:summary="@string/dynamic_bar_keyguard_music_pill_summary"
+            android:defaultValue="false" />
+
         <!-- Pulse music visualizer -->
         <Preference
             android:key="pulse_settings"
