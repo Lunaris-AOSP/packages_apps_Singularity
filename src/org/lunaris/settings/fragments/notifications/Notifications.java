@@ -20,7 +20,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -67,6 +70,14 @@ public class Notifications extends SettingsPreferenceFragment implements
     private SwitchPreferenceCompat mFlashOnCallIgnoreDND;
     private CustomSeekBarPreference mFlashOnCallRate;
     private CustomSeekBarPreference mHeadsUpTimeOut;
+    private Preference mStackedNotifications;
+    private final ContentObserver mCompactNotificationsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    updateStackedNotificationsPreference();
+                }
+            };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +89,10 @@ public class Notifications extends SettingsPreferenceFragment implements
         final Context mContext = getActivity().getApplicationContext();
         final ContentResolver resolver = mContext.getContentResolver();
         final Resources res = mContext.getResources();
+
+        mStackedNotifications = prefScreen.findPreference(
+                Settings.Secure.LOCK_SCREEN_STACKED_NOTIFICATIONS);
+        updateStackedNotificationsPreference();
 
         mHeadsUpTimeOut = (CustomSeekBarPreference)
                             prefScreen.findPreference(HEADS_UP_TIMEOUT_PREF);
@@ -121,6 +136,35 @@ public class Notifications extends SettingsPreferenceFragment implements
             mFlashOnCallIgnoreDND.setEnabled(value > 1);
             mFlashOnCallRate.setEnabled(value > 0);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM),
+                false, mCompactNotificationsObserver, UserHandle.USER_CURRENT);
+        updateStackedNotificationsPreference();
+    }
+
+    @Override
+    public void onPause() {
+        getContentResolver().unregisterContentObserver(mCompactNotificationsObserver);
+        super.onPause();
+    }
+
+    private void updateStackedNotificationsPreference() {
+        if (mStackedNotifications == null) {
+            return;
+        }
+        boolean compactEnabled = com.android.server.notification.Flags.notificationMinimalism()
+                && Settings.Secure.getIntForUser(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM, 1,
+                        UserHandle.USER_CURRENT) == 1;
+        mStackedNotifications.setEnabled(!compactEnabled);
+        mStackedNotifications.setSummary(compactEnabled
+                ? R.string.lock_screen_stacked_notifications_compact_summary
+                : R.string.lock_screen_stacked_notifications_summary);
     }
 
     @Override

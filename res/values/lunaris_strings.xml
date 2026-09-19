@@ -1841,6 +1841,9 @@
     <string name="notification_row_transparency_summary">Set translucent background for notifications in QS</string>
     <string name="notification_row_transparency_lockscreen_title">Translucent lockscreen notifications</string>
     <string name="notification_row_transparency_lockscreen_summary">Set translucent background for notifications in lockscreen</string>
+    <string name="lock_screen_stacked_notifications_title">Stacked lock screen notifications</string>
+    <string name="lock_screen_stacked_notifications_summary">Layer rounded cards at the bottom of the lock screen. Tap the stack to expand; tap empty space to collapse.</string>
+    <string name="lock_screen_stacked_notifications_compact_summary">Turn off compact lock screen notifications to use stacked cards</string>
 
     <!-- Ambient Wallpaper -->
     <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
