@@ -81,6 +81,12 @@
             android:defaultValue="true" />
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lock_screen_moto_compact_notifications"
+            android:title="@string/lock_screen_moto_compact_notifications_title"
+            android:summary="@string/lock_screen_moto_compact_notifications_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="lock_screen_stacked_notifications"
             android:title="@string/lock_screen_stacked_notifications_title"
             android:summary="@string/lock_screen_stacked_notifications_summary"

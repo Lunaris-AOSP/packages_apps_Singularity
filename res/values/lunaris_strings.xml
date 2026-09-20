@@ -1841,6 +1841,9 @@
     <string name="notification_row_transparency_summary">Set translucent background for notifications in QS</string>
     <string name="notification_row_transparency_lockscreen_title">Translucent lockscreen notifications</string>
     <string name="notification_row_transparency_lockscreen_summary">Set translucent background for notifications in lockscreen</string>
+    <string name="lock_screen_moto_compact_notifications_title">Moto compact notification design</string>
+    <string name="lock_screen_moto_compact_notifications_summary">Show up to seven app icons in separate circles. Tap an icon to preview its notifications; tap again to collapse.</string>
+    <string name="lock_screen_moto_compact_notifications_disabled_summary">Turn on compact lock screen notifications to use this design</string>
     <string name="lock_screen_stacked_notifications_title">Stacked lock screen notifications</string>
     <string name="lock_screen_stacked_notifications_summary">Layer lock screen notifications into rounded cards. Tap the stack to expand; tap empty space to collapse.</string>
     <string name="lock_screen_stacked_notifications_compact_summary">Turn off compact lock screen notifications to use stacked cards</string>

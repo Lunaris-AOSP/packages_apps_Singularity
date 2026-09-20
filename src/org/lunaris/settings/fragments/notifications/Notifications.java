@@ -71,11 +71,12 @@ public class Notifications extends SettingsPreferenceFragment implements
     private CustomSeekBarPreference mFlashOnCallRate;
     private CustomSeekBarPreference mHeadsUpTimeOut;
     private Preference mStackedNotifications;
+    private Preference mMotoCompactNotifications;
     private final ContentObserver mCompactNotificationsObserver =
             new ContentObserver(new Handler(Looper.getMainLooper())) {
                 @Override
                 public void onChange(boolean selfChange) {
-                    updateStackedNotificationsPreference();
+                    updateLockScreenNotificationPreferences();
                 }
             };
 
@@ -92,7 +93,9 @@ public class Notifications extends SettingsPreferenceFragment implements
 
         mStackedNotifications = prefScreen.findPreference(
                 Settings.Secure.LOCK_SCREEN_STACKED_NOTIFICATIONS);
-        updateStackedNotificationsPreference();
+        mMotoCompactNotifications = prefScreen.findPreference(
+                Settings.Secure.LOCK_SCREEN_MOTO_COMPACT_NOTIFICATIONS);
+        updateLockScreenNotificationPreferences();
 
         mHeadsUpTimeOut = (CustomSeekBarPreference)
                             prefScreen.findPreference(HEADS_UP_TIMEOUT_PREF);
@@ -144,7 +147,7 @@ public class Notifications extends SettingsPreferenceFragment implements
         getContentResolver().registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM),
                 false, mCompactNotificationsObserver, UserHandle.USER_CURRENT);
-        updateStackedNotificationsPreference();
+        updateLockScreenNotificationPreferences();
     }
 
     @Override
@@ -153,18 +156,23 @@ public class Notifications extends SettingsPreferenceFragment implements
         super.onPause();
     }
 
-    private void updateStackedNotificationsPreference() {
-        if (mStackedNotifications == null) {
-            return;
-        }
+    private void updateLockScreenNotificationPreferences() {
         boolean compactEnabled = com.android.server.notification.Flags.notificationMinimalism()
                 && Settings.Secure.getIntForUser(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM, 1,
                         UserHandle.USER_CURRENT) == 1;
-        mStackedNotifications.setEnabled(!compactEnabled);
-        mStackedNotifications.setSummary(compactEnabled
-                ? R.string.lock_screen_stacked_notifications_compact_summary
-                : R.string.lock_screen_stacked_notifications_summary);
+        if (mStackedNotifications != null) {
+            mStackedNotifications.setEnabled(!compactEnabled);
+            mStackedNotifications.setSummary(compactEnabled
+                    ? R.string.lock_screen_stacked_notifications_compact_summary
+                    : R.string.lock_screen_stacked_notifications_summary);
+        }
+        if (mMotoCompactNotifications != null) {
+            mMotoCompactNotifications.setEnabled(compactEnabled);
+            mMotoCompactNotifications.setSummary(compactEnabled
+                    ? R.string.lock_screen_moto_compact_notifications_summary
+                    : R.string.lock_screen_moto_compact_notifications_disabled_summary);
+        }
     }
 
     @Override
