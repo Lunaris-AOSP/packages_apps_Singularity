@@ -86,6 +86,12 @@
             android:summary="@string/lock_screen_stacked_notifications_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lock_screen_notifications_bottom_anchored"
+            android:title="@string/lock_screen_notifications_bottom_anchored_title"
+            android:summary="@string/lock_screen_notifications_bottom_anchored_summary"
+            android:defaultValue="false" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="notification_icons_center_aligned"
             android:title="@string/notification_icons_center_aligned_title"
