@@ -98,6 +98,17 @@
             android:summary="@string/lock_screen_notifications_bottom_anchored_summary"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="lock_screen_notifications_anchor_position"
+            android:title="@string/lock_screen_notifications_anchor_position_title"
+            android:summary="@string/lock_screen_notifications_anchor_position_summary"
+            android:dependency="lock_screen_notifications_bottom_anchored"
+            android:defaultValue="88"
+            settings:min="10"
+            android:max="100"
+            settings:interval="1"
+            settings:units="%" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="notification_icons_center_aligned"
             android:title="@string/notification_icons_center_aligned_title"

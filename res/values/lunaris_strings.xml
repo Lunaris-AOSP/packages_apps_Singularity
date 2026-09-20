@@ -1848,7 +1848,9 @@
     <string name="lock_screen_stacked_notifications_summary">Layer lock screen notifications into rounded cards. Tap the stack to expand; tap empty space to collapse.</string>
     <string name="lock_screen_stacked_notifications_compact_summary">Turn off compact lock screen notifications to use stacked cards</string>
     <string name="lock_screen_notifications_bottom_anchored_title">Bottom-aligned lock screen notifications</string>
-    <string name="lock_screen_notifications_bottom_anchored_summary">Place all notification styles near the bottom, above the fingerprint or shortcut area with extra spacing</string>
+    <string name="lock_screen_notifications_bottom_anchored_summary">Align all notification styles at your chosen position near the bottom of the lock screen</string>
+    <string name="lock_screen_notifications_anchor_position_title">Notification anchor position</string>
+    <string name="lock_screen_notifications_anchor_position_summary">Position of the bottom edge, measured from the top of the screen. Higher values move notifications lower.</string>
 
     <!-- Ambient Wallpaper -->
     <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
