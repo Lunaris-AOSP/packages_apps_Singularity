@@ -118,6 +118,8 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.theme.SettingsTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -422,6 +424,7 @@ private fun IdleManagerRoot(
 ) {
     val pm = ctx.packageManager
     val scope = rememberCoroutineScope()
+    val settingsWriteMutex = remember { Mutex() }
     val haptic = LocalHapticFeedback.current
 
     var allApps by remember { mutableStateOf(listOf<IdleAppItem>()) }
@@ -468,9 +471,17 @@ private fun IdleManagerRoot(
         }
     }
 
+    fun launchSettingsWrite(block: suspend () -> Unit) {
+        scope.launch {
+            settingsWriteMutex.withLock {
+                withContext(Dispatchers.IO) { block() }
+            }
+        }
+    }
+
     fun persist(updated: LinkedHashMap<String, IdleAppConfig>) {
         configuredApps = updated
-        scope.launch(Dispatchers.IO) { writeAppConfigs(ctx, updated) }
+        launchSettingsWrite { writeAppConfigs(ctx, updated) }
     }
 
     fun upsert(pkg: String, action: IdleAction, app: IdleAppItem) {
@@ -489,7 +500,7 @@ private fun IdleManagerRoot(
     fun clearAll() = persist(linkedMapOf())
 
     fun clearStats() {
-        scope.launch(Dispatchers.IO) {
+        launchSettingsWrite {
             Settings.Secure.putString(
                 ctx.contentResolver, Settings.Secure.IDLE_MANAGER_KILL_STATS, ""
             )
@@ -529,7 +540,7 @@ private fun IdleManagerRoot(
         selectedApps: Set<String>,
         parsedJson: JSONObject
     ) {
-        scope.launch(Dispatchers.IO) {
+        launchSettingsWrite {
             try {
                 if (importGlobal) {
                     if (parsedJson.has("global_enabled")) {
@@ -688,7 +699,7 @@ private fun IdleManagerRoot(
                 onToggle = { v ->
                     scope.launch { haptic.performHapticFeedback(HapticFeedbackType.LongPress) }
                     globalEnabled = v
-                    scope.launch(Dispatchers.IO) { writeEnabled(ctx, v) }
+                    launchSettingsWrite { writeEnabled(ctx, v) }
                 },
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
             )
@@ -698,7 +709,7 @@ private fun IdleManagerRoot(
                 globalEnabled = globalEnabled,
                 onToggle = { v ->
                     sleepModeTrigger = v
-                    scope.launch(Dispatchers.IO) { writeSleepModeTrigger(ctx, v) }
+                    launchSettingsWrite { writeSleepModeTrigger(ctx, v) }
                 },
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
             )
