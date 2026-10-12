@@ -43,6 +43,12 @@
             android:defaultValue="false" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_bounce_effect"
+            android:title="@string/qs_bounce_effect_title"
+            android:summary="@string/qs_bounce_effect_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_split_notification"
             android:title="@string/qs_split_notification_title"
             android:summary="@string/qs_split_notification_summary"
