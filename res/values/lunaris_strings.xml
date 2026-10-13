@@ -113,6 +113,8 @@
     <string name="statusbar_title">Status Bar</string>
     <string name="display_title">Display</string>
     <string name="ui_title">User Interface</string>
+    <string name="oneui_collapsing_toolbar_title">One UI-style headers</string>
+    <string name="oneui_collapsing_toolbar_summary">Show large, centered titles in Settings that fade into the toolbar as you scroll</string>
     <string name="lock_screen_charging_category">Lock screen charging animation</string>
     <string name="extras_category">Extras</string>
 

@@ -10,6 +10,12 @@
         android:key="ui_category"
         android:title="@string/ui_title">
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="oneui_collapsing_toolbar"
+            android:title="@string/oneui_collapsing_toolbar_title"
+            android:summary="@string/oneui_collapsing_toolbar_summary"
+            android:defaultValue="false" />
+
         <!-- QuickSwitch -->
         <Preference
             android:key="quickswitch"
