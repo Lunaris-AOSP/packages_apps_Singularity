@@ -15,6 +15,12 @@
             android:targetPackage="org.lunaris.lockstyles" />
     </Preference>
 
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lock_screen_notifications_above_clock"
+        android:title="@string/notifications_above_clock_title"
+        android:summary="@string/notifications_above_clock_summary"
+        android:defaultValue="false" />
+
     <Preference
         android:key="lockscreen_widgets"
         android:title="@string/lockscreen_widgets_title"
