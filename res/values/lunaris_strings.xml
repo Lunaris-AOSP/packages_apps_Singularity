@@ -212,6 +212,9 @@
     <string name="wallpaper_zoom_title">Wallpaper zoom</string>
     <string name="wallpaper_zoom_summary">Turn off to show the wallpaper without extra zoom</string>
 
+    <string name="lockscreen_wallpaper_zoom_title">Lockscreen wallpaper zoom</string>
+    <string name="lockscreen_wallpaper_zoom_summary">Turn off to disable zoom on the lockscreen wallpaper and depth wallpaper</string>
+
     <!-- Wallpaper Styles -->
     <string name="wallpaper_settings_title">Wallpaper styles</string>
     <string name="wallpaper_settings_summary">Configure wallpaper styles and settings</string>

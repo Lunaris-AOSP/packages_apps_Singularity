@@ -22,6 +22,12 @@
         android:key="lockscreen_interface_category"
         android:title="@string/lockscreen_interface_category">
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_wallpaper_zoom_enabled"
+            android:title="@string/lockscreen_wallpaper_zoom_title"
+            android:summary="@string/lockscreen_wallpaper_zoom_summary"
+            android:defaultValue="true" />
+
         <!-- Lockscreen Media Art -->
         <Preference
             android:key="media_art_settings"
