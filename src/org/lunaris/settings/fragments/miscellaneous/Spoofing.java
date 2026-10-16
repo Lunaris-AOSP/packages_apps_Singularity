@@ -6,9 +6,7 @@
 package org.lunaris.settings.fragments.miscellaneous;
 
 import android.app.ActivityManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 import android.provider.Settings;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
@@ -28,28 +27,26 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference;
+
 @SearchIndexable
 public class Spoofing extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "Spoofing";
 
-    private static final String KEY_IDENTITY_CATEGORY = "spoofing_identity_category";
     private static final String KEY_FEATURES_CATEGORY = "spoofing_features_category";
     private static final String KEY_APP_SPECIFIC_CATEGORY = "spoofing_app_specific_category";
-    private static final String PI_PP_SPOOF = "pi_pp_spoof";
     private static final String PI_PHOTOS_SPOOF = "pi_photos_spoof";
     private static final String PI_SNAPCHAT_SPOOF = "pi_snapchat_spoof";
     private static final String KEY_TENSOR_TARGETS = "tensor_targets_settings";
+    private static final String KEY_RESET_DEFAULTS = "spoofing_reset_defaults";
 
     private static final String PHOTOS_PACKAGE = "com.google.android.apps.photos";
     private static final String SNAPCHAT_PACKAGE = "com.snapchat.android";
-    private static final String VENDING_PACKAGE = "com.android.vending";
 
-    private PreferenceCategory mIdentityCategory;
     private PreferenceCategory mFeaturesCategory;
     private PreferenceCategory mAppSpecificCategory;
-    private SwitchPreferenceCompat mGoogleSpoof;
     private SwitchPreferenceCompat mPhotosSpoof;
     private SwitchPreferenceCompat mSnapchatSpoof;
     private Preference mTensorTargets;
@@ -62,37 +59,45 @@ public class Spoofing extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.spoofing);
 
-        final Context context = getContext();
-        final ContentResolver resolver = context.getContentResolver();
         mHandler = new Handler(Looper.getMainLooper());
 
-        if (PixelPropsUtils.isCustomForkBuild()) {
-            if (getPreferenceScreen() != null) {
-                getPreferenceScreen().removeAll();
-            }
-            return;
-        }
-
-        mIdentityCategory = (PreferenceCategory) findPreference(KEY_IDENTITY_CATEGORY);
         mFeaturesCategory = (PreferenceCategory) findPreference(KEY_FEATURES_CATEGORY);
         mAppSpecificCategory = (PreferenceCategory) findPreference(KEY_APP_SPECIFIC_CATEGORY);
         mPhotosSpoof = (SwitchPreferenceCompat) findPreference(PI_PHOTOS_SPOOF);
-        mGoogleSpoof = (SwitchPreferenceCompat) findPreference(PI_PP_SPOOF);
         mSnapchatSpoof = (SwitchPreferenceCompat) findPreference(PI_SNAPCHAT_SPOOF);
         mTensorTargets = findPreference(KEY_TENSOR_TARGETS);
 
-        // Google spoof: hide entirely on mainline Tensor devices
-        if (PixelPropsUtils.isMainlinePixelDevice()) {
-            mIdentityCategory.removePreference(mGoogleSpoof);
-        } else {
-            mGoogleSpoof.setOnPreferenceChangeListener(this);
-        }
         // Tensor targets: only relevant on non-Tensor devices
         if (mTensorTargets != null && PixelPropsUtils.isTensorPixelDevice()) {
             mFeaturesCategory.removePreference(mTensorTargets);
         }
         mPhotosSpoof = initAppSpoof(mPhotosSpoof, PHOTOS_PACKAGE);
         mSnapchatSpoof = initAppSpoof(mSnapchatSpoof, SNAPCHAT_PACKAGE);
+
+        final Preference resetDefaults = findPreference(KEY_RESET_DEFAULTS);
+        if (resetDefaults != null) {
+            resetDefaults.setOnPreferenceClickListener(pref -> {
+                showResetDefaultsDialog();
+                return true;
+            });
+        }
+    }
+
+    private void showResetDefaultsDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.spoofing_reset_defaults_dialog_title)
+                .setMessage(R.string.spoofing_reset_defaults_dialog_message)
+                .setPositiveButton(R.string.spoofing_reset_defaults_confirm, (dialog, which) -> {
+                    try {
+                        TrickyStore.resetAllSpoofDefaults(requireContext());
+                        Toast.makeText(requireContext(),
+                                R.string.spoofing_reset_defaults_done, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Log.e(TAG, "Failed to reset spoof defaults", e);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     /**
@@ -118,13 +123,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
             mHandler.removeCallbacks(mPendingKill);
         }
         Toast.makeText(getContext(), R.string.spoofing_applying_changes, Toast.LENGTH_SHORT).show();
-        mPendingKill = () -> {
-            if (pkg != null) {
-                killIfRunning(pkg);
-            } else {
-                killGooglePackages();
-            }
-        };
+        mPendingKill = () -> killIfRunning(pkg);
         mHandler.postDelayed(mPendingKill, 500);
     }
 
@@ -148,35 +147,13 @@ public class Spoofing extends SettingsPreferenceFragment implements
         }
     }
 
-    /**
-     * Kill all Google packages (com.google.*) and Play Store to pick up new properties.
-     * Note: com.android.vending is killed explicitly since it doesn't match the com.google prefix.
-     */
-    private void killGooglePackages() {
-        try {
-            PackageManager pm = getContext().getPackageManager();
-            for (ApplicationInfo app : pm.getInstalledApplications(0)) {
-                if (app.packageName.startsWith("com.google")) {
-                    killIfRunning(app.packageName);
-                }
-            }
-            killIfRunning(VENDING_PACKAGE);
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to kill Google packages", e);
-        }
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (mSnapchatSpoof == null && mPhotosSpoof == null && mGoogleSpoof == null) return true;
-        // SecureSettingSwitchPreference handles the Settings.Secure write automatically.
-        // We only need to trigger the kill so the target app picks up the new props.
+        if (mSnapchatSpoof == null && mPhotosSpoof == null) return true;
         if (preference == mSnapchatSpoof) {
             scheduleKill(SNAPCHAT_PACKAGE);
         } else if (preference == mPhotosSpoof) {
             scheduleKill(PHOTOS_PACKAGE);
-        } else if (preference == mGoogleSpoof) {
-            scheduleKill(null);
         }
         return true;
     }
@@ -186,6 +163,17 @@ public class Spoofing extends SettingsPreferenceFragment implements
         super.onDestroy();
         if (mHandler != null && mPendingKill != null) {
             mHandler.removeCallbacks(mPendingKill);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        for (String key : new String[] { "spoof_trickystore_enabled", "spoof_pif_enabled" }) {
+            SystemSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
         }
     }
 

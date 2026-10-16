@@ -9,12 +9,21 @@ import android.app.ActivityManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +31,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -39,6 +49,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -106,6 +117,21 @@ fun killPackages(activityManager: ActivityManager?, packages: Set<String>) {
 // via the optional `extraFilter` predicate.
 // ---------------------------------------------------------------------------
 
+// Overlay packages are stable for the process lifetime. Cache the set so
+// repeated filterInstalledApps calls (e.g. on showSystemApps toggles across
+// any screen) don't re-scan the full package list every time. Set to null to
+// invalidate if a package-install broadcast is ever observed.
+private var cachedOverlayPackages: Set<String>? = null
+
+private fun getOverlayPackages(pm: PackageManager): Set<String> {
+    cachedOverlayPackages?.let { return it }
+    return pm.getInstalledPackages(0)
+        .filter { it.overlayTarget != null }
+        .map { it.packageName }
+        .toSet()
+        .also { cachedOverlayPackages = it }
+}
+
 fun filterInstalledApps(
     pm: PackageManager,
     showSystem: Boolean,
@@ -113,10 +139,7 @@ fun filterInstalledApps(
     hidden: Set<String> = emptySet(),
     extraFilter: ((ApplicationInfo) -> Boolean)? = null,
 ): List<ApplicationInfo> {
-    val overlayPackages = pm.getInstalledPackages(0)
-        .filter { it.overlayTarget != null }
-        .map { it.packageName }
-        .toSet()
+    val overlayPackages = getOverlayPackages(pm)
 
     return pm.getInstalledApplications(PackageManager.GET_META_DATA)
         .filter { app ->
@@ -203,6 +226,44 @@ fun SystemAppBadge(
 }
 
 // ---------------------------------------------------------------------------
+// CheckCloseSwitch
+// Shared Switch with a Check/Close thumb icon, matching the ForceFullscreen
+// (AxionOS) picker-row toggle style. Used by AppPickerItem's per-row switch
+// and any other Switch that wants the same check/x thumb treatment (the
+// SpoofingHeaderCard master switch already does its own Crossfade version
+// of this and is left as-is).
+// ---------------------------------------------------------------------------
+
+@Composable
+fun CheckCloseSwitch(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        thumbContent = {
+            val icon = if (checked) Icons.Rounded.Check else Icons.Rounded.Close
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(SwitchDefaults.IconSize),
+            )
+        },
+        colors = SwitchDefaults.colors(
+            checkedThumbColor = MaterialTheme.colorScheme.primary,
+            checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
+            checkedIconColor = MaterialTheme.colorScheme.onPrimary,
+            uncheckedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        ),
+    )
+}
+
+// ---------------------------------------------------------------------------
 // SpoofingHeaderCard
 // The big header card with icon circle + title + subtitle.
 // Screens that have a master switch pass checked/onCheckedChange;
@@ -241,8 +302,11 @@ fun SpoofingHeaderCard(
                     .size(48.dp)
                     .clip(CircleShape)
                     .background(
-                        if (checked != false) MaterialTheme.colorScheme.primary
-                        else MaterialTheme.colorScheme.surfaceVariant,
+                        when (checked) {
+                            true  -> MaterialTheme.colorScheme.primary
+                            false -> MaterialTheme.colorScheme.surfaceVariant
+                            null  -> MaterialTheme.colorScheme.primaryContainer
+                        },
                     ),
                 contentAlignment = Alignment.Center,
             ) {
@@ -405,3 +469,57 @@ fun SectionLabel(
     )
 }
 
+// ---------------------------------------------------------------------------
+// AppListAnimatedContent
+// Adapted from ForceFullscreenCompose.kt's AnimatedContent state-transition
+// pattern (LineageOS/AxionOS diff). Wraps the loading/empty/content
+// branching used by PixelProps, TensorTargets, and TrickyStoreAppSettings
+// behind a single shared AnimatedContent + sealed state, instead of each
+// screen hand-rolling its own if/else block.
+// ---------------------------------------------------------------------------
+
+private sealed class AppListScreenState {
+    object Loading : AppListScreenState()
+    data class Empty(val hasSearchQuery: Boolean) : AppListScreenState()
+    object Content : AppListScreenState()
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AppListAnimatedContent(
+    isLoading: Boolean,
+    isEmpty: Boolean,
+    hasSearchQuery: Boolean,
+    modifier: Modifier = Modifier,
+    loadingContent: @Composable () -> Unit = { SpoofingLoadingBox(modifier = Modifier.fillMaxSize()) },
+    emptyContent: @Composable (hasSearchQuery: Boolean) -> Unit,
+    content: @Composable () -> Unit,
+) {
+    AnimatedContent(
+        targetState = when {
+            isLoading -> AppListScreenState.Loading
+            isEmpty -> AppListScreenState.Empty(hasSearchQuery)
+            else -> AppListScreenState.Content
+        },
+        modifier = modifier,
+        transitionSpec = {
+            fadeIn(animationSpec = tween(300, easing = LinearEasing)) +
+                    slideInVertically(
+                        animationSpec = tween(300, easing = FastOutSlowInEasing),
+                        initialOffsetY = { it / 4 },
+                    ) togetherWith
+                    fadeOut(animationSpec = tween(200, easing = LinearEasing)) +
+                    slideOutVertically(
+                        animationSpec = tween(200, easing = FastOutLinearInEasing),
+                        targetOffsetY = { -it / 4 },
+                    )
+        },
+        label = "app_list_state_animation",
+    ) { state ->
+        when (state) {
+            is AppListScreenState.Loading -> loadingContent()
+            is AppListScreenState.Empty -> emptyContent(state.hasSearchQuery)
+            is AppListScreenState.Content -> content()
+        }
+    }
+}

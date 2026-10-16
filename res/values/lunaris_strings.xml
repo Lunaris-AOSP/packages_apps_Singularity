@@ -1052,7 +1052,7 @@
     <string name="spoofing_identity_category">Device identity</string>
     <string name="spoofing_features_category">Hardware features</string>
     <string name="spoofing_pixel_props_title">Pixel props</string>
-    <string name="spoofing_pixel_props_summary">Report the latest Pixel device identity to a curated set of Google apps</string>
+    <string name="spoofing_pixel_props_summary">Spoof selected apps as a Pixel device to unlock Pixel-exclusive features</string>
     <string name="spoofing_app_specific_category">App-specific overrides</string>
     <string name="spoofing_photos_title">Google Photos</string>
     <string name="spoofing_photos_summary">Spoof Google Photos as a Pixel XL</string>
@@ -1108,8 +1108,8 @@
     <string name="pif_active_config">Active configuration</string>
     <string name="pif_no_config">No configuration loaded</string>
     <string name="pif_config_loaded">Configuration loaded</string>
-    <string name="pif_fetch_pixel_beta">Fetch Pixel Beta fingerprint</string>
-    <string name="pif_fetch_pixel_beta_summary">Download the latest Pixel Beta fingerprint from Google</string>
+    <string name="pif_fetch_pixel_beta">Fetch Pixel Canary fingerprint</string>
+    <string name="pif_fetch_pixel_beta_summary">Download the latest Pixel Canary fingerprint from Google</string>
     <string name="pif_fetching">Fetching from Google\u2026</string>
     <string name="pif_fetched_model">Fetched fingerprint for %s</string>
     <string name="pif_import_config">Import configuration</string>
@@ -1125,7 +1125,7 @@
     <string name="pif_select_device">Select device</string>
     <string name="pif_generating">Generating configuration\u2026</string>
     <string name="pif_footer_title">Passing basic integrity</string>
-    <string name="pif_footer_body">1. Tap "Fetch Pixel Beta fingerprint" and select a device from the list.\n2. If no devices are found, import a working PIF config from a trusted source. Config files are not provided.\n3. Recheck your Play Integrity status.\n\nAlways delete the active configuration before loading a new one. Loading an expired PIF config will cause TrickyStore strong integrity to fail even with a valid keybox.</string>
+    <string name="pif_footer_body">A Canary fingerprint is checked at most once a day and replaced automatically once it is within about two weeks of expiring. Canary configs expire roughly 6 weeks from their release date — the expiry is shown in the active config summary.\n\nFor manual setup:\n1. Tap "Fetch Pixel Canary fingerprint" and select a device.\n2. If no devices are found, import a working PIF config from a trusted source. Config files are not provided.\n3. Recheck your Play Integrity status.\n\nAlways delete the active configuration before importing a new one. Loading an expired PIF config will cause TrickyStore strong integrity to fail even with a valid keybox.\n\nAdvanced spoofing:\n• Play Store fingerprint spoof — leave disabled unless advised otherwise. Spoofing FINGERPRINT to Play Store is rarely needed and may cause issues.\n• Spoof SDK to Play Store — presents SDK 32 to the Play Store to force the legacy pre-Android 13 verdict path. It can break Play Store behavior, so leave it off unless testing.\n• Spoof build fields and system properties — leave on. They present the fingerprint to DroidGuard.\n• Spoof keystore provider — keep off when a keybox is in use, since it bypasses keybox attestation.\n• Spoof ROM signature — experimental.</string>
     <string name="pif_select_channel">Select channel</string>
     <string name="pif_channel_latest_release">Latest release</string>
     <string name="pif_channel_canary_release">Canary release</string>
@@ -1157,8 +1157,8 @@
     <string name="ts_targets_saved">Target list saved</string>
     <string name="ts_failed">Failed: %s</string>
     <string name="ts_footer_title">Passing strong integrity</string>
-    <string name="ts_footer_body">1. Obtain a valid keybox XML from a trusted source. Keyboxes are not provided; you must find one yourself.\n2. Tap \"Import keybox\" and load the file.\n3. Open \"Manage target apps\" and select Google Play Services and Google Play Store.\n4. Set target mode to \"Leaf\" if your device has a working TEE; otherwise leave it as Auto.\n5. Recheck your Play Integrity status.\n\nAlways delete the existing keybox before importing a new one. If Google revokes a keybox, it may still allow passing up to device integrity even though strong integrity will fail.</string>
-    <string name="ts_patch_date_hint" translatable="false">YYYY-MM-DD</string>
+    <string name="ts_footer_body">1. Obtain a valid keybox XML from a trusted source.\n2. Tap \"Import keybox\" and load the file.\n3. Open \"Manage target apps\" and select the apps that require integrity checks.\n4. Set target mode to \"Leaf\" if your device has a working TEE; otherwise leave it as Auto.\n5. Recheck your Play Integrity status.\n\nRevocation status is checked every 24 hours when this screen is opened. Tap \"Check revocation status\" to check it manually. Always delete the existing keybox before importing a new one. If Google revokes a keybox, it may still allow passing up to device integrity even though strong integrity will fail.</string>
+    <string name="ts_patch_date_hint" translatable="false">e.g. 2026-07-05, YYYY-MM-05, or per-package blocks</string>
     <string name="ts_security_patch">Security patch date</string>
     <string name="ts_no_patch">Not set (using device default)</string>
     <string name="ts_select_target_apps">Select target apps</string>
@@ -1174,30 +1174,18 @@
     <string name="ts_verification_auto_count">%1$d auto</string>
     <string name="ts_verification_cert_count">%1$d cert</string>
     <string name="ts_verification_leaf_count">%1$d leaf</string>
-    <string name="ts_revocation_status">Revocation status</string>
+    <string name="ts_revocation_status">Check revocation status</string>
     <string name="ts_revocation_checking">Checking revocation status…</string>
     <string name="ts_revocation_no_keybox">No keybox installed</string>
-    <string name="ts_revocation_valid">✓ Valid — not revoked</string>
-    <string name="ts_revocation_revoked">✗ Revoked (%s)</string>
-    <string name="ts_revocation_suspended">⚠ Suspended (%s)</string>
+    <string name="ts_revocation_valid">Not on Google\'s revocation list</string>
+    <string name="ts_revocation_revoked">Revoked%s</string>
+    <string name="ts_revocation_suspended">Suspended%s</string>
     <string name="ts_revocation_soft_banned">Soft-banned (Strong Integrity will fail)</string>
     <string name="ts_revocation_network_error">Could not reach revocation server</string>
     <string name="ts_revocation_error">Check failed: %s</string>
     <string name="ts_revocation_last_checked">Last checked: %1$s</string>
     <string name="ts_revocation_tap_to_check">Tap to check revocation status</string>
-    <string name="ts_revocation_not_yet_checked">Status not yet checked — tap to check</string>
-    <string name="ts_fetch_keybox">Fetch official keybox</string>
-    <string name="ts_fetch_keybox_summary">Download keybox from Lunaris servers</string>
-    <string name="ts_fetch_keybox_fetching">Fetching keybox…</string>
-    <string name="ts_fetch_keybox_success">Official keybox fetched successfully</string>
-    <string name="ts_fetch_keybox_failed">Fetch failed: %s</string>
-    <string name="ts_fetch_keybox_revoked_refetch">Keybox revoked, fetching a newer one…</string>
-    <string name="ts_fetch_keybox_same_file">Keybox is already up to date</string>
-    <string name="ts_fetch_keybox_blocked">Your keybox is valid — no fetch needed</string>
-    <string name="ts_fetch_keybox_last_fetched">Last fetched: %1$s</string>
-    <string name="ts_fetch_keybox_auto_replaced">Keybox automatically replaced with a valid one</string>
-    <string name="ts_fetch_keybox_soft_banned_refetch">Keybox soft-banned, keeping it and attempting to fetch a better one…</string>
-    <string name="ts_fetch_keybox_no_valid_found">No valid keybox available yet, will retry tomorrow</string>
+    <string name="ts_revocation_not_yet_checked">Not yet checked — tap to verify now</string>
     <string name="action_generate">Generate</string>
     <string name="action_merge">Merge</string>
 
@@ -2983,4 +2971,55 @@
     <string name="package_installer_style_aosp">AOSP</string>
     <string name="package_installer_style_compose_dialog">Compose dialog</string>
     <string name="package_installer_style_compose_bottom_sheet">Compose bottom sheet</string>
+
+    <!-- Play Integrity Fix and TrickyStore -->
+    <string name="spoofing_reset_defaults_title">Reset to defaults</string>
+    <string name="spoofing_reset_defaults_summary">Restore Play Integrity, target list, patch level and GameProps to defaults. Your keybox is kept</string>
+    <string name="spoofing_reset_defaults_dialog_title">Reset spoofing settings?</string>
+    <string name="spoofing_reset_defaults_dialog_message">This clears the Play Integrity config, security patch override and GameProps config, and restores the default TrickyStore target list. Your keybox is kept. Play Integrity and the patch level are fetched again shortly afterwards. Enable toggles are not changed.</string>
+    <string name="spoofing_reset_defaults_confirm">Reset</string>
+    <string name="spoofing_reset_defaults_done">Spoofing settings reset</string>
+    <string name="pif_wipe_playstore_title">Clear Play Store data?</string>
+    <string name="pif_wipe_playstore_message">Applying this fingerprint works best with a fresh Play Store session. Clear Play Store app data now? This will sign you out and clear its local cache and download queue.</string>
+    <string name="pif_wipe_confirm">Clear data</string>
+    <string name="pif_recommended_suffix">Recommended</string>
+    <string name="pif_advanced_settings">Advanced spoofing</string>
+    <string name="pif_spoof_vending_finger_title">Play Store fingerprint spoof</string>
+    <string name="pif_spoof_vending_finger_summary">Controls which FINGERPRINT is presented to the Play Store process</string>
+    <string name="pif_spoof_vending_sdk_title">Spoof SDK to Play Store</string>
+    <string name="pif_spoof_vending_sdk_summary">Present SDK 32 to the Play Store to force the legacy &lt;A13 verdict path. Never raised above the real SDK. Can break Play Store behavior, so leave off unless testing</string>
+    <string name="pif_vending_finger_custom_summary">Custom fingerprint: %1$s</string>
+    <string name="pif_spoof_build_title">Spoof build fields</string>
+    <string name="pif_spoof_build_summary">Present the fingerprint\'s Build fields (model, device, fingerprint, ...) to DroidGuard</string>
+    <string name="pif_spoof_props_title">Spoof system properties</string>
+    <string name="pif_spoof_props_summary">Present the fingerprint\'s build id, security patch, API level and product identity to DroidGuard</string>
+    <string name="pif_spoof_provider_title">Spoof keystore provider</string>
+    <string name="pif_spoof_provider_summary">Make DroidGuard\'s certificate chain request fail. This bypasses keybox attestation, so keep it off when a keybox is in use</string>
+    <string name="pif_spoof_signature_title">Spoof ROM signature</string>
+    <string name="pif_spoof_signature_summary">Experimental. Work around the test-key ROM ban for DroidGuard</string>
+    <string name="pif_reset_advanced_title">Reset advanced spoofing</string>
+    <string name="pif_reset_advanced_summary">Restore the default value of every switch above. The fingerprint is kept</string>
+    <string name="pif_reset_advanced_message">Reset all advanced spoofing options to their defaults? The current fingerprint is kept.</string>
+    <string name="pif_vending_finger_disabled">Disabled (default)</string>
+    <string name="pif_vending_finger_same">Same as DroidGuard fingerprint</string>
+    <string name="ts_target_apps_empty_description">No apps match your search or configuration</string>
+    <string name="ts_patch_stale_warning">%1$s (stale, 12+ months old)</string>
+    <string name="ts_mode_skip">Skip</string>
+    <string name="ts_chain_invalid_title">Invalid certificate chain</string>
+    <string name="ts_chain_invalid_message">The keybox certificate chain is invalid or could not be verified. It may be corrupted, tampered with, or expired. Use Import keybox to load a valid replacement from a trusted source.</string>
+    <string name="ts_expiring_soon_title">Keybox expiring soon</string>
+    <string name="ts_expiring_soon_message">This keybox\'s certificate expires on %1$s. It will stop working after expiry. Use Import keybox to load a valid replacement from a trusted source.</string>
+    <string name="ts_expiry_unknown">unknown expiry</string>
+    <string name="ts_untrusted_root_title">Unrecognized keybox root</string>
+    <string name="ts_untrusted_root_message">This keybox has a certificate chain rooted at an authority not recognized by Lunaris. It may still pass Strong Integrity on some devices. You can keep it installed or use Import keybox to load a replacement from a trusted source.</string>
+    <string name="ts_revocation_expiring_soon">Keybox expiring soon — tap to review</string>
+    <string name="ts_revocation_chain_invalid">Certificate chain is invalid — tap to review</string>
+    <string name="ts_revocation_untrusted_root">Keybox chain has an unrecognized root — may still pass integrity</string>
+    <string name="action_add_installed">Add installed</string>
+
+    <!-- Pixel props -->
+    <string name="pp_target_count">Spoofing %1$d app(s) as Pixel</string>
+    <string name="pp_spoof_as">Spoof as</string>
+    <string name="pp_empty_description">Selected apps will report the chosen Pixel device identity to unlock Pixel-exclusive features</string>
+    <string name="pp_mainline_unsupported">This device is already a Pixel. Spoofing is not available on mainline Pixel devices.</string>
 </resources>
