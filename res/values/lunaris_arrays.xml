@@ -1955,8 +1955,62 @@
         <item>@string/pif_vending_finger_disabled</item>
         <item>@string/pif_vending_finger_same</item>
     </string-array>
+    
     <string-array name="pif_spoof_vending_finger_values">
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <string-array name="qs_mist_control_columns_entries">
+        <item>Automatic</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="qs_mist_control_columns_values" translatable="false">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="qs_mist_tile_columns_entries">
+        <item>Automatic</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="qs_mist_tile_columns_values" translatable="false">
+        <item>0</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="qs_mist_rows_entries">
+        <item>Automatic</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="qs_mist_rows_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="qs_mist_slider_entries">
+        <item>Expressive</item>
+        <item>Classic</item>
+    </string-array>
+
+    <string-array name="qs_mist_slider_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>

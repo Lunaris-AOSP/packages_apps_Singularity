@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2026 MistOS and Lunaris
+    Based on Mistify 59d20e15374d93c9a89ba66ae181007f6a319e08
+    Author: Zabuka_zuzu <zuzu950444@gmail.com>
+    SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/qs_mist_settings_title">
+    
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="ax_qs_show_weather"
+        android:title="@string/qs_mist_weather_title"
+        android:summary="@string/qs_mist_weather_summary"
+        android:defaultValue="true" />
+    
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="qs_split_shade"
+        android:title="@string/qs_split_shade_title"
+        android:summary="@string/qs_mist_split_summary"
+        android:defaultValue="false" />
+    
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:dependency="qs_split_shade"
+        android:key="ax_qs_quick_panel_on_left"
+        android:title="@string/qs_mist_left_title"
+        android:summary="@string/qs_mist_left_summary"
+        android:defaultValue="false" />
+    
+    <PreferenceCategory
+        android:title="@string/qs_mist_qqs_title">
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qqs_control_columns"
+            android:title="@string/qs_mist_control_columns_title"
+            android:entries="@array/qs_mist_control_columns_entries"
+            android:entryValues="@array/qs_mist_control_columns_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qqs_tile_columns"
+            android:title="@string/qs_mist_tile_columns_title"
+            android:entries="@array/qs_mist_tile_columns_entries"
+            android:entryValues="@array/qs_mist_tile_columns_values"
+            android:summary="@string/qs_mist_tile_columns_summary"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qqs_tile_rows"
+            android:title="@string/qs_mist_tile_rows_title"
+            android:entries="@array/qs_mist_rows_entries"
+            android:entryValues="@array/qs_mist_rows_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qqs_brightness_vertical_slider_style"
+            android:title="@string/qs_mist_brightness_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qqs_volume_vertical_slider_style"
+            android:title="@string/qs_mist_volume_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+    
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="@string/qs_mist_qs_title">
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_control_columns"
+            android:title="@string/qs_mist_control_columns_title"
+            android:entries="@array/qs_mist_control_columns_entries"
+            android:entryValues="@array/qs_mist_control_columns_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_tile_columns"
+            android:title="@string/qs_mist_tile_columns_title"
+            android:entries="@array/qs_mist_tile_columns_entries"
+            android:entryValues="@array/qs_mist_tile_columns_values"
+            android:summary="@string/qs_mist_tile_columns_summary"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_tile_rows"
+            android:title="@string/qs_mist_tile_rows_title"
+            android:entries="@array/qs_mist_rows_entries"
+            android:entryValues="@array/qs_mist_rows_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_brightness_vertical_slider_style"
+            android:title="@string/qs_mist_brightness_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_volume_vertical_slider_style"
+            android:title="@string/qs_mist_volume_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="ax_qs_show_tile_labels"
+            android:title="@string/qs_mist_labels_title"
+            android:defaultValue="true" />
+    
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="@string/qs_mist_large_title">
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_split_shade_control_columns"
+            android:title="@string/qs_mist_control_columns_title"
+            android:entries="@array/qs_mist_control_columns_entries"
+            android:entryValues="@array/qs_mist_control_columns_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_split_shade_tile_columns"
+            android:title="@string/qs_mist_tile_columns_title"
+            android:entries="@array/qs_mist_tile_columns_entries"
+            android:entryValues="@array/qs_mist_tile_columns_values"
+            android:summary="@string/qs_mist_tile_columns_summary"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_split_shade_tile_rows"
+            android:title="@string/qs_mist_tile_rows_title"
+            android:entries="@array/qs_mist_rows_entries"
+            android:entryValues="@array/qs_mist_rows_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_split_shade_brightness_vertical_slider_style"
+            android:title="@string/qs_mist_brightness_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="ax_qs_split_shade_volume_vertical_slider_style"
+            android:title="@string/qs_mist_volume_style_title"
+            android:entries="@array/qs_mist_slider_entries"
+            android:entryValues="@array/qs_mist_slider_values"
+            android:summary="%s"
+            android:defaultValue="0" />
+        
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="ax_qs_split_shade_show_tile_labels"
+            android:title="@string/qs_mist_labels_title"
+            android:defaultValue="true" />
+    
+    </PreferenceCategory>
+</PreferenceScreen>

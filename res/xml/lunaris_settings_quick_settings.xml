@@ -23,6 +23,18 @@
     <PreferenceCategory
          android:title="@string/qs_misc_category">
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_mist_enabled"
+            android:title="@string/qs_mist_enabled_title"
+            android:summary="@string/qs_mist_enabled_summary"
+            android:defaultValue="false" />
+
+        <Preference
+            android:key="qs_mist_settings"
+            android:title="@string/qs_mist_settings_title"
+            android:summary="@string/qs_mist_edit_summary"
+            android:fragment="org.lunaris.settings.fragments.quicksettings.MistSettings" />
+
         <!-- QS Header -->
         <Preference
             android:key="qs_header_image"

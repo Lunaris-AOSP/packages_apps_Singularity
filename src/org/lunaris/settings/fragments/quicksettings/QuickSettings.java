@@ -60,6 +60,18 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
     public static final String TAG = "QuickSettings";
 
+    private static final String KEY_QS_MIST_ENABLED = "qs_mist_enabled";
+    // These controls belong to the original design. Preserve their saved values while using Mist.
+    private static final String[] ORIGINAL_DESIGN_KEYS = {
+        "qs_header_image", "qs_widget_category", "qs_brightness_slider_category",
+        "qs_volume_slider_category", "quick_settings_media_category", "qs_panel_style",
+        "qs_tile_icon_shape", "qs_tile_animation_style", "qs_tile_label_hide",
+        "qs_tile_style_minimal", "qs_tile_style_minimal_invert", "qs_tile_shape",
+        "qs_use_modified_tile_spacing", "qs_layout_columns_rows", "dual_target_tile_style",
+        "qs_tile_alternate_color", "qs_show_data_usage", "qs_show_data_usage_tile",
+        "qs_footer_show_edit", "qs_footer_show_power_menu", "qs_footer_show_settings"
+    };
+
     private static final String QS_BRIGHTNESS_CATEGORY = "qs_brightness_slider_category";
     private static final String QS_LAYOUT_CATEGORY = "qs_layout_category";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
@@ -122,6 +134,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.lunaris_settings_quick_settings);
+
+        findPreference(KEY_QS_MIST_ENABLED).setOnPreferenceChangeListener(this);
+        updateMistDesignPreferences(Settings.System.getIntForUser(
+                getContext().getContentResolver(), KEY_QS_MIST_ENABLED, 0,
+                UserHandle.USER_CURRENT) == 1);
 
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
@@ -268,6 +285,22 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mNotificationScrimAlphaPref.setValue(notificationScrimAlpha);
     }
 
+    private void updateMistDesignPreferences(boolean enabled) {
+        findPreference("qs_mist_settings").setVisible(enabled);
+        for (String key : ORIGINAL_DESIGN_KEYS) {
+            Preference preference = findPreference(key);
+            if (preference != null) preference.setEnabled(!enabled);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateMistDesignPreferences(Settings.System.getIntForUser(
+                getContext().getContentResolver(), KEY_QS_MIST_ENABLED, 0,
+                UserHandle.USER_CURRENT) == 1);
+    }
+
     private boolean isPanelStyleClassic() {
         ContentResolver resolver = getContext().getContentResolver();
         return Settings.System.getInt(resolver, KEY_QS_PANEL_STYLE, 0) == 1;
@@ -312,7 +345,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getContext().getContentResolver();
 
-        if (preference == mShowBrightnessSlider) {
+        if (KEY_QS_MIST_ENABLED.equals(preference.getKey())) {
+            updateMistDesignPreferences((Boolean) newValue);
+            SystemUtils.showSystemUiRestartDialog(getActivity());
+            return true;
+        } else if (preference == mShowBrightnessSlider) {
             int value = Integer.parseInt((String) newValue);
             mBrightnessSliderPosition.setEnabled(value > 0);
             if (mBrightnessSliderHaptic != null)
