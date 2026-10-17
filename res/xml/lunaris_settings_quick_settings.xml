@@ -385,6 +385,12 @@
     <PreferenceCategory 
          android:title="@string/qs_footer_category">
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="empty_shade_messages"
+            android:title="@string/empty_shade_messages_title"
+            android:summary="@string/empty_shade_messages_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_show_data_usage"
             android:title="@string/qs_footer_datausage_title"

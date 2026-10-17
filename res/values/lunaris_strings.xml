@@ -1838,6 +1838,9 @@
     <string name="pulse_height_multiplier_summary">Adjust the visualization height</string>
 
     <!-- Notification Row -->
+    <string name="empty_shade_messages_title">Empty shade messages</string>
+    <string name="empty_shade_messages_summary">Show a new message and rounded icon each time you open the empty notification shade</string>
+
     <string name="notification_row_transparency_title">Translucent notifications</string>
     <string name="notification_row_transparency_summary">Set translucent background for notifications in QS</string>
     <string name="notification_row_transparency_lockscreen_title">Translucent lockscreen notifications</string>
