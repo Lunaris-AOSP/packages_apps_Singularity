@@ -6,6 +6,7 @@
     SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/qs_mist_settings_title">
     
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
@@ -27,6 +28,49 @@
         android:summary="@string/qs_mist_left_summary"
         android:defaultValue="false" />
     
+    <org.lunaris.settings.preferences.SecureSettingListPreference
+        android:key="ax_qs_tile_style"
+        android:title="@string/qs_mist_tile_shape_title"
+        android:entries="@array/qs_mist_tile_shape_entries"
+        android:entryValues="@array/qs_mist_tile_shape_values"
+        android:summary="%s"
+        android:defaultValue="0" />
+
+    <PreferenceCategory
+        android:title="@string/qs_mist_spacing_title">
+
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="ax_qs_tile_gap"
+            android:title="@string/qs_mist_tile_gap_title"
+            android:summary="@string/qs_mist_tile_gap_summary"
+            android:defaultValue="20"
+            android:max="28"
+            settings:min="8"
+            settings:units="dp"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="ax_qs_side_padding"
+            android:title="@string/qs_mist_side_padding_title"
+            android:summary="@string/qs_mist_side_padding_summary"
+            android:defaultValue="24"
+            android:max="40"
+            settings:min="8"
+            settings:units="dp"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.SecureSettingSeekBarPreference
+            android:key="ax_qs_top_padding"
+            android:title="@string/qs_mist_top_padding_title"
+            android:summary="@string/qs_mist_top_padding_summary"
+            android:defaultValue="8"
+            android:max="32"
+            settings:min="0"
+            settings:units="dp"
+            settings:interval="1" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/qs_mist_qqs_title">
         

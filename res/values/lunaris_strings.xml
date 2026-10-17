@@ -3033,6 +3033,14 @@
     <string name="qs_mist_split_summary">Open Quick Settings and notifications separately. Swipe from the selected edge for Quick Settings.</string>
     <string name="qs_mist_left_title">Quick Settings on the left</string>
     <string name="qs_mist_left_summary">Open Quick Settings from the left edge when split Quick Settings is enabled</string>
+    <string name="qs_mist_tile_shape_title">Tile shape</string>
+    <string name="qs_mist_spacing_title">Spacing</string>
+    <string name="qs_mist_tile_gap_title">Tile gap</string>
+    <string name="qs_mist_tile_gap_summary">Space between tiles and controls</string>
+    <string name="qs_mist_side_padding_title">Side padding</string>
+    <string name="qs_mist_side_padding_summary">Space between panel contents and screen edges</string>
+    <string name="qs_mist_top_padding_title">Top spacing</string>
+    <string name="qs_mist_top_padding_summary">Space below the clock and status icons</string>
     <string name="qs_mist_qqs_title">Compact panel</string>
     <string name="qs_mist_qs_title">Expanded panel</string>
     <string name="qs_mist_large_title">Large-screen split panel</string>

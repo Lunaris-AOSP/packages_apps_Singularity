@@ -2006,11 +2006,25 @@
     <string-array name="qs_mist_slider_entries">
         <item>Expressive</item>
         <item>Classic</item>
+        <item>Rounded square</item>
     </string-array>
 
     <string-array name="qs_mist_slider_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="qs_mist_tile_shape_entries">
+        <item>Pill</item>
+        <item>Rounded square</item>
+        <item>Dynamic (pill when active)</item>
+    </string-array>
+
+    <string-array name="qs_mist_tile_shape_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>
