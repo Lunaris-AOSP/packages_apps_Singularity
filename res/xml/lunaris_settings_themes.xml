@@ -82,10 +82,11 @@
             android:summary="@string/pulse_on_new_tracks_summary" />
 
         <!-- Edge Light -->
-        <Preference
-            android:key="edge_light_settings"
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="edge_light_enabled"
             android:title="@string/edge_light_title"
             android:summary="@string/edge_light_summary"
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.themes.EdgeLightSettings" />
 
         <org.lunaris.settings.preferences.SecureSettingListPreference
@@ -137,10 +138,11 @@
             android:summary="@string/wallpaper_zoom_summary"
             android:defaultValue="true" />
 
-        <Preference
-            android:key="lock_glymps_settings"
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="lock_glymps_enabled"
             android:title="@string/lock_glymps_title"
             android:summary="@string/lock_glymps_enable_summary"
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.themes.LockGlympsSettings" />
 
         <Preference
@@ -244,10 +246,11 @@
             android:defaultValue="0" />
 
         <!-- Smart Pixels -->
-        <Preference
-            android:key="smart_pixels"  
+        <org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference
+            android:key="smart_pixel_filter_enabled"
             android:title="@string/smart_pixels_title" 
             android:summary="@string/smart_pixels_summary" 
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.themes.SmartPixels" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference

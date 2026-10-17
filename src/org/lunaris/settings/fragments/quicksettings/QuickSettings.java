@@ -43,6 +43,7 @@ import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
 import org.lunaris.settings.preferences.SecureSettingListPreference;
 import org.lunaris.settings.preferences.SecureSettingSwitchPreference;
+import org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingSeekBarPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
@@ -63,7 +64,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_MIST_ENABLED = "qs_mist_enabled";
     // These controls belong to the original design. Preserve their saved values while using Mist.
     private static final String[] ORIGINAL_DESIGN_KEYS = {
-        "qs_header_image", "qs_widget_category", "qs_brightness_slider_category",
+        "status_bar_custom_header", "qs_widget_category", "qs_brightness_slider_category",
         "qs_volume_slider_category", "quick_settings_media_category", "qs_panel_style",
         "qs_tile_icon_shape", "qs_tile_animation_style", "qs_tile_label_hide",
         "qs_tile_style_minimal", "qs_tile_style_minimal_invert", "qs_tile_shape",
@@ -290,12 +291,20 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         for (String key : ORIGINAL_DESIGN_KEYS) {
             Preference preference = findPreference(key);
             if (preference != null) preference.setEnabled(!enabled);
+            if (preference instanceof SystemSettingPrimarySwitchPreference) {
+                ((SystemSettingPrimarySwitchPreference) preference).setSwitchEnabled(!enabled);
+            }
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        SystemSettingPrimarySwitchPreference headerImage =
+                findPreference("status_bar_custom_header");
+        if (headerImage != null) {
+            headerImage.loadValue();
+        }
         updateMistDesignPreferences(Settings.System.getIntForUser(
                 getContext().getContentResolver(), KEY_QS_MIST_ENABLED, 0,
                 UserHandle.USER_CURRENT) == 1);

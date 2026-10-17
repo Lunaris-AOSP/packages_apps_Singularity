@@ -6,6 +6,7 @@
 package org.lunaris.settings.preferences;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -31,6 +32,11 @@ public class SystemSettingPrimarySwitchPreference extends PrimarySwitchPreferenc
     public SystemSettingPrimarySwitchPreference(Context context) {
         super(context);
         setPreferenceDataStore(new DataStore());
+    }
+
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+        return a.getBoolean(index, false);
     }
 
     @Override

@@ -33,6 +33,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference;
+import org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.SystemUtils;
 
@@ -157,6 +159,16 @@ public class LockScreen extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        for (String key : new String[] { "ls_media_art_enabled", "nowplaying_enabled" }) {
+            SystemSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
+        }
+        SecureSettingPrimarySwitchPreference pulse = findPreference("lockscreen_pulse_enabled");
+        if (pulse != null) {
+            pulse.loadValue();
+        }
         updateWeatherSettings();
     }
 

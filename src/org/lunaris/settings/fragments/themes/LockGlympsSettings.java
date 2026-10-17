@@ -162,19 +162,7 @@ public class LockGlympsSettings extends SettingsPreferenceFragment
         String key = preference.getKey();
         
         if (KEY_ENABLE.equals(key)) {
-            boolean enabled = (Boolean) newValue;
-            
-            Intent serviceIntent = new Intent();
-            serviceIntent.setClassName("com.android.systemui",
-                "com.android.systemui.lockglymps.LockGlympsService");
-            
-            if (enabled) {
-                context.startService(serviceIntent);
-            } else {
-                context.stopService(serviceIntent);
-            }
-            
-            SystemUtils.showSystemUiRestartDialog(context);
+            onEnabledChanged(context, (Boolean) newValue);
             return true;
             
         } else if (KEY_SOURCE.equals(key)) {
@@ -204,6 +192,18 @@ public class LockGlympsSettings extends SettingsPreferenceFragment
         return true;
     }
     
+    public static void onEnabledChanged(Context context, boolean enabled) {
+        Intent serviceIntent = new Intent();
+        serviceIntent.setClassName("com.android.systemui",
+                "com.android.systemui.lockglymps.LockGlympsService");
+        if (enabled) {
+            context.startService(serviceIntent);
+        } else {
+            context.stopService(serviceIntent);
+        }
+        SystemUtils.showSystemUiRestartDialog(context);
+    }
+
     private void schedulePreviewRefresh() {
         if (mHandler != null && mPreviewPreference != null) {
             mHandler.postDelayed(() -> {

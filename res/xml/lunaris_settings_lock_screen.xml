@@ -29,10 +29,11 @@
             android:defaultValue="true" />
 
         <!-- Lockscreen Media Art -->
-        <Preference
-            android:key="media_art_settings"
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="ls_media_art_enabled"
             android:title="@string/ls_media_art_title"
             android:summary="@string/ls_media_art_summary"
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.lockscreen.MediaArtSettings" />
 
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
@@ -42,16 +43,18 @@
             android:defaultValue="false" />
 
         <!-- Pulse music visualizer -->
-        <Preference
-            android:key="pulse_settings"
+        <org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference
+            android:key="lockscreen_pulse_enabled"
             android:title="@string/pulse_settings_title"
             android:summary="@string/pulse_settings_summary"
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.lockscreen.PulseSettings" />
 
-        <Preference
-            android:key="nowplaying_settings"
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="nowplaying_enabled"
             android:title="@string/nowplaying_title"
             android:summary="@string/nowplaying_summary"
+            android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.lockscreen.NowplayingSettings" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference

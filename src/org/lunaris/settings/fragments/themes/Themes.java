@@ -38,7 +38,9 @@ import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.fragments.themes.SmartPixels;
 import org.lunaris.settings.utils.SystemUtils;
+import org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference;
 import org.lunaris.settings.preferences.SystemPropertySwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference;
 
@@ -61,6 +63,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_QUICKSWITCH = "quickswitch";
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
     private static final String KEY_AXION_VOLUME_STYLE = "axion_volume_style";
+    private static final String KEY_LOCK_GLYMPS = "lock_glymps_enabled";
 
     private static final int VOLUME_TYPE_AXION = 0;
     private static final int VOLUME_TYPE_REDESIGNED = 1;
@@ -78,6 +81,8 @@ public class Themes extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.lunaris_settings_themes);
+
+        findPreference(KEY_LOCK_GLYMPS).setOnPreferenceChangeListener(this);
 
         Context mContext = getActivity().getApplicationContext();
         final PreferenceScreen prefScreen = getPreferenceScreen();
@@ -108,6 +113,22 @@ public class Themes extends SettingsPreferenceFragment implements
         updateVolumeRelatedVisibility(getCurrentVolumeDialogType());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        for (String key : new String[] { "edge_light_enabled", KEY_LOCK_GLYMPS }) {
+            SystemSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
+        }
+        SecureSettingPrimarySwitchPreference smartPixels =
+                findPreference("smart_pixel_filter_enabled");
+        if (smartPixels != null) {
+            smartPixels.loadValue();
+        }
+    }
+
     private int getCurrentVolumeDialogType() {
         return Settings.System.getIntForUser(
                 getContext().getContentResolver(),
@@ -130,7 +151,10 @@ public class Themes extends SettingsPreferenceFragment implements
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
 
-        if (preference == mVolumeDialogType) {
+        if (KEY_LOCK_GLYMPS.equals(preference.getKey())) {
+            LockGlympsSettings.onEnabledChanged(context, (Boolean) newValue);
+            return true;
+        } else if (preference == mVolumeDialogType) {
             SystemUtils.showSystemUiRestartDialog(getActivity());
             int val = Integer.parseInt((String) newValue);
             updateVolumeRelatedVisibility(val);

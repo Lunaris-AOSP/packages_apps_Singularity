@@ -44,7 +44,9 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference;
 import org.lunaris.settings.preferences.SystemSettingListPreference;
+import org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference;
 import org.lunaris.settings.preferences.colorpicker.ColorPickerPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -80,7 +82,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_CARRIER_KEY = "status_bar_carrier_key";
     private static final String CARRIER_NAME = "lockscreen_show_carrier";
     private static final String CUSTOM_CARRIER_LABEL = "lockscreen_show_custom_carrier_text";
-    private static final String DYNAMIC_ISLAND = "status_bar_dynamic_island";
+    private static final String DYNAMIC_ISLAND = "status_bar_show_dynamic_island";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -185,6 +187,22 @@ public class StatusBar extends SettingsPreferenceFragment implements
         } else {
             mCustomCarrierTextPref = findPreference(CUSTOM_CARRIER_LABEL);
             updateCustomCarrierTextSummary();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SystemSettingPrimarySwitchPreference dynamicIsland = findPreference(DYNAMIC_ISLAND);
+        if (dynamicIsland != null) {
+            dynamicIsland.loadValue();
+        }
+        for (String key : new String[] {
+                "status_bar_show_lyric", "ax_dynamic_bar_enabled", "cutout_progress_enabled" }) {
+            SecureSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
         }
     }
 

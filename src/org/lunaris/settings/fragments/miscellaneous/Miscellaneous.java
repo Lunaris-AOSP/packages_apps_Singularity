@@ -33,6 +33,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import org.lunaris.settings.fragments.miscellaneous.SensorBlock;
+import org.lunaris.settings.preferences.GlobalSettingPrimarySwitchPreference;
 
 import java.util.List;
 
@@ -73,6 +74,15 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
                 LineageSettings.System.KEY_THREE_FINGERS_SWIPE_ACTION,
                 Action.NOTHING);
         mThreeFingersSwipeAction = initList(KEY_THREE_FINGERS_SWIPE, threeFingersSwipeAction);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GlobalSettingPrimarySwitchPreference sensorBlock = findPreference("sensor_block");
+        if (sensorBlock != null) {
+            sensorBlock.loadValue();
+        }
     }
 
     private ListPreference initList(String key, Action value) {
