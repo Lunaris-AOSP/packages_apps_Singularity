@@ -1697,31 +1697,31 @@
     <string name="video_wallpaper_current_title">当前壁纸</string>
     <string name="video_wallpaper_current_summary">未选择视频壁纸</string>
 
-    <string name="video_wallpaper_pick_title">选择视频/GIF</string>
-    <string name="video_wallpaper_pick_summary">选择视频或动态图片</string>
+    <string name="video_wallpaper_pick_title">选择视频或动画</string>
+    <string name="video_wallpaper_pick_summary">选择 MP4 视频、动态 GIF 或动态 WebP</string>
 
-    <string name="video_wallpaper_enable_title">启用视频壁纸</string>
-    <string name="video_wallpaper_enable_summary">将所选视频应用为动态壁纸</string>
+    <string name="video_wallpaper_enable_title">预览并应用</string>
+    <string name="video_wallpaper_enable_summary">在系统预览界面中选择壁纸的应用位置</string>
 
     <string name="video_wallpaper_clear_title">清除视频壁纸</string>
-    <string name="video_wallpaper_clear_summary">移除当前视频壁纸</string>
+    <string name="video_wallpaper_clear_summary">移除已保存的媒体文件并停止将其用作壁纸</string>
 
     <string name="video_wallpaper_playback">播放设置</string>
 
     <string name="video_wallpaper_speed">播放速度</string>
 
     <string name="video_wallpaper_pause_lock">锁屏时暂停</string>
-    <string name="video_wallpaper_pause_lock_summary">屏幕锁定时节省电量</string>
+    <string name="video_wallpaper_pause_lock_summary">显示锁屏界面时保持静止画面</string>
 
     <!-- Info section -->
     <string name="video_wallpaper_info_category_title">信息</string>
     <string name="video_wallpaper_info_title">支持的格式</string>
-    <string name="video_wallpaper_info_summary">MP4 视频、GIF 和 WebP 动画\n最大文件大小：50MB</string>
+    <string name="video_wallpaper_info_summary">MP4 视频、动态 GIF 和 WebP 图片\n最大文件大小：50 MiB</string>
 
     <string name="video_wallpaper_tips_title">提示</string>
-    <string name="video_wallpaper_tips_summary">• 视频会自动静音\n• 分辨率越低的视频越省电\n• 建议使用较短的循环以获得更好的性能\n• 如果视频壁纸未加载，请在选择视频壁纸后从“壁纸和样式”中选择动态壁纸\n• 重启设备后需要重新应用动态壁纸</string>
+    <string name="video_wallpaper_tips_summary">视频会自动静音，壁纸不可见或屏幕关闭时会暂停播放。较短、分辨率较低的循环更省电。\n\n播放速度仅适用于视频，动画使用原始速度。设备重启后，解锁即可加载壁纸。</string>
 
-    <string name="video_wallpaper_description">动态视频和 GIF 壁纸</string>
+    <string name="video_wallpaper_description">动态视频、GIF 和 WebP 壁纸</string>
     <string name="lunaris_os">GHOST</string>
 
     <!-- Video Wallpaper Strings -->
@@ -1731,12 +1731,12 @@
     <string name="video_wallpaper_current_none">未选择视频壁纸</string>
     <string name="video_wallpaper_select_first">请先选择视频壁纸</string>
     <string name="video_wallpaper_select_wallpaper">选择视频壁纸</string>
-    <string name="video_wallpaper_save_failed">保存所选视频或图片失败</string>
+    <string name="video_wallpaper_save_failed">无法读取或保存此文件，已保留之前的选择。</string>
     <string name="video_wallpaper_apply_prompt">请从预览界面手动应用所选的视频壁纸</string>
     <string name="video_wallpaper_enable_failed">启用视频壁纸失败</string>
     <string name="video_wallpaper_picker_error">无法打开选择器，请重试</string>
-    <string name="video_wallpaper_processing">正在处理所选文件…</string>
-    <string name="video_wallpaper_saved">视频壁纸保存成功</string>
+    <string name="video_wallpaper_processing">正在处理壁纸…</string>
+    <string name="video_wallpaper_saved">壁纸已保存。点按“预览并应用”以选择应用位置。</string>
 
     <!-- Wallpaper Glymps -->
     <string name="lock_glymps_title">壁纸快览</string>

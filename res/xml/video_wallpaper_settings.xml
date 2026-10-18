@@ -34,11 +34,11 @@
             android:title="@string/video_wallpaper_pick_title"
             android:summary="@string/video_wallpaper_pick_summary" />
 
-        <SwitchPreferenceCompat
+        <Preference
             android:key="enable_video_wallpaper"
             android:title="@string/video_wallpaper_enable_title"
             android:summary="@string/video_wallpaper_enable_summary"
-            android:defaultValue="false" />
+            android:persistent="false" />
 
         <Preference
             android:key="clear_video_wallpaper"

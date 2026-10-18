@@ -15,25 +15,26 @@
  */
 package org.lunaris.settings.fragments.themes;
 
-import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.lunaris.VibrationUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -42,262 +43,130 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.utils.MediaUtils;
 
 import java.io.File;
-import java.util.List;
-
-import com.android.internal.util.lunaris.VibrationUtils;
 
 @SearchIndexable
-public class VideoWallpaperFragment extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
-
+public class VideoWallpaperFragment extends SettingsPreferenceFragment {
     private static final String TAG = "VideoWallpaperFragment";
-    private static final String PREFS_NAME = "video_wallpaper_prefs";
-
-    private static final String KEY_PICK_VIDEO = "pick_video_wallpaper";
-    private static final String KEY_ENABLE_VIDEO_WALLPAPER = "enable_video_wallpaper";
-    private static final String KEY_CLEAR_VIDEO_WALLPAPER = "clear_video_wallpaper";
-    private static final String KEY_CURRENT_WALLPAPER = "current_video_wallpaper";
-    private static final String KEY_PLAYBACK_SPEED = "playback_speed";
-    private static final String KEY_PAUSE_ON_LOCK = "pause_on_lock";
 
     private Preference mPickVideoPref;
-    private SwitchPreferenceCompat mEnableWallpaperPref;
+    private Preference mApplyWallpaperPref;
     private Preference mClearWallpaperPref;
     private Preference mCurrentWallpaperPref;
     private ListPreference mPlaybackSpeedPref;
     private SwitchPreferenceCompat mPauseOnLockPref;
-
-    private ActivityResultLauncher<Intent> mVideoPickerLauncher;
+    private ActivityResultLauncher<String[]> mVideoPickerLauncher;
+    private VideoWallpaperViewModel mModel;
     private SharedPreferences mPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Use the same preference store as the service, including framework persistence.
+        getPreferenceManager().setSharedPreferencesName(MediaUtils.PREFS_NAME);
         addPreferencesFromResource(R.xml.video_wallpaper_settings);
+        mPrefs = MediaUtils.getPreferences(requireContext());
+        mModel = new ViewModelProvider(this).get(VideoWallpaperViewModel.class);
 
-        final Context context = getContext();
-        mPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        mPickVideoPref = findPreference("pick_video_wallpaper");
+        mApplyWallpaperPref = findPreference("enable_video_wallpaper");
+        mClearWallpaperPref = findPreference("clear_video_wallpaper");
+        mCurrentWallpaperPref = findPreference("current_video_wallpaper");
+        mPlaybackSpeedPref = findPreference(MediaUtils.KEY_PLAYBACK_SPEED);
+        mPauseOnLockPref = findPreference(MediaUtils.KEY_PAUSE_ON_LOCK);
 
-        initPreferences();
-        setupVideoPickerLauncher();
-        setupPreferenceListeners();
-        loadPreferenceValues();
-        updatePreferences();
-    }
-
-    private void initPreferences() {
-        mPickVideoPref = findPreference(KEY_PICK_VIDEO);
-        mEnableWallpaperPref = findPreference(KEY_ENABLE_VIDEO_WALLPAPER);
-        mClearWallpaperPref = findPreference(KEY_CLEAR_VIDEO_WALLPAPER);
-        mCurrentWallpaperPref = findPreference(KEY_CURRENT_WALLPAPER);
-        mPlaybackSpeedPref = findPreference(KEY_PLAYBACK_SPEED);
-        mPauseOnLockPref = findPreference(KEY_PAUSE_ON_LOCK);
-    }
-
-    private void loadPreferenceValues() {
-        if (mPlaybackSpeedPref != null) {
-            String speed = mPrefs.getString(KEY_PLAYBACK_SPEED, "1.0");
-            mPlaybackSpeedPref.setValue(speed);
-            Log.d(TAG, "Loaded playback speed: " + speed);
-        }
-
-        if (mPauseOnLockPref != null) {
-            boolean pauseOnLock = mPrefs.getBoolean(KEY_PAUSE_ON_LOCK, true);
-            mPauseOnLockPref.setChecked(pauseOnLock);
-            Log.d(TAG, "Loaded pause on lock: " + pauseOnLock);
-        }
-    }
-
-    private void setupVideoPickerLauncher() {
         mVideoPickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        Uri uri = result.getData().getData();
-                        if (uri != null) {
-                            handleVideoSelection(uri);
-                        }
-                    }
-                }
-        );
-    }
-
-    private void setupPreferenceListeners() {
-        if (mPickVideoPref != null) {
-            mPickVideoPref.setOnPreferenceClickListener(preference -> {
-                openVideoPicker();
-                return true;
-            });
-        }
-
-        if (mEnableWallpaperPref != null) {
-            mEnableWallpaperPref.setOnPreferenceChangeListener(this);
-        }
-
-        if (mClearWallpaperPref != null) {
-            mClearWallpaperPref.setOnPreferenceClickListener(preference -> {
-                confirmClearWallpaper();
-                return true;
-            });
-        }
-
-        if (mPlaybackSpeedPref != null) {
-            mPlaybackSpeedPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                String speed = (String) newValue;
-                mPrefs.edit().putString(KEY_PLAYBACK_SPEED, speed).apply();
-                Log.d(TAG, "Playback speed saved: " + speed);
-                Toast.makeText(getContext(), 
-                        "Playback speed changed to " + speed + "x", 
+                new ActivityResultContracts.OpenDocument(), uri -> {
+                    if (uri != null) mModel.importWallpaper(uri);
+                });
+        mPickVideoPref.setOnPreferenceClickListener(preference -> {
+            try {
+                mVideoPickerLauncher.launch(new String[] {"video/mp4", "image/gif", "image/webp"});
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Could not open media picker", e);
+                Toast.makeText(requireContext(), R.string.video_wallpaper_picker_error,
                         Toast.LENGTH_SHORT).show();
-                return true;
-            });
-        }
-
-        if (mPauseOnLockPref != null) {
-            mPauseOnLockPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean pauseOnLock = (Boolean) newValue;
-                mPrefs.edit().putBoolean(KEY_PAUSE_ON_LOCK, pauseOnLock).apply();
-                Log.d(TAG, "Pause on lock saved: " + pauseOnLock);
-                Toast.makeText(getContext(), 
-                        pauseOnLock ? "Will pause when locked" : "Will continue when locked", 
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            });
-        }
+            }
+            return true;
+        });
+        mApplyWallpaperPref.setOnPreferenceClickListener(preference -> {
+            showWallpaperPreview();
+            return true;
+        });
+        mClearWallpaperPref.setOnPreferenceClickListener(preference -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.video_wallpaper_clear_confirm_title)
+                    .setMessage(R.string.video_wallpaper_clear_confirm_message)
+                    .setPositiveButton(R.string.video_wallpaper_clear_action,
+                            (dialog, which) -> mModel.clearWallpaper())
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+            return true;
+        });
+        mModel.getBusy().observe(this, busy -> updatePreferences());
+        mModel.getResult().observe(this, message -> {
+            if (message != null && message != 0) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+                mModel.consumeResult();
+                updatePreferences();
+            }
+        });
     }
 
-    private void openVideoPicker() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        String[] mimeTypes = {"video/mp4", "image/gif", "image/webp"};
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        try {
-            mVideoPickerLauncher.launch(intent);
-        } catch (Exception e) {
-            Log.e(TAG, "Error opening video picker", e);
-            Toast.makeText(getContext(), R.string.video_wallpaper_picker_error, Toast.LENGTH_SHORT).show();
+    private void showWallpaperPreview() {
+        if (MediaUtils.getCurrentWallpaperFile(requireContext()) == null) {
+            updatePreferences();
+            return;
         }
-    }
-
-    private void handleVideoSelection(Uri videoUri) {
-        Toast.makeText(getContext(), R.string.video_wallpaper_processing, Toast.LENGTH_SHORT).show();
-
-        new Thread(() -> {
-            String savedPath = MediaUtils.saveMediaToWallpaperStorage(getContext(), videoUri);
-            requireActivity().runOnUiThread(() -> {
-                if (savedPath != null) {
-                    Log.d(TAG, "Video saved at: " + savedPath);
-                    Toast.makeText(getContext(), R.string.video_wallpaper_saved, Toast.LENGTH_SHORT).show();
-                    updatePreferences();
-                    if (mEnableWallpaperPref != null) {
-                        enableVideoWallpaper();
-                    }
-                } else {
-                    Toast.makeText(getContext(), R.string.video_wallpaper_save_failed, Toast.LENGTH_LONG).show();
-                }
-            });
-        }).start();
-    }
-
-    private void enableVideoWallpaper() {
         try {
             Intent intent = new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
             intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                    new ComponentName(getContext(), VideoWallpaperService.class));
+                    new ComponentName(requireContext(), VideoWallpaperService.class));
             startActivity(intent);
-            Toast.makeText(getContext(), R.string.video_wallpaper_apply_prompt, Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Log.e(TAG, "Error enabling video wallpaper", e);
-            Toast.makeText(getContext(), R.string.video_wallpaper_enable_failed, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void confirmClearWallpaper() {
-        new AlertDialog.Builder(getContext())
-                .setTitle("Clear video wallpaper?")
-                .setMessage("This will remove the current video wallpaper")
-                .setPositiveButton("Clear", (dialog, which) -> clearVideoWallpaper())
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
-
-    private void clearVideoWallpaper() {
-        File file = MediaUtils.getCurrentWallpaperFile(getContext());
-        if (file != null && file.exists() && MediaUtils.deleteCurrentWallpaper(getContext())) {
-            Toast.makeText(getContext(), R.string.video_wallpaper_cleared, Toast.LENGTH_SHORT).show();
-            if (mEnableWallpaperPref != null) {
-                mEnableWallpaperPref.setChecked(false);
-            }
-            updatePreferences();
-        } else {
-            Toast.makeText(getContext(), R.string.video_wallpaper_clear_failed, Toast.LENGTH_SHORT).show();
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Could not open wallpaper preview", e);
+            Toast.makeText(requireContext(), R.string.video_wallpaper_enable_failed,
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
     private void updatePreferences() {
-        File file = MediaUtils.getCurrentWallpaperFile(getContext());
-        boolean hasWallpaper = file != null && file.exists();
-        if (mCurrentWallpaperPref != null) {
-            if (hasWallpaper) {
-                String name = file.getName();
-                String size = formatFileSize(file.length());
-                mCurrentWallpaperPref.setSummary(
-                        getString(R.string.video_wallpaper_current_summary_dynamic, name, size));
-                mCurrentWallpaperPref.setVisible(true);
-            } else {
-                mCurrentWallpaperPref.setSummary(R.string.video_wallpaper_current_none);
-                mCurrentWallpaperPref.setVisible(false);
-            }
-        }
+        Context context = requireContext();
+        File file = MediaUtils.getCurrentWallpaperFile(context);
+        boolean hasWallpaper = file != null;
+        boolean busy = mModel.isBusy();
+        WallpaperManager manager = WallpaperManager.getInstance(context);
+        boolean canSet = manager.isWallpaperSupported() && manager.isSetWallpaperAllowed();
+        int activeFlags = VideoWallpaperViewModel.getActiveWallpaperFlags(context);
 
-        if (mClearWallpaperPref != null) {
-            mClearWallpaperPref.setEnabled(hasWallpaper);
+        mCurrentWallpaperPref.setSummary(hasWallpaper
+                ? getString(R.string.video_wallpaper_current_summary_dynamic,
+                        mPrefs.getString(MediaUtils.KEY_WALLPAPER_NAME, file.getName()),
+                        Formatter.formatShortFileSize(context, file.length()))
+                : getString(MediaUtils.hasWallpaperSelection(context)
+                        ? R.string.video_wallpaper_missing : R.string.video_wallpaper_current_none));
+        mPickVideoPref.setSummary(busy ? R.string.video_wallpaper_processing
+                : R.string.video_wallpaper_pick_summary);
+        mPickVideoPref.setEnabled(!busy && canSet);
+        mApplyWallpaperPref.setEnabled(hasWallpaper && !busy && canSet);
+        int applySummary = R.string.video_wallpaper_enable_summary;
+        if (activeFlags == (WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK)) {
+            applySummary = R.string.video_wallpaper_active_both;
+        } else if (activeFlags == WallpaperManager.FLAG_SYSTEM) {
+            applySummary = R.string.video_wallpaper_active_home;
+        } else if (activeFlags == WallpaperManager.FLAG_LOCK) {
+            applySummary = R.string.video_wallpaper_active_lock;
         }
-
-        if (mEnableWallpaperPref != null) {
-            mEnableWallpaperPref.setEnabled(hasWallpaper);
-            if (!hasWallpaper) {
-                mEnableWallpaperPref.setChecked(false);
-            }
-        }
-
-        if (mPlaybackSpeedPref != null) {
-            mPlaybackSpeedPref.setEnabled(hasWallpaper);
-        }
-        if (mPauseOnLockPref != null) {
-            mPauseOnLockPref.setEnabled(hasWallpaper);
-        }
-    }
-
-    private String formatFileSize(long size) {
-        if (size < 1024) return size + " B";
-        else if (size < 1024 * 1024) return String.format("%.1f KB", size / 1024.0);
-        else return String.format("%.1f MB", size / (1024.0 * 1024.0));
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mEnableWallpaperPref) {
-            boolean enable = (Boolean) newValue;
-            if (enable) {
-                File file = MediaUtils.getCurrentWallpaperFile(getContext());
-                if (file != null && file.exists()) {
-                    enableVideoWallpaper();
-                    return true;
-                } else {
-                    Toast.makeText(getContext(), R.string.video_wallpaper_select_first, 
-                            Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            } else {
-                Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                startActivity(Intent.createChooser(intent, 
-                        getString(R.string.video_wallpaper_select_wallpaper)));
-                return true;
-            }
-        }
-        return false;
+        mApplyWallpaperPref.setSummary(applySummary);
+        mClearWallpaperPref.setEnabled(!busy && canSet
+                && (MediaUtils.hasWallpaperSelection(context) || activeFlags != 0));
+        boolean isVideo = hasWallpaper && MediaUtils.isVideoFormat(file.getName());
+        mPlaybackSpeedPref.setEnabled(isVideo && !busy);
+        mPlaybackSpeedPref.setSummary(isVideo ? "%s"
+                : getString(R.string.video_wallpaper_speed_video_only));
+        String speed = mPrefs.getString(MediaUtils.KEY_PLAYBACK_SPEED, "1.0");
+        mPlaybackSpeedPref.setValue(mPlaybackSpeedPref.findIndexOfValue(speed) >= 0 ? speed : "1.0");
+        mPauseOnLockPref.setEnabled(hasWallpaper && !busy);
+        mPauseOnLockPref.setChecked(mPrefs.getBoolean(MediaUtils.KEY_PAUSE_ON_LOCK, true));
     }
 
     @Override
@@ -311,7 +180,6 @@ public class VideoWallpaperFragment extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        loadPreferenceValues();
         updatePreferences();
     }
 
@@ -321,11 +189,5 @@ public class VideoWallpaperFragment extends SettingsPreferenceFragment
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.video_wallpaper_settings) {
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.video_wallpaper_settings);
 }

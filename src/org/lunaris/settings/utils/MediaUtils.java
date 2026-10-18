@@ -17,301 +17,230 @@ package org.lunaris.settings.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.graphics.drawable.AnimatedImageDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.Environment;
+import android.provider.OpenableColumns;
 import android.util.Log;
-import android.webkit.MimeTypeMap;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Arrays;
 
-public class MediaUtils {
+public final class MediaUtils {
     private static final String TAG = "MediaUtils";
-    private static final int BUFFER_SIZE = 8192;
-    private static final long MAX_FILE_SIZE = 50 * 1024 * 1024;
-    private static final String PREFS_NAME = "video_wallpaper_prefs";
-    private static final String KEY_WALLPAPER_PATH = "current_wallpaper_path";
-    
-    private static final List<String> SUPPORTED_VIDEO_FORMATS = Arrays.asList("mp4");
-    private static final List<String> SUPPORTED_IMAGE_FORMATS = Arrays.asList("gif", "webp");
-    
-    public static String saveMediaToWallpaperStorage(Context context, Uri mediaUri) {
-        return saveMediaToExternalStorage(context, mediaUri, "Wallpapers", "wallpaper");
+    private static final long MAX_FILE_SIZE = 50L * 1024 * 1024;
+    private static final int MAX_IMAGE_EDGE = 2048;
+    public static final String PREFS_NAME = "video_wallpaper_prefs";
+    public static final String KEY_WALLPAPER_PATH = "current_wallpaper_path";
+    public static final String KEY_WALLPAPER_NAME = "current_wallpaper_name";
+    public static final String KEY_PLAYBACK_SPEED = "playback_speed";
+    public static final String KEY_PAUSE_ON_LOCK = "pause_on_lock";
+
+    private MediaUtils() {}
+
+    public static final class FileTooLargeException extends IOException {}
+    public static final class UnsupportedMediaException extends IOException {}
+
+    public static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
-    
-    public static String saveMediaToExternalStorage(Context context, Uri mediaUri, 
-                                                    String featurePath, String filePrefix) {
-        InputStream inputStream = null;
-        FileOutputStream outputStream = null;
-        
+
+    // Call on a worker thread. Never change the selection until the new file is complete.
+    public static synchronized void saveMediaToWallpaperStorage(Context context, Uri uri)
+            throws IOException {
+        String name = getDisplayName(context, uri);
+        String extension = getFileExtension(context, uri, name);
+        File directory = getWallpaperDirectory(context);
+        if (!directory.isDirectory() && !directory.mkdirs()) {
+            throw new IOException("Could not create wallpaper directory");
+        }
+        File pending = File.createTempFile("wallpaper_", extension, directory);
+        boolean saved = false;
         try {
-            if (mediaUri == null) {
-                Log.e(TAG, "Media URI is null");
-                return null;
+            try (InputStream input = context.getContentResolver().openInputStream(uri);
+                    FileOutputStream output = new FileOutputStream(pending)) {
+                if (input == null) throw new IOException("Could not open selected media");
+                copyWithLimit(input, output);
+                output.getFD().sync();
             }
-            inputStream = getInputStreamFromUri(context, mediaUri);
-            if (inputStream == null) {
-                Log.e(TAG, "Failed to get input stream from URI");
-                return null;
+            validateMedia(pending);
+            SharedPreferences prefs = getPreferences(context);
+            String oldPath = prefs.getString(KEY_WALLPAPER_PATH, null);
+            String oldName = prefs.getString(KEY_WALLPAPER_NAME, null);
+            if (!prefs.edit().putString(KEY_WALLPAPER_PATH, pending.getAbsolutePath())
+                    .putString(KEY_WALLPAPER_NAME, name).commit()) {
+                // commit() updates memory even on disk failure. Restore the previous selection.
+                prefs.edit().putString(KEY_WALLPAPER_PATH, oldPath)
+                        .putString(KEY_WALLPAPER_NAME, oldName).commit();
+                throw new IOException("Could not save wallpaper selection");
             }
-            String extension = getFileExtension(context, mediaUri);
-            if (!isValidWallpaperFormat(extension)) {
-                Log.e(TAG, "Unsupported file format: " + extension);
-                return null;
-            }
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-            String fileName = filePrefix + "_" + timeStamp + extension;
-            File directory = new File("/sdcard/Lunaris-OS/" + featurePath);
-            if (!directory.exists() && !directory.mkdirs()) {
-                Log.e(TAG, "Failed to create directory: " + directory.getAbsolutePath());
-                return null;
-            }
-            deleteOldFiles(directory, filePrefix);
-            File outputFile = new File(directory, fileName);
-            outputStream = new FileOutputStream(outputFile);
-            long bytesCopied = copyStreamWithLimit(inputStream, outputStream, MAX_FILE_SIZE);
-            
-            if (bytesCopied < 0) {
-                Log.e(TAG, "File size exceeds maximum allowed size");
-                outputFile.delete();
-                return null;
-            }
-
-            String absolutePath = outputFile.getAbsolutePath();
-            
-            saveWallpaperPath(context, absolutePath);
-
-            Log.d(TAG, "Media saved successfully: " + absolutePath + " (" + bytesCopied + " bytes)");
-            return absolutePath;
-            
-        } catch (FileNotFoundException e) {
-            Log.e(TAG, "File not found: " + e.getMessage());
-            return null;
-        } catch (IOException e) {
-            Log.e(TAG, "IO error: " + e.getMessage());
-            return null;
-        } catch (OutOfMemoryError e) {
-            Log.e(TAG, "Out of memory: " + e.getMessage());
-            return null;
-        } catch (Exception e) {
-            Log.e(TAG, "Unexpected error: " + e.getMessage(), e);
-            return null;
+            saved = true;
+            deleteOwnedFile(context, oldPath);
         } finally {
-            closeQuietly(inputStream);
-            closeQuietly(outputStream);
+            if (!saved && !pending.delete()) {
+                Log.w(TAG, "Could not remove incomplete wallpaper");
+            }
         }
     }
 
-    private static void saveWallpaperPath(Context context, String path) {
-        try {
-            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            prefs.edit().putString(KEY_WALLPAPER_PATH, path).apply();
-            Log.d(TAG, "Saved wallpaper path to SharedPreferences: " + path);
-        } catch (Exception e) {
-            Log.e(TAG, "Error saving wallpaper path: " + e.getMessage());
+    // Preserve existing installations while moving away from shared /sdcard storage.
+    // Leave the original shared file alone; only this app's private copies are owned here.
+    public static synchronized void migrateWallpaperStorage(Context context) {
+        File current = getCurrentWallpaperFile(context);
+        if (current == null || getWallpaperDirectory(context).equals(current.getParentFile())) {
+            return;
         }
-    }
-
-    public static String getWallpaperPath(Context context) {
         try {
-            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String path = prefs.getString(KEY_WALLPAPER_PATH, null);
-            Log.d(TAG, "Retrieved wallpaper path: " + path);
-            return path;
-        } catch (Exception e) {
-            Log.e(TAG, "Error getting wallpaper path: " + e.getMessage());
-            return null;
+            saveMediaToWallpaperStorage(context, Uri.fromFile(current));
+        } catch (IOException | RuntimeException e) {
+            Log.w(TAG, "Could not migrate wallpaper; keeping the existing selection", e);
         }
     }
 
     public static File getCurrentWallpaperFile(Context context) {
-        String savedPath = getWallpaperPath(context);
-        if (savedPath != null) {
-            File file = new File(savedPath);
-            if (file.exists()) {
-                Log.d(TAG, "Found wallpaper from SharedPreferences: " + savedPath);
-                return file;
-            }
-        }
-
-        File directory = new File("/sdcard/Lunaris-OS/Wallpapers");
-        if (!directory.exists()) {
-            Log.d(TAG, "Wallpaper directory does not exist");
-            return null;
-        }
-
-        File[] files = directory.listFiles((dir, name) -> {
-            String lower = name.toLowerCase(Locale.ROOT);
-            return name.startsWith("wallpaper") && 
-                   (lower.endsWith(".mp4") || lower.endsWith(".gif") || lower.endsWith(".webp"));
-        });
-
-        if (files != null && files.length > 0) {
-            Arrays.sort(files, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
-            Log.d(TAG, "Found wallpaper from directory scan: " + files[0].getAbsolutePath());
-            saveWallpaperPath(context, files[0].getAbsolutePath());
-            return files[0];
-        }
-
-        Log.d(TAG, "No wallpaper file found");
-        return null;
-    }
-
-    public static boolean deleteCurrentWallpaper(Context context) {
-        File wallpaperFile = getCurrentWallpaperFile(context);
-        if (wallpaperFile != null && wallpaperFile.exists()) {
-            boolean deleted = wallpaperFile.delete();
-            if (deleted) {
-                SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                prefs.edit().remove(KEY_WALLPAPER_PATH).apply();
-                Log.d(TAG, "Deleted wallpaper: " + wallpaperFile.getAbsolutePath());
-            }
-            return deleted;
-        }
-        return false;
-    }
-
-    public static boolean isVideoFormat(String filePath) {
-        if (filePath == null) return false;
-        String extension = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase(Locale.ROOT);
-        return SUPPORTED_VIDEO_FORMATS.contains(extension);
-    }
-
-    public static boolean isAnimatedImageFormat(String filePath) {
-        if (filePath == null) return false;
-        String extension = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase(Locale.ROOT);
-        return SUPPORTED_IMAGE_FORMATS.contains(extension);
-    }
-
-    private static boolean isValidWallpaperFormat(String extension) {
-        if (extension == null || extension.isEmpty()) return false;
-        String ext = extension.toLowerCase(Locale.ROOT).replace(".", "");
-        return SUPPORTED_VIDEO_FORMATS.contains(ext) || SUPPORTED_IMAGE_FORMATS.contains(ext);
-    }
-
-    private static InputStream getInputStreamFromUri(Context context, Uri uri) throws IOException {
-        if (uri.toString().startsWith("content://com.google.android.apps.photos.contentprovider")) {
-            List<String> segments = uri.getPathSegments();
-            if (segments.size() > 2) {
-                String mediaUriString = URLDecoder.decode(segments.get(2), StandardCharsets.UTF_8.name());
-                Uri mediaUri = Uri.parse(mediaUriString);
-                return context.getContentResolver().openInputStream(mediaUri);
-            } else {
-                throw new FileNotFoundException("Failed to parse Google Photos content URI");
-            }
-        } else {
-            return context.getContentResolver().openInputStream(uri);
-        }
-    }
-
-    private static long copyStreamWithLimit(InputStream input, FileOutputStream output, 
-                                           long maxSize) throws IOException {
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead;
-        long totalBytes = 0;
-        
-        while ((bytesRead = input.read(buffer)) != -1) {
-            totalBytes += bytesRead;
-            if (totalBytes > maxSize) {
-                return -1;
-            }
-            output.write(buffer, 0, bytesRead);
-        }
-        output.flush();
-        return totalBytes;
-    }
-
-    private static void deleteOldFiles(File directory, String filePrefix) {
-        try {
-            File[] files = directory.listFiles((dir, name) -> {
-                String lower = name.toLowerCase(Locale.ROOT);
-                return name.startsWith(filePrefix) && 
-                       (lower.endsWith(".mp4") || lower.endsWith(".gif") || 
-                        lower.endsWith(".webp"));
-            });
-            
-            if (files != null) {
-                for (File file : files) {
-                    if (!file.delete()) {
-                        Log.w(TAG, "Failed to delete old file: " + file.getName());
-                    } else {
-                        Log.d(TAG, "Deleted old file: " + file.getName());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error deleting old files: " + e.getMessage());
-        }
-    }
-
-    private static String getFileExtension(Context context, Uri uri) {
-        String extension = null;
-
-        if ("content".equals(uri.getScheme())) {
-            String mimeType = context.getContentResolver().getType(uri);
-            if (mimeType != null) {
-                extension = getExtensionFromMimeType(mimeType);
-            }
-        }
-
-        if (extension == null && uri.getPath() != null) {
-            extension = getExtensionFromPath(uri.getPath());
-        }
-
-        return extension != null ? extension : ".mp4";
-    }
-
-    private static String getExtensionFromMimeType(String mimeType) {
-        if (mimeType == null) return null;
-        
-        String lower = mimeType.toLowerCase(Locale.ROOT);
-        if (lower.contains("mp4") || lower.equals("video/mp4")) {
-            return ".mp4";
-        } else if (lower.contains("gif") || lower.equals("image/gif")) {
-            return ".gif";
-        } else if (lower.contains("webp") || lower.equals("image/webp")) {
-            return ".webp";
-        }
-        
-        String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-        if (extension != null) {
-            return "." + extension;
-        }
-        
-        return null;
-    }
-
-    private static String getExtensionFromPath(String path) {
+        String path = getPreferences(context).getString(KEY_WALLPAPER_PATH, null);
         if (path == null) return null;
-        
-        String lowerPath = path.toLowerCase(Locale.ROOT);
-        if (lowerPath.endsWith(".mp4")) {
-            return ".mp4";
-        } else if (lowerPath.endsWith(".gif")) {
-            return ".gif";
-        } else if (lowerPath.endsWith(".webp")) {
-            return ".webp";
-        }
-        
-        return null;
+        File file = new File(path);
+        return file.isFile() && file.canRead() && file.length() > 0 ? file : null;
     }
 
-    private static void closeQuietly(java.io.Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
+    public static boolean hasWallpaperSelection(Context context) {
+        return getPreferences(context).getString(KEY_WALLPAPER_PATH, null) != null;
+    }
+
+    public static synchronized boolean deleteCurrentWallpaper(Context context) {
+        SharedPreferences prefs = getPreferences(context);
+        String path = prefs.getString(KEY_WALLPAPER_PATH, null);
+        String name = prefs.getString(KEY_WALLPAPER_NAME, null);
+        if (!prefs.edit().remove(KEY_WALLPAPER_PATH).remove(KEY_WALLPAPER_NAME).commit()) {
+            prefs.edit().putString(KEY_WALLPAPER_PATH, path)
+                    .putString(KEY_WALLPAPER_NAME, name).commit();
+            return false;
+        }
+        deleteOwnedFile(context, path);
+        return true;
+    }
+
+    private static File getWallpaperDirectory(Context context) {
+        return new File(context.getFilesDir(), "video_wallpapers");
+    }
+
+    private static void deleteOwnedFile(Context context, String path) {
+        if (path == null) return;
+        File file = new File(path);
+        if (getWallpaperDirectory(context).equals(file.getParentFile())
+                && file.exists() && !file.delete()) {
+            Log.w(TAG, "Could not remove unused wallpaper");
+        }
+    }
+
+    public static boolean isVideoFormat(String path) {
+        return path != null && path.toLowerCase(Locale.ROOT).endsWith(".mp4");
+    }
+
+    public static float getPlaybackSpeed(SharedPreferences prefs) {
+        try {
+            float speed = Float.parseFloat(prefs.getString(KEY_PLAYBACK_SPEED, "1.0"));
+            return Float.isFinite(speed) && speed >= 0.25f && speed <= 2f ? speed : 1f;
+        } catch (NumberFormatException e) {
+            return 1f;
+        }
+    }
+
+    public static AnimatedImageDrawable decodeWallpaperImage(File file) throws IOException {
+        Drawable drawable = ImageDecoder.decodeDrawable(ImageDecoder.createSource(file),
+                (decoder, info, source) -> {
+                    String mime = info.getMimeType();
+                    if (!info.isAnimated()
+                            || !("image/gif".equals(mime) || "image/webp".equals(mime))) {
+                        throw new IllegalArgumentException("Expected a GIF or WebP animation");
+                    }
+                    int width = info.getSize().getWidth();
+                    int height = info.getSize().getHeight();
+                    float scale = Math.min(1f, (float) MAX_IMAGE_EDGE / Math.max(width, height));
+                    decoder.setTargetSize(Math.max(1, Math.round(width * scale)),
+                            Math.max(1, Math.round(height * scale)));
+                    decoder.setAllocator(ImageDecoder.ALLOCATOR_SOFTWARE);
+                });
+        if (!(drawable instanceof AnimatedImageDrawable)) throw new UnsupportedMediaException();
+        AnimatedImageDrawable animation = (AnimatedImageDrawable) drawable;
+        animation.setRepeatCount(AnimatedImageDrawable.REPEAT_INFINITE);
+        return animation;
+    }
+
+    private static void validateMedia(File file) throws IOException {
+        try {
+            if (isVideoFormat(file.getName())) {
+                try (MediaMetadataRetriever retriever = new MediaMetadataRetriever()) {
+                    retriever.setDataSource(file.getAbsolutePath());
+                    if (!"yes".equals(retriever.extractMetadata(
+                            MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO))) {
+                        throw new UnsupportedMediaException();
+                    }
+                    Bitmap frame = retriever.getScaledFrameAtTime(-1,
+                            MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 256, 256);
+                    if (frame == null) throw new UnsupportedMediaException();
+                    frame.recycle();
+                }
+            } else {
+                decodeWallpaperImage(file).stop();
+            }
+        } catch (RuntimeException e) {
+            throw new UnsupportedMediaException();
+        }
+    }
+
+    private static void copyWithLimit(InputStream input, FileOutputStream output)
+            throws IOException {
+        byte[] buffer = new byte[8192];
+        long size = 0;
+        int count;
+        while ((count = input.read(buffer)) != -1) {
+            size += count;
+            if (size > MAX_FILE_SIZE) throw new FileTooLargeException();
+            output.write(buffer, 0, count);
+        }
+        if (size == 0) throw new UnsupportedMediaException();
+    }
+
+    private static String getDisplayName(Context context, Uri uri) {
+        if ("content".equals(uri.getScheme())) {
+            try (Cursor cursor = context.getContentResolver().query(uri,
+                    new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst() && !cursor.isNull(0)) {
+                    return cursor.getString(0);
+                }
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Could not read media display name", e);
             }
         }
+        String name = uri.getLastPathSegment();
+        return name != null ? name : "wallpaper";
+    }
+
+    private static String getFileExtension(Context context, Uri uri, String name)
+            throws UnsupportedMediaException {
+        String mime = context.getContentResolver().getType(uri);
+        if (mime != null) {
+            switch (mime.toLowerCase(Locale.ROOT)) {
+                case "video/mp4": return ".mp4";
+                case "image/gif": return ".gif";
+                case "image/webp": return ".webp";
+                case "application/octet-stream": break;
+                default: throw new UnsupportedMediaException();
+            }
+        }
+        String lowerName = name.toLowerCase(Locale.ROOT);
+        for (String extension : new String[] {".mp4", ".gif", ".webp"}) {
+            if (lowerName.endsWith(extension)) return extension;
+        }
+        throw new UnsupportedMediaException();
     }
 }

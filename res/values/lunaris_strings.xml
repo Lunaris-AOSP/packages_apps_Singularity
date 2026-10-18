@@ -1931,31 +1931,31 @@
     <string name="video_wallpaper_current_title">Current wallpaper</string>
     <string name="video_wallpaper_current_summary">No video wallpaper selected</string>
 
-    <string name="video_wallpaper_pick_title">Select video/GIF</string>
-    <string name="video_wallpaper_pick_summary">Choose a video or animated image</string>
+    <string name="video_wallpaper_pick_title">Select video or animation</string>
+    <string name="video_wallpaper_pick_summary">Choose an MP4 video, animated GIF, or animated WebP</string>
 
-    <string name="video_wallpaper_enable_title">Enable video wallpaper</string>
-    <string name="video_wallpaper_enable_summary">Apply the selected video as live wallpaper</string>
+    <string name="video_wallpaper_enable_title">Preview and apply</string>
+    <string name="video_wallpaper_enable_summary">Choose where to use this wallpaper from the system preview</string>
 
     <string name="video_wallpaper_clear_title">Clear video wallpaper</string>
-    <string name="video_wallpaper_clear_summary">Remove the current video wallpaper</string>
+    <string name="video_wallpaper_clear_summary">Remove the saved media and stop using it as wallpaper</string>
 
-    <string name="video_wallpaper_playback">Playback Settings</string>
+    <string name="video_wallpaper_playback">Playback settings</string>
     
     <string name="video_wallpaper_speed">Playback speed</string>
     
     <string name="video_wallpaper_pause_lock">Pause on lock screen</string>
-    <string name="video_wallpaper_pause_lock_summary">Save battery when screen is locked</string>
+    <string name="video_wallpaper_pause_lock_summary">Show a still frame while the lock screen is visible</string>
 
     <!-- Info section -->
     <string name="video_wallpaper_info_category_title">Information</string>
     <string name="video_wallpaper_info_title">Supported formats</string>
-    <string name="video_wallpaper_info_summary">MP4 videos, GIF and WebP animations\nMaximum file size: 50MB</string>
+    <string name="video_wallpaper_info_summary">MP4 videos, animated GIF and WebP images\nMaximum file size: 50 MiB</string>
 
     <string name="video_wallpaper_tips_title">Tips</string>
-    <string name="video_wallpaper_tips_summary">• Videos are muted automatically\n• Lower resolution videos use less battery\n• Shorter loops are recommended for better performance\n• If videos wallpaper doesnt load select live wallpaper from Wallpaper and style after selecting video wallpaper\n• You have to reapply live wallpaper after restart device</string>
+    <string name="video_wallpaper_tips_summary">Videos are muted and all wallpapers pause when hidden or the screen is off. Short, lower-resolution loops use less battery.\n\nPlayback speed applies to videos. Animations use their original speed. After a restart, playback is available once you unlock the device.</string>
 
-    <string name="video_wallpaper_description">Animated video and GIF wallpaper</string>
+    <string name="video_wallpaper_description">Animated video, GIF, and WebP wallpaper</string>
     <string name="lunaris_os">GHOST</string>
 
     <!-- Video Wallpaper Strings -->
@@ -1965,12 +1965,25 @@
     <string name="video_wallpaper_current_none">No video wallpaper selected</string>
     <string name="video_wallpaper_select_first">Please select a video wallpaper first</string>
     <string name="video_wallpaper_select_wallpaper">Select video wallpaper</string>
-    <string name="video_wallpaper_save_failed">Failed to save selected video or image</string>
+    <string name="video_wallpaper_save_failed">Could not read or save this file. Your previous selection was kept.</string>
     <string name="video_wallpaper_apply_prompt">Apply the selected video wallpaper manually from the preview screen</string>
     <string name="video_wallpaper_enable_failed">Failed to enable video wallpaper</string>
     <string name="video_wallpaper_picker_error">Unable to open picker. Please try again.</string>
-    <string name="video_wallpaper_processing">Processing selected file...</string>
-    <string name="video_wallpaper_saved">Video wallpaper saved successfully</string>
+    <string name="video_wallpaper_processing">Processing wallpaper…</string>
+    <string name="video_wallpaper_saved">Wallpaper saved. Use Preview and apply to choose where to display it.</string>
+
+    <string name="video_wallpaper_clear_confirm_title">Clear video wallpaper?</string>
+    <string name="video_wallpaper_clear_confirm_message">Remove the saved media and restore the default wallpaper on screens using it. A cleared lock screen will use the home screen wallpaper.</string>
+    <string name="video_wallpaper_clear_action">Clear</string>
+    <string name="video_wallpaper_active_home">Active on the home screen • Tap to preview or change where it is applied</string>
+    <string name="video_wallpaper_active_lock">Active on the lock screen • Tap to preview or change where it is applied</string>
+    <string name="video_wallpaper_active_both">Active on home and lock screens • Tap to preview</string>
+    <string name="video_wallpaper_speed_video_only">Available for MP4 videos; animations use their original speed</string>
+    <string name="video_wallpaper_too_large">Choose a file no larger than 50 MiB. Your previous selection was kept.</string>
+    <string name="video_wallpaper_unsupported">Choose a playable MP4 video, animated GIF, or animated WebP. Your previous selection was kept.</string>
+    <string name="video_wallpaper_missing">The saved file is unavailable. Select a wallpaper again.</string>
+    <string name="video_wallpaper_playback_failed">Unable to play this wallpaper. Select another file in Settings → Themes → Video wallpaper.</string>
+    <string name="video_wallpaper_waiting_unlock">Unlock your device to load the wallpaper.</string>
 
     <!-- Wallpaper Glymps -->
     <string name="lock_glymps_title">Wallpaper Glymps</string>
