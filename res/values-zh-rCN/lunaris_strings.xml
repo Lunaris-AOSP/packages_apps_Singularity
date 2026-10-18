@@ -514,8 +514,6 @@
     <string name="theme_customization_signal_icon_summary">设置自定义信号图标样式</string>
     <string name="theme_customization_wifi_icon_title">WiFi 图标样式</string>
     <string name="theme_customization_wifi_icon_summary">设置自定义 WiFi 图标样式</string>
-    <string name="theme_customization_navbar_title">导航栏样式</string>
-    <string name="theme_customization_navbar_summary">设置自定义导航栏样式</string>
     <string name="theme_customization_lock_clock_title">时钟样式</string>
     <string name="theme_customization_lock_clock_summary">修改锁屏时钟外观</string>
     <string name="theme_customization_brightness_slider_summary">设置自定义亮度滑块样式</string>

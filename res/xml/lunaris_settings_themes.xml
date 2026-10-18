@@ -48,18 +48,17 @@
             android:summary="@string/gradient_settings_summary"
             android:fragment="org.lunaris.settings.fragments.themes.GradientSettings" />
             
-        <Preference
-            android:key="android.theme.customization.navbar"
-            android:title="@string/theme_customization_navbar_title"
-            android:summary="@string/theme_customization_navbar_summary"
-            android:fragment="org.lunaris.settings.fragments.themes.NavbarStyles"/>
-
         <!-- Font style -->
         <Preference
             android:key="font_settings"
             android:title="@string/font_settings_title"
             android:summary="@string/font_settings_summary"
-            android:fragment="org.lunaris.settings.fragments.themes.fonts.FontSettingsFragment"/>
+            >
+            <intent
+                android:action="com.android.axion.axthemestore.action.FONTS"
+                android:targetPackage="com.android.axion.axthemestore"
+                android:targetClass="com.android.axion.axthemestore.MainActivity" />
+        </Preference>
 
         <!-- Ambient Display -->
         <Preference

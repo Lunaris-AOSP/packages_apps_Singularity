@@ -50,6 +50,7 @@
     <string name="themes_lock_sound_title">Lock sound</string>
     <string name="themes_unlock_sound_title">Unlock sound</string>
     <string name="themes_fonts_category">Fonts</string>
+    <string name="font_themestore_unavailable">ThemeStore is not installed.</string>
     <string name="themes_system_font_title">System font</string>
     <string name="themes_system_font_summary">Set system font style</string>
     <string name="themes_lock_screen_clock_font_title">Lock screen clock font</string>
@@ -568,8 +569,6 @@
     <string name="theme_customization_signal_icon_summary">Set custom signal icon style</string>
     <string name="theme_customization_wifi_icon_title">WiFi icon style</string>
     <string name="theme_customization_wifi_icon_summary">Set custom wifi icon style</string>
-    <string name="theme_customization_navbar_title">Navbar style</string>
-    <string name="theme_customization_navbar_summary">Set custom navigation bar style</string>
     <string name="theme_customization_lock_clock_title">Clock face</string>
     <string name="theme_customization_lock_clock_summary">Modify lockscreen clock appearance</string>
     <string name="theme_customization_brightness_slider_summary">Set custom brightness slider style</string>
