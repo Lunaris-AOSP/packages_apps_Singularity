@@ -64,12 +64,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_MIST_ENABLED = "qs_mist_enabled";
     // These controls belong to the original design. Preserve their saved values while using Mist.
     private static final String[] ORIGINAL_DESIGN_KEYS = {
-        "status_bar_custom_header", "qs_widget_category", "qs_brightness_slider_category",
+        "qs_widget_category", "qs_brightness_slider_category",
         "qs_volume_slider_category", "quick_settings_media_category", "qs_panel_style",
         "qs_tile_icon_shape", "qs_tile_animation_style", "qs_tile_label_hide",
         "qs_tile_style_minimal", "qs_tile_style_minimal_invert", "qs_tile_shape",
-        "qs_use_modified_tile_spacing", "qs_layout_columns_rows", "dual_target_tile_style",
-        "qs_tile_alternate_color", "qs_show_data_usage", "qs_show_data_usage_tile",
+        "qs_use_modified_tile_spacing", "qs_layout_columns_rows",
+        "qs_tile_alternate_color", "qs_show_data_usage_tile",
         "qs_footer_show_edit", "qs_footer_show_power_menu", "qs_footer_show_settings"
     };
 
@@ -287,7 +287,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     }
 
     private void updateMistDesignPreferences(boolean enabled) {
-        findPreference("qs_mist_settings").setVisible(enabled);
         for (String key : ORIGINAL_DESIGN_KEYS) {
             Preference preference = findPreference(key);
             if (preference != null) preference.setEnabled(!enabled);

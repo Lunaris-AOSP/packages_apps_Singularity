@@ -3044,30 +3044,4 @@
 
     <string name="qs_mist_enabled_title">Moduler Quick Settings</string>
     <string name="qs_mist_enabled_summary">Use the new moduler design for the header, tiles, sliders, media player, and editor. Requires a SystemUI restart.</string>
-    <string name="qs_mist_edit_title">Customize Moduler Quick Settings</string>
-    <string name="qs_mist_edit_summary">Open Quick Settings and tap Edit to arrange controls, resize tiles, and change the layout. Turning Mist off restores your original design settings.</string>
-    <string name="qs_mist_settings_title">Moduler Quick layout settings</string>
-    <string name="qs_mist_weather_title">Show weather</string>
-    <string name="qs_mist_weather_summary">Show weather from your configured weather provider in the QS header</string>
-    <string name="qs_mist_split_summary">Open Quick Settings and notifications separately. Swipe from the selected edge for Quick Settings.</string>
-    <string name="qs_mist_left_title">Quick Settings on the left</string>
-    <string name="qs_mist_left_summary">Open Quick Settings from the left edge when split Quick Settings is enabled</string>
-    <string name="qs_mist_tile_shape_title">Tile shape</string>
-    <string name="qs_mist_spacing_title">Spacing</string>
-    <string name="qs_mist_tile_gap_title">Tile gap</string>
-    <string name="qs_mist_tile_gap_summary">Space between tiles and controls</string>
-    <string name="qs_mist_side_padding_title">Side padding</string>
-    <string name="qs_mist_side_padding_summary">Space between panel contents and screen edges</string>
-    <string name="qs_mist_top_padding_title">Top spacing</string>
-    <string name="qs_mist_top_padding_summary">Space below the clock and status icons</string>
-    <string name="qs_mist_qqs_title">Compact panel</string>
-    <string name="qs_mist_qs_title">Expanded panel</string>
-    <string name="qs_mist_large_title">Large-screen split panel</string>
-    <string name="qs_mist_control_columns_title">Control columns</string>
-    <string name="qs_mist_tile_columns_title">Tile columns</string>
-    <string name="qs_mist_tile_columns_summary">Column count is limited to fit the available width</string>
-    <string name="qs_mist_tile_rows_title">Tile rows</string>
-    <string name="qs_mist_labels_title">Show tile labels</string>
-    <string name="qs_mist_brightness_style_title">Vertical brightness slider style</string>
-    <string name="qs_mist_volume_style_title">Vertical volume slider style</string>
 </resources>

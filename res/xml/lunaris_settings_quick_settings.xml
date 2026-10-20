@@ -29,12 +29,6 @@
             android:summary="@string/qs_mist_enabled_summary"
             android:defaultValue="false" />
 
-        <Preference
-            android:key="qs_mist_settings"
-            android:title="@string/qs_mist_settings_title"
-            android:summary="@string/qs_mist_edit_summary"
-            android:fragment="org.lunaris.settings.fragments.quicksettings.MistSettings" />
-
         <!-- QS Header -->
         <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
             android:key="status_bar_custom_header"
