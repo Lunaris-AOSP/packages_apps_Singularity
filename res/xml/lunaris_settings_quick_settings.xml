@@ -56,6 +56,12 @@
             android:defaultValue="true" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_fling_haptic"
+            android:title="@string/qs_fling_haptic_title"
+            android:summary="@string/qs_fling_haptic_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_split_notification"
             android:title="@string/qs_split_notification_title"
             android:summary="@string/qs_split_notification_summary"

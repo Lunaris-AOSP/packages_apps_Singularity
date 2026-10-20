@@ -80,6 +80,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BRIGHTNESS_SLIDER_HAPTIC = "qs_brightness_slider_haptic";
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
     private static final String KEY_QS_TILE_HAPTIC = "qs_tile_haptic";
+    private static final String KEY_QS_FLING_HAPTIC = Settings.System.QS_FLING_HAPTIC;
     private static final String KEY_QS_COMPACT_PLAYER = "qs_compact_media_player_mode";
     private static final String KEY_SINGLE_QS_TONE = "single_qs_tone_enabled";
     private static final String KEY_DUAL_TARGET_TILE_STYLE = "dual_target_tile_style";
@@ -215,6 +216,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
         mQsTileHaptic = findPreference(KEY_QS_TILE_HAPTIC);
         boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+        findPreference(KEY_QS_FLING_HAPTIC).setVisible(hapticAvailable);
 
         if (hapticAvailable) {
             mBrightnessSliderHaptic.setEnabled(showSlider);
@@ -457,6 +459,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                     if (!hapticAvailable) {
                         keys.add(KEY_BRIGHTNESS_SLIDER_HAPTIC);
                         keys.add(KEY_QS_TILE_HAPTIC);
+                        keys.add(KEY_QS_FLING_HAPTIC);
                         keys.add(KEY_VOLUME_SLIDER_HAPTIC);
                     }
 
