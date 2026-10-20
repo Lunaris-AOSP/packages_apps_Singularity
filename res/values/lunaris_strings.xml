@@ -554,6 +554,10 @@
     <string name="smart_pulldown_dismissable">no dismissible</string>
     <string name="smart_pulldown_ongoing">no ongoing</string>
 
+    <!-- Long press on lock screen -->
+    <string name="lockscreen_long_press_title">Hold to open Lock Styles</string>
+    <string name="lockscreen_long_press_summary">Touch and hold the lock screen to open Lock Styles</string>
+
     <!-- Tap to sleep on status bar -->
     <string name="lockscreen_doubletap_sleep_title">Tap to sleep</string>
     <string name="lockscreen_doubletap_sleep_summary">Double-tap on the lock screen to put device asleep</string>

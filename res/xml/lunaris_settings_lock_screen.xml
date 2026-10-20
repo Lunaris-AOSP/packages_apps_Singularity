@@ -155,6 +155,12 @@
         android:key="lockscreen_gestures_category"
         android:title="@string/gestures_title">
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lockscreen_long_press_enabled"
+            android:title="@string/lockscreen_long_press_title"
+            android:summary="@string/lockscreen_long_press_summary"
+            android:defaultValue="true" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="double_tap_sleep_lockscreen"
             android:title="@string/lockscreen_doubletap_sleep_title"
