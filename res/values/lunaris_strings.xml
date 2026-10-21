@@ -2907,6 +2907,8 @@
     <string name="dynamic_island_now_playing_summary">Show recognized songs</string>
     <string name="dynamic_island_recent_apps_title">Recent apps</string>
     <string name="dynamic_island_recent_apps_summary">Show recent app shortcuts alongside active events</string>
+    <string name="dynamic_island_disable_in_landscape_title">Disable in landscape</string>
+    <string name="dynamic_island_disable_in_landscape_summary">Hide Dynamic Island when the device is in landscape orientation</string>
     <string name="dynamic_island_lockscreen_title">Show on lock screen</string>
     <string name="dynamic_island_lockscreen_summary">Display Dynamic Island on the lock screen</string>
 
