@@ -64,8 +64,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QS_MIST_ENABLED = "qs_mist_enabled";
     // These controls belong to the original design. Preserve their saved values while using Mist.
     private static final String[] ORIGINAL_DESIGN_KEYS = {
-        "qs_widget_category", "qs_brightness_slider_category",
-        "qs_volume_slider_category", "quick_settings_media_category", "qs_panel_style",
+        "qs_widget_category", "quick_settings_media_category", "qs_panel_style",
         "qs_tile_icon_shape", "qs_tile_animation_style", "qs_tile_label_hide",
         "qs_tile_style_minimal", "qs_tile_style_minimal_invert", "qs_tile_shape",
         "qs_use_modified_tile_spacing", "qs_layout_columns_rows",
@@ -138,9 +137,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.lunaris_settings_quick_settings);
 
         findPreference(KEY_QS_MIST_ENABLED).setOnPreferenceChangeListener(this);
-        updateMistDesignPreferences(Settings.System.getIntForUser(
+        boolean mistEnabled = Settings.System.getIntForUser(
                 getContext().getContentResolver(), KEY_QS_MIST_ENABLED, 0,
-                UserHandle.USER_CURRENT) == 1);
+                UserHandle.USER_CURRENT) == 1;
+        updateMistDesignPreferences(mistEnabled);
 
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
@@ -219,7 +219,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         findPreference(KEY_QS_FLING_HAPTIC).setVisible(hapticAvailable);
 
         if (hapticAvailable) {
-            mBrightnessSliderHaptic.setEnabled(showSlider);
+            mBrightnessSliderHaptic.setEnabled(showSlider || mistEnabled);
         } else {
             brightnessCategory.removePreference(mBrightnessSliderHaptic);
             tileCategory.removePreference(mQsTileHaptic);
@@ -254,7 +254,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                 findPreference(KEY_SHOW_RINGER_BUTTON);
 
         if (hapticAvailable) {
-            mVolumeSliderHaptic.setEnabled(showVolumeSlider);
+            mVolumeSliderHaptic.setEnabled(showVolumeSlider || mistEnabled);
         } else {
             volumeCategory.removePreference(mVolumeSliderHaptic);
         }
@@ -294,6 +294,28 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             if (preference != null) preference.setEnabled(!enabled);
             if (preference instanceof SystemSettingPrimarySwitchPreference) {
                 ((SystemSettingPrimarySwitchPreference) preference).setSwitchEnabled(!enabled);
+            }
+        }
+        ContentResolver resolver = getContext().getContentResolver();
+        for (String key : new String[] {QS_BRIGHTNESS_CATEGORY, QS_VOLUME_CATEGORY}) {
+            PreferenceCategory category = findPreference(key);
+            if (category == null) continue;
+            for (int i = 0; i < category.getPreferenceCount(); i++) {
+                Preference preference = category.getPreference(i);
+                boolean brightnessHaptic =
+                        KEY_BRIGHTNESS_SLIDER_HAPTIC.equals(preference.getKey());
+                boolean sliderHaptic = brightnessHaptic
+                        || KEY_VOLUME_SLIDER_HAPTIC.equals(preference.getKey());
+                preference.setVisible(!enabled || sliderHaptic);
+                if (sliderHaptic) {
+                    boolean showSlider = brightnessHaptic
+                            ? LineageSettings.Secure.getIntForUser(resolver,
+                                    LineageSettings.Secure.QS_SHOW_BRIGHTNESS_SLIDER, 1,
+                                    UserHandle.USER_CURRENT) > 0
+                            : Settings.System.getIntForUser(resolver, KEY_SHOW_VOLUME_SLIDER, 0,
+                                    UserHandle.USER_CURRENT) > 0;
+                    preference.setEnabled(enabled || showSlider);
+                }
             }
         }
     }
