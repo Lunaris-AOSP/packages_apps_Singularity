@@ -24,6 +24,10 @@
         android:title="@string/enable"
         android:defaultValue="false" />
 
+    <org.lunaris.settings.preferences.QsHeaderImagePreviewPreference
+        android:key="qs_header_image_preview"
+        android:dependency="status_bar_custom_header" />
+
     <ListPreference
         android:key="qs_header_provider"
         android:title="@string/qs_header_provider_title"
