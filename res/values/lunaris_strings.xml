@@ -2866,6 +2866,8 @@
     <string name="dynamic_island_features_title">Features</string>
     <string name="dynamic_island_media_controls_title">Media controls</string>
     <string name="dynamic_island_media_controls_summary">Show playback controls and artwork in the island</string>
+    <string name="dynamic_island_redesigned_media_title">Use redesigned expanded media</string>
+    <string name="dynamic_island_redesigned_media_summary">Use the new media layout with animated artwork and its own background. Turn off to use the original layout and popup background setting.</string>
     <string name="dynamic_island_screen_recording_title">Screen recording</string>
     <string name="dynamic_island_screen_recording_summary">Show the recording timer and controls in the island</string>
     <string name="dynamic_island_alarms_title">Alarms</string>
