@@ -2859,8 +2859,8 @@
     <string name="md3_system_animation_style">MD3 spring</string>
 
     <!-- Dynamic island -->
-    <string name="status_bar_dynamic_island_title">Dynamic island</string>
-    <string name="status_bar_dynamic_island_summary">Configure the island and choose which features can appear</string>
+    <string name="status_bar_dynamic_island_title">Lunaris Bar</string>
+    <string name="status_bar_dynamic_island_summary">Customize chips, cards, colors, and gestures</string>
     <string name="dynamic_island_footer_title">About Dynamic Island</string>
     <string name="dynamic_island_intro">Turn on Dynamic island and choose the features you want in the centered chip.</string>
     <string name="dynamic_island_features_title">Features</string>
@@ -2906,16 +2906,12 @@
     <string name="dynamic_island_vpn_summary">Show VPN connection status</string>
     <string name="dynamic_island_ringer_title">Sound mode</string>
     <string name="dynamic_island_ringer_summary">Show sound mode changes and controls</string>
-    <string name="dynamic_island_clipboard_title">Clipboard</string>
-    <string name="dynamic_island_clipboard_summary">Show copied content previews</string>
     <string name="dynamic_island_timer_title">Timer</string>
     <string name="dynamic_island_timer_summary">Show countdown timers and controls</string>
     <string name="dynamic_island_audio_recording_title">Audio recording</string>
     <string name="dynamic_island_audio_recording_summary">Show audio recorder status and controls</string>
     <string name="dynamic_island_now_playing_title">Now Playing</string>
     <string name="dynamic_island_now_playing_summary">Show recognized songs</string>
-    <string name="dynamic_island_recent_apps_title">Recent apps</string>
-    <string name="dynamic_island_recent_apps_summary">Show recent app shortcuts alongside active events</string>
     <string name="dynamic_island_disable_in_landscape_title">Disable in landscape</string>
     <string name="dynamic_island_disable_in_landscape_summary">Hide Dynamic Island when the device is in landscape orientation</string>
     <string name="dynamic_island_lockscreen_title">Show on lock screen</string>
