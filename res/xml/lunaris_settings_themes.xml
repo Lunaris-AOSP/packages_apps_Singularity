@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP -->
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +40,12 @@
             android:key="monet_settings"
             android:title="@string/monet_settings_title"
             android:summary="@string/monet_settings_summary"
-            android:fragment="org.lunaris.settings.fragments.themes.ColorsSettingsFragment" />
+            >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="org.lunaris.monet"
+                android:targetClass="org.lunaris.monet.MainActivity" />
+        </Preference>
 
         <!-- Gradient Customization -->
         <Preference
