@@ -194,6 +194,7 @@ internal val lunarisBarMotionOptions =
             1,
             choices = listOf("no_bounce", "normal_bounce", "high_bounce"),
         ),
+        LunarisBarOption("status_glow"),
         LunarisBarOption("reduce_motion"),
         LunarisBarOption("haptics", default = 1),
         LunarisBarOption("mini_fade", default = 1),

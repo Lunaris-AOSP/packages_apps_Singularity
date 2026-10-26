@@ -13,6 +13,8 @@
     <string name="lunaris_bar_animation_bounce">Bounce intensity</string>
     <string name="lunaris_bar_animation_speed">Animation speed</string>
     <string name="lunaris_bar_animation_style">Expansion style</string>
+    <string name="lunaris_bar_status_glow">Status glow</string>
+    <string name="lunaris_bar_status_glow_description">Glow on bar updates and music changes. Turn off Original expanded music popup for popup glow; Reduce animations disables the effect.</string>
     <string name="lunaris_bar_app_icon">App icon</string>
     <string name="lunaris_bar_app_name">App name</string>
     <string name="lunaris_bar_appearance">Appearance</string>
