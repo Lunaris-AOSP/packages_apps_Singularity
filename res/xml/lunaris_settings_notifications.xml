@@ -30,12 +30,12 @@
             android:summary="@string/media_squiggle_animation_summary"
             android:defaultValue="true" />
 
-        <!-- Waveform seekbar -->
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        <org.lunaris.settings.preferences.SystemSettingListPreference
             android:key="media_waveform_seekbar"
-            android:title="@string/media_waveform_seekbar_title"
-            android:summary="@string/media_waveform_seekbar_summary"
-            android:defaultValue="false" />
+            android:title="@string/media_seekbar_style_title"
+            android:entries="@array/media_seekbar_style_entries"
+            android:entryValues="@array/media_seekbar_style_values"
+            android:defaultValue="0" />
 
     </PreferenceCategory>
 

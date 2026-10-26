@@ -3055,4 +3055,8 @@
 
     <string name="qs_mist_enabled_title">Moduler Quick Settings</string>
     <string name="qs_mist_enabled_summary">Use the new moduler design for the header, tiles, sliders, media player, and editor. Requires a SystemUI restart.</string>
+    <string name="media_seekbar_style_title">Media seekbar style</string>
+    <string name="media_seekbar_style_default">Default</string>
+    <string name="media_seekbar_style_waveform">Waveform</string>
+    <string name="media_seekbar_style_glowing">Glowing</string>
 </resources>

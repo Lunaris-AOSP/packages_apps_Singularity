@@ -1961,4 +1961,16 @@
         <item>1</item>
     </string-array>
 
+    <string-array name="media_seekbar_style_entries">
+        <item>@string/media_seekbar_style_default</item>
+        <item>@string/media_seekbar_style_waveform</item>
+        <item>@string/media_seekbar_style_glowing</item>
+    </string-array>
+
+    <string-array name="media_seekbar_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
