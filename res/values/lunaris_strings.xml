@@ -3058,5 +3058,6 @@
     <string name="media_seekbar_style_waveform">Waveform</string>
     <string name="media_seekbar_style_glowing">Glowing</string>
     <string name="media_seekbar_style_gradient_wave">Gradient wave</string>
+    <string name="media_seekbar_style_cos">COS</string>
 
 </resources>
