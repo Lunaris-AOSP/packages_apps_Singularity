@@ -211,6 +211,12 @@
             android:defaultValue="0"
             android:summary="%s" />
 
+        <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
+            android:key="lunaris_luminous_animations"
+            android:title="@string/luminous_animations_title"
+            android:summary="@string/luminous_animations_summary"
+            android:defaultValue="true" />
+
         <!-- Display Cutout -->
         <Preference
             android:key="display_cutout_force_fullscreen_settings"

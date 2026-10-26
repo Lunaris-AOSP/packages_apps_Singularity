@@ -2853,6 +2853,8 @@
 
     <!-- System Animation styles -->
     <string name="system_animation_style_title">System animation style</string>
+    <string name="luminous_animations_title">Luminous animations</string>
+    <string name="luminous_animations_summary">Improve supported animations in system apps. Takes effect immediately.</string>
     <string name="pie_system_animation_style">Android P</string>
     <string name="scale_system_animation_style">Scale</string>
     <string name="slide_system_animation_style">Slide</string>
