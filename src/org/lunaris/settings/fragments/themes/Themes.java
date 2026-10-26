@@ -64,6 +64,9 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
     private static final String KEY_AXION_VOLUME_STYLE = "axion_volume_style";
     private static final String KEY_LOCK_GLYMPS = "lock_glymps_enabled";
+    private static final String KEY_UNLOCK_ANIMATION = "lockscreen_unlock_animation";
+    private static final String KEY_UNLOCK_EFFECT_HFR = "lockscreen_unlock_effect_hfr";
+    private static final String KEY_WATER_RIPPLE_FULLSCREEN = "lockscreen_water_ripple_fullscreen";
 
     private static final int VOLUME_TYPE_AXION = 0;
     private static final int VOLUME_TYPE_REDESIGNED = 1;
@@ -74,12 +77,16 @@ public class Themes extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mVolumeDialogType;
     private SystemSettingListPreference mAxionVolumeStyle;
     private SystemSettingSwitchPreference mShowVolumePercentage;
+    private SystemSettingListPreference mUnlockAnimation;
+    private Preference mUnlockEffectHfr;
+    private Preference mWaterRippleFullscreen;
     private ThemeUtils mThemeUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final int unlockAnimation = getCurrentUnlockAnimation();
         addPreferencesFromResource(R.xml.lunaris_settings_themes);
 
         findPreference(KEY_LOCK_GLYMPS).setOnPreferenceChangeListener(this);
@@ -111,6 +118,15 @@ public class Themes extends SettingsPreferenceFragment implements
         mShowVolumePercentage = findPreference(KEY_SHOW_VOLUME_PERCENTAGE);
 
         updateVolumeRelatedVisibility(getCurrentVolumeDialogType());
+
+        mUnlockAnimation = findPreference(KEY_UNLOCK_ANIMATION);
+        mUnlockEffectHfr = findPreference(KEY_UNLOCK_EFFECT_HFR);
+        mWaterRippleFullscreen = findPreference(KEY_WATER_RIPPLE_FULLSCREEN);
+        if (mUnlockAnimation != null) {
+            mUnlockAnimation.setValue(Integer.toString(unlockAnimation));
+            mUnlockAnimation.setOnPreferenceChangeListener(this);
+        }
+        updateUnlockRelatedVisibility(unlockAnimation);
     }
 
     @Override
@@ -126,6 +142,29 @@ public class Themes extends SettingsPreferenceFragment implements
                 findPreference("smart_pixel_filter_enabled");
         if (smartPixels != null) {
             smartPixels.loadValue();
+        }
+        final int unlockAnimation = getCurrentUnlockAnimation();
+        if (mUnlockAnimation != null) {
+            mUnlockAnimation.setValue(Integer.toString(unlockAnimation));
+        }
+        updateUnlockRelatedVisibility(unlockAnimation);
+    }
+
+    private int getCurrentUnlockAnimation() {
+        final ContentResolver resolver = getContext().getContentResolver();
+        final int legacy = Settings.System.getIntForUser(resolver,
+                "lockscreen_water_ripple_enabled", 0, UserHandle.USER_CURRENT);
+        final int selected = Settings.System.getIntForUser(resolver,
+                KEY_UNLOCK_ANIMATION, legacy == 1 ? 1 : 0, UserHandle.USER_CURRENT);
+        return selected >= 0 && selected <= 4 ? selected : 0;
+    }
+
+    private void updateUnlockRelatedVisibility(int style) {
+        if (mUnlockEffectHfr != null) {
+            mUnlockEffectHfr.setVisible(style >= 1 && style <= 4);
+        }
+        if (mWaterRippleFullscreen != null) {
+            mWaterRippleFullscreen.setVisible(style == 1);
         }
     }
 
@@ -153,6 +192,9 @@ public class Themes extends SettingsPreferenceFragment implements
 
         if (KEY_LOCK_GLYMPS.equals(preference.getKey())) {
             LockGlympsSettings.onEnabledChanged(context, (Boolean) newValue);
+            return true;
+        } else if (preference == mUnlockAnimation) {
+            updateUnlockRelatedVisibility(Integer.parseInt((String) newValue));
             return true;
         } else if (preference == mVolumeDialogType) {
             SystemUtils.showSystemUiRestartDialog(getActivity());

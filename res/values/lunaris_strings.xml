@@ -2987,8 +2987,10 @@
     
     <!-- Screen on animation -->
     <string name="lockscreen_unlock_animation_title">Fingerprint unlock animation</string>
+    <string name="lockscreen_unlock_animation_glow">Glow ripple wave</string>
+    <string name="lockscreen_unlock_animation_rainbow_glow">Rainbow glow</string>
     <string name="lockscreen_unlock_effect_hfr_title">High frame rate</string>
-    <string name="lockscreen_unlock_effect_hfr_summary">Animate Water and Watercolor at the display refresh rate</string>
+    <string name="lockscreen_unlock_effect_hfr_summary">Animate the selected effect at the display refresh rate</string>
     <string name="lockscreen_water_ripple_fullscreen_title">Fullscreen water ripple</string>
     <string name="lockscreen_water_ripple_fullscreen_summary">Let Water waves fill the screen and bounce off its edges</string>
 

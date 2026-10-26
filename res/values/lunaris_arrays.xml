@@ -1931,12 +1931,16 @@
         <item>Default</item>
         <item>Water</item>
         <item>Watercolor</item>
+        <item>@string/lockscreen_unlock_animation_glow</item>
+        <item>@string/lockscreen_unlock_animation_rainbow_glow</item>
     </string-array>
 
     <string-array name="lockscreen_unlock_animation_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="package_installer_style_entries">
