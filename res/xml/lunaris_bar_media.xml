@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_bar_media">
+
+    <ListPreference
+        android:key="media_background"
+        android:title="@string/lunaris_bar_media_background"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="artwork_shape"
+        android:title="@string/lunaris_bar_artwork_shape"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="media_button_shape"
+        android:title="@string/lunaris_bar_media_button_shape"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="player_icon"
+        android:title="@string/lunaris_bar_player_icon"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_haptics"
+        android:title="@string/lunaris_bar_media_haptics"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_artwork_colors"
+        android:title="@string/lunaris_bar_media_artwork_colors"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="rotate_artwork"
+        android:title="@string/lunaris_bar_rotate_artwork"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="equalizer"
+        android:title="@string/lunaris_bar_equalizer"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_slider"
+        android:title="@string/lunaris_bar_media_slider"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_thin_border"
+        android:title="@string/lunaris_bar_media_thin_border"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_hide_paused"
+        android:title="@string/lunaris_bar_media_hide_paused"
+        android:persistent="false" />
+
+    <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+        android:key="media_hide_delay"
+        android:title="@string/lunaris_bar_media_hide_delay"
+        android:persistent="false"
+        android:defaultValue="0"
+        settings:min="0"
+        android:max="300"
+        settings:interval="1" />
+
+    <SwitchPreferenceCompat
+        android:key="media_mini"
+        android:title="@string/lunaris_bar_media_mini"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_mini_custom"
+        android:title="@string/lunaris_bar_media_mini_custom"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="media_mini_left_shape"
+        android:title="@string/lunaris_bar_media_mini_left_shape"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="media_mini_right_shape"
+        android:title="@string/lunaris_bar_media_mini_right_shape"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="media_mini_right"
+        android:title="@string/lunaris_bar_media_mini_right"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="media_mini_artwork_colors"
+        android:title="@string/lunaris_bar_media_mini_artwork_colors"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_lyrics"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_lyrics"
+        android:persistent="false" />
+
+    <PreferenceCategory
+        android:key="colors"
+        android:title="@string/lunaris_bar_colors" />
+
+</PreferenceScreen>

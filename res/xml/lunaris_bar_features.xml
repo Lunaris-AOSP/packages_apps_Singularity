@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_bar_features">
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_battery"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_battery"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_unlock"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_unlock"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_bluetooth"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_bluetooth"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_calls"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_calls"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_notifications"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_notifications"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_ongoing_activities"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_ongoing_activities"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_hotspot"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_hotspot"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_vpn"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_vpn"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_ringer"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_ringer"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_timer"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_timer"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_audio_recording"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_audio_recording"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_now_playing"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_now_playing"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_media_controls"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_media_controls"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_screen_recording"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_screen_recording"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_alarms"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_alarms"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_flashlight"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_flashlight"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_stopwatch"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_stopwatch"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_live_scores"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_live_scores"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_lockscreen"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_lockscreen"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_disable_in_landscape"
+        android:title="@string/lunaris_bar_status_bar_dynamic_island_disable_in_landscape"
+        android:persistent="false" />
+
+    <Preference
+        android:key="feature_appearance"
+        android:title="@string/lunaris_bar_feature_appearance"
+        android:fragment="org.lunaris.settings.fragments.statusbar.DynamicIslandSettings">
+
+        <extra
+            android:name="page"
+            android:value="feature_style" />
+
+    </Preference>
+
+</PreferenceScreen>

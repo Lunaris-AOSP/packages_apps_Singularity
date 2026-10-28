@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2024-2026 Lunaris AOSP -->
 <resources>
+    <string name="lunaris_bar_card_enabled">Enable this card</string>
+    <string name="lunaris_bar_customize">Customize</string>
+    <string name="lunaris_bar_reset">Reset</string>
     <string name="lunaris_bar_action">Action</string>
     <string name="lunaris_bar_actions">Actions</string>
     <string name="lunaris_bar_add_app">Add an app</string>
@@ -162,6 +165,7 @@
     <string name="lunaris_bar_mini_background_day">Background</string>
     <string name="lunaris_bar_mini_background_night">Background</string>
     <string name="lunaris_bar_mini_blur">Blur behind the chip</string>
+    <string name="lunaris_bar_mini_blur_summary">May impact battery life and pref</string>
     <string name="lunaris_bar_mini_fade">Fade when the chip appears</string>
     <string name="lunaris_bar_mini_foreground_day">Foreground</string>
     <string name="lunaris_bar_mini_foreground_night">Foreground</string>

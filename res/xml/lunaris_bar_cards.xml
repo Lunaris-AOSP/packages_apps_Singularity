@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_bar_cards">
+
+    <Preference
+        android:key="add_card"
+        android:title="@string/lunaris_bar_add_card"
+        android:persistent="false" />
+
+    <PreferenceCategory
+        android:key="cards"
+        android:title="@string/lunaris_bar_cards" />
+
+    <Preference
+        android:key="cards_empty"
+        android:title="@string/lunaris_bar_cards_empty"
+        android:persistent="false"
+        android:selectable="false" />
+
+</PreferenceScreen>

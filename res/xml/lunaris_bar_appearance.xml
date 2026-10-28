@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_bar_appearance">
+
+    <SwitchPreferenceCompat
+        android:key="screen_profile"
+        android:title="@string/lunaris_bar_screen_profile"
+        android:persistent="false"
+        android:summary="@string/lunaris_bar_screen_profile_description" />
+
+    <PreferenceCategory
+        android:key="appearance_theme"
+        android:title="@string/lunaris_bar_appearance_theme">
+
+        <ListPreference
+            android:key="theme"
+            android:title="@string/lunaris_bar_theme"
+            android:persistent="false" />
+
+        <SwitchPreferenceCompat
+            android:key="mini_blur"
+            android:title="@string/lunaris_bar_mini_blur"
+            android:summary="@string/lunaris_bar_mini_blur_summary"
+            android:persistent="false" />
+
+        <SwitchPreferenceCompat
+            android:key="capsule_blur"
+            android:title="@string/lunaris_bar_capsule_blur"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appearance_chip"
+        android:title="@string/lunaris_bar_appearance_chip">
+
+        <ListPreference
+            android:key="mini_shape"
+            android:title="@string/lunaris_bar_mini_shape"
+            android:persistent="false" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="mini_scale"
+            android:title="@string/lunaris_bar_mini_scale"
+            android:persistent="false"
+            android:defaultValue="100"
+            settings:min="70"
+            android:max="200"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="status_bar_dynamic_island_width_scale"
+            android:title="@string/lunaris_bar_status_bar_dynamic_island_width_scale"
+            android:persistent="false"
+            android:defaultValue="100"
+            settings:min="70"
+            android:max="140"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="status_bar_dynamic_island_height_scale"
+            android:title="@string/lunaris_bar_status_bar_dynamic_island_height_scale"
+            android:persistent="false"
+            android:defaultValue="100"
+            settings:min="70"
+            android:max="140"
+            settings:interval="1" />
+
+        <SwitchPreferenceCompat
+            android:key="companion"
+            android:title="@string/lunaris_bar_companion"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appearance_position"
+        android:title="@string/lunaris_bar_appearance_position">
+
+        <ListPreference
+            android:key="mini_alignment"
+            android:title="@string/lunaris_bar_mini_alignment"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="mini_scale_alignment"
+            android:title="@string/lunaris_bar_mini_scale_alignment"
+            android:persistent="false" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="offset_x"
+            android:title="@string/lunaris_bar_offset_x"
+            android:persistent="false"
+            android:defaultValue="0"
+            settings:min="-200"
+            android:max="200"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="offset_y"
+            android:title="@string/lunaris_bar_offset_y"
+            android:persistent="false"
+            android:defaultValue="0"
+            settings:min="-24"
+            android:max="100"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="camera_width"
+            android:title="@string/lunaris_bar_camera_width"
+            android:persistent="false"
+            android:defaultValue="25"
+            settings:min="0"
+            android:max="120"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="camera_height"
+            android:title="@string/lunaris_bar_camera_height"
+            android:persistent="false"
+            android:defaultValue="24"
+            settings:min="8"
+            android:max="64"
+            settings:interval="1" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appearance_expanded"
+        android:title="@string/lunaris_bar_appearance_expanded">
+
+        <ListPreference
+            android:key="expanded_mode"
+            android:title="@string/lunaris_bar_expanded_mode"
+            android:persistent="false"
+            android:summary="@string/lunaris_bar_expanded_mode_description" />
+
+        <ListPreference
+            android:key="expanded_width"
+            android:title="@string/lunaris_bar_expanded_width"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="expanded_shape"
+            android:title="@string/lunaris_bar_expanded_shape"
+            android:persistent="false"
+            android:summary="@string/lunaris_bar_expanded_shape_description" />
+
+        <ListPreference
+            android:key="card_icon_shape"
+            android:title="@string/lunaris_bar_card_icon_shape"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="card_button_shape"
+            android:title="@string/lunaris_bar_card_button_shape"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appearance_edges"
+        android:title="@string/lunaris_bar_appearance_edges">
+
+        <SwitchPreferenceCompat
+            android:key="custom_radius"
+            android:title="@string/lunaris_bar_custom_radius"
+            android:persistent="false"
+            android:summary="@string/lunaris_bar_custom_radius_description" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="corner_radius"
+            android:title="@string/lunaris_bar_corner_radius"
+            android:persistent="false"
+            android:defaultValue="42"
+            settings:min="0"
+            android:max="64"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="outline_width"
+            android:title="@string/lunaris_bar_outline_width"
+            android:persistent="false"
+            android:defaultValue="10"
+            settings:min="0"
+            android:max="30"
+            settings:interval="1" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="shadow_elevation"
+            android:title="@string/lunaris_bar_shadow_elevation"
+            android:persistent="false"
+            android:defaultValue="12"
+            settings:min="0"
+            android:max="32"
+            settings:interval="1" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appearance_idle"
+        android:title="@string/lunaris_bar_appearance_idle">
+
+        <SwitchPreferenceCompat
+            android:key="always_visible"
+            android:title="@string/lunaris_bar_always_visible"
+            android:persistent="false" />
+
+        <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+            android:key="collapsed_opacity"
+            android:title="@string/lunaris_bar_collapsed_opacity"
+            android:persistent="false"
+            android:defaultValue="0"
+            settings:min="0"
+            android:max="100"
+            settings:interval="1" />
+
+        <ListPreference
+            android:key="collapsed_border"
+            android:title="@string/lunaris_bar_collapsed_border"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

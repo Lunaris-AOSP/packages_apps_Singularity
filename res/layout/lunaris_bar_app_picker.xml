@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp">
+    <EditText
+        android:id="@+id/lunaris_bar_app_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lunaris_bar_search"
+        android:inputType="text"
+        android:singleLine="true" />
+    <ListView
+        android:id="@+id/lunaris_bar_app_list"
+        android:layout_width="match_parent"
+        android:layout_height="320dp" />
+</LinearLayout>

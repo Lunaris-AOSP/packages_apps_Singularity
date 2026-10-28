@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_bar_title">
+
+    <SwitchPreferenceCompat
+        android:key="switch"
+        android:title="@string/lunaris_bar_switch"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="choice"
+        android:title="@string/lunaris_bar_choice"
+        android:persistent="false" />
+
+    <org.lunaris.settings.preferences.LunarisBarSeekBarPreference
+        android:key="slider"
+        android:title="@string/lunaris_bar_slider"
+        android:persistent="false"
+        android:defaultValue="0"
+        android:max="100"
+        settings:min="0"
+        settings:interval="1" />
+
+    <org.lunaris.settings.preferences.colorpicker.LunarisBarColorPickerPreference
+        android:key="color"
+        android:title="@string/lunaris_bar_choose_color"
+        android:persistent="false"
+        android:defaultValue="-16777216" />
+
+    <EditTextPreference
+        android:key="text"
+        android:title="@string/lunaris_bar_text"
+        android:persistent="false" />
+
+    <Preference
+        android:key="action"
+        android:title="@string/lunaris_bar_action"
+        android:persistent="false" />
+
+</PreferenceScreen>
