@@ -172,7 +172,7 @@ public class Themes extends SettingsPreferenceFragment implements
         return Settings.System.getIntForUser(
                 getContext().getContentResolver(),
                 KEY_VOLUME_DIALOG_TYPE,
-                VOLUME_TYPE_REDESIGNED,
+                VOLUME_TYPE_AXION,
                 UserHandle.USER_CURRENT);
     }
 
