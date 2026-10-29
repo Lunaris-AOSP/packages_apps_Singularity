@@ -100,7 +100,6 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private Preference mLogoCustomImage;
     private Preference mLogoStyle;
     private Preference mCustomCarrierTextPref;
-    private Preference mDynamicIsland;
     private String mCustomCarrierText;
 
     @Override
@@ -129,11 +128,6 @@ public class StatusBar extends SettingsPreferenceFragment implements
         } else if (DeviceUtils.hasCenteredCutout(mContext)) {
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
-        }
-
-        mDynamicIsland = findPreference(DYNAMIC_ISLAND);
-        if (mDynamicIsland != null) {
-            mDynamicIsland.setVisible(DeviceUtils.hasCenteredCutout(mContext));
         }
 
         mQuickPulldown =
@@ -416,10 +410,6 @@ public class StatusBar extends SettingsPreferenceFragment implements
                     if (!TelephonyUtils.isVoiceCapable(context)) {
                         keys.add(CARRIER_NAME);
                         keys.add(CUSTOM_CARRIER_LABEL);
-                    }
-
-                    if (!DeviceUtils.hasCenteredCutout(context)) {
-                        keys.add(DYNAMIC_ISLAND);
                     }
                     return keys;
                 }
