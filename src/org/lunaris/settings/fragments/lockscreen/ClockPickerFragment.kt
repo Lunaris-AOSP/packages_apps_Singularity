@@ -5,6 +5,7 @@
  */
 package org.lunaris.settings.fragments.lockscreen
 
+import com.android.settings.widget.setSettingsContent
 import android.app.WallpaperManager
 import android.os.Bundle
 import android.os.UserHandle
@@ -99,7 +100,7 @@ class ClockPickerFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             isNestedScrollingEnabled = true
-            setContent {
+            setSettingsContent {
                 SettingsTheme {
                     val initialClock = remember {
                         Settings.Secure.getIntForUser(

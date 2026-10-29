@@ -16,6 +16,7 @@
 
 package org.lunaris.settings.fragments.lockscreen
 
+import com.android.settings.widget.setSettingsContent
 import android.os.Bundle
 import android.os.UserHandle
 import android.provider.Settings
@@ -62,7 +63,7 @@ class ClockColorPickerDialogFragment : DialogFragment() {
 
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
+            setSettingsContent {
                 LunarisTheme {
                     ClockColorPickerDialog(
                         initialColor = initialHex,

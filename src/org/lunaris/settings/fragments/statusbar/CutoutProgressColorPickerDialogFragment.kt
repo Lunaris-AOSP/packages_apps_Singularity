@@ -16,6 +16,7 @@
 
 package org.lunaris.settings.fragments.statusbar
 
+import com.android.settings.widget.setSettingsContent
 import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +62,7 @@ class CutoutProgressColorPickerDialogFragment : DialogFragment() {
             setViewCompositionStrategy(
                 ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
             )
-            setContent {
+            setSettingsContent {
                 LunarisTheme {
                     ColorPickerDialog(
                         initialColor = initialColor,

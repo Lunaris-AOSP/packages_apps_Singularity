@@ -5,6 +5,7 @@
 
 package org.lunaris.settings.fragments.miscellaneous
 
+import com.android.settings.widget.setSettingsContent
 import android.app.ActivityManager
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -102,7 +103,7 @@ class PixelPropsSettings : SettingsPreferenceFragment() {
         savedInstanceState: Bundle?,
     ): View = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
+        setSettingsContent {
             SettingsTheme {
                 PixelPropsContent(context = requireContext())
             }

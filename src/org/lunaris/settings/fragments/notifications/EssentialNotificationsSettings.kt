@@ -5,6 +5,7 @@
 
 package org.lunaris.settings.fragments.notifications
 
+import com.android.settings.widget.setSettingsContent
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -96,7 +97,7 @@ class EssentialNotificationsSettings : Fragment() {
                 androidx.compose.ui.platform.ViewCompositionStrategy
                     .DisposeOnViewTreeLifecycleDestroyed
             )
-            setContent {
+            setSettingsContent {
                 SettingsTheme {
                     EssentialNotificationsContent(requireContext())
                 }

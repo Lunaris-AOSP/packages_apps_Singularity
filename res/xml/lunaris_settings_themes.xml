@@ -270,6 +270,12 @@
             android:summary="@string/compose_homepage_summary"
             android:defaultValue="true" />
 
+        <Preference
+            android:key="settings_scroll_bounce"
+            android:title="@string/settings_scroll_bounce_title"
+            android:summary="@string/settings_scroll_bounce_summary"
+            android:fragment="com.android.settings.display.ScrollBounceSettings" />
+
         <org.lunaris.settings.preferences.OverlaySwitchPreference
             android:key="com.android.settingslib.smileswitch"
             android:title="@string/smile_switch_title"

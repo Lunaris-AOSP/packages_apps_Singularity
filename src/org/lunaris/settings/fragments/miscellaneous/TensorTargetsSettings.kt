@@ -5,6 +5,7 @@
 
 package org.lunaris.settings.fragments.miscellaneous
 
+import com.android.settings.widget.setSettingsContent
 import android.app.ActivityManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -104,7 +105,7 @@ class TensorTargetsSettings : SettingsPreferenceFragment() {
         savedInstanceState: Bundle?,
     ): View = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
+        setSettingsContent {
             SettingsTheme {
                 TensorTargetsContent(context = requireContext())
             }

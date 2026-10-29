@@ -5,6 +5,7 @@
 
 package org.lunaris.settings.fragments.miscellaneous
 
+import com.android.settings.widget.setSettingsContent
 import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageManager
@@ -125,7 +126,7 @@ class UserSelectedAppSpoofSettings : Fragment() {
                 androidx.compose.ui.platform.ViewCompositionStrategy
                     .DisposeOnViewTreeLifecycleDestroyed
             )
-            setContent {
+            setSettingsContent {
                 SettingsTheme {
                     AppSpoofingContent(requireContext())
                 }

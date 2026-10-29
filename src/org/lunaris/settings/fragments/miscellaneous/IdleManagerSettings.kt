@@ -5,6 +5,7 @@
 
 package org.lunaris.settings.fragments.miscellaneous
 
+import com.android.settings.widget.setSettingsContent
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -393,7 +394,7 @@ class IdleManagerSettings : Fragment() {
         savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
+        setSettingsContent {
             SettingsTheme {
                 IdleManagerRoot(
                     ctx = requireContext(),
