@@ -62,7 +62,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_DIALOG_TYPE = "volume_dialog_type";
     private static final String KEY_QUICKSWITCH = "quickswitch";
     private static final String KEY_SHOW_VOLUME_PERCENTAGE = "show_volume_percentage";
-    private static final String KEY_AXION_VOLUME_STYLE = "axion_volume_style";
+    private static final String KEY_AXION_VOLUME_STYLE = "compose_volume_style";
     private static final String KEY_LOCK_GLYMPS = "lock_glymps_enabled";
     private static final String KEY_UNLOCK_ANIMATION = "lockscreen_unlock_animation";
     private static final String KEY_UNLOCK_EFFECT_HFR = "lockscreen_unlock_effect_hfr";
