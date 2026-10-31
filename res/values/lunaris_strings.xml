@@ -2,6 +2,7 @@
 <!--
      Copyright (C) 2016-2024 crDroid Android Project
      Copyright (C) 2023-2025 Lunaris OS Android Project
+     Copyright (C) 2024-2026 Lunaris AOSP
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -1666,6 +1667,25 @@
     <string name="sidebar_summary">Quickly open apps in a floating window</string>
 
     <!-- Smartspace -->
+    <string name="lockscreen_smartspace_extras_title">Smartspace extras</string>
+    <string name="lockscreen_smartspace_extras_summary">Show extra information on the lockscreen and Always-on Display</string>
+    <string name="lockscreen_smartspace_extras_weather_title">Weather conditions</string>
+    <string name="lockscreen_smartspace_extras_weather_summary">Show weather forecasts and alerts from Smartspace</string>
+    <string name="lockscreen_smartspace_extras_flashlight_title">Torch</string>
+    <string name="lockscreen_smartspace_extras_flashlight_summary">Show when the torch is on and tap to turn it off</string>
+    <string name="lockscreen_smartspace_extras_default_events_title">Other Smartspace information</string>
+    <string name="lockscreen_smartspace_extras_default_events_summary">Show upcoming alarms, battery status, and available Smartspace cards such as timers and reminders</string>
+    <string name="lockscreen_smartspace_extras_navigation_title">Maps and navigation</string>
+    <string name="lockscreen_smartspace_extras_navigation_summary">Show directions and trip information from active navigation notifications</string>
+    <string name="lockscreen_smartspace_extras_calendar_title">Calendar events</string>
+    <string name="lockscreen_smartspace_extras_calendar_summary">Show current events and events in the next hour when private lockscreen content is allowed</string>
+    <string name="lockscreen_smartspace_extras_bluetooth_title">Bluetooth and Fast Pair</string>
+    <string name="lockscreen_smartspace_extras_bluetooth_summary">Show connected devices, Fast Pair artwork, and battery levels</string>
+    <string name="lockscreen_smartspace_extras_music_title">Music</string>
+    <string name="lockscreen_smartspace_extras_music_summary">Show the playing song and artist using your lockscreen privacy settings</string>
+    <string name="lockscreen_smartspace_extras_messages_title">Random messages</string>
+    <string name="lockscreen_smartspace_extras_messages_summary">Show a greeting for the time of day with a random message on the second line</string>
+
     <string name="lockscreen_smartspace_title">Smartspace</string>
     <string name="lockscreen_smartspace_summary">Show Google Smartspace when available</string>
 

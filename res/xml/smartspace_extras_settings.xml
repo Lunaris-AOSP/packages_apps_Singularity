@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2024-2026 Lunaris AOSP
+    SPDX-License-Identifier: Apache-2.0
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lockscreen_smartspace_extras_title">
+
+    <lineageos.preference.SecureSettingMainSwitchPreference
+        android:key="lockscreen_smartspace_extras_enabled"
+        android:title="@string/enable"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_weather"
+        android:title="@string/lockscreen_smartspace_extras_weather_title"
+        android:summary="@string/lockscreen_smartspace_extras_weather_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_flashlight"
+        android:title="@string/lockscreen_smartspace_extras_flashlight_title"
+        android:summary="@string/lockscreen_smartspace_extras_flashlight_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_default_events"
+        android:title="@string/lockscreen_smartspace_extras_default_events_title"
+        android:summary="@string/lockscreen_smartspace_extras_default_events_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_navigation"
+        android:title="@string/lockscreen_smartspace_extras_navigation_title"
+        android:summary="@string/lockscreen_smartspace_extras_navigation_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_calendar"
+        android:title="@string/lockscreen_smartspace_extras_calendar_title"
+        android:summary="@string/lockscreen_smartspace_extras_calendar_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_bluetooth"
+        android:title="@string/lockscreen_smartspace_extras_bluetooth_title"
+        android:summary="@string/lockscreen_smartspace_extras_bluetooth_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_music"
+        android:title="@string/lockscreen_smartspace_extras_music_title"
+        android:summary="@string/lockscreen_smartspace_extras_music_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="lockscreen_smartspace_extras_messages"
+        android:title="@string/lockscreen_smartspace_extras_messages_title"
+        android:summary="@string/lockscreen_smartspace_extras_messages_summary"
+        android:dependency="lockscreen_smartspace_extras_enabled"
+        android:defaultValue="true" />
+
+</PreferenceScreen>

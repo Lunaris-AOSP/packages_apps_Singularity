@@ -165,9 +165,12 @@ public class LockScreen extends SettingsPreferenceFragment
                 preference.loadValue();
             }
         }
-        SecureSettingPrimarySwitchPreference pulse = findPreference("lockscreen_pulse_enabled");
-        if (pulse != null) {
-            pulse.loadValue();
+        for (String key : new String[] {
+                "lockscreen_pulse_enabled", "lockscreen_smartspace_extras_enabled" }) {
+            SecureSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
         }
         updateWeatherSettings();
     }
