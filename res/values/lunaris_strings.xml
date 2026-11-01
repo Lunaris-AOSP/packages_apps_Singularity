@@ -2796,8 +2796,10 @@
     <string name="keyguard_scrim_transparent_summary">Hide the lockscreen wallpaper dimming layer</string>
 
     <!-- AOD Peek -->
+    <string name="doze_fp_only_title">FP only</string>
+    <string name="doze_fp_only_summary">Show only the fingerprint icon on ambient display, including AOD Peek</string>
     <string name="doze_peek_title">AOD Peek</string>
-    <string name="doze_peek_summary">Show ambient display briefly when the screen turns off</string>
+    <string name="doze_peek_summary">Show ambient display briefly when the screen turns off. Used when always-on display is off.</string>
     <string name="doze_peek_duration_title">Peek duration</string>
     
     <!-- Notification icons center aligned -->

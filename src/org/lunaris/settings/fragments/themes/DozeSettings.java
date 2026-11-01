@@ -23,6 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
+import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,6 +61,9 @@ public class DozeSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE_ENABLED = "doze_enabled";
     private static final String KEY_DOZE_ALWAYS_ON = "doze_always_on";
     private static final String KEY_DOZE_ALWAYS_ON_SCHEDULE = "always_on_display_schedule";
+    private static final String KEY_DOZE_FP_ONLY = "doze_fp_only";
+    private static final String KEY_DOZE_PEEK = "doze_peek";
+    private static final String KEY_DOZE_PEEK_DURATION = "doze_peek_duration";
 
     private static final String CATEG_DOZE_SENSOR = "doze_sensor";
 
@@ -70,6 +76,10 @@ public class DozeSettings extends SettingsPreferenceFragment implements
 
     private SwitchPreferenceCompat mDozeEnabledPreference;
     private SwitchPreferenceCompat mDozeAlwaysOnPreference;
+    private SwitchPreferenceCompat mDozeFpOnlyPreference;
+    private SwitchPreferenceCompat mDozePeekPreference;
+    private Preference mDozePeekDurationPreference;
+    private PreferenceCategory mAmbientDisplayCategory;
     private SwitchPreferenceCompat mTiltPreference;
     private SwitchPreferenceCompat mPickUpPreference;
     private SwitchPreferenceCompat mHandwavePreference;
@@ -97,6 +107,22 @@ public class DozeSettings extends SettingsPreferenceFragment implements
 
         mDozeAlwaysOnPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_ALWAYS_ON);
         mDozeAlwaysOnSchedulePreference = findPreference(KEY_DOZE_ALWAYS_ON_SCHEDULE);
+        mDozeFpOnlyPreference = findPreference(KEY_DOZE_FP_ONLY);
+        mDozePeekPreference = findPreference(KEY_DOZE_PEEK);
+        mDozePeekDurationPreference = findPreference(KEY_DOZE_PEEK_DURATION);
+        mAmbientDisplayCategory = findPreference("ambient_display_category");
+
+        if (new AmbientDisplayConfiguration(context).ambientDisplayAvailable()) {
+            mDozePeekPreference.setOnPreferenceChangeListener(this);
+        } else {
+            getPreferenceScreen().removePreference(mDozePeekDurationPreference);
+            getPreferenceScreen().removePreference(mDozePeekPreference);
+        }
+        if (isFpOnlyAvailable(context)) {
+            mDozeFpOnlyPreference.setOnPreferenceChangeListener(this);
+        } else {
+            getPreferenceScreen().removePreference(mDozeFpOnlyPreference);
+        }
 
         mTiltPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_TILT_GESTURE);
         mPickUpPreference = (SwitchPreferenceCompat) findPreference(KEY_DOZE_PICK_UP_GESTURE);
@@ -143,6 +169,45 @@ public class DozeSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mDozeAlwaysOnPreference.setChecked(Utils.isDozeAlwaysOnEnabled(getContext()));
+        updateAodPreferences();
+    }
+
+    private static boolean isFpOnlyAvailable(Context context) {
+        if (!new AmbientDisplayConfiguration(context).ambientDisplayAvailable()) {
+            return false;
+        }
+        FingerprintManager fingerprintManager = context.getSystemService(FingerprintManager.class);
+        if (fingerprintManager == null) {
+            return false;
+        }
+        for (FingerprintSensorPropertiesInternal sensor
+                : fingerprintManager.getSensorPropertiesInternal()) {
+            if (sensor.isAnyUdfpsType()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateAodPreferences() {
+        ContentResolver resolver = getContext().getContentResolver();
+        boolean peekEnabled = Settings.Secure.getIntForUser(resolver,
+                KEY_DOZE_PEEK, 0, UserHandle.USER_CURRENT) == 1;
+        boolean fpOnlyEnabled = Settings.Secure.getIntForUser(resolver,
+                KEY_DOZE_FP_ONLY, 0, UserHandle.USER_CURRENT) == 1;
+        boolean alwaysOnEnabled = new AmbientDisplayConfiguration(getContext())
+                .alwaysOnEnabledSetting(UserHandle.USER_CURRENT);
+        mDozePeekPreference.setChecked(peekEnabled);
+        mDozePeekPreference.setEnabled(!alwaysOnEnabled);
+        mDozePeekDurationPreference.setEnabled(peekEnabled && mDozePeekPreference.isEnabled());
+        mDozeFpOnlyPreference.setChecked(fpOnlyEnabled);
+        mAmbientDisplayCategory.setEnabled(!fpOnlyEnabled || !isFpOnlyAvailable(getContext()));
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Context context = getContext();
         ContentResolver resolver = context.getContentResolver();
@@ -151,7 +216,13 @@ public class DozeSettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) newValue;
             Settings.Secure.putIntForUser(resolver, Settings.Secure.DOZE_ALWAYS_ON, 
                  value ? 1 : 0, UserHandle.USER_CURRENT);
+            updateAodPreferences();
             checkService(context);
+            return true;
+        } else if (preference == mDozeFpOnlyPreference || preference == mDozePeekPreference) {
+            Settings.Secure.putIntForUser(resolver, preference.getKey(),
+                    (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
+            updateAodPreferences();
             return true;
         } else if (preference == mTiltPreference) {
             boolean value = (Boolean) newValue;
@@ -241,6 +312,14 @@ public class DozeSettings extends SettingsPreferenceFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!new AmbientDisplayConfiguration(context).ambientDisplayAvailable()) {
+                        keys.add(KEY_DOZE_PEEK);
+                        keys.add(KEY_DOZE_PEEK_DURATION);
+                    }
+                    if (!isFpOnlyAvailable(context)) {
+                        keys.add(KEY_DOZE_FP_ONLY);
+                    }
 
                     if (!Utils.isDozeAlwaysOnAvailable(context)) {
                         keys.add(KEY_DOZE_ALWAYS_ON);

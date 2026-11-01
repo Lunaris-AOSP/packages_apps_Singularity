@@ -36,6 +36,12 @@
         android:dependency="doze_always_on" />
 
     <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="doze_fp_only"
+        android:title="@string/doze_fp_only_title"
+        android:summary="@string/doze_fp_only_summary"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
         android:key="doze_peek"
         android:title="@string/doze_peek_title"
         android:summary="@string/doze_peek_summary"
