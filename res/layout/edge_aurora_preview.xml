@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <org.lunaris.settings.fragments.themes.EdgeAuroraPreviewView
+        android:id="@+id/edge_aurora_preview"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:contentDescription="@string/edge_aurora_preview_description" />
+</FrameLayout>

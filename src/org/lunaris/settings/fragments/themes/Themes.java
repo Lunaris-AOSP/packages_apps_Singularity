@@ -132,7 +132,8 @@ public class Themes extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        for (String key : new String[] { "edge_light_enabled", KEY_LOCK_GLYMPS }) {
+        for (String key : new String[] {
+                "edge_aurora_enabled", "edge_light_enabled", KEY_LOCK_GLYMPS }) {
             SystemSettingPrimarySwitchPreference preference = findPreference(key);
             if (preference != null) {
                 preference.loadValue();

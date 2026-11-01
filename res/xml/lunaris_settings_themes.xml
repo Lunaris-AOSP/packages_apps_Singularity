@@ -86,6 +86,13 @@
             android:title="@string/pulse_on_new_tracks_title"
             android:summary="@string/pulse_on_new_tracks_summary" />
 
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="edge_aurora_enabled"
+            android:title="@string/edge_aurora_title"
+            android:summary="@string/edge_aurora_summary"
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.themes.EdgeAuroraSettings" />
+
         <!-- Edge Light -->
         <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
             android:key="edge_light_enabled"

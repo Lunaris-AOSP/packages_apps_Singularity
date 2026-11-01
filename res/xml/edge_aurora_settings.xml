@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/edge_aurora_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="preview"
+        android:layout="@layout/edge_aurora_preview"
+        android:selectable="false"
+        settings:searchable="false" />
+
+    <lineageos.preference.SystemSettingMainSwitchPreference
+        android:key="edge_aurora_enabled"
+        android:title="@string/edge_aurora_enable"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="instructions"
+        android:title="@string/edge_aurora_summary"
+        android:summary="@string/edge_aurora_instructions"
+        android:selectable="false" />
+
+    <PreferenceCategory android:key="profiles" android:title="@string/edge_aurora_glows" />
+
+    <PreferenceCategory android:title="@string/edge_aurora_add">
+        <Preference android:key="add_app" android:title="@string/edge_aurora_add_app" />
+        <Preference android:key="add_group" android:title="@string/edge_aurora_add_group"
+            android:summary="@string/edge_aurora_group_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/edge_aurora_interaction">
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_popup_blur"
+            android:title="@string/edge_aurora_popup_blur"
+            android:summary="@string/edge_aurora_popup_blur_summary"
+            android:defaultValue="true" android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="edge_aurora_open_action"
+            android:title="@string/edge_aurora_open_action"
+            android:entries="@array/edge_aurora_open_action_entries"
+            android:entryValues="@array/edge_aurora_open_action_values"
+            android:summary="%s" android:defaultValue="0"
+            android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_auto_peek"
+            android:title="@string/edge_aurora_auto_peek"
+            android:summary="@string/edge_aurora_auto_peek_summary"
+            android:defaultValue="false" android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="edge_aurora_peek_timeout"
+            android:title="@string/edge_aurora_peek_timeout"
+            android:entries="@array/edge_aurora_peek_time_entries"
+            android:entryValues="@array/edge_aurora_peek_time_values"
+            android:summary="%s" android:defaultValue="6"
+            android:dependency="edge_aurora_auto_peek" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_only_edge"
+            android:title="@string/edge_aurora_only_edge"
+            android:summary="@string/edge_aurora_only_edge_summary"
+            android:defaultValue="false" android:dependency="edge_aurora_enabled" />
+        <Preference
+            android:key="edge_aurora_quiet_apps"
+            android:title="@string/edge_aurora_quiet"
+            android:summary="@string/edge_aurora_quiet_summary"
+            android:persistent="false"
+            android:dependency="edge_aurora_enabled" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/edge_aurora_screen">
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_lock_screen"
+            android:title="@string/edge_aurora_lock_screen"
+            android:summary="@string/edge_aurora_lock_screen_summary"
+            android:defaultValue="true" android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_wake"
+            android:title="@string/edge_aurora_wake"
+            android:summary="@string/edge_aurora_wake_summary"
+            android:defaultValue="true" android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="edge_aurora_brightness"
+            android:title="@string/edge_aurora_brightness"
+            android:defaultValue="10" android:max="50"
+            settings:min="2" settings:interval="1" settings:units="%"
+            android:dependency="edge_aurora_wake" />
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="edge_aurora_timeout"
+            android:title="@string/edge_aurora_timeout"
+            android:defaultValue="15" android:max="60"
+            settings:min="5" settings:interval="1" settings:units="s"
+            android:dependency="edge_aurora_wake" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_clock"
+            android:title="@string/edge_aurora_clock"
+            android:defaultValue="true" android:dependency="edge_aurora_wake" />
+    </PreferenceCategory>
+</PreferenceScreen>

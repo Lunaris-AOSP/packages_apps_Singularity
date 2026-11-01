@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/edge_aurora_title">
+
+    <Preference android:key="app_info" android:selectable="false" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="preview" android:layout="@layout/edge_aurora_preview"
+        android:selectable="false" settings:searchable="false" />
+    <SwitchPreferenceCompat android:key="profile_enabled"
+        android:title="@string/edge_aurora_profile_enabled" android:persistent="false" />
+    <EditTextPreference android:key="name" android:title="@string/edge_aurora_name"
+        android:persistent="false" />
+    <Preference android:key="members" android:title="@string/edge_aurora_members"
+        android:persistent="false" />
+    <Preference android:key="drag_hint" android:summary="@string/edge_aurora_drag_hint"
+        android:selectable="false" />
+
+    <PreferenceCategory android:title="@string/edge_aurora_appearance">
+        <ListPreference android:key="edge" android:title="@string/edge_aurora_edge"
+            android:entries="@array/edge_aurora_edges" android:entryValues="@array/edge_aurora_edge_values"
+            android:summary="%s" android:persistent="false" />
+        <ListPreference android:key="palette" android:title="@string/edge_aurora_palette"
+            android:entries="@array/edge_aurora_colors" android:entryValues="@array/edge_aurora_color_values"
+            android:persistent="false" />
+        <org.lunaris.settings.preferences.colorpicker.ColorPickerPreference
+            android:key="color" android:title="@string/edge_aurora_color"
+            android:defaultValue="-41846" android:persistent="false" />
+        <ListPreference android:key="recent_colors" android:title="@string/edge_aurora_recent_colors"
+            android:persistent="false" />
+        <ListPreference android:key="motion" android:title="@string/edge_aurora_motion"
+            android:entries="@array/edge_aurora_motions" android:entryValues="@array/edge_aurora_motion_values"
+            android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/edge_aurora_shape">
+        <org.lunaris.settings.fragments.themes.EdgeAuroraSliderPreference
+            android:key="position" android:title="@string/edge_aurora_position"
+            android:defaultValue="28" android:max="97" settings:min="0" settings:interval="1"
+            settings:units="%" android:persistent="false" />
+        <org.lunaris.settings.fragments.themes.EdgeAuroraSliderPreference
+            android:key="length" android:title="@string/edge_aurora_length"
+            android:defaultValue="20" android:max="70" settings:min="3" settings:interval="1"
+            settings:units="%" android:persistent="false" />
+        <org.lunaris.settings.fragments.themes.EdgeAuroraSliderPreference
+            android:key="thickness" android:title="@string/edge_aurora_thickness"
+            android:defaultValue="5" android:max="16" settings:min="3" settings:interval="1"
+            settings:units="dp" android:persistent="false" />
+        <org.lunaris.settings.fragments.themes.EdgeAuroraSliderPreference
+            android:key="bloom" android:title="@string/edge_aurora_bloom"
+            android:defaultValue="22" android:max="40" settings:min="8" settings:interval="1"
+            settings:units="dp" android:persistent="false" />
+    </PreferenceCategory>
+
+    <Preference android:key="try" android:title="@string/edge_aurora_try"
+        android:summary="@string/edge_aurora_try_summary" />
+    <Preference android:key="notification_settings" android:title="@string/edge_aurora_notification_settings" />
+    <Preference android:key="remove" android:title="@string/edge_aurora_remove" />
+</PreferenceScreen>
