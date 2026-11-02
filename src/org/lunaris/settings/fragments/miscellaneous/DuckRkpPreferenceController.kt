@@ -130,7 +130,15 @@ internal class DuckRkpPreferenceController(
             imported -> fragment.getString(R.string.ts_rkp_imported)
             !available -> fragment.getString(R.string.ts_rkp_unavailable)
             !enabled -> fragment.getString(R.string.ts_rkp_disabled)
-            !current.getString("error").isNullOrEmpty() -> error(current)
+            !current.getString("error").isNullOrEmpty() -> when {
+                current.getBoolean("automatic_paused") -> fragment.getString(
+                    R.string.ts_rkp_auto_paused, error(current))
+                current.getLong("next_automatic_at") > 0 -> fragment.getString(
+                    R.string.ts_rkp_auto_retry, error(current),
+                    DateFormat.getDateTimeInstance().format(
+                        Date(current.getLong("next_automatic_at"))))
+                else -> error(current)
+            }
             busy -> fragment.getString(when (current.getString("stage")) {
                 "fetching" -> R.string.ts_rkp_fetching
                 "signing" -> R.string.ts_rkp_signing
@@ -138,7 +146,10 @@ internal class DuckRkpPreferenceController(
                 else -> R.string.ts_rkp_hardware
             })
             current.getBoolean("active") -> fragment.getString(R.string.ts_rkp_ready,
-                DateFormat.getDateTimeInstance().format(Date(current.getLong("expires_at"))))
+                DateFormat.getDateTimeInstance().format(Date(current.getLong("expires_at"))),
+                DateFormat.getDateTimeInstance().format(Date(current.getLong("renew_at"))))
+            current.getBoolean("waiting_for_network") ->
+                fragment.getString(R.string.ts_rkp_waiting_network)
             current.getLong("expires_at") in 1..System.currentTimeMillis() ->
                 fragment.getString(R.string.ts_rkp_expired)
             else -> fragment.getString(R.string.ts_rkp_idle)
