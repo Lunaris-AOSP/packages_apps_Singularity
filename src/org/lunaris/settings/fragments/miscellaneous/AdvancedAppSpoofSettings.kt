@@ -138,7 +138,7 @@ private data class SpoofRule(
 )
 
 private fun readEnabled(ctx: Context): Boolean =
-    Settings.Secure.getInt(ctx.contentResolver, KEY_ENABLED, 1) != 0
+    Settings.Secure.getInt(ctx.contentResolver, KEY_ENABLED, 0) != 0
 
 private fun writeEnabled(ctx: Context, v: Boolean) =
     Settings.Secure.putInt(ctx.contentResolver, KEY_ENABLED, if (v) 1 else 0)
@@ -219,7 +219,7 @@ private fun AdvancedSpoofContent(context: Context) {
     val haptic         = LocalHapticFeedback.current
     val scope          = rememberCoroutineScope()
 
-    var enabled by remember { mutableStateOf(true) }
+    var enabled by remember { mutableStateOf(false) }
     var rules   by remember { mutableStateOf(listOf<SpoofRule>()) }
     var allApps by remember { mutableStateOf(listOf<SpoofAppEntry>()) }
 
