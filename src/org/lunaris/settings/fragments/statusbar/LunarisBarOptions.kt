@@ -120,7 +120,6 @@ internal val lunarisBarGestureActions =
 internal val lunarisBarAppearanceOptions =
     listOf(
         LunarisBarOption("theme", "choice", choices = listOf("follow_system", "light", "dark")),
-        LunarisBarOption("mini_blur"),
         LunarisBarOption("capsule_blur"),
         LunarisBarOption("mini_shape", "choice", 2, choices = lunarisBarShapeNames),
         LunarisBarOption("card_icon_shape", "choice", 2, choices = lunarisBarShapeNames),

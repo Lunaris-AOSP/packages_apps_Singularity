@@ -22,12 +22,6 @@
             android:persistent="false" />
 
         <SwitchPreferenceCompat
-            android:key="mini_blur"
-            android:title="@string/lunaris_bar_mini_blur"
-            android:summary="@string/lunaris_bar_mini_blur_summary"
-            android:persistent="false" />
-
-        <SwitchPreferenceCompat
             android:key="capsule_blur"
             android:title="@string/lunaris_bar_capsule_blur"
             android:persistent="false" />
