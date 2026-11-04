@@ -187,9 +187,11 @@ public class StatusBar extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        SystemSettingPrimarySwitchPreference dynamicIsland = findPreference(DYNAMIC_ISLAND);
-        if (dynamicIsland != null) {
-            dynamicIsland.loadValue();
+        for (String key : new String[] { DYNAMIC_ISLAND, "network_speed_enabled" }) {
+            SystemSettingPrimarySwitchPreference preference = findPreference(key);
+            if (preference != null) {
+                preference.loadValue();
+            }
         }
         for (String key : new String[] {
                 "status_bar_show_lyric", "ax_dynamic_bar_enabled", "cutout_progress_enabled" }) {

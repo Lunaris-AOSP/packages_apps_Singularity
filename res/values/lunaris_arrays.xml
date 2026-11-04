@@ -1985,4 +1985,21 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="network_speed_position_entries">
+        <item>@string/network_speed_position_left</item>
+        <item>@string/network_speed_position_right</item>
+    </string-array>
+    <string-array name="network_speed_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="network_speed_layout_entries">
+        <item>@string/network_speed_layout_single</item>
+        <item>@string/network_speed_layout_dual</item>
+    </string-array>
+    <string-array name="network_speed_layout_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>

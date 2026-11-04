@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Lunaris AOSP
+     SPDX-License-Identifier: Apache-2.0 -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/network_speed_settings_title">
+
+    <lineageos.preference.SystemSettingMainSwitchPreference
+        android:key="network_speed_enabled"
+        android:title="@string/network_speed_enabled_title"
+        android:summary="@string/network_speed_enabled_summary"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="network_speed_auto_hide"
+        android:title="@string/network_speed_auto_hide_title"
+        android:summary="@string/network_speed_auto_hide_summary"
+        android:dependency="network_speed_enabled"
+        android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SystemSettingListPreference
+        android:key="network_speed_position"
+        android:title="@string/network_speed_position_title"
+        android:dialogTitle="@string/network_speed_position_title"
+        android:summary="%s"
+        android:entries="@array/network_speed_position_entries"
+        android:entryValues="@array/network_speed_position_values"
+        android:dependency="network_speed_enabled"
+        android:defaultValue="1" />
+
+    <org.lunaris.settings.preferences.SystemSettingListPreference
+        android:key="network_speed_layout"
+        android:title="@string/network_speed_layout_title"
+        android:dialogTitle="@string/network_speed_layout_title"
+        android:summary="%s"
+        android:entries="@array/network_speed_layout_entries"
+        android:entryValues="@array/network_speed_layout_values"
+        android:dependency="network_speed_enabled"
+        android:defaultValue="1" />
+
+</PreferenceScreen>

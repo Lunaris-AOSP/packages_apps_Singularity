@@ -3087,4 +3087,17 @@
     <string name="media_seekbar_style_gradient_wave">Gradient wave</string>
     <string name="media_seekbar_style_cos">COS</string>
 
+    <string name="network_speed_settings_title">Network indicator</string>
+    <string name="network_speed_settings_summary">Network speed, auto hide, placement and text layout</string>
+    <string name="network_speed_enabled_title">Enable network indicator</string>
+    <string name="network_speed_enabled_summary">Display real-time network speed in the status bar</string>
+    <string name="network_speed_auto_hide_title">Auto hide</string>
+    <string name="network_speed_auto_hide_summary">Hide the indicator when upload and download speeds are zero</string>
+    <string name="network_speed_position_title">Indicator placement</string>
+    <string name="network_speed_position_left">Left (between clock &amp; notifications)</string>
+    <string name="network_speed_position_right">Right (end side)</string>
+    <string name="network_speed_layout_title">Text layout</string>
+    <string name="network_speed_layout_single">Single line (units beside number)</string>
+    <string name="network_speed_layout_dual">Dual line (units below number)</string>
+
 </resources>
