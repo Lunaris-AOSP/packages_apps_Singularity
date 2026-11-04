@@ -157,14 +157,17 @@ internal class DuckRkpPreferenceController(
     }
 
     private fun error(current: Bundle): String = when (current.getString("error")) {
-        "hal_rejected" -> fragment.getString(R.string.ts_rkp_hal_rejected, current.getInt("detail"))
+        "hal_rejected", "native_rejected" -> fragment.getString(R.string.ts_rkp_hal_rejected, current.getInt("detail"))
+        "native_unavailable" -> fragment.getString(R.string.ts_rkp_native_unavailable)
+        "native_transport" -> fragment.getString(R.string.ts_rkp_native_transport)
+        "invalid_hal_response" -> fragment.getString(R.string.ts_rkp_invalid_response)
         "http_error" -> fragment.getString(R.string.ts_rkp_http_error, current.getInt("detail"))
         "hal_unsupported", "hal_unavailable", "missing_eek" ->
             fragment.getString(R.string.ts_rkp_unsupported)
         "network_error" -> fragment.getString(R.string.ts_rkp_network_error)
         "submission_unknown" -> fragment.getString(R.string.ts_rkp_submission_unknown)
         "certificate_invalid", "stored_key_invalid" -> fragment.getString(R.string.ts_rkp_invalid_chain)
-        "timeout" -> fragment.getString(R.string.ts_rkp_timeout)
+        "timeout", "native_timeout" -> fragment.getString(R.string.ts_rkp_timeout)
         "canceled" -> fragment.getString(R.string.ts_rkp_canceled)
         "save_failed" -> fragment.getString(R.string.ts_rkp_save_failed)
         else -> fragment.getString(R.string.ts_rkp_action_failed)
