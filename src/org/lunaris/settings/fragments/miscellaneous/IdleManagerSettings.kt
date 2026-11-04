@@ -105,9 +105,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -393,6 +395,10 @@ class IdleManagerSettings : Fragment() {
         container: android.view.ViewGroup?,
         savedInstanceState: Bundle?
     ) = ComposeView(requireContext()).apply {
+        layoutParams = android.view.ViewGroup.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+        )
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setSettingsContent {
             SettingsTheme {
@@ -691,6 +697,7 @@ private fun IdleManagerRoot(
     Scaffold(containerColor = Color.Transparent) { padding ->
         Column(
             modifier = Modifier
+                .nestedScroll(rememberNestedScrollInteropConnection())
                 .fillMaxSize()
                 .padding(padding)
         ) {
@@ -702,7 +709,7 @@ private fun IdleManagerRoot(
                     globalEnabled = v
                     launchSettingsWrite { writeEnabled(ctx, v) }
                 },
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 6.dp)
             )
 
             SleepModeTriggerCard(
@@ -712,11 +719,16 @@ private fun IdleManagerRoot(
                     sleepModeTrigger = v
                     launchSettingsWrite { writeSleepModeTrigger(ctx, v) }
                 },
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 12.dp)
             )
 
-            AnimatedVisibility(visible = globalEnabled) {
-                Column {
+            AnimatedVisibility(
+                visible = globalEnabled,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.fillMaxSize()) {
                     TabRow(
                         selectedTabIndex = selectedTab,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -738,7 +750,10 @@ private fun IdleManagerRoot(
                     AnimatedContent(
                         targetState = selectedTab,
                         transitionSpec = { fadeIn(tween(200)) togetherWith fadeOut(tween(200)) },
-                        label = "tab_content"
+                        label = "tab_content",
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
                     ) { tab ->
                         LaunchedEffect(tab) { if (tab == 1) refreshRecords() }
                         when (tab) {
@@ -781,7 +796,10 @@ private fun MasterToggleCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier.size(48.dp).clip(CircleShape)
                         .background(MaterialTheme.colorScheme.primary),
@@ -794,7 +812,7 @@ private fun MasterToggleCard(
                     )
                 }
                 Spacer(Modifier.width(16.dp))
-                Column {
+                Column(modifier = Modifier.weight(1f, fill = false)) {
                     Text(
                         stringResource(R.string.idle_manager_title),
                         style      = MaterialTheme.typography.titleLarge,
@@ -810,6 +828,7 @@ private fun MasterToggleCard(
                     )
                 }
             }
+            Spacer(Modifier.width(12.dp))
             Switch(
                 checked         = enabled,
                 onCheckedChange = onToggle,
@@ -1878,7 +1897,10 @@ private fun SleepModeTriggerCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         Icons.Default.PowerSettingsNew,
                         contentDescription = null,
@@ -1889,7 +1911,7 @@ private fun SleepModeTriggerCard(
                         modifier = Modifier.size(22.dp)
                     )
                     Spacer(Modifier.width(14.dp))
-                    Column {
+                    Column(modifier = Modifier.weight(1f, fill = false)) {
                         Text(
                             stringResource(R.string.idle_manager_sleep_mode_trigger_title),
                             style = MaterialTheme.typography.titleSmall,
@@ -1902,6 +1924,7 @@ private fun SleepModeTriggerCard(
                         )
                     }
                 }
+                Spacer(Modifier.width(12.dp))
                 Switch(checked = enabled, onCheckedChange = onToggle)
             }
         }
