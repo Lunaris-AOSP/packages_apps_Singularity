@@ -28,6 +28,12 @@
             android:summary="@string/lockscreen_wallpaper_zoom_summary"
             android:defaultValue="true" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="lockscreen_hide_lock_icon"
+            android:title="@string/lockscreen_hide_lock_icon_title"
+            android:summary="@string/lockscreen_hide_lock_icon_summary"
+            android:defaultValue="false" />
+
         <!-- Lockscreen Media Art -->
         <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
             android:key="ls_media_art_enabled"
