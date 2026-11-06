@@ -185,7 +185,11 @@ internal val lunarisBarAppearanceOptions =
 
 internal val lunarisBarMotionOptions =
     listOf(
-        LunarisBarOption("animation_style", "choice", choices = listOf("fruit", "robot")),
+        LunarisBarOption(
+            "animation_style",
+            "choice",
+            choices = listOf("fruit", "robot", "coloros"),
+        ),
         LunarisBarOption("animation_speed", "slider", 100, 50, 200),
         LunarisBarOption(
             "animation_bounce",
