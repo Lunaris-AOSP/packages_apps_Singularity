@@ -137,6 +137,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.lunaris_settings_quick_settings);
 
         findPreference(KEY_QS_MIST_ENABLED).setOnPreferenceChangeListener(this);
+        findPreference(Settings.System.QS_BLUR_ENABLED).setOnPreferenceChangeListener(this);
         boolean mistEnabled = Settings.System.getIntForUser(
                 getContext().getContentResolver(), KEY_QS_MIST_ENABLED, 0,
                 UserHandle.USER_CURRENT) == 1;
@@ -261,31 +262,28 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mShowRingerButton.setEnabled(showVolumeSlider);
 
-        final int defScrimAlpha =
-        (SystemProperties.getBoolean("ro.custom.blur.enable", false)
-                && Settings.Global.getInt(resolver,
-                        Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0)
-                ? 75 : 100;
-
         mShadeScrimAlphaPref = findPreference(SHADE_SCRIM_ALPHA);
-        mShadeScrimAlphaPref.setDefaultValue(defScrimAlpha);
         mShadeScrimAlphaPref.setOnPreferenceChangeListener(this);
-        int shadeScrimAlpha = Settings.System.getIntForUser(resolver,
-                SHADE_SCRIM_ALPHA, defScrimAlpha, UserHandle.USER_CURRENT);
-        mShadeScrimAlphaPref.setValue(shadeScrimAlpha);
-
-        final int defNotiAlpha =
-        (SystemProperties.getBoolean("ro.custom.blur.enable", false)
-                && Settings.Global.getInt(resolver,
-                        Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0)
-                ? 30 : 100;
-
         mNotificationScrimAlphaPref = findPreference(NOTIFICATION_SCRIM_ALPHA);
-        mNotificationScrimAlphaPref.setDefaultValue(defNotiAlpha);
         mNotificationScrimAlphaPref.setOnPreferenceChangeListener(this);
-        int notificationScrimAlpha = Settings.System.getIntForUser(resolver,
-                NOTIFICATION_SCRIM_ALPHA, defNotiAlpha, UserHandle.USER_CURRENT);
-        mNotificationScrimAlphaPref.setValue(notificationScrimAlpha);
+    }
+
+    private void updateBlurPreferences(boolean qsBlurEnabled) {
+        ContentResolver resolver = getContext().getContentResolver();
+        boolean blurEnabled = qsBlurEnabled
+                && Settings.Global.getInt(resolver, Settings.Global.DISABLE_WINDOW_BLURS,
+                        SystemProperties.getBoolean("ro.custom.blur.enable", false) ? 0 : 1) == 0;
+        int defScrimAlpha = blurEnabled ? 75 : 100;
+        mShadeScrimAlphaPref.setDefaultValue(defScrimAlpha);
+        mShadeScrimAlphaPref.setEnabled(blurEnabled);
+        mShadeScrimAlphaPref.setValue(Settings.System.getIntForUser(resolver,
+                SHADE_SCRIM_ALPHA, defScrimAlpha, UserHandle.USER_CURRENT));
+
+        int defNotiAlpha = blurEnabled ? 30 : 100;
+        mNotificationScrimAlphaPref.setDefaultValue(defNotiAlpha);
+        mNotificationScrimAlphaPref.setEnabled(blurEnabled);
+        mNotificationScrimAlphaPref.setValue(Settings.System.getIntForUser(resolver,
+                NOTIFICATION_SCRIM_ALPHA, defNotiAlpha, UserHandle.USER_CURRENT));
     }
 
     private void updateMistDesignPreferences(boolean enabled) {
@@ -323,6 +321,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        updateBlurPreferences(Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.QS_BLUR_ENABLED, 1,
+                UserHandle.USER_CURRENT) != 0);
         SystemSettingPrimarySwitchPreference headerImage =
                 findPreference("status_bar_custom_header");
         if (headerImage != null) {
@@ -377,7 +378,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getContext().getContentResolver();
 
-        if (KEY_QS_MIST_ENABLED.equals(preference.getKey())) {
+        if (Settings.System.QS_BLUR_ENABLED.equals(preference.getKey())) {
+            updateBlurPreferences((Boolean) newValue);
+            return true;
+        } else if (KEY_QS_MIST_ENABLED.equals(preference.getKey())) {
             updateMistDesignPreferences((Boolean) newValue);
             SystemUtils.showSystemUiRestartDialog(getActivity());
             return true;

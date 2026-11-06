@@ -3082,6 +3082,8 @@
     <string name="pp_empty_description">Selected apps will report the chosen Pixel device identity to unlock Pixel-exclusive features</string>
     <string name="pp_mainline_unsupported">This device is already a Pixel. Spoofing is not available on mainline Pixel devices.</string>
 
+    <string name="qs_blur_enabled_title">Quick Settings blur</string>
+    <string name="qs_blur_enabled_summary">Blur the background of both Quick Settings designs and the notification shade. Turn off to use solid colors.</string>
     <string name="qs_mist_enabled_title">Moduler Quick Settings</string>
     <string name="qs_mist_enabled_summary">Use the new moduler design for the header, tiles, sliders, media player, and editor. Requires a SystemUI restart.</string>
     <string name="media_seekbar_style_title">Media seekbar style</string>
