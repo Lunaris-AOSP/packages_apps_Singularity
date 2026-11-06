@@ -290,6 +290,8 @@
     <!-- Lockscreen lock icon -->
     <string name="lockscreen_hide_lock_icon_title">Hide lock icon</string>
     <string name="lockscreen_hide_lock_icon_summary">Hide the lock and unlock icons on the lockscreen while keeping the fingerprint icon visible</string>
+    <string name="lockscreen_lock_icon_top_title">Lock icon at the top</string>
+    <string name="lockscreen_lock_icon_top_summary">Show the lock icon at the top of the lockscreen. Face unlock takes priority when active.</string>
 
     <!-- Lockscreen battery info indicator -->
     <string name="lockscreen_battery_info_title">Battery info</string>
