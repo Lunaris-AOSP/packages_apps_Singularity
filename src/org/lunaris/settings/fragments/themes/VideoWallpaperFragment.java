@@ -80,7 +80,8 @@ public class VideoWallpaperFragment extends SettingsPreferenceFragment {
                 });
         mPickVideoPref.setOnPreferenceClickListener(preference -> {
             try {
-                mVideoPickerLauncher.launch(new String[] {"video/mp4", "image/gif", "image/webp"});
+                mVideoPickerLauncher.launch(new String[] {
+                        "video/mp4", "application/mp4", "video/x-m4v", "image/gif", "image/webp"});
             } catch (RuntimeException e) {
                 Log.e(TAG, "Could not open media picker", e);
                 Toast.makeText(requireContext(), R.string.video_wallpaper_picker_error,

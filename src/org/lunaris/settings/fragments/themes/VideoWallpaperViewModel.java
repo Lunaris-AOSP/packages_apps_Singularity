@@ -71,6 +71,7 @@ public class VideoWallpaperViewModel extends AndroidViewModel {
             } catch (MediaUtils.FileTooLargeException e) {
                 result = R.string.video_wallpaper_too_large;
             } catch (MediaUtils.UnsupportedMediaException e) {
+                Log.w(TAG, "Selected wallpaper media is unsupported", e);
                 result = R.string.video_wallpaper_unsupported;
             } catch (IOException | RuntimeException e) {
                 Log.e(TAG, "Could not import wallpaper", e);

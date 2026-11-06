@@ -18,16 +18,18 @@ package org.lunaris.settings.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.AnimatedImageDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaMetadataRetriever;
+import android.media.MediaCodecList;
+import android.media.MediaExtractor;
+import android.media.MediaFormat;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +48,15 @@ public final class MediaUtils {
     private MediaUtils() {}
 
     public static final class FileTooLargeException extends IOException {}
-    public static final class UnsupportedMediaException extends IOException {}
+    public static final class UnsupportedMediaException extends IOException {
+        public UnsupportedMediaException(String message) {
+            super(message);
+        }
+
+        public UnsupportedMediaException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 
     public static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -169,7 +179,9 @@ public final class MediaUtils {
                             Math.max(1, Math.round(height * scale)));
                     decoder.setAllocator(ImageDecoder.ALLOCATOR_SOFTWARE);
                 });
-        if (!(drawable instanceof AnimatedImageDrawable)) throw new UnsupportedMediaException();
+        if (!(drawable instanceof AnimatedImageDrawable)) {
+            throw new UnsupportedMediaException("Expected an animated image");
+        }
         AnimatedImageDrawable animation = (AnimatedImageDrawable) drawable;
         animation.setRepeatCount(AnimatedImageDrawable.REPEAT_INFINITE);
         return animation;
@@ -178,22 +190,42 @@ public final class MediaUtils {
     private static void validateMedia(File file) throws IOException {
         try {
             if (isVideoFormat(file.getName())) {
-                try (MediaMetadataRetriever retriever = new MediaMetadataRetriever()) {
-                    retriever.setDataSource(file.getAbsolutePath());
-                    if (!"yes".equals(retriever.extractMetadata(
-                            MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO))) {
-                        throw new UnsupportedMediaException();
-                    }
-                    Bitmap frame = retriever.getScaledFrameAtTime(-1,
-                            MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 256, 256);
-                    if (frame == null) throw new UnsupportedMediaException();
-                    frame.recycle();
-                }
+                validateVideo(file);
             } else {
                 decodeWallpaperImage(file).stop();
             }
-        } catch (RuntimeException e) {
-            throw new UnsupportedMediaException();
+        } catch (UnsupportedMediaException e) {
+            throw e;
+        } catch (IOException | RuntimeException e) {
+            throw new UnsupportedMediaException("Could not read wallpaper media", e);
+        }
+    }
+
+    private static void validateVideo(File file) throws IOException {
+        MediaExtractor extractor = new MediaExtractor();
+        try (FileInputStream input = new FileInputStream(file)) {
+            extractor.setDataSource(input.getFD());
+            for (int i = 0; i < extractor.getTrackCount(); i++) {
+                MediaFormat format = extractor.getTrackFormat(i);
+                String mime = format.getString(MediaFormat.KEY_MIME);
+                if (mime == null || !mime.startsWith("video/")) continue;
+                if (format.getInteger(MediaFormat.KEY_WIDTH, 0) <= 0
+                        || format.getInteger(MediaFormat.KEY_HEIGHT, 0) <= 0) {
+                    throw new UnsupportedMediaException("Invalid video dimensions");
+                }
+                if (new MediaCodecList(MediaCodecList.REGULAR_CODECS)
+                        .findDecoderForFormat(format) == null) {
+                    throw new UnsupportedMediaException("No playback decoder for " + mime);
+                }
+                extractor.selectTrack(i);
+                if (extractor.getSampleSize() <= 0) {
+                    throw new UnsupportedMediaException("Video track has no samples");
+                }
+                return;
+            }
+            throw new UnsupportedMediaException("No video track found");
+        } finally {
+            extractor.release();
         }
     }
 
@@ -207,7 +239,7 @@ public final class MediaUtils {
             if (size > MAX_FILE_SIZE) throw new FileTooLargeException();
             output.write(buffer, 0, count);
         }
-        if (size == 0) throw new UnsupportedMediaException();
+        if (size == 0) throw new UnsupportedMediaException("Selected media is empty");
     }
 
     private static String getDisplayName(Context context, Uri uri) {
@@ -227,20 +259,20 @@ public final class MediaUtils {
 
     private static String getFileExtension(Context context, Uri uri, String name)
             throws UnsupportedMediaException {
-        String mime = context.getContentResolver().getType(uri);
-        if (mime != null) {
-            switch (mime.toLowerCase(Locale.ROOT)) {
-                case "video/mp4": return ".mp4";
-                case "image/gif": return ".gif";
-                case "image/webp": return ".webp";
-                case "application/octet-stream": break;
-                default: throw new UnsupportedMediaException();
-            }
-        }
         String lowerName = name.toLowerCase(Locale.ROOT);
         for (String extension : new String[] {".mp4", ".gif", ".webp"}) {
             if (lowerName.endsWith(extension)) return extension;
         }
-        throw new UnsupportedMediaException();
+        String mime = context.getContentResolver().getType(uri);
+        if (mime != null) {
+            switch (mime.split(";", 2)[0].trim().toLowerCase(Locale.ROOT)) {
+                case "video/mp4":
+                case "application/mp4":
+                case "video/x-m4v": return ".mp4";
+                case "image/gif": return ".gif";
+                case "image/webp": return ".webp";
+            }
+        }
+        throw new UnsupportedMediaException("Unsupported media type: " + mime);
     }
 }
