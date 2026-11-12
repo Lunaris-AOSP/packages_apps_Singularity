@@ -71,6 +71,8 @@
     <string name="themes_udfps_icon_summary">Set UDFPS icon style</string>
     <string name="themes_udfps_animation_title">UDFPS animation</string>
     <string name="themes_udfps_animation_summary">Set UDFPS animation style</string>
+    <string name="dialog_blur_title">Dialog and toast blur</string>
+    <string name="dialog_blur_summary">Blur the background of system dialogs and toasts</string>
     <string name="udfps_animation_offset_title">UDFPS animation offset</string>
     <string name="udfps_animation_offset_summary">Adjust the vertical position of fingerprint animation</string>
     <string name="udfps_animation_size_title">UDFPS animation size</string>
