@@ -2031,6 +2031,7 @@
         <item>@string/media_seekbar_style_glowing</item>
         <item>@string/media_seekbar_style_gradient_wave</item>
         <item>@string/media_seekbar_style_cos</item>
+        <item>@string/media_seekbar_style_comet_trail</item>
     </string-array>
 
     <string-array name="media_seekbar_style_values" translatable="false">
@@ -2039,6 +2040,7 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="network_speed_position_entries">
