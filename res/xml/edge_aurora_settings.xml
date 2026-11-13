@@ -32,6 +32,17 @@
 
     <PreferenceCategory android:title="@string/edge_aurora_interaction">
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="edge_aurora_auto_hide"
+            android:title="@string/edge_aurora_auto_hide"
+            android:summary="@string/edge_aurora_auto_hide_summary"
+            android:defaultValue="false" android:dependency="edge_aurora_enabled" />
+        <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+            android:key="edge_aurora_auto_hide_timeout"
+            android:title="@string/edge_aurora_auto_hide_timeout"
+            android:defaultValue="10" android:max="20"
+            settings:min="5" settings:interval="1" settings:units="s"
+            android:dependency="edge_aurora_auto_hide" />
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="edge_aurora_popup_blur"
             android:title="@string/edge_aurora_popup_blur"
             android:summary="@string/edge_aurora_popup_blur_summary"

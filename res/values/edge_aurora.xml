@@ -24,6 +24,9 @@
     <string name="edge_aurora_save_failed">Could not save the app selection. Please try again.</string>
     <string name="edge_aurora_limit">Unable to save more glow settings. Remove an unused glow or group and try again.</string>
     <string name="edge_aurora_interaction">Interaction</string>
+    <string name="edge_aurora_auto_hide">Auto-hide glows</string>
+    <string name="edge_aurora_auto_hide_summary">Hide glows after the selected delay. Notifications stay in the shade.</string>
+    <string name="edge_aurora_auto_hide_timeout">Hide after</string>
     <string name="edge_aurora_popup_blur">Blur notification popup</string>
     <string name="edge_aurora_popup_blur_summary">Use Blur behind notification panels. Turn off for a solid background.</string>
     <string name="edge_aurora_open_action">Open notification panel</string>
