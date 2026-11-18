@@ -1865,11 +1865,13 @@
         <item>White</item>
         <item>Accent color</item>
         <item>Album art</item>
+        <item>@string/custom_color</item>
     </string-array>
     <string-array name="nowplaying_color_mode_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="dynamic_bar_chip_style_entries">

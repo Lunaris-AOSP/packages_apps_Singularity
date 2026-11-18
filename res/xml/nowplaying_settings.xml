@@ -72,6 +72,12 @@
         android:entryValues="@array/nowplaying_color_mode_values"
         android:defaultValue="0" />
 
+    <org.lunaris.settings.preferences.colorpicker.SystemSettingColorPickerPreference
+        android:key="nowplaying_custom_color"
+        android:title="@string/custom_color"
+        android:dependency="nowplaying_enabled"
+        android:defaultValue="#FFFFFF" />
+
     <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
         android:key="nowplaying_vertical_position"
         android:title="@string/nowplaying_vertical_position_title"

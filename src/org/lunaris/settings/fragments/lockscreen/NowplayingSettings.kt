@@ -27,6 +27,7 @@ import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
 import com.android.internal.util.lunaris.VibrationUtils
 
+import org.lunaris.settings.preferences.SystemSettingListPreference
 import org.lunaris.settings.preferences.SystemSettingSwitchPreference
 
 @SearchIndexable
@@ -35,6 +36,8 @@ class NowplayingSettings : SettingsPreferenceFragment(),
 
     private var compactStylePref: SystemSettingSwitchPreference? = null
     private var artistTextSizePref: Preference? = null
+    private var colorModePref: SystemSettingListPreference? = null
+    private var customColorPref: Preference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +45,14 @@ class NowplayingSettings : SettingsPreferenceFragment(),
 
         compactStylePref = findPreference("nowplaying_use_compact_style")
         artistTextSizePref = findPreference("nowplaying_artist_text_size")
+        colorModePref = findPreference(Settings.System.NOWPLAYING_COLOR_MODE)
+        customColorPref = findPreference(Settings.System.NOWPLAYING_CUSTOM_COLOR)
 
         compactStylePref?.onPreferenceChangeListener = this
+        colorModePref?.onPreferenceChangeListener = this
 
         updateArtistTextSizeVisibility()
+        updateCustomColorVisibility()
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
@@ -58,6 +65,8 @@ class NowplayingSettings : SettingsPreferenceFragment(),
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (preference.key == "nowplaying_use_compact_style") {
             updateArtistTextSizeVisibility()
+        } else if (preference.key == Settings.System.NOWPLAYING_COLOR_MODE) {
+            updateCustomColorVisibility(newValue as String)
         }
         return true
     }
@@ -72,12 +81,17 @@ class NowplayingSettings : SettingsPreferenceFragment(),
         artistTextSizePref?.isVisible = !isCompactEnabled
     }
 
+    private fun updateCustomColorVisibility(colorMode: String? = colorModePref?.value) {
+        customColorPref?.isVisible = colorMode == COLOR_MODE_CUSTOM.toString()
+    }
+
     override fun getMetricsCategory(): Int {
         return MetricsProto.MetricsEvent.LUNARIS
     }
 
     companion object {
         const val TAG = "NowplayingSettings"
+        private const val COLOR_MODE_CUSTOM = 3
 
         /** For search */
         @JvmField
@@ -93,6 +107,15 @@ class NowplayingSettings : SettingsPreferenceFragment(),
                 
                 if (isCompactEnabled) {
                     keys.add("nowplaying_artist_text_size")
+                }
+
+                val colorMode = Settings.System.getInt(
+                    context.contentResolver,
+                    Settings.System.NOWPLAYING_COLOR_MODE,
+                    0
+                )
+                if (colorMode != COLOR_MODE_CUSTOM) {
+                    keys.add(Settings.System.NOWPLAYING_CUSTOM_COLOR)
                 }
                 
                 return keys
