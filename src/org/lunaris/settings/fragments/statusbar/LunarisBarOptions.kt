@@ -243,6 +243,7 @@ internal val lunarisBarFeatureKeys =
         "bluetooth",
         "calls",
         "notifications",
+        "hide_notification_content_on_lockscreen",
         "ongoing_activities",
         "hotspot",
         "vpn",
@@ -274,6 +275,7 @@ internal val lunarisBarFeatureOptions =
                             "flashlight",
                             "stopwatch",
                             "live_scores",
+                            "hide_notification_content_on_lockscreen",
                         )
                 )
                     1

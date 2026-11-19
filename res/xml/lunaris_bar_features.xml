@@ -32,6 +32,12 @@
         android:persistent="false" />
 
     <SwitchPreferenceCompat
+        android:key="status_bar_dynamic_island_hide_notification_content_on_lockscreen"
+        android:title="@string/lunaris_bar_hide_notification_content_on_lockscreen"
+        android:summary="@string/lunaris_bar_hide_notification_content_on_lockscreen_summary"
+        android:persistent="false" />
+
+    <SwitchPreferenceCompat
         android:key="status_bar_dynamic_island_ongoing_activities"
         android:title="@string/lunaris_bar_status_bar_dynamic_island_ongoing_activities"
         android:persistent="false" />

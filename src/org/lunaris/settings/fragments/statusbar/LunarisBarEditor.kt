@@ -72,6 +72,10 @@ internal class LunarisBarEditor(val context: Context) {
     fun available(option: LunarisBarOption): Boolean {
         val key = option.key
         if (
+            key == "status_bar_dynamic_island_hide_notification_content_on_lockscreen" &&
+                !alternative("status_bar_dynamic_island_notifications")
+        ) return false
+        if (
             alternative(LunarisBarSettings.ALTERNATIVE_ANIMATION) &&
                 key in listOf("animation_style", "animation_speed", "animation_bounce", "mini_fade")
         )

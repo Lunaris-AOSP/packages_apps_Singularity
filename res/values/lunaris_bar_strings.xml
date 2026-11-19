@@ -104,6 +104,8 @@
     <string name="lunaris_bar_fahrenheit">Use Fahrenheit</string>
     <string name="lunaris_bar_fan">Fan</string>
     <string name="lunaris_bar_features">Events</string>
+    <string name="lunaris_bar_hide_notification_content_on_lockscreen">Hide notification content on lock screen</string>
+    <string name="lunaris_bar_hide_notification_content_on_lockscreen_summary">Show only the app icon and notification count while locked.</string>
     <string name="lunaris_bar_filled">Filled</string>
     <string name="lunaris_bar_flashlight">Flashlight</string>
     <string name="lunaris_bar_flower">Flower</string>
