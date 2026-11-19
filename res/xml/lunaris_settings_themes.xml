@@ -86,6 +86,13 @@
             android:summary="@string/doze_always_on_wallpaper_summary"
             android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
 
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="doze_always_on_wallpaper_blur_enabled"
+            android:title="@string/doze_always_on_wallpaper_blur_title"
+            android:summary="@string/doze_always_on_wallpaper_blur_summary"
+            android:defaultValue="true"
+            android:dependency="doze_always_on_wallpaper_enabled" />
+
         <!-- Ambient Music Ticker -->
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="pulse_on_new_tracks"
