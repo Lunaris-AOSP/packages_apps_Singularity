@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * SPDX-FileCopyrightText: Lunaris AOSP
+ * SPDX-License-Identifier: Apache-2.0
+ */
+-->
+<resources>
+    <string name="edgego_action">Action</string>
+    <string name="edgego_action_unavailable">This action is unavailable on the current screen.</string>
+    <string name="edgego_actions">Actions</string>
+    <string name="edgego_add_drawing">Add drawn gesture</string>
+    <string name="edgego_add_group">Add group</string>
+    <string name="edgego_add_item">Add item</string>
+    <string name="edgego_add_macro">Add macro</string>
+    <string name="edgego_add_note">Add note</string>
+    <string name="edgego_add_pause_rule">Add app pause rule</string>
+    <string name="edgego_add_step">Add step</string>
+    <string name="edgego_animation_damping_title">Spring damping</string>
+    <string name="edgego_animation_stiffness_title">Spring responsiveness</string>
+    <string name="edgego_app_launcher_columns_title">App columns</string>
+    <string name="edgego_app_launcher_opacity_title">Launcher opacity</string>
+    <string name="edgego_app_launcher_show_only_pinned_title">Only show pinned items</string>
+    <string name="edgego_app_launcher_show_pinned_title">Show pinned apps and shortcuts</string>
+    <string name="edgego_app_shortcut">App shortcut</string>
+    <string name="edgego_apply">Apply</string>
+    <string name="edgego_audio_mute_target_title">Mute action controls</string>
+    <string name="edgego_auto_hide_delay_title">Indicator idle delay</string>
+    <string name="edgego_auto_hide_enabled_title">Hide idle indicators</string>
+    <string name="edgego_backup_error">Could not read or write the backup.</string>
+    <string name="edgego_blackout_hint">Tap to leave screen blackout</string>
+    <string name="edgego_both">Portrait and landscape</string>
+    <string name="edgego_bottom">Bottom edge</string>
+    <string name="edgego_brightness_slider_color_rgb_title">Brightness slider color</string>
+    <string name="edgego_brightness_slider_style_title">Brightness slider style</string>
+    <string name="edgego_brightness_slider_use_accent_color_title">Accent brightness slider</string>
+    <string name="edgego_brightness_step_title">Brightness step</string>
+    <string name="edgego_cancel_hold_on_return_to_start_title">Return to edge to cancel</string>
+    <string name="edgego_choice_120_title">120 minutes</string>
+    <string name="edgego_choice_15_title">15 minutes</string>
+    <string name="edgego_choice_30_title">30 minutes</string>
+    <string name="edgego_choice_60_title">60 minutes</string>
+    <string name="edgego_choice_actions_title">Actions</string>
+    <string name="edgego_choice_all_title">All volume</string>
+    <string name="edgego_choice_auto_scroll_title">Auto scroll</string>
+    <string name="edgego_choice_balanced_title">Balanced</string>
+    <string name="edgego_choice_both_title">Portrait and landscape</string>
+    <string name="edgego_choice_brightness_title">Brightness</string>
+    <string name="edgego_choice_bubble_title">Bubble</string>
+    <string name="edgego_choice_classic_title">Classic fan</string>
+    <string name="edgego_choice_clear_bounds_title">Clear bounds</string>
+    <string name="edgego_choice_custom_title">Custom action</string>
+    <string name="edgego_choice_dark_title">Dark</string>
+    <string name="edgego_choice_dismiss_title">Close cursor</string>
+    <string name="edgego_choice_double_tap_title">Double tap at cursor</string>
+    <string name="edgego_choice_double_title">Double</string>
+    <string name="edgego_choice_edge_rail_title">Edge rail</string>
+    <string name="edgego_choice_edge_title">Follow edge</string>
+    <string name="edgego_choice_glass_title">Glass arc</string>
+    <string name="edgego_choice_hold_drag_title">Hold and drag</string>
+    <string name="edgego_choice_horizontal_title">Horizontal</string>
+    <string name="edgego_choice_landscape_title">Landscape only</string>
+    <string name="edgego_choice_left_to_right_title">Left edge</string>
+    <string name="edgego_choice_light_title">Light</string>
+    <string name="edgego_choice_long_click_title">Long press at cursor</string>
+    <string name="edgego_choice_media_title">Media</string>
+    <string name="edgego_choice_minimal_title">Thin line</string>
+    <string name="edgego_choice_none_title">None</string>
+    <string name="edgego_choice_notifications_title">Notifications</string>
+    <string name="edgego_choice_pill_title">Pill</string>
+    <string name="edgego_choice_portrait_title">Portrait only</string>
+    <string name="edgego_choice_record_swipe_title">Record and replay a swipe</string>
+    <string name="edgego_choice_right_to_left_title">Right edge</string>
+    <string name="edgego_choice_ringtone_title">Ringtone</string>
+    <string name="edgego_choice_single_title">Single</string>
+    <string name="edgego_choice_slide_title">Hold and slide</string>
+    <string name="edgego_choice_soft_fade_title">Soft fade</string>
+    <string name="edgego_choice_strong_title">Strong</string>
+    <string name="edgego_choice_system_pill_title">System pill</string>
+    <string name="edgego_choice_system_title">Follow system</string>
+    <string name="edgego_choice_tap_title">Stay open for a tap</string>
+    <string name="edgego_choice_touch_pad_slide_title">Double tap and drag</string>
+    <string name="edgego_choice_vertical_title">Vertical</string>
+    <string name="edgego_choice_volume_title">Volume</string>
+    <string name="edgego_choice_wave_title">Wave</string>
+    <string name="edgego_choose_action">Choose action</string>
+    <string name="edgego_choose_app">Choose app</string>
+    <string name="edgego_clear_history">Clear clipboard history</string>
+    <string name="edgego_clipboard">Clipboard</string>
+    <string name="edgego_close">Close</string>
+    <string name="edgego_color_error">Enter a color such as #FF6750A4.</string>
+    <string name="edgego_continuous_gesture_overlay_background_color_rgb_title">Control background</string>
+    <string name="edgego_continuous_gesture_overlay_foreground_color_rgb_title">Control text</string>
+    <string name="edgego_continuous_gesture_overlay_use_accent_color_title">Accent controls</string>
+    <string name="edgego_copy">Copy</string>
+    <string name="edgego_copy_actions">Copy actions to another zone</string>
+    <string name="edgego_cursor_double_action">Custom cursor double tap action</string>
+    <string name="edgego_cursor_hold_action">Custom cursor hold action</string>
+    <string name="edgego_cursor_top_action">Cursor top edge action</string>
+    <string name="edgego_custom_pull_angle_slot_count_title">Number of pull sectors</string>
+    <string name="edgego_custom_pull_angles_enabled_title">Custom pull sectors</string>
+    <string name="edgego_custom_pull_lower_limit_title">Downward pull limit</string>
+    <string name="edgego_custom_pull_upper_limit_title">Upward pull limit</string>
+    <string name="edgego_customize">Customization</string>
+    <string name="edgego_delete">Delete</string>
+    <string name="edgego_direction_hysteresis_deg_title">Direction stability</string>
+    <string name="edgego_disable_in_fullscreen_title">Pause in fullscreen apps</string>
+    <string name="edgego_disable_in_gaming_mode_title">Pause in GameSpace</string>
+    <string name="edgego_disable_on_home_screen_title">Pause on launcher</string>
+    <string name="edgego_disable_on_lock_screen_title">Pause on lock screen</string>
+    <string name="edgego_disable_with_touch_exploration_title">Pause with touch exploration</string>
+    <string name="edgego_dismiss">Dismiss</string>
+    <string name="edgego_draw_hint">Draw a gesture. Tap to close.</string>
+    <string name="edgego_draw_no_match">No matching gesture</string>
+    <string name="edgego_drawing">Drawn gesture</string>
+    <string name="edgego_drawing_confidence_title">Drawing match confidence</string>
+    <string name="edgego_drawing_orientation_sensitive_title">Match drawing direction</string>
+    <string name="edgego_drawing_pad_timeout_title">Drawing pad timeout</string>
+    <string name="edgego_drawings">Drawn gestures</string>
+    <string name="edgego_edge_action_sync_direction_title">Copy actions from</string>
+    <string name="edgego_edge_actions_synced_title">Sync left and right actions</string>
+    <string name="edgego_edge_bottom_navigation_replacement_enabled_title">Three bottom shortcut zones</string>
+    <string name="edgego_edge_indicator_style_title">Indicator style</string>
+    <string name="edgego_edge_top_vertical_offset_dp_title">Top edge offset</string>
+    <string name="edgego_enable">Use EdgeGo Gesture</string>
+    <string name="edgego_enable_first">Turn on EdgeGo Gesture before recording or running a macro.</string>
+    <string name="edgego_enable_summary">Control your phone with customizable gestures from its edges.</string>
+    <string name="edgego_entry_summary">Edge gestures, one-handed tools, and shortcuts</string>
+    <string name="edgego_export">Export backup</string>
+    <string name="edgego_exported">Backup saved.</string>
+    <string name="edgego_extended_threshold_dp_title">Extended swipe distance</string>
+    <string name="edgego_extra_dim_intensity_percent_title">Extra dim strength</string>
+    <string name="edgego_extra_dim_schedule_start_enabled_title">Schedule extra dim on</string>
+    <string name="edgego_extra_dim_schedule_start_minute_of_day_title">Extra dim start</string>
+    <string name="edgego_extra_dim_schedule_stop_enabled_title">Schedule extra dim off</string>
+    <string name="edgego_extra_dim_schedule_stop_minute_of_day_title">Extra dim end</string>
+    <string name="edgego_extra_dim_warmth_percent_title">Extra dim warmth</string>
+    <string name="edgego_faster">Faster</string>
+    <string name="edgego_floating_panel_blur_title">Blur behind panels</string>
+    <string name="edgego_floating_panel_corner_radius_title">Panel corner radius</string>
+    <string name="edgego_floating_panel_pass_through_outside_taps_title">Pass outside taps through</string>
+    <string name="edgego_floating_panel_remember_position_title">Remember panel positions</string>
+    <string name="edgego_floating_panel_scale_title">Panel size</string>
+    <string name="edgego_floating_panel_timeout_title">Panel idle timeout</string>
+    <string name="edgego_game_guard_summary">Pause gestures, panels, and macros while GameSpace or a gaming session is active. Resume automatically when it ends.</string>
+    <string name="edgego_gesture_cooldown_ms_title">Accidental repeat protection</string>
+    <string name="edgego_gesture_custom_pull_1_and_hold_title">Pull sector 1 and hold</string>
+    <string name="edgego_gesture_custom_pull_1_extended_title">Pull sector 1 · extended</string>
+    <string name="edgego_gesture_custom_pull_1_title">Pull sector 1</string>
+    <string name="edgego_gesture_custom_pull_2_and_hold_title">Pull sector 2 and hold</string>
+    <string name="edgego_gesture_custom_pull_2_extended_title">Pull sector 2 · extended</string>
+    <string name="edgego_gesture_custom_pull_2_title">Pull sector 2</string>
+    <string name="edgego_gesture_custom_pull_3_and_hold_title">Pull sector 3 and hold</string>
+    <string name="edgego_gesture_custom_pull_3_extended_title">Pull sector 3 · extended</string>
+    <string name="edgego_gesture_custom_pull_3_title">Pull sector 3</string>
+    <string name="edgego_gesture_custom_pull_4_and_hold_title">Pull sector 4 and hold</string>
+    <string name="edgego_gesture_custom_pull_4_extended_title">Pull sector 4 · extended</string>
+    <string name="edgego_gesture_custom_pull_4_title">Pull sector 4</string>
+    <string name="edgego_gesture_custom_pull_5_and_hold_title">Pull sector 5 and hold</string>
+    <string name="edgego_gesture_custom_pull_5_extended_title">Pull sector 5 · extended</string>
+    <string name="edgego_gesture_custom_pull_5_title">Pull sector 5</string>
+    <string name="edgego_gesture_custom_pull_6_and_hold_title">Pull sector 6 and hold</string>
+    <string name="edgego_gesture_custom_pull_6_extended_title">Pull sector 6 · extended</string>
+    <string name="edgego_gesture_custom_pull_6_title">Pull sector 6</string>
+    <string name="edgego_gesture_custom_pull_7_and_hold_title">Pull sector 7 and hold</string>
+    <string name="edgego_gesture_custom_pull_7_extended_title">Pull sector 7 · extended</string>
+    <string name="edgego_gesture_custom_pull_7_title">Pull sector 7</string>
+    <string name="edgego_gesture_double_tap_title">Double tap</string>
+    <string name="edgego_gesture_long_press_title">Long press</string>
+    <string name="edgego_gesture_pull_diagonal_down_and_hold_title">Pull diagonally down and hold</string>
+    <string name="edgego_gesture_pull_diagonal_down_extended_title">Pull diagonally down · extended</string>
+    <string name="edgego_gesture_pull_diagonal_down_title">Pull diagonally down</string>
+    <string name="edgego_gesture_pull_diagonal_up_and_hold_title">Pull diagonally up and hold</string>
+    <string name="edgego_gesture_pull_diagonal_up_extended_title">Pull diagonally up · extended</string>
+    <string name="edgego_gesture_pull_diagonal_up_title">Pull diagonally up</string>
+    <string name="edgego_gesture_pull_inward_and_hold_title">Pull inward and hold</string>
+    <string name="edgego_gesture_pull_inward_extended_title">Pull inward · extended</string>
+    <string name="edgego_gesture_pull_inward_title">Pull inward</string>
+    <string name="edgego_gesture_slide_left_and_hold_title">Slide left and hold</string>
+    <string name="edgego_gesture_slide_left_extended_title">Slide left · extended</string>
+    <string name="edgego_gesture_slide_left_title">Slide left</string>
+    <string name="edgego_gesture_slide_right_and_hold_title">Slide right and hold</string>
+    <string name="edgego_gesture_slide_right_extended_title">Slide right · extended</string>
+    <string name="edgego_gesture_slide_right_title">Slide right</string>
+    <string name="edgego_gesture_swipe_down_and_hold_title">Swipe down and hold</string>
+    <string name="edgego_gesture_swipe_down_extended_title">Swipe down · extended</string>
+    <string name="edgego_gesture_swipe_down_title">Swipe down</string>
+    <string name="edgego_gesture_swipe_up_and_hold_title">Swipe up and hold</string>
+    <string name="edgego_gesture_swipe_up_extended_title">Swipe up · extended</string>
+    <string name="edgego_gesture_swipe_up_title">Swipe up</string>
+    <string name="edgego_gesture_tap_title">Tap</string>
+    <string name="edgego_gesture_timeout_ms_title">Gesture time limit</string>
+    <string name="edgego_gesture_triple_tap_title">Triple tap</string>
+    <string name="edgego_gestures">Gesture actions</string>
+    <string name="edgego_global_size">Global edge size</string>
+    <string name="edgego_group_items">Group items</string>
+    <string name="edgego_haptic_feedback_pattern_title">Vibration pattern</string>
+    <string name="edgego_haptic_feedback_strength_title">Vibration strength</string>
+    <string name="edgego_haptic_feedback_title">Gesture vibration</string>
+    <string name="edgego_haptic_test">Try vibration</string>
+    <string name="edgego_help">Gesture guide</string>
+    <string name="edgego_help_body">Start inside an enabled zone. Swipe inward, diagonally, or along the edge, then release to run its action. Hold still after a swipe for a hold action. A longer swipe selects its extended action. Return to the starting edge to cancel. Taps wait briefly when double or triple tap actions are assigned. Drawn gestures start inside the zone and use a single stroke. Bottom shortcuts sit above the system navigation area. GameSpace protection is enabled by default. Sliders follow your finger; pie control supports slide selection and tap selection. Lock screen shortcuts use the normal system unlock flow.</string>
+    <string name="edgego_help_summary">Interactive gesture illustrations and explanations for every feature</string>
+    <string name="edgego_hide_indicators_in_fullscreen_title">Hide indicators in fullscreen</string>
+    <string name="edgego_hold_action">Hold action</string>
+    <string name="edgego_hold_actions_on_release_title">Run hold actions on release</string>
+    <string name="edgego_hold_settle_ms_title">Pause before a swipe hold</string>
+    <string name="edgego_hold_timeout_ms_title">Hold delay</string>
+    <string name="edgego_home_edges">Edges paused on launcher</string>
+    <string name="edgego_icon_pack">Icon pack</string>
+    <string name="edgego_import">Import backup</string>
+    <string name="edgego_imported">Backup imported.</string>
+    <string name="edgego_include_package_in_picker_search_title">Search package names</string>
+    <string name="edgego_item_count">%1$d items</string>
+    <string name="edgego_items">Apps, shortcuts, and actions</string>
+    <string name="edgego_keep_edges_over_keyboard_title">Keep side edges above keyboard</string>
+    <string name="edgego_landscape">Landscape only</string>
+    <string name="edgego_landscape_length">Landscape length</string>
+    <string name="edgego_launch_app">Launch app</string>
+    <string name="edgego_launcher_pins">Pinned apps and shortcuts</string>
+    <string name="edgego_left">Left edge</string>
+    <string name="edgego_length">Length</string>
+    <string name="edgego_lock_edges">Edges paused on lock screen</string>
+    <string name="edgego_macro">Macro</string>
+    <string name="edgego_macro_progress">%1$d / %2$d %3$s</string>
+    <string name="edgego_material_you_accent_enabled_title">Use system accent</string>
+    <string name="edgego_material_you_surface_tint_enabled_title">Tint panel surfaces</string>
+    <string name="edgego_material_you_sync_sliders_title">Sync slider colors</string>
+    <string name="edgego_media_controller_opacity_title">Media panel opacity</string>
+    <string name="edgego_media_controller_show_progress_title">Media progress</string>
+    <string name="edgego_media_controller_theme_title">Media theme</string>
+    <string name="edgego_media_scrub_overlay_background_color_rgb_title">Media seek background</string>
+    <string name="edgego_media_scrub_overlay_foreground_color_rgb_title">Media seek text</string>
+    <string name="edgego_media_scrub_overlay_use_accent_color_title">Accent media seek</string>
+    <string name="edgego_media_scrub_sensitivity_title">Seek sensitivity</string>
+    <string name="edgego_module">Control module</string>
+    <string name="edgego_move_down">Move later</string>
+    <string name="edgego_move_up">Move earlier</string>
+    <string name="edgego_multi_tap_interval_ms_title">Multiple tap interval</string>
+    <string name="edgego_name">Name</string>
+    <string name="edgego_next">Next</string>
+    <string name="edgego_no_items">Add items in EdgeGo settings first.</string>
+    <string name="edgego_no_media">No active media</string>
+    <string name="edgego_no_notifications">No notifications</string>
+    <string name="edgego_no_presets">Save a preset in EdgeGo settings first.</string>
+    <string name="edgego_notch_apps_action_color_rgb_title">Notch apps icons</string>
+    <string name="edgego_notch_apps_opacity_title">Notch apps opacity</string>
+    <string name="edgego_notch_apps_panel_color_rgb_title">Notch apps surface</string>
+    <string name="edgego_notch_apps_sync_quick_access_items_title">Sync notch apps with pie</string>
+    <string name="edgego_notch_set_one">Notch apps · set 1</string>
+    <string name="edgego_notch_set_two">Notch apps · set 2</string>
+    <string name="edgego_notch_timer_opacity_title">Notch timer opacity</string>
+    <string name="edgego_notch_timer_theme_mode_title">Notch timer theme</string>
+    <string name="edgego_notes">Notes</string>
+    <string name="edgego_notification_carousel_opacity_title">Notification panel opacity</string>
+    <string name="edgego_notification_carousel_snooze_minutes_title">Snooze duration</string>
+    <string name="edgego_notification_carousel_theme_title">Notification theme</string>
+    <string name="edgego_notification_hidden">Notification content hidden</string>
+    <string name="edgego_orientation">Orientation</string>
+    <string name="edgego_overlay_color_bottom_rgb_title">Bottom edge color</string>
+    <string name="edgego_overlay_color_left_rgb_title">Left edge color</string>
+    <string name="edgego_overlay_color_right_rgb_title">Right edge color</string>
+    <string name="edgego_overlay_color_top_rgb_title">Top edge color</string>
+    <string name="edgego_overlay_opacity_title">Indicator opacity</string>
+    <string name="edgego_page_scroll_auto_speed_level_title">Auto scroll speed</string>
+    <string name="edgego_page_scroll_overlay_background_color_rgb_title">Scroll control background</string>
+    <string name="edgego_page_scroll_overlay_foreground_color_rgb_title">Scroll control text</string>
+    <string name="edgego_page_scroll_overlay_use_accent_color_title">Accent scroll controls</string>
+    <string name="edgego_page_scroll_variant_title">Page scroll behavior</string>
+    <string name="edgego_pause_edges">Choose paused edges</string>
+    <string name="edgego_pause_resume">Pause / resume</string>
+    <string name="edgego_paused">Paused</string>
+    <string name="edgego_paused_gamespace">Paused in GameSpace</string>
+    <string name="edgego_picker_empty">No items available.</string>
+    <string name="edgego_picker_no_results">No matches. Try another search.</string>
+    <string name="edgego_pie_drawer">Pie app drawer items</string>
+    <string name="edgego_pie_set_one">Pie control · set 1</string>
+    <string name="edgego_pie_set_two">Pie control · set 2</string>
+    <string name="edgego_play_pause">Play / pause</string>
+    <string name="edgego_portrait">Portrait only</string>
+    <string name="edgego_position">Position</string>
+    <string name="edgego_preset_picker_opacity_title">Preset picker opacity</string>
+    <string name="edgego_preset_picker_radius_title">Preset picker reach</string>
+    <string name="edgego_preset_picker_show_name_title">Show preset names</string>
+    <string name="edgego_preview_hint">Drag inside the preview to move the zone</string>
+    <string name="edgego_previous">Previous</string>
+    <string name="edgego_pull_animation_arrow_color_rgb_title">Action icon color</string>
+    <string name="edgego_pull_animation_bubble_arrow_opacity_title">Bubble opacity</string>
+    <string name="edgego_pull_animation_bubble_color_rgb_title">Bubble color</string>
+    <string name="edgego_pull_animation_enabled_title">Gesture animation</string>
+    <string name="edgego_pull_animation_show_action_icon_title">Show action icons</string>
+    <string name="edgego_pull_animation_show_launch_app_icon_title">Show app icons</string>
+    <string name="edgego_pull_animation_style_title">Animation style</string>
+    <string name="edgego_pull_animation_sync_arrow_with_accent_title">Accent action icon</string>
+    <string name="edgego_pull_animation_wave_color_rgb_title">Wave color</string>
+    <string name="edgego_pull_animation_wave_opacity_title">Wave opacity</string>
+    <string name="edgego_quick_access_arc_color_rgb_title">Pie surface color</string>
+    <string name="edgego_quick_access_group_delay_title">Group opening delay</string>
+    <string name="edgego_quick_access_hold_timeout_title">Pie item hold delay</string>
+    <string name="edgego_quick_access_icon_size_title">Pie icon size</string>
+    <string name="edgego_quick_access_keep_open_on_action_title">Keep pie open after actions</string>
+    <string name="edgego_quick_access_opacity_title">Pie opacity</string>
+    <string name="edgego_quick_access_open_mode_title">Pie opening behavior</string>
+    <string name="edgego_quick_access_radius_title">Pie reach distance</string>
+    <string name="edgego_quick_access_show_arc_background_title">Show arc background</string>
+    <string name="edgego_quick_access_show_guide_line_title">Show arc guide line</string>
+    <string name="edgego_quick_access_show_icon_background_title">Show icon backgrounds</string>
+    <string name="edgego_quick_access_style_title">Pie style</string>
+    <string name="edgego_quick_tools_icon_color_rgb_title">Quick tools icons</string>
+    <string name="edgego_quick_tools_panel_color_rgb_title">Quick tools surface</string>
+    <string name="edgego_quick_tools_panel_opacity_title">Quick tools opacity</string>
+    <string name="edgego_quick_tools_selected_button_color_rgb_title">Selected tool color</string>
+    <string name="edgego_quick_tools_show_media_progress_title">Quick tools media progress</string>
+    <string name="edgego_quick_tools_slider_color_rgb_title">Quick tools sliders</string>
+    <string name="edgego_record">Record taps and swipes</string>
+    <string name="edgego_redraw">Record again</string>
+    <string name="edgego_remote_cursor_base_color_rgb_title">Cursor and pad color</string>
+    <string name="edgego_remote_cursor_cursor_size_dp_title">Cursor size</string>
+    <string name="edgego_remote_cursor_double_tap_action_title">Cursor double tap</string>
+    <string name="edgego_remote_cursor_hold_action_title">Cursor long press</string>
+    <string name="edgego_remote_cursor_inactivity_timeout_title">Cursor idle timeout</string>
+    <string name="edgego_remote_cursor_long_press_delay_ms_title">Cursor hold delay</string>
+    <string name="edgego_remote_cursor_opacity_title">Cursor and pad opacity</string>
+    <string name="edgego_remote_cursor_outside_dismiss_title">Close cursor on outside touch</string>
+    <string name="edgego_remote_cursor_outside_only_dismiss_title">Keep cursor open until dismissed</string>
+    <string name="edgego_remote_cursor_pad_size_dp_title">Thumb pad size</string>
+    <string name="edgego_remote_cursor_speed_title">Cursor speed</string>
+    <string name="edgego_remote_cursor_throw_dismiss_enabled_title">Flick pad to close</string>
+    <string name="edgego_remote_cursor_top_edge_shortcut_title">Cursor top edge shortcut</string>
+    <string name="edgego_remote_cursor_triple_tap_reset_title">Triple tap resets cursor</string>
+    <string name="edgego_remote_cursor_use_accent_color_title">Accent cursor</string>
+    <string name="edgego_rename">Rename</string>
+    <string name="edgego_reply">Reply</string>
+    <string name="edgego_reset">Reset</string>
+    <string name="edgego_reset_positions">Reset panel positions</string>
+    <string name="edgego_respect_app_exclusion_title">Respect app gesture exclusions</string>
+    <string name="edgego_reverse">Reverse direction</string>
+    <string name="edgego_right">Right edge</string>
+    <string name="edgego_run">Run macro</string>
+    <string name="edgego_save">Save</string>
+    <string name="edgego_save_failed">Could not save the setting.</string>
+    <string name="edgego_save_preset">Save current preset</string>
+    <string name="edgego_scroll_speed">Scroll speed %1$d of 7</string>
+    <string name="edgego_search">Search</string>
+    <string name="edgego_search_apps">Search apps</string>
+    <string name="edgego_section_animation_title">Animations and vibration</string>
+    <string name="edgego_section_appearance_title">Edge appearance</string>
+    <string name="edgego_section_controls_title">Behavior and timing</string>
+    <string name="edgego_section_cursor_title">Remote cursor</string>
+    <string name="edgego_section_dim_title">Extra dim and schedule</string>
+    <string name="edgego_section_drawing_title">Drawing pad</string>
+    <string name="edgego_section_launcher_title">App launcher</string>
+    <string name="edgego_section_macros_title">Macros</string>
+    <string name="edgego_section_media_title">Media controls</string>
+    <string name="edgego_section_notch_title">Notch tools</string>
+    <string name="edgego_section_notifications_title">Notification carousel</string>
+    <string name="edgego_section_panels_title">Floating panels</string>
+    <string name="edgego_section_pauses_title">App pause rules</string>
+    <string name="edgego_section_pie_title">Pie control</string>
+    <string name="edgego_section_presets_title">Presets and backups</string>
+    <string name="edgego_section_scroll_title">Page scrolling</string>
+    <string name="edgego_section_sectors_title">Pull sectors</string>
+    <string name="edgego_section_side_panel_title">Side panel</string>
+    <string name="edgego_section_sliders_title">Volume and brightness</string>
+    <string name="edgego_section_tools_title">Quick tools</string>
+    <string name="edgego_section_touch_pad_title">Touch pad</string>
+    <string name="edgego_sector_haptics_title">Feedback when direction changes</string>
+    <string name="edgego_sector_hint">Drag the dots to adjust pull sectors</string>
+    <string name="edgego_send">Send</string>
+    <string name="edgego_set_two">Set 2</string>
+    <string name="edgego_share">Share</string>
+    <string name="edgego_shortcut">Shortcut</string>
+    <string name="edgego_show_action_label_title">Show selected action</string>
+    <string name="edgego_show_indicators_title">Show edge indicators</string>
+    <string name="edgego_show_zone">Show this indicator</string>
+    <string name="edgego_side_items">Side panel actions</string>
+    <string name="edgego_side_panel_clipboard_history_title">Clipboard history</string>
+    <string name="edgego_side_panel_clipboard_limit_title">Clipboard history limit</string>
+    <string name="edgego_side_panel_opacity_title">Side panel opacity</string>
+    <string name="edgego_side_panel_show_recent_apps_title">Show recent apps</string>
+    <string name="edgego_side_panel_theme_title">Side panel theme</string>
+    <string name="edgego_slider_orientation_title">Slider direction</string>
+    <string name="edgego_slider_sensitivity_title">Slider sensitivity</string>
+    <string name="edgego_slower">Slower</string>
+    <string name="edgego_snooze">Snooze</string>
+    <string name="edgego_split_zones_enabled_title">Two zones on each side</string>
+    <string name="edgego_start">Start</string>
+    <string name="edgego_step_error">Enter valid coordinates and a duration.</string>
+    <string name="edgego_steps">Macro steps</string>
+    <string name="edgego_stop">Stop</string>
+    <string name="edgego_swipe">Swipe</string>
+    <string name="edgego_swipe_hint">Start X, start Y, end X, end Y, duration in ms</string>
+    <string name="edgego_swipe_threshold_dp_title">Swipe distance</string>
+    <string name="edgego_system_icons">System icons</string>
+    <string name="edgego_tap">Tap</string>
+    <string name="edgego_tap_hint">X percent, Y percent, duration in ms</string>
+    <string name="edgego_tap_slop_dp_title">Tap movement tolerance</string>
+    <string name="edgego_tap_through_duration_ms_title">Tap through duration</string>
+    <string name="edgego_target_app">Target app</string>
+    <string name="edgego_text_tools">Text tools</string>
+    <string name="edgego_thickness">Thickness</string>
+    <string name="edgego_timer">EdgeGo timer</string>
+    <string name="edgego_timer_finished">Timer finished</string>
+    <string name="edgego_timer_minutes">Minutes</string>
+    <string name="edgego_title">EdgeGo Gesture</string>
+    <string name="edgego_tools_items">Quick tools actions</string>
+    <string name="edgego_tools_order">Quick tools section order</string>
+    <string name="edgego_top">Top edge</string>
+    <string name="edgego_touch_pad_cursor_color_rgb_title">Touch pad cursor color</string>
+    <string name="edgego_touch_pad_cursor_sensitivity_title">Touch pad speed</string>
+    <string name="edgego_touch_pad_double_tap_timeout_ms_title">Touch pad double tap interval</string>
+    <string name="edgego_touch_pad_hold_delay_ms_title">Touch pad hold delay</string>
+    <string name="edgego_touch_pad_hold_duration_ms_title">Replayed hold duration</string>
+    <string name="edgego_touch_pad_hold_enabled_title">Touch pad long press</string>
+    <string name="edgego_touch_pad_opacity_title">Touch pad opacity</string>
+    <string name="edgego_touch_pad_pass_through_outside_taps_title">Touch pad outside taps pass through</string>
+    <string name="edgego_touch_pad_slide_duration_ms_title">Replayed swipe duration</string>
+    <string name="edgego_touch_priority_enabled_title">Give configured side zones priority</string>
+    <string name="edgego_training_collision">That shape is too close to an existing drawing.</string>
+    <string name="edgego_training_fingers">Use the same number of fingers as the first sample.</string>
+    <string name="edgego_training_hint">Draw the same shape three times. Use one to three fingers for the drawing pad, or one finger for an edge drawing.</string>
+    <string name="edgego_training_inconsistent">That sample looked different. Try the same shape again.</string>
+    <string name="edgego_training_progress">Sample %1$d of 3 saved</string>
+    <string name="edgego_training_too_simple">Draw a larger shape with a turn. Two or three fingers can use straight strokes.</string>
+    <string name="edgego_translate">Translate</string>
+    <string name="edgego_ui_accent_dark_rgb_title">Dark theme accent</string>
+    <string name="edgego_ui_accent_light_rgb_title">Light theme accent</string>
+    <string name="edgego_ui_theme_mode_title">Panel theme</string>
+    <string name="edgego_update">Update with current settings</string>
+    <string name="edgego_volume_slider_color_rgb_title">Volume slider color</string>
+    <string name="edgego_volume_slider_follow_active_audio_title">Follow call and ringing volume</string>
+    <string name="edgego_volume_slider_style_title">Volume slider style</string>
+    <string name="edgego_volume_slider_use_accent_color_title">Accent volume slider</string>
+    <string name="edgego_wait">Wait</string>
+    <string name="edgego_wait_hint">Delay in milliseconds</string>
+    <string name="edgego_zone_bottom_navigation_s1_title">Bottom · left shortcut</string>
+    <string name="edgego_zone_bottom_navigation_s2_title">Bottom · center shortcut</string>
+    <string name="edgego_zone_bottom_navigation_s3_title">Bottom · right shortcut</string>
+    <string name="edgego_zone_bottom_z1_title">Bottom edge</string>
+    <string name="edgego_zone_enabled">Enable this zone</string>
+    <string name="edgego_zone_left_z1_title">Left edge · zone 1</string>
+    <string name="edgego_zone_left_z2_title">Left edge · zone 2</string>
+    <string name="edgego_zone_off">Disabled</string>
+    <string name="edgego_zone_on">Enabled</string>
+    <string name="edgego_zone_right_z1_title">Right edge · zone 1</string>
+    <string name="edgego_zone_right_z2_title">Right edge · zone 2</string>
+    <string name="edgego_zone_top_z1_title">Top edge</string>
+    <string name="edgego_zone_vibrate">Vibrate for this zone</string>
+    <string name="edgego_zones">Edge zones</string>
+    <string-array name="edgego_action_labels">
+        <item>None</item>
+        <item>Back</item>
+        <item>Home</item>
+        <item>Recent apps</item>
+        <item>Previous app</item>
+        <item>Notifications</item>
+        <item>Quick Settings</item>
+        <item>Close notification shade</item>
+        <item>Power menu</item>
+        <item>Lock screen</item>
+        <item>Screenshot</item>
+        <item>Partial screenshot</item>
+        <item>One-handed mode</item>
+        <item>Voice assistant</item>
+        <item>Flashlight</item>
+        <item>Wi-Fi</item>
+        <item>Bluetooth</item>
+        <item>Mobile data</item>
+        <item>Location</item>
+        <item>Auto-rotate</item>
+        <item>Do Not Disturb</item>
+        <item>Internet panel</item>
+        <item>NFC settings</item>
+        <item>Accessibility settings</item>
+        <item>Current app info</item>
+        <item>Volume panel</item>
+        <item>Media volume up</item>
+        <item>Media volume down</item>
+        <item>Ringtone volume up</item>
+        <item>Ringtone volume down</item>
+        <item>Notification volume up</item>
+        <item>Notification volume down</item>
+        <item>Mute / restore volume</item>
+        <item>Mute / restore media</item>
+        <item>Mute / restore ringtone</item>
+        <item>Mute / restore notifications</item>
+        <item>Mute / restore all volume</item>
+        <item>Volume slider</item>
+        <item>Brightness up</item>
+        <item>Brightness down</item>
+        <item>Brightness slider</item>
+        <item>Auto brightness</item>
+        <item>Change screen timeout</item>
+        <item>Extra dim</item>
+        <item>Screen blackout</item>
+        <item>Play / pause</item>
+        <item>Next track</item>
+        <item>Previous track</item>
+        <item>Stop media</item>
+        <item>Media seek</item>
+        <item>Media controller</item>
+        <item>Notch media</item>
+        <item>Song search</item>
+        <item>App launcher</item>
+        <item>Pie control</item>
+        <item>Quick tools</item>
+        <item>Side panel</item>
+        <item>Notch apps</item>
+        <item>Notification carousel</item>
+        <item>Preset picker</item>
+        <item>Touch pad</item>
+        <item>Remote cursor</item>
+        <item>Drawing pad</item>
+        <item>Page scroll</item>
+        <item>Scroll to top</item>
+        <item>Scroll to bottom</item>
+        <item>Copy selected text</item>
+        <item>Paste clipboard</item>
+        <item>Select field text</item>
+        <item>Text picker</item>
+        <item>Tap through</item>
+        <item>Notch timer</item>
+        <item>Camera</item>
+        <item>Battery saver</item>
+        <item>Screen recording</item>
+        <item>Split screen</item>
+        <item>Close panel</item>
+        <item>Pause EdgeGo</item>
+    </string-array>
+    <string name="edgego_app_drawer">App drawer</string>
+    <string name="edgego_app_launcher_disable_search_title">Hide launcher search</string>
+    <string name="edgego_app_launcher_hide_labels_title">Hide app labels</string>
+    <string name="edgego_app_launcher_keep_open_on_action_title">Keep launcher open after actions</string>
+    <string name="edgego_app_launcher_open_keyboard_on_show_title">Open keyboard with launcher</string>
+    <string name="edgego_app_launcher_pass_through_outside_taps_title">Pass outside launcher taps through</string>
+    <string name="edgego_brightness">Brightness</string>
+    <string name="edgego_clear_all">Clear all</string>
+    <string name="edgego_copy_set_one">Copy Set 1</string>
+    <string name="edgego_draw_hold_hint">Hold at the end of this drawing to run its action.</string>
+    <string name="edgego_drawing_details">%1$d fingers · %2$s</string>
+    <string name="edgego_drawing_hold_off">Run on release</string>
+    <string name="edgego_drawing_hold_on">Require a hold after drawing</string>
+    <string name="edgego_edit">Edit</string>
+    <string name="edgego_expand">Show more or less</string>
+    <string name="edgego_filter_all">All apps</string>
+    <string name="edgego_forward_15">Forward 15 seconds</string>
+    <string name="edgego_media_controller_artwork_shading_enabled_title">Show shaded media artwork</string>
+    <string name="edgego_media_controller_pass_through_outside_taps_title">Pass outside media panel taps through</string>
+    <string name="edgego_minutes_value">%1$d min</string>
+    <string name="edgego_move_ring">Move to ring</string>
+    <string name="edgego_no_apps">No apps match your search.</string>
+    <string name="edgego_notification_carousel_pass_through_outside_taps_title">Pass outside notification taps through</string>
+    <string name="edgego_notification_carousel_show_app_filter_title">Show notification app filters</string>
+    <string name="edgego_notification_carousel_show_ongoing_title">Show ongoing notifications</string>
+    <string name="edgego_notification_carousel_show_scrim_title">Shade behind notification cards</string>
+    <string name="edgego_preset_picker_pass_through_outside_taps_title">Pass outside preset picker taps through</string>
+    <string name="edgego_pull_animation_thickness_dp_title">Gesture bubble size</string>
+    <string name="edgego_quick_access_arc_background_opacity_title">Arc background opacity</string>
+    <string name="edgego_quick_access_arc_degrees_title">Pie arc angle</string>
+    <string name="edgego_quick_access_blur_background_title">Blur behind pie</string>
+    <string name="edgego_quick_access_drawer_enabled_title">Add app drawer control</string>
+    <string name="edgego_quick_access_pass_through_outside_taps_title">Pass outside pie taps through</string>
+    <string name="edgego_quick_access_recents_enabled_title">Add recent apps control</string>
+    <string name="edgego_quick_access_slider_brightness_title">Add brightness control</string>
+    <string name="edgego_quick_access_slider_volume_title">Add volume control</string>
+    <string name="edgego_quick_tools_pass_through_outside_taps_title">Pass outside quick tools taps through</string>
+    <string name="edgego_quick_tools_show_media_controls_title">Quick tools media controls</string>
+    <string name="edgego_recent_apps">Recent apps</string>
+    <string name="edgego_rewind_15">Rewind 15 seconds</string>
+    <string name="edgego_ring_one">Ring 1</string>
+    <string name="edgego_ring_three">Ring 3</string>
+    <string name="edgego_ring_two">Ring 2</string>
+    <string name="edgego_scroll_drag_hint">Drag here to scroll</string>
+    <string name="edgego_scroll_up">Scroll up</string>
+    <string name="edgego_side_panel_actions_enabled_title">Show actions tab</string>
+    <string name="edgego_side_panel_clipboard_enabled_title">Show clipboard tab</string>
+    <string name="edgego_side_panel_notes_enabled_title">Show notes tab</string>
+    <string name="edgego_side_panel_pass_through_outside_taps_title">Pass outside side panel taps through</string>
+    <string name="edgego_side_panel_remember_page_title">Remember side panel tab</string>
+    <string name="edgego_side_panel_skip_sensitive_clips_title">Skip clips marked sensitive</string>
+    <string name="edgego_side_panel_tap_to_paste_title">Tap a clip to paste</string>
+    <string name="edgego_touch_pad_size_dp_title">Touch pad width</string>
+    <string name="edgego_volume">Volume</string>
+    <string name="edgego_material_you_sync_edges_title">Sync edge colors</string>
+    <string name="edgego_material_you_sync_wave_title">Sync wave color</string>
+    <string name="edgego_material_you_sync_bubble_title">Sync bubble color</string>
+    <string name="edgego_material_you_sync_quick_access_background_title">Sync pie surface</string>
+    <string name="edgego_material_you_sync_quick_tools_title">Sync Quick Tools accents</string>
+    <string name="edgego_custom_pull_use_sector_colors_title">Use sector colors while pulling</string>
+    <string name="edgego_custom_pull_show_sector_number_title">Show sector number while pulling</string>
+    <string name="edgego_custom_pull_sector_1_color_rgb_title">Sector 1 color</string>
+    <string name="edgego_custom_pull_sector_2_color_rgb_title">Sector 2 color</string>
+    <string name="edgego_custom_pull_sector_3_color_rgb_title">Sector 3 color</string>
+    <string name="edgego_custom_pull_sector_4_color_rgb_title">Sector 4 color</string>
+    <string name="edgego_custom_pull_sector_5_color_rgb_title">Sector 5 color</string>
+    <string name="edgego_custom_pull_sector_6_color_rgb_title">Sector 6 color</string>
+    <string name="edgego_custom_pull_sector_7_color_rgb_title">Sector 7 color</string>
+</resources>

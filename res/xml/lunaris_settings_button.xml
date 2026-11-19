@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+/*
+ * SPDX-FileCopyrightText: Lunaris AOSP
+ * SPDX-License-Identifier: Apache-2.0
+ */
+-->
+<!--
      Copyright (C) 2016-2024 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +30,13 @@
     <PreferenceCategory
         android:key="extras_category"
         android:title="@string/extras_title" >
+
+        <org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference
+            android:key="edgego_enabled"
+            android:title="@string/edgego_title"
+            android:summary="@string/edgego_entry_summary"
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.buttons.EdgeGoSettings" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="hardware_keys_disable"

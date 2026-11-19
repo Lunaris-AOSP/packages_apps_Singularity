@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: Lunaris AOSP
+    SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="edgego_settings"
+    android:title="@string/edgego_title">
+
+    <lineageos.preference.SecureSettingMainSwitchPreference
+        android:key="edgego_enabled"
+        android:title="@string/edgego_enable"
+        android:summary="@string/edgego_enable_summary"
+        android:defaultValue="false" />
+
+    <SwitchPreferenceCompat
+        android:key="disable_in_gaming_mode"
+        android:title="@string/edgego_disable_in_gaming_mode_title"
+        android:summary="@string/edgego_game_guard_summary"
+        android:persistent="false"
+        android:defaultValue="true" />
+
+    <PreferenceCategory
+        android:key="edgego_learn"
+        android:title="@string/edgego_learn">
+
+        <Preference
+            android:key="edgego_help"
+            android:title="@string/edgego_help"
+            android:summary="@string/edgego_help_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="zones"
+        android:title="@string/edgego_zones" />
+
+    <PreferenceCategory
+        android:key="sections"
+        android:title="@string/edgego_customize" />
+
+</PreferenceScreen>

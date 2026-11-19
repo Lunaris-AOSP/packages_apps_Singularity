@@ -1,4 +1,13 @@
+/*
+ * SPDX-FileCopyrightText: Lunaris AOSP
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package org.lunaris.settings;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import com.android.settings.core.SubSettingLauncher;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -14,6 +23,20 @@ import com.android.internal.util.lunaris.VibrationUtils;
 public class LunarisSettings extends DashboardFragment {
 
     private static final String TAG = "LunarisSettings";
+
+    @Override
+    public void onCreate(Bundle state) {
+        super.onCreate(state);
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.getBoolean("edgego_open", false)) {
+            arguments.putBoolean("edgego_open", false);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (isAdded()) new SubSettingLauncher(requireContext())
+                        .setDestination("org.lunaris.settings.fragments.buttons.EdgeGoSettings")
+                        .setSourceMetricsCategory(getMetricsCategory()).setTitleRes(R.string.edgego_title).launch();
+            });
+        }
+    }
 
     @Override
     protected int getPreferenceScreenResId() {

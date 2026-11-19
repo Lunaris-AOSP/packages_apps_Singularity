@@ -41,6 +41,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.lunaris.settings.fragments.buttons.ButtonBacklightBrightness;
 import org.lunaris.settings.fragments.buttons.PowerMenuActions;
 import org.lunaris.settings.preferences.LineageSystemSettingSeekBarPreference;
+import org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference;
 import org.lunaris.settings.utils.DeviceUtils;
 import org.lunaris.settings.utils.TelephonyUtils;
 
@@ -402,6 +403,11 @@ public class Buttons extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        SecureSettingPrimarySwitchPreference edgeGo = findPreference("edgego_enabled");
+        if (edgeGo != null) {
+            edgeGo.loadValue();
+        }
 
         // Power button ends calls.
         if (mPowerEndCall != null) {
