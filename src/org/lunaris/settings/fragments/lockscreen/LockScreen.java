@@ -56,6 +56,7 @@ public class LockScreen extends SettingsPreferenceFragment
     private static final String KEY_KG_USER_SWITCHER = "kg_user_switcher_enabled";
     private static final String LUNARIS_UDFPS_CUSTOM_CATEGORY = "lockscreen_custom_category";
     private static final String KEY_KEYGUARD_SCRIM = "keyguard_scrim_transparent";
+    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications_settings";
 
     private static final String KEY_FP_SUCCESS = "fp_success_vibrate";
     private static final String KEY_FP_ERROR = "fp_error_vibrate";
@@ -77,6 +78,9 @@ public class LockScreen extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.lunaris_settings_lock_screen);
         final Context context = getContext();
+
+        findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS).setVisible(
+                com.android.server.notification.Flags.notificationLockScreenSettings());
 
         PreferenceCategory gestCategory = (PreferenceCategory) findPreference(LOCKSCREEN_GESTURES_CATEGORY);
         PreferenceCategory lunarisUdfpsCategory = (PreferenceCategory) findPreference(LUNARIS_UDFPS_CUSTOM_CATEGORY);
@@ -186,6 +190,10 @@ public class LockScreen extends SettingsPreferenceFragment
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!com.android.server.notification.Flags.notificationLockScreenSettings()) {
+                        keys.add(KEY_LOCK_SCREEN_NOTIFICATIONS);
+                    }
 
                     boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
                     if (!hasFingerprint) {

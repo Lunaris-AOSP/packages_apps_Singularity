@@ -1889,18 +1889,19 @@
     <string name="notification_row_transparency_summary">Set translucent background for notifications in QS</string>
     <string name="notification_row_transparency_lockscreen_title">Translucent lockscreen notifications</string>
     <string name="notification_row_transparency_lockscreen_summary">Set translucent background for notifications in lockscreen</string>
-    <string name="lock_screen_moto_compact_notifications_title">Moto compact notification design</string>
-    <string name="lock_screen_moto_compact_notifications_summary">Show up to seven app icons in separate circles. Tap an icon to preview its notifications; tap again to collapse.</string>
-    <string name="lock_screen_moto_compact_notifications_disabled_summary">Turn on compact lock screen notifications to use this design</string>
-    <string name="lock_screen_stacked_notifications_title">Stacked lock screen notifications</string>
-    <string name="lock_screen_stacked_notifications_summary">Layer lock screen notifications into rounded cards. Tap the stack to expand; tap empty space to collapse.</string>
-    <string name="lock_screen_stacked_notifications_compact_summary">Turn off compact lock screen notifications to use stacked cards</string>
-    <string name="lock_screen_notifications_bottom_anchored_title">Bottom-aligned lock screen notifications</string>
-    <string name="lock_screen_notifications_bottom_anchored_summary">Align all notification styles at your chosen position near the bottom of the lock screen</string>
-    <string name="lock_screen_notifications_anchor_position_title">Notification anchor position</string>
+    <string name="lock_screen_notifications_settings_summary">Choose notification style and position</string>
+    <string name="lock_screen_notification_appearance_title">Notification appearance</string>
+    <string name="lock_screen_notification_style_hint">Compact includes the Moto design option. Full list includes iOS-style stacked cards. Turn on the style you want below.</string>
+    <string name="lock_screen_moto_compact_notifications_title">Moto compact notifications</string>
+    <string name="lock_screen_moto_compact_notifications_summary">Customize Compact with up to seven app icons in separate circles. Tap an icon to preview its notifications; tap again to collapse.</string>
+    <string name="lock_screen_stacked_notifications_title">iOS-style stacked notifications</string>
+    <string name="lock_screen_stacked_notifications_summary">Customize Full list with iOS-style stacked rounded cards. Tap the stack to expand; tap empty space to collapse.</string>
+    <string name="lock_screen_notifications_bottom_anchored_title">Bottom-aligned notifications</string>
+    <string name="lock_screen_notifications_bottom_anchored_summary">Position notifications near the bottom of the lock screen. Works with Compact and Full list.</string>
+    <string name="lock_screen_notifications_anchor_position_title">Notification position</string>
     <string name="lock_screen_notifications_anchor_position_summary">Position of the bottom edge, measured from the top of the screen. Higher values move notifications lower.</string>
     <string name="notifications_above_clock_title">Notifications above clock</string>
-    <string name="notifications_above_clock_summary">Show notifications over custom clocks, so full-screen styles do not push them off-screen</string>
+    <string name="notifications_above_clock_summary">Allow notifications to overlap custom or dynamic clocks. Bottom alignment still follows your chosen position.</string>
 
     <!-- Ambient Wallpaper -->
     <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>

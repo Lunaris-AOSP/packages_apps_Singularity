@@ -22,6 +22,12 @@
         android:key="lockscreen_interface_category"
         android:title="@string/lockscreen_interface_category">
 
+        <Preference
+            android:key="lock_screen_notifications_settings"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/lock_screen_notifications_settings_summary"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment" />
+
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="lockscreen_wallpaper_zoom_enabled"
             android:title="@string/lockscreen_wallpaper_zoom_title"
