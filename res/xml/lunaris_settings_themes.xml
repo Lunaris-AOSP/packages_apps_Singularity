@@ -11,11 +11,11 @@
         android:key="ui_category"
         android:title="@string/ui_title">
 
-        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
-            android:key="dialog_blur_enabled"
-            android:title="@string/dialog_blur_title"
-            android:summary="@string/dialog_blur_summary"
-            android:defaultValue="true" />
+        <Preference
+            android:key="system_blur_settings"
+            android:title="@string/system_blur_settings_title"
+            android:summary="@string/system_blur_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.SystemBlurSettings" />
 
         <org.lunaris.settings.preferences.SystemSettingSwitchPreference
             android:key="oneui_collapsing_toolbar"

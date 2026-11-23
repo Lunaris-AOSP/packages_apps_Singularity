@@ -3159,4 +3159,19 @@
     <string name="lockscreen_media_player_style_one_ui">OneUI</string>
     <string name="lockscreen_media_player_style_cos">COS</string>
 
+    <!-- System blur -->
+    <string name="system_blur_settings_title">System blur</string>
+    <string name="system_blur_settings_summary">Customize blur tint and radius across the system</string>
+    <string name="system_blur_tint_category">Tint</string>
+    <string name="system_blur_tint_override_title">Override tint</string>
+    <string name="system_blur_tint_override_summary">Use the same tint for all system blur surfaces</string>
+    <string name="system_blur_tint_mode_title">Tint color</string>
+    <string name="system_blur_custom_color_title">Custom color</string>
+    <string name="system_blur_tint_alpha_title">Tint alpha</string>
+    <string name="system_blur_tint_alpha_summary" formatted="false">0% is transparent; 100% is opaque</string>
+    <string name="system_blur_radius_category">Blur radius</string>
+    <string name="system_blur_radius_override_title">Override blur radius</string>
+    <string name="system_blur_radius_override_summary">Use the same radius for all system blur surfaces</string>
+    <string name="system_blur_radius_title">Radius</string>
+
 </resources>

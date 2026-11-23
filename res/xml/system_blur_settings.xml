@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/system_blur_settings_title">
+
+    <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+        android:key="dialog_blur_enabled"
+        android:title="@string/dialog_blur_title"
+        android:summary="@string/dialog_blur_summary"
+        android:defaultValue="true" />
+
+    <PreferenceCategory android:title="@string/system_blur_tint_category">
+        <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
+            android:key="ax_blur_tint_override_enabled"
+            android:title="@string/system_blur_tint_override_title"
+            android:summary="@string/system_blur_tint_override_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.GlobalSettingListPreference
+            android:key="ax_blur_tint_override_mode"
+            android:title="@string/system_blur_tint_mode_title"
+            android:entries="@array/system_blur_tint_modes"
+            android:entryValues="@array/system_blur_tint_mode_values"
+            android:summary="%s"
+            android:defaultValue="0"
+            android:dependency="ax_blur_tint_override_enabled" />
+
+        <org.lunaris.settings.preferences.colorpicker.GlobalSettingColorPickerPreference
+            android:key="ax_blur_tint_override_color"
+            android:title="@string/system_blur_custom_color_title"
+            android:defaultValue="-12285185"
+            android:dependency="ax_blur_tint_override_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_tint_override_alpha"
+            android:title="@string/system_blur_tint_alpha_title"
+            android:summary="@string/system_blur_tint_alpha_summary"
+            android:min="0"
+            android:max="100"
+            android:defaultValue="50"
+            settings:units="%"
+            android:dependency="ax_blur_tint_override_enabled" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/system_blur_radius_category">
+        <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
+            android:key="ax_blur_radius_override_enabled"
+            android:title="@string/system_blur_radius_override_title"
+            android:summary="@string/system_blur_radius_override_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_radius_override_dp"
+            android:title="@string/system_blur_radius_title"
+            android:min="0"
+            android:max="60"
+            android:defaultValue="34"
+            settings:units="dp"
+            android:dependency="ax_blur_radius_override_enabled" />
+    </PreferenceCategory>
+</PreferenceScreen>

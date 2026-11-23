@@ -2083,4 +2083,16 @@
         <item>3</item>
     </string-array>
 
+    <!-- System blur -->
+    <string-array name="system_blur_tint_modes">
+        <item>Accent Color</item>
+        <item>Secondary Color</item>
+        <item>Custom Color</item>
+    </string-array>
+    <string-array name="system_blur_tint_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
