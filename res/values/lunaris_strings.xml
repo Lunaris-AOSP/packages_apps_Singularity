@@ -3153,4 +3153,10 @@
     <string name="edge_light_animation_direction_title">Animation direction</string>
     <string name="edge_light_direction_normal">Normal</string>
     <string name="edge_light_direction_reversed">Reversed</string>
+    <string name="lockscreen_media_player_style_title">Media player style</string>
+    <string name="lockscreen_media_player_style_default">Default</string>
+    <string name="lockscreen_media_player_style_album_art">Album Art</string>
+    <string name="lockscreen_media_player_style_one_ui">OneUI</string>
+    <string name="lockscreen_media_player_style_cos">COS</string>
+
 </resources>

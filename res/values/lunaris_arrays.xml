@@ -2070,4 +2070,17 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+    <string-array name="lockscreen_media_player_style_entries" translatable="false">
+        <item>@string/lockscreen_media_player_style_default</item>
+        <item>@string/lockscreen_media_player_style_album_art</item>
+        <item>@string/lockscreen_media_player_style_one_ui</item>
+        <item>@string/lockscreen_media_player_style_cos</item>
+    </string-array>
+    <string-array name="lockscreen_media_player_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

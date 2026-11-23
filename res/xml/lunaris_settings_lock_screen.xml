@@ -48,6 +48,14 @@
             android:dependency="lockscreen_hide_lock_icon"
             android:defaultValue="false" />
 
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="lockscreen_media_player_style"
+            android:title="@string/lockscreen_media_player_style_title"
+            android:summary="%s"
+            android:entries="@array/lockscreen_media_player_style_entries"
+            android:entryValues="@array/lockscreen_media_player_style_values"
+            android:defaultValue="0" />
+
         <!-- Lockscreen Media Art -->
         <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
             android:key="ls_media_art_enabled"
