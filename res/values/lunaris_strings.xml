@@ -288,6 +288,8 @@
 
     <!-- Lockscreen categories -->
     <string name="lockscreen_interface_category">Interface</string>
+    <string name="lockscreen_dark_status_bar_title">Dark status bar</string>
+    <string name="lockscreen_dark_status_bar_summary">Always use dark status bar icons on the lock screen</string>
 
     <!-- Lockscreen lock icon -->
     <string name="lockscreen_hide_lock_icon_title">Hide lock icon</string>
