@@ -3,6 +3,7 @@
      SPDX-License-Identifier: Apache-2.0 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/network_speed_settings_title">
 
     <lineageos.preference.SystemSettingMainSwitchPreference
@@ -10,6 +11,17 @@
         android:title="@string/network_speed_enabled_title"
         android:summary="@string/network_speed_enabled_summary"
         android:defaultValue="false" />
+
+    <org.lunaris.settings.preferences.SystemSettingSeekBarPreference
+        android:key="network_speed_refresh_interval"
+        android:title="@string/network_traffic_refresh_interval_title"
+        android:summary="@string/network_traffic_refresh_interval_summary"
+        android:dependency="network_speed_enabled"
+        android:defaultValue="4"
+        android:max="6"
+        settings:min="1"
+        settings:interval="1"
+        settings:units="@string/unit_seconds" />
 
     <org.lunaris.settings.preferences.SystemSettingSwitchPreference
         android:key="network_speed_auto_hide"
