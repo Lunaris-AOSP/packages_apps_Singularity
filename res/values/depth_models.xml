@@ -1,0 +1,4 @@
+<resources>
+    <string name="depth_wallpaper_models_title">Depth wallpaper models</string>
+    <string name="depth_wallpaper_models_required">Download the depth wallpaper models before extracting a subject.</string>
+</resources>

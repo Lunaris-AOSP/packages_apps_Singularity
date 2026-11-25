@@ -25,8 +25,6 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.util.Log
-import java.io.File
-import java.io.FileOutputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.math.min
@@ -47,30 +45,29 @@ private const val TAG = "PortraitSegmenter"
 private const val RAID_MODEL = "mobile_bg_removal_mosaic_dm1_w_metadata.f16.tflite"
 private const val DEEP_MATTING_MODEL = "deep_matting.tflite"
 private const val FG_ESTIMATION_MODEL = "foreground_estimator_5680_512_512.tflite"
-private const val MODELS_DIR = "segmentation_models_v2"
 
 class PortraitSegmenter(private val context: Context) {
 
-    private var raidModelFile: File? = null
-    private var mattingModelFile: File? = null
-    private var fgEstModelFile: File? = null
+    private var raidModelFile: ByteBuffer? = null
+    private var mattingModelFile: ByteBuffer? = null
+    private var fgEstModelFile: ByteBuffer? = null
     private var hasFullPipeline = false
     private val interpreterOptions = Interpreter.Options().apply { setNumThreads(4) }
 
     fun init() {
         try {
-            raidModelFile = cacheModel(RAID_MODEL)
+            raidModelFile = mapModel(RAID_MODEL)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to cache RAID model", e)
             return
         }
         try {
-            mattingModelFile = cacheModel(DEEP_MATTING_MODEL)
+            mattingModelFile = mapModel(DEEP_MATTING_MODEL)
         } catch (e: Exception) {
             Log.w(TAG, "Deep matting model not available", e)
         }
         try {
-            fgEstModelFile = cacheModel(FG_ESTIMATION_MODEL)
+            fgEstModelFile = mapModel(FG_ESTIMATION_MODEL)
         } catch (e: Exception) {
             Log.w(TAG, "FG estimation model not available", e)
         }
@@ -80,19 +77,12 @@ class PortraitSegmenter(private val context: Context) {
 
     fun isReady(): Boolean = raidModelFile != null
 
-    private fun cacheModel(fileName: String): File {
-        val deContext = context.createDeviceProtectedStorageContext()
-        val modelsDir = File(deContext.cacheDir.absolutePath, MODELS_DIR)
-        modelsDir.mkdirs()
-        val cachedModel = File(modelsDir, fileName)
-        if (!cachedModel.exists() || cachedModel.length() == 0L) {
-            cachedModel.delete()
-            context.assets.open(fileName).use { input ->
-                FileOutputStream(cachedModel).use { output -> input.copyTo(output) }
-            }
-            Log.d(TAG, "Cached model $fileName: ${cachedModel.length()} bytes")
+    private fun mapModel(fileName: String): ByteBuffer {
+        val uri = android.net.Uri.parse("content://org.lunaris.lockstyles.models/$fileName")
+        val descriptor = requireNotNull(context.contentResolver.openFileDescriptor(uri, "r"))
+        return android.os.ParcelFileDescriptor.AutoCloseInputStream(descriptor).use { input ->
+            input.channel.map(java.nio.channels.FileChannel.MapMode.READ_ONLY, 0, input.channel.size())
         }
-        return cachedModel
     }
 
     fun segment(bitmap: Bitmap): Bitmap? {
@@ -100,7 +90,7 @@ class PortraitSegmenter(private val context: Context) {
         return if (hasFullPipeline) runFullPipeline(raidFile, bitmap) else fallbackSegment(raidFile, bitmap)
     }
 
-    private fun runFullPipeline(raidFile: File, bitmap: Bitmap): Bitmap? {
+    private fun runFullPipeline(raidFile: ByteBuffer, bitmap: Bitmap): Bitmap? {
         return try {
             val startTime = System.currentTimeMillis()
 
@@ -303,7 +293,7 @@ class PortraitSegmenter(private val context: Context) {
         return scaled
     }
 
-    private fun fallbackSegment(raidFile: File, bitmap: Bitmap): Bitmap? {
+    private fun fallbackSegment(raidFile: ByteBuffer, bitmap: Bitmap): Bitmap? {
         return try {
             val raidOutputBuffers = HashMap<Int, TensorBuffer>()
             val maskIdx: Int

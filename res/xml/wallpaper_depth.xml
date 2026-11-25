@@ -25,6 +25,11 @@
         android:summary="@string/depthwall_wallpaper_enabled_summary"
         android:defaultValue="false" />
 
+    <Preference android:title="@string/depth_wallpaper_models_title">
+        <intent android:targetPackage="org.lunaris.lockstyles"
+            android:targetClass="org.lunaris.lockstyles.models.ModelActivity" />
+    </Preference>
+
     <Preference
         android:key="depth_wallpaper_extract_now"
         android:dependency="depth_wallpaper_enabled"

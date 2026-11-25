@@ -30,6 +30,7 @@ import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Environment
+import com.android.settings.R
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
@@ -198,7 +199,11 @@ class WallpaperSubjectExtractorService : Service() {
         segmenter.init()
 
         if (!segmenter.isReady()) {
-            Log.e(TAG, "Segmenter not ready after init() — models likely missing from assets/")
+            Log.e(TAG, "Shared subject extraction model unavailable")
+            if (force) handler.post {
+                android.widget.Toast.makeText(this, R.string.depth_wallpaper_models_required,
+                    android.widget.Toast.LENGTH_LONG).show()
+            }
             if (!cropped.isRecycled) cropped.recycle()
             return
         }
