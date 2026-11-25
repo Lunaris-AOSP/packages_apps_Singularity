@@ -2645,11 +2645,15 @@
     <!-- Dynamic Bar -->
     <string name="dynamic_bar">Dynamic Bar</string>
     <string name="dynamic_bar_summary">Smart status bar chip for active events like recording, media, timers, and more</string>
-    <string name="dynamic_bar_enable">Enable Dynamic Bar</string>
+    <string name="dynamic_bar_enable">Enable status bar Dynamic Bar</string>
     <string name="dynamic_bar_enable_summary">Show a dynamic chip on the status bar for live events</string>
     <string name="dynamic_bar_chip_style_title">Status bar chip style</string>
-    <string name="dynamic_bar_keyguard_enable">Dynamic bar on lock screen</string>
-    <string name="dynamic_bar_keyguard_enable_summary">Replace keyguard indication with dynamic bar chip on the lock screen with controls and quick actions</string>
+    <string name="dynamic_bar_keyguard_enable">Enable lock screen Dynamic Bar</string>
+    <string name="dynamic_bar_keyguard_enable_summary">Show a dynamic chip on the lock screen with controls and quick actions</string>
+    <string name="dynamic_bar_lockscreen_title">Lock screen Dynamic Bar</string>
+    <string name="dynamic_bar_lockscreen_footer_body">Dynamic Bar shows live events at the bottom of the lock screen with controls and quick actions. Its switch and event choices are independent of the status bar Dynamic Bar.</string>
+    <string name="dynamic_bar_event_now_playing">Now Playing</string>
+    <string name="dynamic_bar_event_now_playing_summary">Recognized songs on the lock screen</string>
     <string name="dynamic_bar_keyguard_battery_chip">Battery info on lock screen</string>
     <string name="dynamic_bar_keyguard_battery_chip_disabled">Never show</string>
     <string name="dynamic_bar_keyguard_battery_chip_charging">Only when charging</string>
@@ -2704,11 +2708,11 @@
     <string name="dynamic_bar_event_biometric">Biometric unlock</string>
     <string name="dynamic_bar_event_biometric_summary">Show chip on fingerprint or face unlock</string>
     <string name="dynamic_bar_guide_title">How to use Dynamic Bar</string>
-    <string name="dynamic_bar_guide_chip">Events appear in the status bar showing active events like recording, media playback, and timers</string>
+    <string name="dynamic_bar_guide_chip">Events appear in the enabled Dynamic Bar showing active events like recording, media playback, and timers</string>
     <string name="dynamic_bar_guide_swipe">When multiple events are active, swipe left or right on the chip to cycle through them</string>
     <string name="dynamic_bar_guide_expand">Tap a chip to expand it into a detailed card with controls and additional information</string>
     <string name="dynamic_bar_guide_dismiss">Swipe the expanded card away to dismiss it. The event continues in the background</string>
-    <string name="dynamic_bar_guide_keyguard">Dynamic bar chip also appears at the bottom of the lock screen with playback controls and quick actions</string>
+    <string name="dynamic_bar_guide_keyguard">Enable Dynamic Bar in Lock screen settings to show a chip at the bottom of the lock screen with controls and quick actions. Its switch and event choices are independent of the status bar Dynamic Bar.</string>
     <string name="dynamic_bar_guide_chip_title">Chip appearance</string>
     <string name="dynamic_bar_guide_swipe_title">Swipe between chips</string>
     <string name="dynamic_bar_guide_expand_title">Tap to expand</string>

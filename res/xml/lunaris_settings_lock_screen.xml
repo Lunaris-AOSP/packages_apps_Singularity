@@ -70,6 +70,19 @@
             android:defaultValue="false"
             android:fragment="org.lunaris.settings.fragments.lockscreen.MediaArtSettings" />
 
+        <org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference
+            android:key="ax_dynamic_bar_lockscreen_enabled"
+            android:title="@string/dynamic_bar"
+            android:summary="@string/dynamic_bar_keyguard_enable_summary"
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.statusbar.DynamicBar">
+
+            <extra
+                android:name="surface"
+                android:value="lockscreen" />
+
+        </org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference>
+
         <org.lunaris.settings.preferences.SecureSettingSwitchPreference
             android:key="ax_dynamic_bar_keyguard_music_pill"
             android:title="@string/dynamic_bar_keyguard_music_pill"

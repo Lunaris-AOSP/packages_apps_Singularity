@@ -170,7 +170,8 @@ public class LockScreen extends SettingsPreferenceFragment
             }
         }
         for (String key : new String[] {
-                "lockscreen_pulse_enabled", "lockscreen_smartspace_extras_enabled" }) {
+                "lockscreen_pulse_enabled", "lockscreen_smartspace_extras_enabled",
+                "ax_dynamic_bar_lockscreen_enabled" }) {
             SecureSettingPrimarySwitchPreference preference = findPreference(key);
             if (preference != null) {
                 preference.loadValue();

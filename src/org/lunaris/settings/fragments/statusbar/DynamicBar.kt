@@ -26,6 +26,12 @@ class DynamicBar : SettingsPreferenceFragment() {
     private val resolver: ContentResolver
         get() = requireContext().contentResolver
 
+    private val isLockscreen: Boolean
+        get() = arguments?.getString("surface") == "lockscreen"
+
+    private val eventsKey: String
+        get() = if (isLockscreen) SETTINGS_KEY_LOCKSCREEN_EVENTS else SETTINGS_KEY_EVENTS
+
     private val handler = Handler(Looper.getMainLooper())
     private var settingsObserver: ContentObserver? = null
 
@@ -52,7 +58,9 @@ class DynamicBar : SettingsPreferenceFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addPreferencesFromResource(R.xml.dynamic_bar)
+        addPreferencesFromResource(
+            if (isLockscreen) R.xml.dynamic_bar_lockscreen else R.xml.dynamic_bar
+        )
 
         setupKeyguardSubPrefs()
         setupEventToggles()
@@ -66,14 +74,13 @@ class DynamicBar : SettingsPreferenceFragment() {
     }
 
     private fun setupKeyguardSubPrefs() {
-        val keyguardPref = findPreference<SwitchPreferenceCompat>(SETTINGS_KEY_KEYGUARD_ENABLED)
+        val keyguardPref = findPreference<Preference>(SETTINGS_KEY_KEYGUARD_ENABLED)
         keyguardPref?.setOnPreferenceChangeListener { _, newValue ->
             updateKeyguardSubPrefsVisibility(newValue as Boolean)
             true
         }
-        // Set initial visibility from current setting value
         val keyguardEnabled = Settings.Secure.getIntForUser(
-            resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 1, UserHandle.USER_CURRENT
+            resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 0, UserHandle.USER_CURRENT
         ) == 1
         updateKeyguardSubPrefsVisibility(keyguardEnabled)
     }
@@ -101,7 +108,7 @@ class DynamicBar : SettingsPreferenceFragment() {
 
     private fun getDisabledEvents(): Set<String> {
         val json = Settings.Secure.getStringForUser(
-            resolver, SETTINGS_KEY_EVENTS, UserHandle.USER_CURRENT
+            resolver, eventsKey, UserHandle.USER_CURRENT
         ) ?: return emptySet()
 
         if (json.isBlank()) return emptySet()
@@ -119,7 +126,7 @@ class DynamicBar : SettingsPreferenceFragment() {
         val updated = if (enabled) current - typeId else current + typeId
         val json = if (updated.isEmpty()) "" else JSONArray(updated.toList()).toString()
         Settings.Secure.putStringForUser(
-            resolver, SETTINGS_KEY_EVENTS, json, UserHandle.USER_CURRENT
+            resolver, eventsKey, json, UserHandle.USER_CURRENT
         )
     }
 
@@ -133,7 +140,7 @@ class DynamicBar : SettingsPreferenceFragment() {
         settingsObserver = object : ContentObserver(handler) {
             override fun onChange(selfChange: Boolean, uri: Uri?) {
                 when (uri?.lastPathSegment) {
-                    SETTINGS_KEY_EVENTS -> {
+                    eventsKey -> {
                         val disabledEvents = getDisabledEvents()
                         for (typeId in eventTypeIds) {
                             val pref = findPreference<SwitchPreferenceCompat>("event_$typeId")
@@ -143,7 +150,7 @@ class DynamicBar : SettingsPreferenceFragment() {
                     }
                     SETTINGS_KEY_KEYGUARD_ENABLED -> {
                         val enabled = Settings.Secure.getIntForUser(
-                            resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 1, UserHandle.USER_CURRENT
+                            resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 0, UserHandle.USER_CURRENT
                         ) == 1
                         updateKeyguardSubPrefsVisibility(enabled)
                     }
@@ -152,7 +159,7 @@ class DynamicBar : SettingsPreferenceFragment() {
         }
 
         resolver.registerContentObserver(
-            Settings.Secure.getUriFor(SETTINGS_KEY_EVENTS),
+            Settings.Secure.getUriFor(eventsKey),
             false, settingsObserver!!
         )
         resolver.registerContentObserver(
@@ -167,7 +174,8 @@ class DynamicBar : SettingsPreferenceFragment() {
 
     companion object {
         private const val SETTINGS_KEY_ENABLED = "ax_dynamic_bar_enabled"
-        private const val SETTINGS_KEY_KEYGUARD_ENABLED = "ax_dynamic_bar_keyguard_enabled"
+        private const val SETTINGS_KEY_KEYGUARD_ENABLED = "ax_dynamic_bar_lockscreen_enabled"
+        private const val SETTINGS_KEY_LOCKSCREEN_EVENTS = "ax_dynamic_bar_lockscreen_events"
         private const val SETTINGS_KEY_EVENTS = "ax_dynamic_bar_events"
         private const val SETTINGS_KEY_COMPACT_NOTIFICATIONS = "ax_dynamic_bar_compact_notifications"
         private const val SETTINGS_KEY_BATTERY_CHIP_MODE = "ax_dynamic_bar_keyguard_battery_chip_mode"
@@ -180,15 +188,7 @@ class DynamicBar : SettingsPreferenceFragment() {
                 UserHandle.USER_CURRENT
             )
             Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
                 resolver, SETTINGS_KEY_COMPACT_NOTIFICATIONS, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_BATTERY_CHIP_MODE, 1,
                 UserHandle.USER_CURRENT
             )
         }
