@@ -2660,6 +2660,8 @@
     <string name="dynamic_bar_keyguard_battery_chip_always">Always show</string>
     <string name="dynamic_bar_keyguard_music_pill">Music pill on lock screen</string>
     <string name="dynamic_bar_keyguard_music_pill_summary">Show music player as a pill on the lock screen</string>
+    <string name="dynamic_bar_keyguard_coloros_style">ColorOS style reveal</string>
+    <string name="dynamic_bar_keyguard_coloros_style_summary">Hide lock screen notifications and media behind the pill, tap to reveal full-size notifications</string>
     <string name="dynamic_bar_keyguard_compact_chip">Compact lock screen chip</string>
     <string name="dynamic_bar_keyguard_compact_chip_summary">Always use the compact chip style on the lockscreen. When disabled, compact mode is used only when space is limited.</string>
     <string name="dynamic_bar_events">Events</string>

@@ -86,6 +86,7 @@ class DynamicBar : SettingsPreferenceFragment() {
     }
 
     private fun updateKeyguardSubPrefsVisibility(keyguardEnabled: Boolean) {
+        findPreference<Preference>(SETTINGS_KEY_COLOROS_STYLE)?.isVisible = keyguardEnabled
         findPreference<Preference>(SETTINGS_KEY_BATTERY_CHIP_MODE)?.isVisible = keyguardEnabled
     }
 
@@ -179,6 +180,7 @@ class DynamicBar : SettingsPreferenceFragment() {
         private const val SETTINGS_KEY_EVENTS = "ax_dynamic_bar_events"
         private const val SETTINGS_KEY_COMPACT_NOTIFICATIONS = "ax_dynamic_bar_compact_notifications"
         private const val SETTINGS_KEY_BATTERY_CHIP_MODE = "ax_dynamic_bar_keyguard_battery_chip_mode"
+        private const val SETTINGS_KEY_COLOROS_STYLE = "ax_dynamic_bar_keyguard_coloros_style"
 
         @JvmStatic
         fun reset(context: Context) {
@@ -189,6 +191,10 @@ class DynamicBar : SettingsPreferenceFragment() {
             )
             Settings.Secure.putIntForUser(
                 resolver, SETTINGS_KEY_COMPACT_NOTIFICATIONS, 1,
+                UserHandle.USER_CURRENT
+            )
+            Settings.Secure.putIntForUser(
+                resolver, SETTINGS_KEY_COLOROS_STYLE, 0,
                 UserHandle.USER_CURRENT
             )
         }

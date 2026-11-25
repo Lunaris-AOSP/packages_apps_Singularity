@@ -23,6 +23,13 @@
         android:title="@string/dynamic_bar_keyguard_enable"
         android:defaultValue="false" />
 
+    <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+        android:key="ax_dynamic_bar_keyguard_coloros_style"
+        android:title="@string/dynamic_bar_keyguard_coloros_style"
+        android:summary="@string/dynamic_bar_keyguard_coloros_style_summary"
+        android:defaultValue="false"
+        android:dependency="ax_dynamic_bar_lockscreen_enabled" />
+
     <org.lunaris.settings.preferences.SecureSettingListPreference
         android:key="ax_dynamic_bar_keyguard_battery_chip_mode"
         android:title="@string/dynamic_bar_keyguard_battery_chip"
@@ -55,6 +62,13 @@
             android:title="@string/dynamic_bar_event_call"
             android:summary="@string/dynamic_bar_event_call_summary"
             android:icon="@drawable/ic_call_ring"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat android:persistent="false"
+            android:key="event_notification"
+            android:title="@string/dynamic_bar_event_notification"
+            android:summary="@string/dynamic_bar_event_notification_summary"
+            android:icon="@drawable/ic_notifications"
             android:defaultValue="true" />
 
         <SwitchPreferenceCompat android:persistent="false"
