@@ -75,6 +75,7 @@ public class Themes extends SettingsPreferenceFragment implements
     private Preference mShowCutoutForce;
     private Preference mQuickSwitch;
     private SystemSettingListPreference mVolumeDialogType;
+    private SystemSettingSwitchPreference mCompactVolumePill;
     private SystemSettingListPreference mAxionVolumeStyle;
     private SystemSettingSwitchPreference mShowVolumePercentage;
     private SystemSettingListPreference mUnlockAnimation;
@@ -114,6 +115,7 @@ public class Themes extends SettingsPreferenceFragment implements
             mVolumeDialogType.setOnPreferenceChangeListener(this);
         }
 
+        mCompactVolumePill = findPreference("compose_volume_compact_pill");
         mAxionVolumeStyle = findPreference(KEY_AXION_VOLUME_STYLE);
         mShowVolumePercentage = findPreference(KEY_SHOW_VOLUME_PERCENTAGE);
 
@@ -178,6 +180,9 @@ public class Themes extends SettingsPreferenceFragment implements
     }
 
     private void updateVolumeRelatedVisibility(int type) {
+        if (mCompactVolumePill != null) {
+            mCompactVolumePill.setVisible(type == VOLUME_TYPE_AXION);
+        }
         if (mAxionVolumeStyle != null) {
             mAxionVolumeStyle.setVisible(type == VOLUME_TYPE_AXION);
         }

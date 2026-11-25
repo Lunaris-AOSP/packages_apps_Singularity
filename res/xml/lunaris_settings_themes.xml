@@ -151,6 +151,12 @@
             android:entryValues="@array/compose_volume_style_values"
             android:defaultValue="2" />
 
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="compose_volume_compact_pill"
+            android:title="@string/compose_volume_compact_pill_title"
+            android:summary="@string/compose_volume_compact_pill_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
