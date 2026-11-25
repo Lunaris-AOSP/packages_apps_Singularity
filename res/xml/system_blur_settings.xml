@@ -40,6 +40,7 @@
             android:max="100"
             android:defaultValue="50"
             settings:units="%"
+            settings:continuousUpdates="true"
             android:dependency="ax_blur_tint_override_enabled" />
     </PreferenceCategory>
 
@@ -57,6 +58,112 @@
             android:max="60"
             android:defaultValue="34"
             settings:units="dp"
+            settings:continuousUpdates="true"
             android:dependency="ax_blur_radius_override_enabled" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/system_blur_rim_category">
+        <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
+            android:key="ax_blur_rim_enabled"
+            android:title="@string/system_blur_rim_title"
+            android:summary="@string/system_blur_rim_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.colorpicker.GlobalSettingColorPickerPreference
+            android:key="ax_blur_rim_color"
+            android:title="@string/system_blur_rim_color_title"
+            android:defaultValue="-1"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_strength"
+            android:title="@string/system_blur_rim_strength_title"
+            android:max="100"
+            android:defaultValue="100"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_top_alpha"
+            android:title="@string/system_blur_rim_top_title"
+            android:max="100"
+            android:defaultValue="14"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_bottom_alpha"
+            android:title="@string/system_blur_rim_bottom_title"
+            android:max="100"
+            android:defaultValue="50"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_side_alpha"
+            android:title="@string/system_blur_rim_side_title"
+            android:max="100"
+            android:defaultValue="0"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingTenthSeekBarPreference
+            android:key="ax_blur_rim_edge_width"
+            android:title="@string/system_blur_rim_width_title"
+            android:max="200"
+            android:defaultValue="8"
+            settings:units="dp"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingTenthSeekBarPreference
+            android:key="ax_blur_rim_glow_depth"
+            android:title="@string/system_blur_rim_depth_title"
+            android:max="300"
+            android:defaultValue="125"
+            settings:units="dp"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_glow_alpha"
+            android:title="@string/system_blur_rim_glow_title"
+            android:max="100"
+            android:defaultValue="30"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_corner_width_scale"
+            android:title="@string/system_blur_rim_corner_width_title"
+            android:summary="@string/system_blur_rim_corner_width_summary"
+            android:max="100"
+            android:defaultValue="100"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSeekBarPreference
+            android:key="ax_blur_rim_corner_alpha_scale"
+            android:title="@string/system_blur_rim_corner_brightness_title"
+            android:max="100"
+            android:defaultValue="80"
+            settings:units="%"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
+
+        <org.lunaris.settings.preferences.GlobalSettingTenthSeekBarPreference
+            android:key="ax_blur_rim_corner_taper_power"
+            android:title="@string/system_blur_rim_taper_title"
+            android:summary="@string/system_blur_rim_taper_summary"
+            android:min="1"
+            android:max="80"
+            android:defaultValue="68"
+            settings:continuousUpdates="true"
+            android:dependency="ax_blur_rim_enabled" />
     </PreferenceCategory>
 </PreferenceScreen>

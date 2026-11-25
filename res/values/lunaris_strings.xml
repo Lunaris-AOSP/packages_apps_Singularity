@@ -3167,7 +3167,7 @@
 
     <!-- System blur -->
     <string name="system_blur_settings_title">System blur</string>
-    <string name="system_blur_settings_summary">Customize blur tint and radius across the system</string>
+    <string name="system_blur_settings_summary">Customize blur tint, radius and glass rim across the system and launcher</string>
     <string name="system_blur_tint_category">Tint</string>
     <string name="system_blur_tint_override_title">Override tint</string>
     <string name="system_blur_tint_override_summary">Use the same tint for all system blur surfaces</string>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="system_blur_rim_category">Glass rim</string>
+    <string name="system_blur_rim_title">Enable glass rim</string>
+    <string name="system_blur_rim_summary">Add soft edge highlights to system and launcher blur surfaces</string>
+    <string name="system_blur_rim_color_title">Rim color</string>
+    <string name="system_blur_rim_strength_title">Overall brightness</string>
+    <string name="system_blur_rim_top_title">Top edge brightness</string>
+    <string name="system_blur_rim_bottom_title">Bottom edge brightness</string>
+    <string name="system_blur_rim_side_title">Side edge brightness</string>
+    <string name="system_blur_rim_width_title">Edge width</string>
+    <string name="system_blur_rim_depth_title">Glow depth</string>
+    <string name="system_blur_rim_glow_title">Glow brightness</string>
+    <string name="system_blur_rim_corner_width_title">Corner width</string>
+    <string name="system_blur_rim_corner_width_summary" formatted="false">Lower values make corners thinner; 100% keeps the width uniform</string>
+    <string name="system_blur_rim_corner_brightness_title">Corner brightness</string>
+    <string name="system_blur_rim_taper_title">Corner taper</string>
+    <string name="system_blur_rim_taper_summary">Higher values concentrate thinning more narrowly in the corners</string>
+
+    <!-- System blur live preview and current values UI -->
+    <string name="system_blur_preview_description">Live preview of system blur, tint and glass rim</string>
+    <string name="system_blur_preview_backdrop_dark">Dark</string>
+    <string name="system_blur_preview_backdrop_light">Light</string>
+    <string name="system_blur_preview_values_button">Values &amp; test</string>
+    <string name="system_blur_preview_dialog_title">Current blur values</string>
+    <string name="system_blur_preview_copy">Copy</string>
+    <string name="system_blur_preview_copied">Blur values copied to clipboard</string>
+    <string name="system_blur_preview_reset_rim">Reset rim</string>
+    <string name="system_blur_preview_rim_reset_done">Glass rim values reset to defaults</string>
+    <string name="system_blur_preview_state_on">On</string>
+    <string name="system_blur_preview_state_off">Off</string>
+    <string name="system_blur_preview_default_label">Default</string>
+    <string name="system_blur_preview_disabled_label">Disabled</string>
+</resources>
