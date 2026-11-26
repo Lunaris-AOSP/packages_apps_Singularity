@@ -3184,4 +3184,20 @@
     <string name="system_blur_radius_override_summary">Use the same radius for all system blur surfaces</string>
     <string name="system_blur_radius_title">Radius</string>
 
+    <string name="hybrid_rendering_title">Hybrid Rendering (Experimental)</string>
+    <string name="hybrid_rendering_summary">Choose which apps use Vulkan for their interface</string>
+    <string name="hybrid_rendering_enable">Use Hybrid Rendering</string>
+    <string name="hybrid_rendering_warning_title">Experimental feature</string>
+    <string name="hybrid_rendering_warning_summary">On some devices, Vulkan can cause visual glitches, video playback problems, or crashes. If an app is affected, turn off Vulkan for that app and reopen it. To restore default rendering for all apps, turn off Hybrid Rendering.</string>
+    <string name="hybrid_rendering_systemui">Use Vulkan for SystemUI</string>
+    <string name="hybrid_rendering_systemui_summary">Status bar, navigation bar, Quick Settings, and volume panel</string>
+    <string name="hybrid_rendering_launcher">Use Vulkan for the default launcher</string>
+    <string name="hybrid_rendering_apps">Apps that use Vulkan</string>
+    <plurals name="hybrid_rendering_selection">
+        <item quantity="one">%1$d app selected · %2$s</item>
+        <item quantity="other">%1$d apps selected · %2$s</item>
+    </plurals>
+    <string name="hybrid_rendering_apps_summary">Other apps use OpenGL</string>
+    <string name="hybrid_rendering_footer">Changing a selection closes the affected running app. SystemUI restarts automatically. Other apps use the new setting the next time they open. Apps use OpenGL if Vulkan is unavailable. To retry Vulkan after a startup crash, turn Hybrid Rendering off and back on.</string>
+    <string name="hybrid_rendering_save_failed">Could not save app selection</string>
 </resources>

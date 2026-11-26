@@ -128,6 +128,12 @@
     <PreferenceCategory
         android:title="@string/extras_category_title">
 
+        <Preference
+            android:key="hybrid_rendering_settings"
+            android:title="@string/hybrid_rendering_title"
+            android:summary="@string/hybrid_rendering_summary"
+            android:fragment="org.lunaris.settings.fragments.miscellaneous.HybridRenderingSettings" />
+
         <!-- Three fingers swipe action -->
         <ListPreference
             android:key="three_fingers_swipe"

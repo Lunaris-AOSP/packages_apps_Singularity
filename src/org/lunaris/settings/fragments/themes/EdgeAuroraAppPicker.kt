@@ -158,6 +158,7 @@ internal object AuroraAppPicker {
         title: Int,
         apps: List<AuroraApp>,
         selected: Set<String>? = null,
+        showSystemInitially: Boolean = false,
         onSelected: (Set<String>) -> Unit,
     ): AlertDialog {
         val multiple = selected != null
@@ -247,7 +248,7 @@ internal object AuroraAppPicker {
                 minHeight = px(56)
                 switchPadding = px(12)
                 setPaddingRelative(px(12), 0, px(12), 0)
-                isChecked = false
+                isChecked = showSystemInitially
             }
         val count =
             TextView(context).apply {
