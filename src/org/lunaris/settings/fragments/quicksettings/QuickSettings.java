@@ -18,7 +18,10 @@ package org.lunaris.settings.fragments.quicksettings;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -129,6 +132,14 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingSeekBarPreference mShadeScrimAlphaPref;
     private SystemSettingSeekBarPreference mNotificationScrimAlphaPref;
     private SystemSettingListPreference mQsHeaderClockStyle;
+
+    private final ContentObserver mSplitQsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    updateSplitNotificationVisibility();
+                }
+            };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -319,6 +330,34 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        requireContext().getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.QS_SPLIT_SHADE), false,
+                mSplitQsObserver, UserHandle.USER_CURRENT);
+        updateSplitNotificationVisibility();
+    }
+
+    @Override
+    public void onStop() {
+        requireContext().getContentResolver().unregisterContentObserver(mSplitQsObserver);
+        super.onStop();
+    }
+
+    private static boolean isSplitQsEnabled(ContentResolver resolver) {
+        return Settings.System.getIntForUser(resolver, Settings.System.QS_SPLIT_SHADE, 0,
+                UserHandle.USER_CURRENT) != 0;
+    }
+
+    private void updateSplitNotificationVisibility() {
+        final Context context = getContext();
+        if (context != null) {
+            findPreference(Settings.System.QS_SPLIT_NOTIFICATION)
+                    .setVisible(isSplitQsEnabled(context.getContentResolver()));
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         updateBlurPreferences(Settings.System.getIntForUser(
@@ -474,6 +513,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
                     List<String> keys = super.getNonIndexableKeys(context);
                     final Resources res = context.getResources();
                     final ContentResolver resolver = context.getContentResolver();
+
+                    if (!isSplitQsEnabled(resolver)) {
+                        keys.add(Settings.System.QS_SPLIT_NOTIFICATION);
+                    }
 
                     boolean automaticAvailable = res.getBoolean(
                             com.android.internal.R.bool.config_automatic_brightness_available);

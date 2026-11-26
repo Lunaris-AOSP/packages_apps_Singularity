@@ -2882,7 +2882,7 @@
 
     <!-- Split notification -->
     <string name="qs_split_notification_title">Split notification shade</string>
-    <string name="qs_split_notification_summary">Allow the notification shade to split into two panes in landscape mode</string>
+    <string name="qs_split_notification_summary">Allow the notification shade to split into two panes in landscape mode. Use only when Split Quick settings is enabled.</string>
 
     <!-- Screenshots -->
     <string name="screenshot_clipboard_only_title">Copy to clipboard only</string>
